@@ -1,0 +1,2 @@
+2016-11-19T21:50:52.487: Fazendo a chamada ao método 2 da classe Shulambs.
+2016-11-19T21:50:52.487: Executando a operacao Shulambs 2.

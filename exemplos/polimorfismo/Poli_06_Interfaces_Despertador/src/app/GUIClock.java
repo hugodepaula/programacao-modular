@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class GUIClock extends JFrame implements Sleeper {
 
 	private static final long serialVersionUID = 1L;
-	private static AlarmClock alarmClock;
+	private static Despertador alarmClock;
 	
 	public GUIClock() {
 		super("Dorminhoco");
@@ -28,7 +28,7 @@ public class GUIClock extends JFrame implements Sleeper {
 			}
 		}, BorderLayout.CENTER);
 		
-		alarmClock = new AlarmClock();
+		alarmClock = new Despertador();
 		alarmClock.letMeSleepFor(this, Sleeper.ONE_SECOND);
 
 	}

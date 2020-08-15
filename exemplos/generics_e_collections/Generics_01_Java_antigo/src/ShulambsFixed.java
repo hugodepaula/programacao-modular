@@ -8,4 +8,9 @@ public class ShulambsFixed<T> {
 		campo = param;
 		arranjo = (T[]) new Object[10];
 	}
+	
+	public void metodo() {
+		arranjo[0] = campo;
+	}
+
 }

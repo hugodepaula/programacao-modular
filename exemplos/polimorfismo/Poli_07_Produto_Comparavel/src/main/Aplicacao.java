@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import app.BemDeConsumo;
 import app.BemDuravel;
 import app.Estoque;
-import app.Produto;
 
 class Aplicacao {
 

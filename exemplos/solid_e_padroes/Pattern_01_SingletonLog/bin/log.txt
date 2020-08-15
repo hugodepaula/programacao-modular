@@ -1,2 +1,0 @@
-2020-05-30T08:40:18.492472700: Fazendo a chamada ao método 2 da classe Shulambs.
-2020-05-30T08:40:18.492472700: Executando a operacao Shulambs 2.

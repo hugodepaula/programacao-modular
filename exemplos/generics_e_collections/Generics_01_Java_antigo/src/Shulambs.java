@@ -6,4 +6,8 @@ public class Shulambs<T> {
 		campo = new T(); // erro
 		arranjo = new T[10]; // erro
 	}
+	
+	public void metodo() {
+		arranjo[0] = campo;
+	}
 }

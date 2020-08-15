@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * @author Hugo de Paula
  *
  */
-public abstract class Produto implements Comparable {
+public abstract class Produto implements Comparable<Produto> {
 
 	public static final String DESCRICAO_PADRAO = "Novo Produto";
 	public static final int MAX_ESTOQUE = 1000;
@@ -117,11 +117,8 @@ public abstract class Produto implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if (o instanceof Produto) {
-			return this.descricao.compareToIgnoreCase(((Produto) o).getDescricao());
-		}
-		return -1;
+	public int compareTo(Produto o) {
+		return this.descricao.compareToIgnoreCase(((Produto) o).getDescricao());
 	}
 
 }

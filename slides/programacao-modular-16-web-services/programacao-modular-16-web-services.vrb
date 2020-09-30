@@ -1,0 +1,12 @@
+\frametitle{Exemplo: Convertendo objetos Java para Json}
+\begin{center}
+        \begin{tikzpicture}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-1,y=3,type=interface]{JSONFormatter}{}{\umlvirt{+ toJson() : JSONObject} \\ \umlvirt{+ default toJsonArray() : JSONArray}}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-4,y=.8,type=abstract]{Produto}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-1.5]{BemDuravel}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-1.5]{BemDeConsumo}{}{ + toJson() : JSONObject}
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+        \umlimpl{Produto}{JSONFormatter}
+        \end{tikzpicture}
+    \end{center}

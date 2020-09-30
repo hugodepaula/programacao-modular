@@ -1,0 +1,11 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Java Streams}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Interfaces base}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Destinos}{4}{0}{1}
+\beamer@sectionintoc {2}{Exemplo: Arquivo}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Fechamento autom\'atico}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Acesso aleat\'orio}{7}{0}{2}
+\beamer@sectionintoc {3}{Data Access Object}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{DAO Factory Pattern}{8}{0}{3}
+\beamer@subsectionintoc {3}{2}{Tipagem}{9}{0}{3}

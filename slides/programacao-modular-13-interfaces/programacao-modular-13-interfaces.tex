@@ -1,0 +1,324 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Interfaces%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Interfaces}
+
+\subsection{Definição de interface}
+
+\begin{frame}{Interface}
+\begin{center}
+``\textbf{Interface}: parte visível de um módulo a outros módulos. \\
+A interface deve oferecer um grupo de métodos coerente. \\
+Se uma interface é definida e sempre é mantida, o sistema ganha em extensibilidade e em baixo acoplamento.''
+\end{center}
+\end{frame}
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item \textbf{Interfaces}:
+\begin{itemize}
+    \item ``determinado conjunto de métodos que serão implementados em uma classe''.
+    \item ``contrato que define tudo o que uma classe deve fazer se quiser ter um determinado status''.
+\end{itemize}
+\item Podemos, então, especificar uma interface; e uma ou mais classes ``assinariam este contrato'', comprometendo-se a implementar o que foi especificado.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Interfaces em Java}
+
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item Interfaces em Java possuem prioritariamente declarações de métodos (sem definição) e atributos ``\lstinline|public static final|''.
+\item A implementação fica a cargo de cada especialização desta interface.
+\item Interfaces são usadas para definir um protocolo de comportamento que pode ser implementado por qualquer classe na hierarquia de classes.
+\item Interfaces podem ser declaradas, mas não podem ser instanciadas, assim como classes abstratas. 
+\item É uma saída elegante ao problema da herança múltipla.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Definindo uma interface}
+
+\begin{itemize}
+\item Definição de interfaces:
+	\begin{itemize}
+	\item Declaração da interface: declara os atributos tais como nome da interface e se ela herda de outra interface.
+	\item Corpo da interface: contém as definições de constantes e  as declarações dos métodos da interface.
+	\end{itemize}
+\end{itemize}
+\begin{lstlisting}
+interface nomeInterface [extends OutraInterface] {
+  corpo da Interface; 
+}
+\end{lstlisting}
+\begin{itemize}
+\item Para se usar uma interface usa-se a palavra-chave \lstinline|implements|.
+\end{itemize}
+\end{frame}
+
+
+\section{Exemplo: Despertadores e dorminhocos}
+
+\begin{frame}[fragile]{Exemplo: Despertadores e Dorminhocos}
+\begin{itemize}
+\item A classe AlarmClock  é um serviço que notifica objetos dorminhocos que um certo tempo passou. 
+\item Um objeto dorminhoco deve fazer duas coisas:
+	\begin{itemize}
+	\item Pedir para o Despertadores acordá-lo após certo tempo. 
+	\item Implementar o método wakeUp.
+    \end{itemize}
+\item Método \texttt{letMeSleepFor} é implementado da seguinte forma:
+\end{itemize}
+\begin{lstlisting}
+public synchronized boolean letMeSleepFor(Sleeper
+                                theSleeper, long time) { 
+   int index = findNextSlot(); 
+   if (index == NOROOM) { 
+       return false;
+   } else {
+       sleepers[index] = theSleeper;
+       sleepFor[index] = time;
+       new AlarmThread(index).start(); return true; 
+   }
+} 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Despertadores e Dorminhocos}
+\begin{itemize}
+\item Se o AlarmClock tem espaço na lista, ele registra o dorminhoco e começa uma nova tarefa (thread) para este dorminhoco.
+\item Um objeto que quiser usar o AlarmClock deve implementar o método. 
+\item Como fazer um tipo genérico?
+	\begin{itemize}
+	\item O primeiro argumento de letMeSleepFor() é um objeto do tipo sleeper (dorminhoco).  Este tipo deve ser uma interface genérica para todos os tipos.
+	\end{itemize}
+\begin{lstlisting}
+public interface Sleeper {
+   public void wakeUp();  
+   public long ONE_SECOND = 1000;
+   public long ONE_MINUTE = 60000; 
+}
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo: Despertadores e Dorminhocos}
+
+\begin{itemize}
+\item A interface Sleeper declara o método wakeUp() mas não a implementa. Ela também define constantes úteis.
+\item As classes que implementarem esta interface ``herdam'' a constante e devem implementar o método wakeUp(). 
+\item Todo objeto será também um dorminhoco.
+\item Exemplo: um relógio que deve ser acordado a cada segundo para atualizar o display do tempo. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo: Despertadores e Dorminhocos - Diagrama UML}
+    \begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-5.5]{Applet}{}{\umlvirt{+ paint(Graphics)}}
+     
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2,type=interface]{Sleeper}%
+      {\umlstatic{+ ONE\_SECOND = 1000} \\%
+       \umlstatic{+ ONE\_MINUTE = 60000}}%
+      {\umlvirt{+ wakeUp() : void}}
+      
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-3.2, y=-3]{GUIClock}%
+     {}{+ wakeUp() \\ + paint(Graphics)}
+     
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=2.5]{AlarmClock}%
+     {\umlstatic{-- MAX\_CAPACITY = 10} \\ \umlstatic{-- UNUSED = -1} \\ \umlstatic{-- NOROOM = -1} \\ -- sleepers : Sleeper[] \\ -- sleepFor : long[]}
+     {+ letMeSleepFor(Sleeper, long) \\  + wakeUpSleeper(int)}
+    \umlimpl{GUIClock}{Sleeper}
+    \umlinherit{GUIClock}{Applet}
+    \umluniassoc{AlarmClock}{Sleeper}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+\section{Interfaces versus Classes Abstratas}
+
+\begin{frame}[fragile]{Porque utilizar interfaces ao invés de classes abstratas?}
+\begin{itemize}
+\item Seria a classe abstrata Sleeper abaixo equivalente à interface?
+\end{itemize}
+\begin{lstlisting}
+abstract class Sleeper {
+   public abstract void wakeUp(); 
+}
+\end{lstlisting}
+\begin{itemize}
+\item Resposta: Não.
+\item Se Sleeper fosse classe abstrata apenas objetos que herdassem de Sleeper poderiam ser utilizados no AlarmClock.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Problemas com classe abstrata}
+\begin{itemize}
+\item Suponha o exemplo do relógio.
+\item Se o relógio for um applet ele deve herdar da classe applet.
+\item Como Java não permite herança múltipla não seria possível tornar o relógio um dorminhoco.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Interfaces provêm Herança Múltipla?}
+\begin{itemize}
+\item Podem ser encarados como um paliativo, mas são coisas diferentes diferentes:
+	\begin{itemize}
+	\item Uma classe herda apenas constantes de uma interface. 
+	\item Uma classe não pode herdar implementações de uma interface.
+	\item A hierarquia de interfaces é independente da hierarquia de classes. Classes que implementam a mesma interface podem ou não estar relacionadas na hierarquia. 
+	\end{itemize}
+\item Java permite herança múltipla de interfaces.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Para que usar Interfaces?}
+\begin{itemize}
+\item Use interfaces para definir protocolos de comportamento que possam ser implementados em qualquer lugar na hierarquia de classes. 
+\item Interfaces são úteis para: 
+	\begin{itemize}
+	\item Capturar similaridades entre classes não relacionadas. 
+	\item Declarar métodos que uma ou mais classes devem inevitavelmente implementar.
+	\item Revelar interfaces sem revelar os objetos que a implementam (útil na venda de pacotes de componentes).
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Métodos default (Java 8 em diante)}
+
+\begin{itemize}
+\item Até o Java 7, interface não podia prover nenhuma implementação.
+\item No Java 8, um método \textit{default} permite definir um método de interface com implementação.
+\item Permite expandir a interface sem violar o código existente.
+\item Permite implementar métodos que são opcionais, dependendo da forma como a interface é usada.
+\item Pode produzir erro de herança múltipla de método.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Métodos default (Java 8 em diante)}
+
+\begin{multicols}{2}
+\begin{lstlisting}
+public interface IFace {
+  // decl. método normal
+  int getUserID();
+  // decl. método default
+  default int getAdminID() {
+   return 1;
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+class IFaceImpl implements IFace {
+  public int getUserID() {
+    return 100;
+  }
+}
+\end{lstlisting}
+\end{multicols}
+
+\begin{lstlisting}
+class Demo {
+  public static void main(String args[]) {
+    IFaceImpl obj = new IFaceImpl();
+
+    System.out.println("User ID is " + obj.getUserID());
+    System.out.println("Administrator ID is " + obj.getAdminID());
+  }
+}
+
+\end{lstlisting}\footnote{Adaptado de: Herbert Schildt. \textit{Java Para Iniciantes.} Bookman 2015.}
+\end{frame}
+
+\begin{frame}[fragile]{Métodos default (Java 8 em diante)}
+
+\begin{lstlisting}
+
+public interface Ordenavel {
+	
+   boolean menorQue(Ordenavel o);
+	
+   boolean igual(Ordenavel o);
+	
+   default boolean diferente(Ordenavel o) {
+      return !igual(o);
+   }
+	
+   default boolean maiorQue(Ordenavel o) {
+      return !menorQue(o) && !igual(o);
+   }
+
+}
+\end{lstlisting}
+\end{frame}
+\end{document}

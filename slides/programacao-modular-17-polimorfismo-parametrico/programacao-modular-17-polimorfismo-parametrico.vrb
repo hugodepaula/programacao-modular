@@ -1,0 +1,16 @@
+\frametitle{Generics: métodos}
+
+\begin{itemize}
+   \item Para tornar apenas um método genérico, o tipo de retorno deve ser precedido pelo parâmetro de tipo.
+\end{itemize}
+
+\begin{lstlisting}
+public class Collections {
+    ...
+    public static <T> void copy(List<T> dst, List<T> src) {
+        for (T t : src) {
+            dst.add(t);
+        }
+    }
+}
+\end{lstlisting}

@@ -1,0 +1,16 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Web services (WS)}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Servi\c cos web}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Acessando web services REST}{4}{0}{1}
+\beamer@sectionintoc {2}{Construindo um web service -- framwork Simple}{7}{0}{2}
+\beamer@subsectionintoc {2}{1}{Simple framework}{7}{0}{2}
+\beamer@subsectionintoc {2}{2}{Trabalhando com dados de formul\'ario}{11}{0}{2}
+\beamer@subsectionintoc {2}{3}{Roteamento de requisi\c c\~oes}{13}{0}{2}
+\beamer@sectionintoc {3}{AJAX e JSON}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{JSON em Java}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Formatando um objeto em JSON}{16}{0}{3}
+\beamer@subsectionintoc {3}{3}{AJAX e JSON}{17}{0}{3}
+\beamer@sectionintoc {4}{Construindo um WS RESTful - Jersey/Grizzly}{24}{0}{4}
+\beamer@subsectionintoc {4}{1}{Criando o projeto usando Maven}{24}{0}{4}
+\beamer@subsectionintoc {4}{2}{Rotas com \textit {annotations}}{35}{0}{4}

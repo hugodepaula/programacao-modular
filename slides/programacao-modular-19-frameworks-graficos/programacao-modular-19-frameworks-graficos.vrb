@@ -1,0 +1,33 @@
+\frametitle{Menus}
+\begin{columns}
+\column{.5\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+JMenuBar barraMenu = new JMenuBar();
+janela.setJMenuBar(barraMenu);
+
+JMenu menuArquivo = new JMenu("Arquivo");
+menuArquivo.setMnemonic(KeyEvent.VK_A);
+barraMenu.add(menuArquivo);
+
+JMenuItem itemNovo = new JMenuItem("Novo");
+menuArquivo.add(itemNovo);
+JMenuItem itemAbrir = new JMenuItem("Abrir...");
+menuArquivo.add(itemAbrir);
+
+menuArquivo.addSeparator();
+
+JMenuItem itemSair = new JMenuItem("Sair");
+menuArquivo.add(itemSair);
+
+JMenu menuAjuda = new JMenu("Ajuda");
+menuAjuda.setMnemonic(KeyEvent.VK_U);
+barraMenu.add(menuAjuda);
+\end{lstlisting}
+
+
+\column{.5\textwidth}
+
+    \includegraphics[width=\textwidth]{menu.pdf}
+
+\end{columns}
+

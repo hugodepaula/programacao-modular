@@ -1,0 +1,474 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Web Services%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+	\includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}
+
+\section{Web services (WS)}
+
+\subsection{Serviços web}
+
+
+\begin{frame}{Serviços web -- \textit{web services}}
+
+\begin{block}{Serviço web (\textit{web services})}
+é uma tecnologia de chamada remota de objetos que utiliza protocolos da web (p. ex. HTTP) como meio de transporte e comunicação.
+\end{block}
+
+\begin{block}{Web services RESTful (\textit{Representational State Transfer})}
+    utiliza URIs e métodos HTTP para disponibilizar acesso aos recursos da aplicação.
+\end{block}
+
+\end{frame}
+ 
+ 
+\subsection{Acessando web services REST}
+
+\begin{frame}[fragile]{Acessando web services REST}
+
+Um serviço web REST disponibiliza dados ou recursos a partir de uma URI.
+
+\begin{block}{\small Resultado do acesso a \url{www.thomas-bayer.com/sqlrest/}}
+\begin{lstlisting}[language=HTML,basicstyle=\tiny]
+<resource xmlns:xlink="http://www.w3.org/1999/xlink">
+ <CUSTOMERList xlink:href="http://(...)/sqlrest/CUSTOMER/">CUSTOMER</CUSTOMERList>
+ <INVOICEList xlink:href="http://(...)/sqlrest/INVOICE/">INVOICE</INVOICEList>
+ <ITEMList xlink:href="http://(...)/sqlrest/ITEM/">ITEM</ITEMList>
+ <PRODUCTList xlink:href="http://(...)/sqlrest/PRODUCT/">PRODUCT</PRODUCTList>
+</resource>
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Acessando web services REST}
+\begin{itemize}
+\item O exemplo indica que existem 4 web services disponíveis:
+
+\begin{enumerate}
+    \item \textbf{CUSTOMER}: dados de cliente.
+    \item \textbf{INVOICE}: dados do pedido.
+    \item \textbf{ITEM}: dados do item do pedido.
+    \item \textbf{PRODUCT}: dados do produto.
+\end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Acessando web services REST}
+
+Para acessar um serviço web de clientes: {\small\url{http://www.thomas-bayer.com/sqlrest/CUSTOMER/}}.
+
+\begin{itemize}
+    \item Aparecerá a lista de clientes.
+\end{itemize}
+
+
+\begin{block}{\small Acesse o cliente 10: \url{http://www.thomas-bayer.com/sqlrest/CUSTOMER/10/}}
+\begin{lstlisting}[language=HTML,basicstyle=\footnotesize]
+<CUSTOMER xmlns:xlink="http://www.w3.org/1999/xlink">
+  <ID>10</ID>
+  <FIRSTNAME>Sue</FIRSTNAME>
+  <LASTNAME>Fuller</LASTNAME>
+  <STREET>135 Upland Pl.</STREET>
+  <CITY>Dallas</CITY>
+</CUSTOMER>
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+
+\section{Construindo um web service  -- Spark framwork}
+
+
+\subsection{Decomposição de serviços}
+
+\begin{frame}{\textit{Decomposição de uma aplicação em serviços REST}}
+	\begin{center}
+		\begin{tikzpicture} 
+		\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-5]{FrontEnd}
+		\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-2]{WebServer}
+		\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=+1]{ServiceClass}
+		\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=+4]{BusinessClass}
+		\umluniassoc{FrontEnd}{WebServer}
+		\umluniassoc{WebServer}{ServiceClass}
+		\umluniassoc{ServiceClass}{BusinessClass}
+		\end{tikzpicture}
+		
+		\vspace{15mm}
+		
+		Exemplo: Controle de estoque \\[5mm]
+		
+		
+		\begin{tikzpicture} 
+			\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-5]{formProduto}
+			\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-2]{Jetty}
+			\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=+1]{EstoqueService}
+			\umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=+4]{Estoque}
+			\umluniassoc{formProduto}{Jetty}
+			\umluniassoc{Jetty}{EstoqueService}
+			\umluniassoc{EstoqueService}{Estoque}
+\end{tikzpicture}
+		
+		
+	\end{center}
+\end{frame}
+
+
+
+
+\subsection{Spark framework}
+
+\begin{frame}[fragile]{Spark Framework}
+
+\begin{block}{Spark framework}
+    é um micro framework para a criação de aplicações web a partir do Java 8 (ou Kotlin). Disponível em: \url{http://sparkjava.com/}.
+\end{block}
+
+Para utilizar o framework em seu projeto você deve utilizar o gerenciador de dependências chamado Maven (\url{https://maven.apache.org/}).
+
+\end{frame}
+
+\begin{frame}[fragile]{Configuração do Maven}
+	\begin{itemize}
+		\item Maven é uma ferramenta de gerenciamento de projeto.
+		\item Controla configuração e dependências.
+		\item Instalação: \url{https://maven.apache.org/download.cgi}
+		\begin{itemize}
+			\item Baixar e descomprimir o arquivo zip.
+			\item Adicionar o diretório \textbf{bin} ao \textbf{PATH}.
+		\end{itemize}
+		\item É necessário que a variável \textbf{JAVA\_HOME} esteja configurada.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Variáveis de ambiente}
+		\includegraphics[width=.97\linewidth]{ambvar.png}
+\end{frame}
+
+
+\begin{frame}[fragile]{Criando um projeto Maven}
+	
+\begin{itemize}
+	\item No Eclipse: \texttt{New} $\rightarrow$ \texttt{Maven  Project}
+\end{itemize}
+
+\begin{tabular}{cc}
+	\includegraphics[width=.5\linewidth]{maven_project.png}
+	\includegraphics[width=.5\linewidth]{maven_simple.png}
+\end{tabular}	
+	
+\end{frame}
+
+\begin{frame}{Configuração do projeto}
+	\begin{itemize}
+		\item 
+		\textbf{archetypeArtifactId}:Especifica o tipo do projeto a ser criado.
+		\item \textbf{archetypeGroupId}: Especifica o grupo em que o arquétipo está definido.
+		\item \textbf{groupId}: Usado para identificar unicamente o projeto. Normalmente baseado no domínio. Usado como o nome do pacote.
+		\item \textbf{artifactId}: O nome do seu projeto.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Configuração do projeto: Arquivo POM.XML}
+\begin{lstlisting}[language=XML]
+<properties>
+   <java.version>13</java.version>
+   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+
+
+<dependencies>
+   <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.8.0</version>
+   </dependency>
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.21</version>
+   </dependency>
+</dependencies>
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Métodos HTTP}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public static void main(String[] args) {
+   port(6789);
+   get("/hello", (request, response) -> "<h1>Nosso primeiro Web Server!</h1>");
+
+   post("/hello", (request, response) -> "Web Server recebeu: " + request.body());
+
+   get("/private", (request, response) -> { response.status(401); 
+                                            return "Área privada!!!"; });
+
+   get("/users/:name", (request, response) -> "Usuário selecionado: " + 
+                                               request.params(":name"));
+
+   get("/news/:section", (request, response) -> { response.type("text/xml");
+                           return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>" + 
+                                  request.params("section") + "</news>";
+   });
+
+   get("/protected", (request, response) -> {
+       halt(403, "I don't think so!!!");
+       return null; });
+
+   get("/redirect", (request, response) -> { response.redirect("/news/world");
+                                             return null; });
+
+   get("/", (request, response) -> "root");
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\subsection{Roteamento de requisições}
+
+\begin{frame}[fragile]{Roteamento de requisições}
+\begin{itemize}
+\item Uma rota é formada por três elementos:
+\begin{itemize}
+	\item verbo: get, post, put, delete, head, trace, connect, options
+	\item caminho: hello, /users/:name
+	\item \textit{callback}: (request, response) -> \{ \}
+\end{itemize}
+\end{itemize}
+
+\begin{lstlisting}[basicstyle=\scriptsize]
+get("/", (request, response) -> {      // Exibe alguma coisa    
+});
+
+post("/", (request, response) -> {     // Cria alguma coisa     
+});
+
+put("/", (request, response) -> {      // Atualiza alguma coisa 
+});
+
+delete("/", (request, response) -> {   // Apaga alguma coisa
+});
+
+options("/", (request, response) -> {  // Verifica alguma coisa
+});
+\end{lstlisting}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Roteamento de requisições: CRUD}
+	\begin{itemize}
+		\item Importante definir uma tabela de rotas antes de começar a codificação.
+		\item Uma tabela padrão de CRUD (criar, consultar, atualizar e apagar) segue o seguinte padrão:
+	\end{itemize}
+	
+\begin{tabular}{lll}
+	\hline
+\bf verbo & \bf path & \bf descrição \\ \hline
+post & /produto      & adiciona um novo produto no Estoque \\
+get  & /produto/:id  & recupera os dados do produto :id \\
+put  & /produto/:id  & atualiza os dados do produto :id \\
+delete  & /produto/:id  & remove o produto :id \\
+get  & /produtos      & recupera toda a lista de produtos \\
+
+\hline
+\end{tabular}	
+	
+\end{frame}
+
+\begin{frame}[fragile]{Disponibilização de arquivos estáticos}
+	\begin{itemize}
+		\item Os arquivos de \textit{front-end} (.html) são considerados arquivos estáticos.
+		
+		\item Eles devem ser disponibilizados para poderem ser acessados a partir do servidor.
+
+		\item O comando \lstinline|staticFileLocation("/public");| avisa que os arquivos estáticos estarão disponíveis em uma pasta \verb|public|, a partir da base do projeto. NO caso do Maven, a base do projeto é o diretório \verb|"/main/resources"|.
+		
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{\textit{Disponibilização do serviço na Web}}
+	\begin{center}
+		\begin{tikzpicture} 
+		\umlclass[font=\fontsize{7}{7}\selectfont, x=-3, y=3]{SparkApp}{}{\umlstatic{+get(path : String, Route)} \\
+		\umlstatic{+post(path : String, Route)} \\
+		\umlstatic{+put(path : String, Route)} \\
+		\umlstatic{+delete(path : String, Route)} }
+		\umlclass[font=\fontsize{7}{7}\selectfont, x=0, y=-0.5]{BemDeConsumoService}{}
+		{+ add(Request, Response) : Object \\ + get(Request, Response) : Object \\ + update(Request, Response) : Object \\ + remove(Request, Response) : Object \\ + getAll(Request, Response) : Object}
+		
+		\umlclass[font=\fontsize{7}{7}\selectfont, x=3, y=3]{ProdutoDAO}{-- produtos : List<Produto>}
+		{+ add(Produto) \\ + get(id : int) : Produto \\ + update(Produto) \\ + remove(Produto) \\ + getAll() : List<Produto>}
+		\umluniassoc{SparkApp}{BemDeConsumoService}
+		\umluniassoc{BemDeConsumoService}{ProdutoDAO}
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{JSON e Redirecionamento}
+
+\subsection{JSON em Java}
+
+\begin{frame}{JavaScript Object Notation}
+    
+    \begin{block}{JavaScript Object Notation -- JSON}
+        É um formato leve para troca de informação. Baseado na linguagem JavaScript, é fácil de ser entendido pelo ser humano e pela máquina.
+    \end{block}
+    
+    Baseado em duas estruturas:
+    
+    \begin{itemize}
+        \item \texttt{JSONObject}: uma coleção de \texttt{pares <nome, valor>}, tais como um dicionário ou \lstinline|Map|, em Java.
+        \item \texttt{JSONArray}: uma lista ordenada de valores, ou \texttt{Array}.
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]{Mapeamento entre JSON e entidades Java}
+    
+\begin{tabular}{cc}
+    \begin{minipage}{.4\linewidth}\small
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \bf JSON & \bf Java \\ \hline
+            \texttt{string} & \lstinline|java.lang.String| \\
+            \texttt{number} & \lstinline|java.lang.Number| \\
+            \texttt{true|false} & \lstinline|java.lang.Boolean| \\
+            \texttt{null} & \lstinline|null| \\
+            \texttt{array} & \lstinline|java.util.List| \\
+            \texttt{object} & \lstinline|java.util.Map| \\ \hline
+        \end{tabular}
+    \end{center}
+    \end{minipage} & 
+    
+    \begin{minipage}{.55\linewidth}
+    \begin{lstlisting}[basicstyle=\scriptsize]
+    JSONObject obj = new JSONObject();
+    
+    obj.put("string", "Shulambs");
+    obj.put("inteiro", new Integer(1));
+    obj.put("real", new Double(1.99));
+    obj.put(logico", new Boolean(true));
+    \end{lstlisting}
+    \end{minipage} \\    
+\end{tabular}
+    
+\end{frame}
+
+
+\subsection{Formatando um objeto em JSON}
+
+
+\begin{frame}[fragile]{Exemplo: Convertendo objetos Java para Json}
+    \begin{center}
+        \begin{tikzpicture} 
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-1,y=3,type=interface]{JSONFormatter}{}{\umlvirt{+ toJson() : JSONObject} \\ \umlvirt{+ default toJsonArray() : JSONArray}}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-4,y=.8,type=abstract]{Produto}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-1.5]{BemDuravel}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-1.5]{BemDeConsumo}{}{ + toJson() : JSONObject}
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+        \umlimpl{Produto}{JSONFormatter}
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+\subsection{Redirecionamento}
+
+
+
+\begin{frame}{Redirecionamento}
+	
+	\begin{itemize}
+		\item Um redirecionamento ocorre quando uma requisição é redirecionada para outro endereço.
+		\item Isto é útil quando Se deseja criar um fluxo de páginas entre as requisições.
+		\item Por exemplo, se um produto não for encontrado, pode-se desejar redirecionar a requisição para uma tela de erro, ou voltar para a tela de cadastro.
+		\item No Spark Java, isso é feito pelo código: \lstinline|response.redirect("/novo");|.
+		\item Existem outras formas de redirecionamento baseado em métodos HTTP. Veja a documentação para mais detalhes.
+	\end{itemize}
+	
+\end{frame}
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

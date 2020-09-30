@@ -1,0 +1,23 @@
+\frametitle{Exemplo: Bem Durável}
+\begin{lstlisting}
+public class BemDuravel extends Produto {
+   ...
+   public BemDuravel(String d, float p, int q,
+                     LocalDateTime f, int g) {
+      super(d, p, q, f);
+      setMesesGarantia(g);
+   }
+
+   @Override
+   public String toString() {
+      return super.toString() + " Garantia: " + mesesGarantia;
+   }
+
+   @Override
+   public boolean emValidade() {
+      LocalDateTime vencimento = this.getDataFabricacao()
+                                   .plusMonths(mesesGarantia);
+      return LocalDateTime.now().isBefore(vencimento);
+   }
+}
+\end{lstlisting}

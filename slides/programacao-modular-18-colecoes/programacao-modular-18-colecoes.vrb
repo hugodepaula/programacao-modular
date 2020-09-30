@@ -1,0 +1,31 @@
+\frametitle{Exemplo: Estoque com \textit {collections} e \textit {streams}}
+
+\begin{itemize}
+    \item Para usar os novos métodos criados na classe Estoque.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}[basicstyle=\tiny]
+public static void main(String args[]) {
+   ...
+   estoque.ordenar();
+
+   List<Produto> filtrado = estoque.ordenarStream(
+                ((pf) -> pf.getQuant() > 100),
+                ((p1, p2)  -> Float.compare(p1.getPreco(), p2.getPreco())));
+
+   filtrado.forEach(prod -> System.out.println(prod));
+
+   double media = estoque.getListaDeProdutos()
+      .stream()
+      .filter(p -> p instanceof BemDeConsumo)
+      .mapToInt(Produto::getQuant)
+      .average()
+      .getAsDouble();
+
+   System.out.println("Quantidade média por produto: " + media);
+   System.out.println("Total em estoque: " + estoque.totalEmEstoque());
+   System.out.println("Valor em estoque: " + estoque.valorEmEstoque());
+}
+\end{lstlisting}
+\end{block}

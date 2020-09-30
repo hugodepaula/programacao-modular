@@ -1,0 +1,57 @@
+\beamer@endinputifotherversion {3.36pt}
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\sectionentry {1}{M\'odulos e classes}{3}{M\'odulos e classes}{0}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{4}{Classes e objetos}}\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\slideentry {1}{1}{1}{4/4}{Classes e objetos}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {1}{1}{2}{5/5}{Classes e objetos}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\sectionentry {2}{Exemplo: Estoque de Produtos}{6}{Exemplo: Estoque de Produtos}{0}}
+\headcommand {\beamer@sectionpages {3}{5}}
+\headcommand {\beamer@subsectionpages {4}{5}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{6}{Criando a classe Produto}}\headcommand {\beamer@subsectionpages {6}{5}}
+\headcommand {\slideentry {2}{1}{1}{6/6}{Criando a classe Produto}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Definindo a classe Produto}}\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\slideentry {2}{2}{1}{7/7}{Definindo a classe Produto}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\slideentry {2}{2}{2}{8/8}{Definindo a classe Produto}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {2}{2}{3}{9/9}{Definindo a classe Produto}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{10}{Sem\^antica de refer\^encia}}\headcommand {\beamer@subsectionpages {7}{9}}
+\headcommand {\slideentry {2}{3}{1}{10/10}{Sem\^antica de refer\^encia}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {2}{3}{2}{11/11}{Sem\^antica de refer\^encia}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {2}{3}{3}{12/12}{Sem\^antica de refer\^encia}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {2}{3}{4}{13/13}{Sem\^antica de refer\^encia}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\sectionentry {3}{Construtores}{14}{Construtores}{0}}
+\headcommand {\beamer@sectionpages {6}{13}}
+\headcommand {\beamer@subsectionpages {10}{13}}
+\headcommand {\slideentry {3}{0}{1}{14/14}{}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{15}{Construtores}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {3}{1}{1}{15/15}{Construtores}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {3}{1}{2}{16/16}{Construtores}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{17}{Usando construtores}}\headcommand {\beamer@subsectionpages {15}{16}}
+\headcommand {\slideentry {3}{2}{1}{17/17}{Usando construtores}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {3}{2}{2}{18/18}{Usando construtores}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@partpages {1}{18}}
+\headcommand {\beamer@subsectionpages {17}{18}}
+\headcommand {\beamer@sectionpages {14}{18}}
+\headcommand {\beamer@documentpages {18}}
+\headcommand {\def \inserttotalframenumber {18}}

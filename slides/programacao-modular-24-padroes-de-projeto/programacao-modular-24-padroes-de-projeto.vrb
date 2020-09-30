@@ -1,0 +1,27 @@
+\frametitle{Classificação dos padrões (Gamma et. al., 1995)}
+
+\scriptsize
+\begin{tabular}{|r|r|r|r|r|}
+\cline{3-5}
+\multicolumn{2}{c|}{\;\;}      & \multicolumn{3}{c|}{\bf Propósito}           \\
+\cline{3-5}
+\multicolumn{2}{c|}{\;\;}      & \bf Criacional   & \bf Estrutural & \bf Comportamental \\
+\hline
+\multirow{11}[4]{*}{\bf Escopo}
+                       & \multirow{2}[2]{*}{\bf Classe}
+                               & Factory Method   & Class Adapter  & Interpreter \\
+                       &       &                  &                & Template Method \\
+\cline{2-5}
+                       & \multirow{9}[2]{*}{\bf Objeto}
+                               & Abstract Factory & Object Adapter & Chain of responsibility \\
+                       &       & Builder          & Bridge         & Command \\
+                       &       & Prototype        & Composite      & Iterator \\
+                       &       & Singleton        & Decorator      & Mediator \\
+                       &       &                  & Facade         & Memento \\
+                       &       &                  & Flyweight      & Observer \\
+                       &       &                  & Proxy          & State \\
+                       &       &                  &                & Strategy \\
+                       &       &                  &                & Visitor \\
+\hline
+\end{tabular}
+

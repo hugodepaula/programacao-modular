@@ -1,0 +1,8 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{SOLID}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Single responsibility principle (SRP)}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Open/closed principle (OCP)}{8}{0}{1}
+\beamer@subsectionintoc {1}{3}{Liskov substitution principle (LSP)}{14}{0}{1}
+\beamer@subsectionintoc {1}{4}{Interface segregation principle (ISP)}{18}{0}{1}
+\beamer@subsectionintoc {1}{5}{Dependency inversion principle (DIP)}{22}{0}{1}

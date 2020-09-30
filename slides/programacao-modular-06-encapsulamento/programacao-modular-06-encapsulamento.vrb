@@ -1,0 +1,11 @@
+\frametitle{Coesão e acoplamento}
+\begin{minipage}{.5\textwidth}
+    \centering
+    \textbf{Alto acoplamento} \\[1mm]
+    \includegraphics[width=.9\textwidth]{high.pdf}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+    \centering
+    \textbf{Baixo acoplamento} \\[1mm]
+    \includegraphics[width=.9\textwidth]{low.pdf}
+\end{minipage}

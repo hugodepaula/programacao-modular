@@ -1,0 +1,336 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Padrões de projeto estruturais%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+        \includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}
+%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-1.48cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+\section{Padrões Estruturais}
+
+\begin{frame}{Padrões de projeto estruturais}
+
+\begin{block}{Padrões Estruturais}
+Estão relacionados com a forma com que os objetos estão estruturados, principalmente em como a herança e as interfaces são aplicadas ao projeto da arquitetura do sistema.
+\end{block}
+
+\begin{itemize}
+\item Em geral, envole empacotamento (\textit{wrapping}), p. ex. uma classe que contém instâncias de outras classes. Normalmente uma classe complexa é empacotada pela por classes mais simples.
+\item Exemplos mais comuns: Adapter, Bridge, Decorator, Facade.
+\item Exemplos menos comuns (para iniciantes): Flyweight e Proxy.
+\end{itemize}
+
+\end{frame}
+
+\section{Adapter}
+
+\begin{frame}{Adapter}
+
+\begin{block}{Adapter}
+Fazer classes com interfaces incompatíveis trabalharem juntas.
+\end{block}
+
+\begin{itemize}
+\item Funciona como uma ponte entre duas classes.
+\item Normalmente usada para refatorar código que teve sua funcionalidade estendida.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Adapter: solução geral}
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{adapter1.pdf}
+\end{center}
+\end{frame}
+
+
+\subsection{Exemplo: Adapter não polimórfico}
+
+\begin{frame}[fragile]{Exemplo: Adapter não polimórfico (solução ruim)}
+
+\begin{lstlisting}
+public class JatoDeTinta {
+   public void imprimir(Documento d, int nrCopias) {
+      // Codigo de impressao vai aqui
+   }
+
+   public void imprimirFrenteVerso(Documento d, int nrCopias) {
+      // Codigo de impressao vai aqui
+   }
+}
+
+public class Laser {
+   public void imprimir(Documento d, boolean frenteVerso) {
+      // Codigo de impressao vai aqui
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Adapter não polimórfico (solução ruim)}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class ImpressoraUnificada {
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso) {
+      if (isLaser()) {
+         for (int copia = 1; copia <= nrCopias; copia++)
+            imprimirLaser(d, frenteVerso);
+      } else {
+         if (frenteVerso)
+            imprimirJatoDeTintaFrenteVerso(d, nrCopias);
+         else
+            imprimirJatoDeTinta(d, nrCopias);
+      }
+   }
+   public void imprimirJatoDeTinta(Documento d, int nrCopias) {
+      // Codigo de impressao vai aqui
+      new JatoDeTinta().imprimir(d, nrCopias);
+   }
+   public void imprimirJatoDeTintaFrenteVerso(Documento d, int nrCopias) {
+      // Codigo de impressao vai aqui
+      new JatoDeTinta().imprimirDuplicada(d, nrCopias);
+   }
+   public void imprimirLaser(Documento d, boolean frenteVerso) {
+      // Codigo de impressao vai aqui
+      new Laser().imprimir(d, frenteVerso);
+   }
+   public boolean isLaser() {
+      // Descobrir uma forma de identificar qual o tipo de impressora está ativa
+      return true;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\subsection{Exemplo: Padrão Adapter}
+
+
+\begin{frame}{Exemplo: Padrão Adapter}
+
+\begin{center}
+\includegraphics[width=.9\textwidth]{adapterPrinter.pdf}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Padrão Adapter}
+
+\begin{lstlisting}
+public class JatoDeTintaLegado {
+   public void imprimir(Documento d, int nrCopias) {
+      // Codigo de impressao vem aqui.
+   }
+
+   public void imprimirFrenteVerso(Documento d, int nrCopias) {
+      // Codigo de impressao vem aqui.
+   }
+}
+public class LaserLegado {
+   public void imprimir(Documento d, boolean frenteVerso) {
+      // Codigo de impressao vem aqui.
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Padrão Adapter}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public interface Impressora {
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso);
+}
+
+public class JatoDeTinta implements Impressora {
+   public JatoDeTintaLegado impressora = new JatoDeTintaLegado();
+
+   @Override
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso) {
+      if (frenteVerso)
+         impressora.imprimirFrenteVerso(d, nrCopias);
+      else
+         impressora.imprimir(d, nrCopias);
+   }
+}
+
+public class Laser implements Impressora {
+   public LaserLegado impressora = new LaserLegado();
+
+   @Override
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso) {
+      for (int copy = 1; copy <= nrCopias; copy++)
+         impressora.imprimir(d, frenteVerso);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Decorator}
+
+\begin{frame}{Decorator}
+    
+    \begin{block}{Decorator}
+        Adiciona nova funcionalidade a um objeto sem alterar a sua estrutura.
+    \end{block}
+    
+    \begin{itemize}
+        \item Funciona como um envelope sobre uma classe.
+        \item Classe decoradora embrulha uma classe existente e adiciona novas funcionalidades.
+    \end{itemize}
+    
+\end{frame}
+
+\subsection{Solução geral}
+
+\begin{frame}{Decorator: solução geral}
+    
+\begin{center}\tiny
+    \begin{tikzpicture} 
+    \umlinterface[font=\fontsize{8}{8}\selectfont,x=0,y=1.5]{Componente}{}{+ operacao()}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=-2,y=0]{ComponenteConcreto}{}{+ operacao()}
+    \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont,x=2,y=0]{Decorador}{}{+ operacao()}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=0,y=-1.5]{DecoradorConcretoA}{}{+ operacao()}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=4,y=-1.5]{DecoradorConcretoB}{}{+ operacao()}
+    \umlimpl{ComponenteConcreto}{Componente} 
+    \umlimpl{Decorador}{Componente} 
+    \umlinherit{DecoradorConcretoA}{Decorador} 
+    \umlinherit{DecoradorConcretoB}{Decorador} 
+    \umlVHaggreg[font=\fontsize{8}{8}\selectfont]{Decorador}{Componente} 
+    \end{tikzpicture} \\[5mm]
+\end{center}
+
+\begin{itemize}\footnotesize
+    \item \textbf{Componente}: interface do objeto que terá responsabilidades adicionadas dinamicamente.
+    \item \textbf{ComponenteConcreto}: onde responsabilidades serão anexadas.
+    \item \textbf{Decorador}: mantém referência e mimetiza interface do componente.
+    \item \textbf{DecoradorConcreto}: adiciona responsabilidades ao componente.
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Exemplo: Pizzaria}
+
+\begin{frame}{Exemplo: Cálculo de acréscimos em Pizza}
+
+\begin{block}{Cálculo de acréscimos em pizza}
+    O objetivo é ajudar uma pizzaria a calcular o valor total de uma pizza com os acréscimos que são colocados. Usuário solicita novos ingredientes que irão gerar um custo adicional. Fonte: \textit{Java Design Patters}, Java Code Geeks.
+\end{block}
+    
+\end{frame}
+
+
+\begin{frame}{Exemplo: Cálculo de acréscimos em Pizza}
+    
+    \begin{center}\tiny
+        \begin{tikzpicture} 
+        \umlinterface[font=\fontsize{8}{8}\selectfont,x=0,y=2.5]{Pizza}{}{+ getDesc() \\ + getPreco()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=-3,y=0]{PizzaSimples}{}{+ getDesc() \\ + getPreco()}
+        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont,x=3,y=0]{AcrescimoDecorador}{}{+ AcrescimoDecorador(Pizza) \\+ getDesc()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=3,y=-2.5]{AcrescimoX}{}{+ AcrescimoX(Pizza) \\ + getDesc() \\ + getPreco()}
+        \umlimpl{PizzaSimples}{Pizza} 
+        \umlimpl{AcrescimoDecorador}{Pizza} 
+        \umlinherit{AcrescimoX}{AcrescimoDecorador} 
+        \umlHVaggreg[font=\fontsize{8}{8}\selectfont]{AcrescimoDecorador}{Pizza} 
+        \end{tikzpicture} \\[5mm]
+    \end{center}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

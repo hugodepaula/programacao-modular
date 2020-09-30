@@ -1,0 +1,14 @@
+\frametitle{Associações reflexivas}
+
+\begin{itemize}
+\item Uma classe pode estar associada a si mesma.
+\end{itemize}
+
+    \begin{center}
+    \begin{tikzpicture}
+     \umlclass{Funcionario}{-- gerente: Funcionario}{}
+     \umlassoc[loopsize=5cm, angle1=30, angle2=-30, arg1=gerente, mult1=1, arg2=equipe, mult2=0..*]{Funcionario}{Funcionario}
+    \end{tikzpicture}
+    \end{center}
+
+

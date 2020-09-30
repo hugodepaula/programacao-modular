@@ -1,0 +1,50 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{Padr\~oes Criacionais}{3}{Padr\~oes Criacionais}{0}}
+\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@sectionpages {3}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\sectionentry {2}{Singleton}{4}{Singleton}{0}}
+\headcommand {\beamer@subsectionpages {4}{3}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{4}{Solu\c c\~ao geral}}
+\headcommand {\slideentry {2}{1}{1}{4/4}{Solu\c c\~ao geral}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {2}{1}{2}{5/5}{Solu\c c\~ao geral}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\slideentry {2}{1}{3}{6/6}{Solu\c c\~ao geral}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@subsectionpages {4}{6}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Exemplo: Logging}}
+\headcommand {\slideentry {2}{2}{1}{7/7}{Exemplo: Logging}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{8}{Classe utilit\'aria est\'atica}}
+\headcommand {\slideentry {2}{3}{1}{8/8}{Classe utilit\'aria est\'atica}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@sectionpages {4}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\sectionentry {3}{Factory Method}{9}{Factory Method}{0}}
+\headcommand {\slideentry {3}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{10}{Exemplo F\'abrica de formas}}
+\headcommand {\slideentry {3}{1}{1}{10/10}{Exemplo F\'abrica de formas}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {3}{1}{2}{11/11}{Exemplo F\'abrica de formas}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {3}{1}{3}{12/12}{Exemplo F\'abrica de formas}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionpages {10}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{13}{Solu\c c\~ao geral}}
+\headcommand {\slideentry {3}{2}{1}{13/13}{Solu\c c\~ao geral}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {9}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\gdef \inserttotalframenumber {13}}

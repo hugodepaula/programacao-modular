@@ -1,0 +1,236 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Introdução%
+}
+\author[Prof. Hugo de Paula]
+{
+	Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+        basicstyle=\scriptsize,
+        commentstyle=\color{red},
+        showstringspaces=false,
+        numbers=left,
+        numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+\section{Programação modular}
+
+\begin{frame}[fragile]{Programação modular}
+   \bi 
+   \item \textbf{Programação modular}
+		\bi
+			\item Técnica de projeto (\textit{design}) de software.
+            \item Cada módulo é uma unidade independente que provê uma funcionalidade específica de um programa.
+            \item Módulos se comunicam.
+		\ei 
+        
+   \item Programação em larga escala: modelo estruturado ou orientado para objetos.
+
+   \item Decomposibilidade de software.   
+ 
+   \ei
+\end{frame}
+
+\section{Modelo orientado para objetos}
+
+\begin{frame}[fragile]{Modelo orientado para objetos}
+    \bi 
+    
+    \item Objeto possui ({\scriptsize \it Cay S. Horstmann, Object-Oriented Design \& Patterns, 2006}.):
+        \bd
+            \item estado;
+            \item comportamento;
+            \item identidade.
+        \ed
+     
+    
+    \item A Orientação para objetos abstrai o mundo real utilizando objetos que interagem entre si.
+    
+    \item Utiliza o princípio da decomposibilidade para desenvolver sistemas modulares.
+    
+    \item Melhora a reusabilidade e extensibilidade dos softwares.
+    \ei
+\end{frame}
+
+
+\begin{frame}[fragile]{Modelo orientado para objetos}
+   \bi 
+   \item \textbf{Programação Orientada para Objetos (OOP):}
+   Método de implementação onde os programas são organizados como coleções de objetos cooperativos, cada objetos representando uma instância de uma classe.
+   \item \textbf{Projeto Orientada para Objetos (OOD):}
+   Método de projeto onde o processo da decomposibilidade orientada para objetos é utilizada e modelos físicos e lógicos de objetos são descritos.
+   \item \textbf{Análise Orientada para Objetos (OOA):}
+   Método de análise que examina os requisitos de um sistema de uma perspectiva de classes e objetos, encontrados no vocabulário o domínio do problema.
+   \ei
+\end{frame}
+
+
+\begin{frame}{Alan Kay, pai da programação Orientada para Objetos}
+
+\begin{block}{}
+\textit{I'm sorry that I long ago coined the term ``objects'' for this topic
+because it gets many people to focus on the lesser idea.}
+\end{block}
+
+Para \textit{Alan Kay}, POO significa apenas:
+\begin{itemize}
+\item troca de mensagens,
+\item proteção e retenção local e ocultamento do estado ou processo, e
+\item associação tardia e dinâmica de tudo o que for possível.
+\end{itemize}
+
+\begin{block}{A grande ideia é ``troca de mensagens''}
+A chave para desenvolver sistemas extensíveis de qualidade é muito mais projetar como os módulos se comunicam do que como suas propriedades internas e seus comportamentos deveriam ser.
+\end{block}
+
+\end{frame}
+
+
+\section{Histórico}
+
+
+\begin{frame}[fragile]{História da programação orientada para objetos}
+    \bi 
+    \item Conceito de classe, objeto e herança (década de 60): linguagem \textbf{Simula 67}.
+
+    \ei
+
+\begin{block}{Alo Mundo em Simula 67}
+    \begin{lstlisting}[language=Simula,numbers=none]
+    begin
+       OutText("Hello, world!");
+       OutImage
+    end
+    \end{lstlisting}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo de programa em Simula 67}
+    
+\begin{lstlisting}[language=Simula,numbers=none]
+   begin
+     class Vehicle;
+        virtual: procedure sound is procedure sound;;
+        begin
+        end;
+     Vehicle class Car;
+     begin
+        procedure sound;
+        begin
+           OutText("Beep beep!");
+           OutImage;
+        end;
+     end;
+     
+     ref (Vehicle) array vehicles (1 : 2);
+     Integer i;
+     vehicles (1) :- new Car;   vehicles (2) :- new Car;
+     for i := 1 step 1 until 2 do  vehicles(i).sound
+     end;        
+\end{lstlisting}
+    
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Smalltalk}
+    \bi 
+    \item \textbf{Smalltalk}:  primeira linguagem orientada para objetos completa (década de 70). 
+
+    \bi
+    \item tipos abstratos de dados (classes e objetos)
+    \item herança
+    \item amarração dinâmica (polimorfismo)
+    \item design de interface gráfica
+    \ei
+
+    \item Desenvolvida por Alan Kay, Dan Ingalls e  Adele Goldberg.
+    
+    \item Em Smalltalk tudo é objeto: números, classes, métodos, blocos de código, etc.
+    \ei
+    
+
+\begin{block}{Alo Mundo em Smalltalk}
+    \begin{lstlisting}[numbers=none]
+    'Hello World!' printNl
+    \end{lstlisting}
+\end{block}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{História da programação orientada para objetos}
+    \bi 
+    
+    
+    \item outros exemplos: Eiffel, Java, Object Pascal, C\#, Python.
+    
+    \item linguagens como C++, Ada e Perl suportam o conceito de classe mas não são consideradas LPs OO em um sentido mais rigoroso.
+    
+    \ei
+    
+\end{frame}
+
+
+
+\end{document}

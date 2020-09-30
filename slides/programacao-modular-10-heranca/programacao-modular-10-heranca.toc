@@ -1,0 +1,6 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Heran\c ca}{3}{0}{1}
+\beamer@sectionintoc {2}{Heran\c ca simples}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Construtores em classes estendidas}{7}{0}{2}
+\beamer@sectionintoc {3}{Exemplo: Heran\c ca de Produto}{11}{0}{3}

@@ -1,0 +1,10 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Relacionamento entre objetos}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Associa\c c\~ao}{5}{0}{1}
+\beamer@subsectionintoc {1}{2}{Agrega\c c\~ao e composi\c c\~ao}{7}{0}{1}
+\beamer@subsectionintoc {1}{3}{Cardinalidade das associa\c c\~oes}{11}{0}{1}
+\beamer@sectionintoc {2}{Exemplo: Controle de Estoque}{14}{0}{2}
+\beamer@sectionintoc {3}{Projeto de rela\c c\~oes}{17}{0}{3}
+\beamer@subsectionintoc {3}{1}{Papeis}{17}{0}{3}
+\beamer@subsectionintoc {3}{2}{Navegabilidade}{19}{0}{3}

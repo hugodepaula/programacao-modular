@@ -1,0 +1,33 @@
+\frametitle{Factory Method: exemplo Fábrica de formas}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class FabricaDeFormas {
+   public Forma getForma(TipoForma tipoForma) {
+      if (tipoForma == null) {
+         return null;
+      } else if (tipoForma.equals(TipoForma.CIRCULO)) {
+         return new Circulo();
+      } else if (tipoForma.equals(TipoForma.QUADRADO)) {
+         return new Retangulo();
+      } else if (tipoForma.equals(TipoForma.RETANGULO)) {
+         return new Quadrado();
+      }
+      return null;
+   }
+}
+
+public class Aplicacao {
+   public static void main(String[] args) throws Exception {
+      FabricaDeFormas fabricaDeFormas = new FabricaDeFormas();
+
+      Forma forma1 = fabricaDeFormas.getForma(TipoForma.CIRCULO);
+      forma1.desenhar();
+
+      Forma forma2 = fabricaDeFormas.getForma(TipoForma.QUADRADO);
+      forma2.desenhar();
+
+      Forma forma3 = fabricaDeFormas.getForma(TipoForma.RETANGULO);
+      forma3.desenhar();
+   }
+}
+\end{lstlisting}

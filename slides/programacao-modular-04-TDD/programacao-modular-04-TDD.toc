@@ -1,0 +1,13 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Princ\IeC {\'\i }pios do teste de software}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Tipos de erro de software}{5}{0}{1}
+\beamer@subsectionintoc {1}{2}{Princ\IeC {\'\i }pios do teste de software}{9}{0}{1}
+\beamer@sectionintoc {2}{Test-driven development (TDD)}{11}{0}{2}
+\beamer@subsectionintoc {2}{1}{TDD: o que \IeC {\'e}}{11}{0}{2}
+\beamer@subsectionintoc {2}{2}{TDD: como funciona}{12}{0}{2}
+\beamer@sectionintoc {3}{Teste de unidade e JUnit}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Teste de unidade}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{JUnit com Eclipse}{17}{0}{3}
+\beamer@subsectionintoc {3}{3}{Exemplo de caso de teste JUnit}{19}{0}{3}
+\beamer@subsectionintoc {3}{4}{Exemplo de JUnit: Data}{34}{0}{3}

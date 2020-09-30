@@ -1,0 +1,25 @@
+\frametitle{DAO binário polimórfico}
+
+    \begin{itemize}
+        \item \lstinline|Serializable| é chamada \textit{markup interface}, porque não possui métodos.
+        \item O Java irá converter o objeto para binário.
+    \end{itemize}
+
+    \begin{lstlisting}
+public class ProdutoDAO {
+  private ObjectOutputStream outputFile;
+  ...
+
+  public void add(Produto produto) throws IOException {
+
+        outputFile.writeObject(produto);
+   }
+}
+
+ProdutoDAO bemDeConsumoDAO = new ProdutoDAO("bemdeconsumo.bin");
+
+bemDeConsumoDAO.add(new BemDeConsumo("Leite",    4.00F, 120,
+           LocalDateTime.now(), LocalDate.now().plusMonths(6)));
+
+
+    \end{lstlisting}

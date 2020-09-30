@@ -1,0 +1,9 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Padr\~oes Estruturais}{3}{0}{1}
+\beamer@sectionintoc {2}{Adapter}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Exemplo: Adapter n\~ao polim\'orfico}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Exemplo: Padr\~ao Adapter}{8}{0}{2}
+\beamer@sectionintoc {3}{Decorator}{11}{0}{3}
+\beamer@subsectionintoc {3}{1}{Solu\c c\~ao geral}{12}{0}{3}
+\beamer@subsectionintoc {3}{2}{Exemplo: Pizzaria}{13}{0}{3}

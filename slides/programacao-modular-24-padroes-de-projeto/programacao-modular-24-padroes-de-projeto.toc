@@ -1,0 +1,5 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Padr\~oes de projeto}{3}{0}{1}
+\beamer@sectionintoc {2}{Desenvolvimento de padr\~oes}{6}{0}{2}
+\beamer@sectionintoc {3}{Reuso de software}{8}{0}{3}

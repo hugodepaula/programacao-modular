@@ -1,0 +1,20 @@
+\frametitle{Métodos default (Java 8 em diante)}
+
+\begin{lstlisting}
+
+public interface Ordenavel {
+
+   boolean menorQue(Ordenavel o);
+
+   boolean igual(Ordenavel o);
+
+   default boolean diferente(Ordenavel o) {
+      return !igual(o);
+   }
+
+   default boolean maiorQue(Ordenavel o) {
+      return !menorQue(o) && !igual(o);
+   }
+
+}
+\end{lstlisting}

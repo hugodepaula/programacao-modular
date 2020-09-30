@@ -1,0 +1,24 @@
+\frametitle{Eliminando redundâncias e tornando os testes curtos}
+\vspace{-2mm}
+\begin{lstlisting}
+public class DataTest {
+  @Test
+  public void testAdicionaDias_numMesmoMes() {
+    adicionaHelper(2050, 2, 15, 4, 2050, 2, 19);
+  }
+
+  @Test
+  public void testAdicionaDias_proximoMes() {
+    adicionaHelper(2050, 2, 15, 14, 2050, 3, 1);
+  }
+
+  private void adicionaHelper(int ano1, int mes1, int dia1,
+                    int adic, int ano2, int mes2, int dia2) {
+    Data real = new Data(ano1, mes1, dia1);
+    real.adicionaDias(adic);
+    Data esper = new Data(ano2, mes2, dia2);
+    assertEquals(esper, real, "data apos +" + adic + " dias");
+  }
+}
+\end{lstlisting}
+

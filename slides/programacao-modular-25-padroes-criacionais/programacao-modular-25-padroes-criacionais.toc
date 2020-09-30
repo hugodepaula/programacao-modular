@@ -1,0 +1,10 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Padr\~oes Criacionais}{3}{0}{1}
+\beamer@sectionintoc {2}{Singleton}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Solu\c c\~ao geral}{4}{0}{2}
+\beamer@subsectionintoc {2}{2}{Exemplo: Logging}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{Classe utilit\'aria est\'atica}{8}{0}{2}
+\beamer@sectionintoc {3}{Factory Method}{9}{0}{3}
+\beamer@subsectionintoc {3}{1}{Exemplo F\'abrica de formas}{10}{0}{3}
+\beamer@subsectionintoc {3}{2}{Solu\c c\~ao geral}{13}{0}{3}

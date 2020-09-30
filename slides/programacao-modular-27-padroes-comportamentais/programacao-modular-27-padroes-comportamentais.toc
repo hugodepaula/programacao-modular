@@ -1,0 +1,8 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Padr\~oes Comportamentais}{3}{0}{1}
+\beamer@sectionintoc {2}{Chain of Responsibility}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Chain of Responsibility: exemplo Logger}{5}{0}{2}
+\beamer@sectionintoc {3}{Observer}{9}{0}{3}
+\beamer@subsectionintoc {3}{1}{Solu\c c\~ao geral}{10}{0}{3}
+\beamer@subsectionintoc {3}{2}{Exemplo: Observer}{11}{0}{3}

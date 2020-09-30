@@ -1,0 +1,397 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Encapsulamento
+}
+
+\author[Prof. Hugo de Paula]
+{
+	Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+\section{Encapsulamento}
+
+\begin{frame}{Encapsulamento: ocultando informações}
+    \begin{itemize}
+        \item Objetiva separar aspectos visíveis de um objeto ou classe  de seus detalhes de implementação
+        
+        \item Interface:
+        \begin{itemize}
+            \item tudo aquilo que o usuário do objeto vê/acessa.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Encapsulamento: ocultando informações}
+    \begin{itemize}
+        \item Permite alterar a implementação de um objeto sem impactos em outros módulos do sistema.
+        \item Permite que seus dados sejam protegidos de acesso ilegal.
+        \item Em geral, desejamos ocultar determinados dados e/ou métodos do cliente/usuário da aplicação.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ocultando informações}
+Exemplo:
+    \begin{itemize}
+        \item Acessar o campo \lstinline|quant| e definir um estoque negativo pode invalidar o Produto.\\[5mm]
+    \end{itemize}
+Solução:
+    \begin{itemize}
+        \item Encapsulamento e interface pequena.
+    \end{itemize}
+\end{frame}
+        
+\subsection{Modificadores de acesso}     
+   
+\begin{frame}{Modificadores de acesso}
+    \begin{itemize}
+        \item Modificadores de acesso controlam a visibilidade dos componentes na aplicação.
+        
+        \item Ao nível da classe: \lstinline|public| ou \textit{package-private} (sem modificador explícito).
+        \begin{itemize}
+            \item Classe declarada como  \lstinline|public| é visível a todas as classes do programa.
+            \item Classe sem modificador de acesso é visível apenas em seu pacote.
+        \end{itemize}
+        \item Ao nível dos membros (atributos e métodos): \lstinline|public|, \lstinline|private|, \lstinline|protected|, ou \textit{package-private} (sem modificador explícito).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Modificadores de acesso}
+O Java possui 4 modificadores de acesso ao nível dos membros:
+    \begin{itemize}
+        \item \lstinline|private|: membros declarados com acesso privado são acessíveis apenas na própria classe.
+        \item \textit{package-private}: membros declarados sem modificador de acesso são acessíveis apenas às classes dentro do mesmo pacote.
+        \item \lstinline|protected|: membros declarados com acesso protegido são acessíveis às classes do pacote e adicionalmente por suas subclasses.
+        \item \lstinline|public|: membros declarados com acesso público são acessíveis de qualquer lugar do programa.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Princípios da ocultação de informação}
+    \begin{itemize}
+        \item Use o nível de acesso mais restrito e que faça sentido para um membro particular.
+        \item Use \lstinline|private| a menos que haja uma boa razão para não fazê-lo.
+        \item Evite campos \lstinline|public| exceto para constantes. Campos públicos aumentam o acoplamento em relação a uma implementação específica e reduz a flexibilidade do sistema a mudanças.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Encapsulamento na UML}
+\begin{minipage}{.45\textwidth}
+    \begin{center}
+        \tiny
+        \begin{tikzpicture} 
+        \umlclass{Shulambs}{ 
+            -- atributoPriv : Tipo \\ 
+            \# atributoProt : Tipo  
+        }{ 
+        + getterPub() : Tipo \\ 
+        + setterPub(p : Tipo) : void \\
+        metodoPkgPriv() : void}        
+    \end{tikzpicture}
+\end{center}
+\end{minipage}%
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}
+    class Shulambs {
+        private Tipo atributoPriv;
+        protected Tipo atributoProt;
+        
+        public Tipo getterPub() {
+         ... 
+        }
+        public void setterPub(Tipo p) {
+         ... 
+        }
+        
+        void metodoPkgPriv() {
+         ... 
+        }
+    }
+\end{lstlisting}
+\end{minipage}
+\end{frame}
+
+\subsection{Classe Produto: encapsulamento}
+
+\begin{frame}[fragile]{Classe Produto: encapsulamento}
+\begin{lstlisting}
+public class Produto {
+    private String descricao;
+    private float preco;
+    private int quant;
+    
+    public bool emEstoque() {
+        return (quant > 0);
+    }
+    
+    public Produto(String d, float p, int q)  {
+        ...
+    }
+    
+    public Produto() {
+        ...
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Métodos de acesso}
+
+\begin{frame}{Métodos de acesso (\textit{getters} e \textit{setters})}
+    \begin{itemize}
+        \item Métodos \textit{get}: acessam o valor de um atributo privado.
+        \begin{itemize}
+            \item Valores podem ser tratados antes de serem exibidos.
+            \item  Ex:	atributo booleano sendo exibido como V ou F
+            atributo numérico e seu correspondente \lstinline|string|.
+            
+        \end{itemize}
+        Métodos \textit{set}: atribuem um valor a um atributo privado.
+        \begin{itemize}
+            \item Valores devem ser validados/tratados antes de serem atribuídos.
+            \item Ex: número do \texttt{dia} numa classe Data depende do atributo \texttt{mes}.
+        \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe Produto: métodos de acesso (\textit{getters} e \textit{setters})}
+\begin{lstlisting}[basicstyle=\tiny]
+    public String getDescricao() { return descricao; }
+    public float getPreco() { return preco; }
+    public int getQuant() { return quant; }
+
+    public void setDescricao(String d) {
+        if (d.length() >= 3)    descricao = d;
+    }
+    public void setPreco(float p) {
+        if (preco > 0)   preco = p;
+    }
+    public void setQuant(int q) {
+        if (quant >= 0)   quant = q;
+    }
+    public Produto(String d, float p, int q)
+    {
+        setDescricao(d);
+        setPreco(p);
+        setQuant(q);
+    }
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe Produto: acessando membros encapsulados}
+\begin{lstlisting}[basicstyle=\tiny]
+class Aplicacao {
+    public static void main(String args[])
+    {
+        Produto p1 = new Produto();
+        Produto p2 = new Produto("Shulambs,1.99F,200);
+        
+        p1.setDescricao("Cool Shulambs");
+        p1.setPreco(2.49F);
+        p1.setQuant(10);
+        
+        System.out.println("Produto: " + p1.getDescricao());
+        System.out.println("Preço: " + p1.getPreco());
+        System.out.println(" Estoque: " + p1.getQuant());
+        
+        System.out.println("Produto: " + p2.getDescricao());
+        System.out.println("Preço: " + p2.getPreco());
+        System.out.println(" Estoque: " + p2.getQuant());
+    
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Quando não utilizar métodos de acesso}
+    \begin{minipage}{.4\textwidth}
+        \begin{lstlisting}[basicstyle=\tiny]
+class Conta {
+    private double limite;
+    private double saldo;
+    
+    public double getSaldo() {
+        return saldo;
+    }
+    
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
+    public double getLimite() {
+        return limite;
+    }
+    
+    public void setLimite(double limite) {
+        this.limite = limite;
+    }
+}        
+\end{lstlisting}
+    \end{minipage}%
+    \begin{minipage}{.45\textwidth}
+        \begin{lstlisting}[basicstyle=\tiny]
+        class Conta {
+            private double saldo;
+            private double limite;
+            
+            public Conta(double limite) {
+                this.limite = limite;
+            }
+            
+            public void depositar(double x) {
+                this.saldo += x;
+            }
+            
+            public void sacar(double x) {
+                if(this.saldo + this.limite >= x) {
+                this.saldo -= x;
+                }
+                else throw 
+                  new Exception("Fundos insuficientes.");
+                }
+            
+            public double getSaldo() {
+                return this.saldo;
+            }
+        }
+        \end{lstlisting}
+    \end{minipage}
+\end{frame}
+
+\section{Coesão e acoplamento}
+
+\begin{frame}{Encapsulamento e o princípio da caixa preta}
+    Envolve os princípios:
+\begin{itemize}
+    \item Abstração
+    \item Encapsulamento
+    \item Interface
+    \item {\color{red} Independência funcional}
+    \item {\color{red} Independência modular}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Independência funcional e coesão}
+    \begin{itemize}
+        \item Módulo: ``grupo de comandos com uma função bem definida e o mais independente possível em relação ao resto do algoritmo''.
+        \item Cada módulo deve cuidar de uma função específica, servindo a um propósito específico.
+        \item É necessária coerência e unidade conceitual.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Independência funcional e coesão}
+    \begin{itemize}
+        \item \textbf{Coesão}: Qualidade de uma coisa em que todas as partes estão ligadas umas às outras. Em software, todas as partes estão coerentemente relacionadas.
+        \item Objetivo de um módulo em programação modular: alta coesão interna.
+        \begin{itemize}
+            \item Facilita a manutenção.            
+            \item Reduz efeitos colaterais e propagação de erros.            
+            \item Dependência deve ser intra-modular: uso de estruturas internas ao módulo.
+        \end{itemize}
+.    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Independência modular e acoplamento}
+    \begin{itemize}
+        \item Módulo: ``grupo de comandos com uma função bem definida e o mais independente possível em relação ao resto do algoritmo''.
+        \item A dependência pode ser medida pela quantidade de conexões entre os elementos de software.
+        \item \textbf{Acoplamento}:
+        \begin{itemize}
+            \item Medida da interconexão entre os elementos de software.
+            \item Situação ideal: baixo acoplamento.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+        
+
+\begin{frame}{Indicadores de baixo acoplamento}
+    \begin{itemize}
+        \item \textbf{Tamanho}: quantidade de parâmetros e métodos públicos.
+        \item \textbf{Visibilidade}: uso de parâmetros x  uso de variáveis globais.
+        \item \textbf{Flexibilidade}: facilidade na chamada (abordaremos no futuro).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Coesão e acoplamento}
+\begin{minipage}{.5\textwidth}
+    \centering
+    \textbf{Alto acoplamento} \\[1mm]
+    \includegraphics[width=.9\textwidth]{high.pdf}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+    \centering
+    \textbf{Baixo acoplamento} \\[1mm]
+    \includegraphics[width=.9\textwidth]{low.pdf}
+\end{minipage}
+\end{frame}
+
+
+
+\end{document}

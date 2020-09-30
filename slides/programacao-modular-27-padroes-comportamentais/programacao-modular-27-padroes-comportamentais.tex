@@ -1,0 +1,279 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Padrões de projeto comportamentais%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+        \includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}
+%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-2.02cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+\section{Padrões Comportamentais}
+
+\begin{frame}{Padrões de projeto comportamentais}
+
+\begin{block}{Padrões Comportamentais}
+Organizam a comunicação entre objetos de forma clara e eficiente.
+\end{block}
+
+\begin{itemize}
+\item Exemplos mais comuns: Chain of Responsibility, Observer (Model-View-Controller), iterator, visitor, template e strategy.
+\item Exemplos menos comuns: Interpreter e Mediator.
+
+
+\end{itemize}
+
+\end{frame}
+
+\section{Chain of Responsibility}
+
+\begin{frame}{Chain of Responsibility}
+
+\begin{block}{Chain of Responsibility}
+Descreve uma forma de organizar os objetos em cadeia (como na forma de uma corrente).
+\end{block}
+
+\begin{itemize}
+\item Útil quando alguns comandos devem ser tratados por diferentes objetos, cada um deles passando o comando ao próximo objeto na forma de uma corrente.
+
+\item Cada receptor de uma requisição contém uma referência a outro receptor.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Chain of Responsibility: exemplo Logger}
+
+\begin{frame}{Chain of Responsibility: exemplo Logger}
+
+\begin{center}
+\includegraphics[width=.9\textwidth]{chainLogger.pdf}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Chain of Responsibility: exemplo Logger}
+
+\begin{lstlisting}
+public abstract class Logger {
+  public static int INFO = 1;
+  public static int DEBUG = 2;
+  public static int ERRO = 3;
+  protected int nivel;
+  // proximo elemento na cadeia de responsabilidades
+  protected Logger proximoLogger;
+
+  public void setProximo(Logger proximoLogger) {
+    this.proximoLogger = proximoLogger;
+  }
+
+  public void log(int nivel, String mensagem) {
+    if (this.nivel <= nivel) {
+      escrever(mensagem);
+    }
+    if (proximoLogger != null) {
+      proximoLogger.log(nivel, mensagem);
+    }
+  }
+  abstract protected void escrever(String mensagem);
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Chain of Responsibility: exemplo Logger}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class LoggerConsole extends Logger {
+  public LoggerConsole(int nivel) {
+    this.nivel = nivel;
+  }
+  @Override
+  protected void escrever(String mensagem) {
+    System.out.println("Console Padrao::Logger: " + mensagem);
+  }
+}
+
+public class LoggerErro extends Logger {
+  public LoggerErro(int nivel) {
+    this.nivel = nivel;
+  }
+  @Override
+  protected void escrever(String mensagem) {
+    System.out.println("Console de Error::Logger: " + mensagem);
+  }
+}
+
+public class LoggerArquivo extends Logger {
+  public LoggerArquivo(int nivel) {
+    this.nivel = nivel;
+  }
+  @Override
+  protected void escrever(String mensagem) {
+    System.out.println("Arquivo::Logger: " + mensagem);
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Chain of Responsibility: exemplo Logger}
+
+\begin{lstlisting}
+
+public class Cliente {
+
+  private static Logger getCadeiaDeLoggers() {
+    Logger errorLogger = new LoggerErro(Logger.ERRO);
+    Logger fileLogger = new LoggerArquivo(Logger.DEBUG);
+    Logger consoleLogger = new LoggerConsole(Logger.INFO);
+    errorLogger.setProximo(fileLogger);
+    fileLogger.setProximo(consoleLogger);
+    return errorLogger;
+  }
+
+  public static void main(String[] args) {
+    Logger loggerChain = getCadeiaDeLoggers();
+    loggerChain.log(Logger.INFO, "Esta é uma informação de evento.");
+    loggerChain.log(Logger.DEBUG, "Esta é uma informação de Debug.");
+    loggerChain.log(Logger.ERRO, "Esta é uma mensagem de erro.");
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Observer}
+
+\begin{frame}{Observer}
+    
+    \begin{block}{Observer}
+        Relação de um-para-muitos entre objetos de tal forma que quando um objeto é modificado os objetos dependentes são notificados automaticamente.
+    \end{block}
+\end{frame}
+
+
+\subsection{Solução geral}
+
+\begin{frame}{Observer: solução geral}
+    \begin{center}\tiny
+        \begin{tikzpicture} 
+        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont]{Observer}{-- subject : Subject}{+ notify()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,y=-2]{ConcreteObserver}{}{+ notify()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=5,y=-0.7]{Subject}{-- observers : List<Observer> \\ -- state : State }{ + getState() : State \\ + setState(: State) : void \\ + attach(: Observer) : void \\ + notifyAllObservers() : void}
+        \umlVHVinherit{ConcreteObserver}{Observer} 
+        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify,pos2=0.5]{Subject}{Observer} 
+        \end{tikzpicture} \\[5mm]
+    \end{center}
+    
+    \begin{itemize}
+        \item \textbf{Subject}: permite a conexão de observadores e possui o estado que será observado.
+        \item \textbf{Observer}: se conecta a um Subject e declara o método que é executado no momento da notificação.
+        \item \textbf{ConcreteObserver}: implementa o método de notificação.
+    \end{itemize}
+    
+\end{frame}
+
+
+
+\subsection{Exemplo: Observer}
+
+\begin{frame}{Exemplo: Observer}
+    \begin{center}\tiny
+        \begin{tikzpicture} 
+        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont,y=1.5]{Observer}{-- subject : Subject}{+ update()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=-3, y=-2]{BinaryObserver}{}{+ update()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=0, y=-2]{OctalObserver}{}{+ update()}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=3, y=-2]{HexaObserver}{}{+ update()}
+        \umlVHVinherit{BinaryObserver}{Observer} 
+        \umlVHVinherit{OctalObserver}{Observer} 
+        \umlVHVinherit{HexaObserver}{Observer}
+        \umlclass[font=\fontsize{8}{8}\selectfont,x=5, y=1.5]{Subject}{-- observers : List<Observer> \\ -- state : int }{ + getState() : int \\ + setState(: State) : void \\ + attach(: Observer) : void \\ + notifyAllObservers() : void}
+        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify, pos2=0.5]{Subject}{Observer} 
+        \end{tikzpicture} \\[5mm]
+    \end{center}
+\end{frame}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

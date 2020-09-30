@@ -1,0 +1,22 @@
+\frametitle{Aplicações e Applets: Exemplo}
+
+    \bi
+        \item Aplicações Gráficas:
+    \ei
+\begin{lstlisting}
+/* AloMundoGraphic.java */
+import javax.swing.JOptionPane;
+
+public class AloMundoGraphic {
+    public static void main(String args[]) {
+        JOptionPane.showMessageDialog(null, "Alo Mundo!" );
+        System.exit(0);  // encerra a aplicação
+    }
+}
+\end{lstlisting}
+    \bi
+        \item Edite, compile e rode o arquivo \lstinline|AloMundoGraphic.java|.
+        \item Para fixar o conceito de pacotes, adicione a linha
+        \item \lstinline|package AloPkg|;
+        \item No início no arquivo e tente compilar e executar o programa.
+    \ei

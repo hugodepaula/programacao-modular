@@ -1,0 +1,29 @@
+\frametitle{Exemplo: Padrão Adapter}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public interface Impressora {
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso);
+}
+
+public class JatoDeTinta implements Impressora {
+   public JatoDeTintaLegado impressora = new JatoDeTintaLegado();
+
+   @Override
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso) {
+      if (frenteVerso)
+         impressora.imprimirFrenteVerso(d, nrCopias);
+      else
+         impressora.imprimir(d, nrCopias);
+   }
+}
+
+public class Laser implements Impressora {
+   public LaserLegado impressora = new LaserLegado();
+
+   @Override
+   public void imprimir(Documento d, int nrCopias, boolean frenteVerso) {
+      for (int copy = 1; copy <= nrCopias; copy++)
+         impressora.imprimir(d, frenteVerso);
+   }
+}
+\end{lstlisting}

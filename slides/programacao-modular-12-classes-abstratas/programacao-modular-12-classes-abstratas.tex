@@ -1,0 +1,562 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Classes abstratas%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Lista de Figuras}
+
+\begin{frame}{Polimorfismo: Lista de Figuras}
+    \begin{itemize}
+    \item Considere aplicativo para desenhar uma lista de figuras.
+    \item As classes são:
+    \begin{itemize}
+    \item \texttt{Quadrado}: representa um quadrado desenhável.
+    \item \texttt{Circulo}: representa um círculo desenhável.
+    \item \texttt{ListaDefiguras}: armazena uma lista de quadrados e círculos.
+    \item \texttt{Polimorfismo}: Aplicação gráfica baseada em \texttt{Applet}.
+    \end{itemize}
+     \end{itemize}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-5]{Quadrado}{-- x, y, lado : int \\ -- cor : Color \\ -- preenchido : boolean}{ + desenha(: Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=-1.7]{Circulo}{-- x, y, lado : int \\ -- cor : Color \\ -- preenchido : boolean}{ + desenha(: Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=2,y=-.1]{ListaDeFiguras}{-- lstQuadrados : Quadrado[] \\ -- lstCirculos : Circulos[]}{+ insere(: Quadrado) \\ + insere(: Circulo) \\ + desenha(: Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=-3.5, y=-1.7]{Polimorfismo}{-- lstFiguras : ListaDeFiguras}{ + paint(: Graphics)}
+    \end{tikzpicture} 
+\end{center}
+\end{frame}
+
+\subsection{Classes Quadrado e Circulo}
+
+\begin{frame}[fragile]{Polimorfismo: classes Quadrado e Circulo}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Quadrado {
+  private int x, y, lado;
+  private boolean preenchido;
+  private Color cor;
+
+  ...
+
+  public Quadrado(int x, int y, 
+                  int l, Color c) {
+     this.x = x;
+     this.y = y;
+     lado = l;
+     cor = c;
+  }
+
+  public void desenha(Graphics g) {
+    Color velhaCor = g.getColor();
+    g.setColor(cor);
+    if (preenchido)
+      g.fillRect(x, y, lado, lado);
+    else
+      g.drawRect(x, y, lado, lado);
+    g.setColor(velhaCor);
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class Circulo {
+  private int x, y, lado;
+  private boolean preenchido;
+  private Color cor;
+
+  ...
+
+  public Circulo(int x, int y, 
+                 int l, Color c) {
+     this.x = x;
+     this.y = y;
+     lado = l;
+     cor = c;
+  }
+
+  public void desenha(Graphics g) {
+    Color velhaCor = g.getColor();
+    g.setColor(cor);
+    if (preenchido)
+      g.fillOval(x, y, lado, lado);
+    else
+      g.drawOval(x, y, lado, lado);
+    g.setColor(velhaCor);
+  }
+}
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+
+\subsection{Classe ListaDeFiguras}
+
+\begin{frame}[fragile]{Classe ListaDeFiguras}
+\begin{multicols}{2}
+\begin{lstlisting}
+class ListaDeFiguras{
+  private Quadrado vetQ[];
+  private Circulo  vetC[];
+  private int tmax,cq,cc;
+      
+  public ListaDeFiguras(int t){
+    vetQ = new Quadrado[t];
+    vetC = new Circulo[t];
+    tmax = t;
+    cq = 0;
+    cc = 0;
+  }
+     
+  public void insere(Quadrado q){
+    if (cq == tmax) return;
+    vetQ[cq] = q;
+    cq++;
+  }
+    
+       
+  public void insere(Circulo c){
+    if (cc == tmax) return;
+    vetC[cc] = c;
+    cc++;
+  }
+      
+  public void desenha(Graphics g){
+    for(int i=0; i<cq; i++)
+      vetQ[i].desenha(g);
+
+    for(int i=0; i<cc; i++)
+      vetC[i].desenha(g);
+  }
+  
+}
+
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+\subsection{Classe Polimorfismo}
+
+\begin{frame}[fragile]{Classe Polimorfismo}
+\begin{lstlisting}
+   public class Polimorfismo extends Applet{
+     ListaDeFiguras lf;
+       
+     public void init(){
+       lf = new ListaDeFiguras(10);
+       lf.insere(new Quadrado(0,0,30));
+       lf.insere(new Quadrado(100,100,80));
+       lf.insere(new Circulo(20,40,34));
+     }
+  
+     public void paint(Graphics g){
+        lf.desenha(g);
+     }
+   }
+\end{lstlisting}
+\end{frame}
+
+\section{Lista de Figuras com herança e Polimorfismo}
+
+\begin{frame}{Problemas com o exemplo da Lista de Figuras}
+
+\begin{itemize}
+\item Classes \texttt{Circulo} e \texttt{Quadrado} possuem atributos com mesma regra de negócios (\textit{getters}, \textit{setters} e construtores repetidos): x, y, lado, cor e preenchido.
+\item Diferença está em como desenhar cada figura.
+\item Lista de figuras deve gerenciar cada tipo de figura separadamente.
+   \begin{itemize}
+   \item código repetido (por ex. em \texttt{insere(...)} e em \texttt{desenha(Graphics g)}).
+   \item não é extensível: novos tipos de figura provocam grandes alterações na Lista de Figuras.
+   \end{itemize}
+   \item É possível usar herança?
+   \item Traz alguma vantagem?
+\end{itemize}
+\end{frame}
+
+
+\subsection{Classe Figura}
+
+\begin{frame}[fragile]{Polimorfismo: classe Figura}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Figura {
+  private int x, y, lado;
+  private boolean preenchido;
+  private Color cor;
+
+  public int getX() {
+     return x;
+  }
+  public void setX(int x) {
+     this.x = x;
+  }
+
+  public int getY() {
+     return y;
+  }
+  public void setY(int y) {
+     this.y = y;
+  }
+
+  public int getLado() {
+     return lado;
+  }
+  public void setLado(int lado) {
+     this.lado = lado;
+  }
+
+  public Color getCor() {
+     return cor;
+  }
+  public void setCor(Color cor) {
+     this.cor = cor;
+  }
+
+  public boolean isPreenchido() {
+     return preenchido;
+  }
+  public void setPreenchido(boolean preench) {
+     this.preenchido = preench;
+  }
+
+  public Figura(int x, int y, int l, Color c) {
+     this.x = x;
+     this.y = y;
+     lado = l;
+     cor = c;
+  }
+
+  public abstract void desenha(Graphics g) {
+  }
+}
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+
+\subsection{Classes Quadrado e Circulo}
+
+\begin{frame}[fragile]{Polimorfismo: classes Quadrado e Circulo}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Quadrado extends Figura {
+
+  public Quadrado(int px, int py, 
+                  int l, Color c) {
+     super(px, py, l, c);
+  }
+
+  @Override
+  public void desenha(Graphics g) {
+     Color velhaCor = g.getColor();
+     g.setColor(getCor());
+     if (isPreenchido())
+        g.fillRect(getX(), getY(), 
+                   getLado(), getLado());
+     else
+        g.drawRect(getX(), getY(), 
+                   getLado(), getLado());
+     g.setColor(velhaCor);
+  }
+}\end{lstlisting}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class Circulo extends Figura {
+
+  public Circulo(int px, int py, 
+                 int l, Color c) {
+     super(px, py, l, c);
+  }
+
+  @Override
+  public void desenha(Graphics g) {
+     Color velhaCor = g.getColor();
+     g.setColor(getCor());
+     if (isPreenchido())
+        g.fillOval(getX(), getY(), 
+                   getLado(), getLado());
+     else
+        g.drawOval(getX(), getY(), 
+                   getLado(), getLado());
+     g.setColor(velhaCor);
+  }
+}
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+\subsection{Lista de Figuras com polimorfismo}
+
+
+\begin{frame}[fragile]{Conclusões relativas ao uso da herança}
+\begin{itemize}
+    \item Eliminou a necessidade de rotinas redundantes entre as classes \texttt{Circulo} e \texttt{Quadrado}.
+   \begin{itemize}
+       \item Sem efeitos práticos sobre a \texttt{ListaDeFiguras};
+   \end{itemize}
+    \item Polimorfismo:
+   \begin{itemize}
+       \item É a característica que permite que diferentes objetos respondam a mesma mensagem cada um a sua maneira.
+        \item Uma referência para a superclasse só pode acessar os métodos previstos na interface da superclasse, porém, o Java automaticamente ativa a implementação correspondente no objeto apontado.
+    \end{itemize}
+    \item O comando \lstinline|instanceof| retorna o nome da classe do objeto (mais baixa na hierarquia de herança). Ex: \\
+    \begin{lstlisting}
+    if (vet[i] instanceof Circulo)
+        System.out.println("Circulo");
+    \end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe ListaDeFiguras polimórfica}
+\begin{lstlisting}
+class ListaDeFiguras {
+   private Figura vet[];
+   private int tmax;
+   private int cont;
+
+   public ListaDeFiguras(int t) {
+      vet = new Figura[t];
+      tmax = t;
+      cont = 0;
+   }
+   public void insere(Figura f) {
+      if (cont == tmax)  return;
+      vet[cont] = f;
+      cont++;
+   }
+   public void desenha(Graphics g) {
+      for (int i = 0; i < cont; i++)
+         vet[i].desenha(g);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\section{Classes abstratas}
+
+
+\begin{frame}{Classes abstratas}
+\begin{itemize}
+\item Classes abstratas permitem que se definam métodos sem implementação que devem ser redefinidos em classes derivadas. 
+\item Classes abstratas podem ou não ter métodos abstratos.
+\item Classes abstratas não podem ser instanciadas.
+\item As classes derivadas de classes abstratas herdam todos os métodos, incluindo os abstratos.
+\item As classes derivadas de classes abstratas são abstratas até que implementem os métodos abstratos.
+\item Em Java: palavra-chave \lstinline|abstract|.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Classe Figura abstrata}
+
+\begin{frame}[fragile]{Classe Figura abstrata}
+\begin{lstlisting}
+public abstract class Figura {
+   private int x, y, lado;
+   private boolean preenchido;
+   private Color cor;
+    ...
+
+   public Figura(int px, int py, int l, Color c) {
+      x = px;
+      y = py;
+      lado = l;
+      cor = c;
+   }
+
+   public abstract void desenha(Graphics g);
+
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Sistema Lista de Figuras}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,type=abstract]{Figura}{-- x, y, lado : int \\ -- cor : Color \\ -- preenchido : boolean}{ \umlvirt{+ desenha(g : Graphics)}}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-1.8, y=-3]{Quadrado}{}{ + desenha(: Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=1.8, y=-3]{Circulo}{}{ + desenha(: Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=6]{ListaDeFiguras}{-- vet : Figura[] \\ -- tmax : int \\ -- cont : int}{
+     + ListaDeFiguras(tmax : int) \\ + getCont() \\ + insere(f : Figura) \\ + remove() \\ + desenha(g : Graphics)}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=6, y=-3]{Polimorfismo}{-- lstFiguras : ListaDeFiguras}{ + paint(g : Graphics)}
+        \umlVHVinherit{Quadrado}{Figura} 
+        \umlVHVinherit{Circulo}{Figura} 
+    \umluniaggreg[arg2=vet,mult1=1,mult2=*]{ListaDeFiguras}{Figura} 
+    \umlassoc{Polimorfismo}{ListaDeFiguras}
+    \umlnote[x=-.5,y=1.8, width=5.7cm]{Figura}{\fontsize{6}{6}\selectfont Classe abstata com método desenha(Graphics) abstrato.}
+    \end{tikzpicture} 
+\end{center}
+\end{frame}
+
+
+
+\subsection{Controle de Estoque Polimórfico com classe abstrata}
+
+
+
+\begin{frame}[fragile]{Exemplo: Produto abstrato}
+\begin{lstlisting}
+public abstract class Produto {
+    ...
+
+   public abstract boolean emValidade();
+
+   @Override
+   public String toString() {
+      return "Produdo: " + id + " - " + descricao
+         + "   Preço: R$" + preco + "   Quant.: " + quant
+         + "   Fabricação: " + dataFabricacao;
+   }
+
+   @Override
+   protected void finalize() throws Throwable {
+      super.finalize();
+      System.out.println("Finalizando um produto....");
+      instancias--;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Bem de Consumo e Bem Durável}
+\begin{lstlisting}
+public class BemDeConsumo extends Produto {
+   ...
+   public BemDeConsumo(String d, float p, int q, 
+                       LocalDateTime f, LocalDate v) {
+      super(d, p, q, f);
+      setDataValidade(v);
+   }
+
+   @Override
+   public String toString() {
+      return super.toString() + 
+             " Data de Validade: " + dataValidade;
+   }
+
+   @Override
+   public boolean emValidade() {
+      return LocalDateTime.now().isBefore(this.getDataValidade()
+                 .atTime(23, 59));
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Bem Durável}
+\begin{lstlisting}
+public class BemDuravel extends Produto {
+   ...
+   public BemDuravel(String d, float p, int q, 
+                     LocalDateTime f, int g) {
+      super(d, p, q, f);
+      setMesesGarantia(g);
+   }
+   
+   @Override
+   public String toString() {
+      return super.toString() + " Garantia: " + mesesGarantia;
+   }
+
+   @Override
+   public boolean emValidade() {
+      LocalDateTime vencimento = this.getDataFabricacao()
+                                   .plusMonths(mesesGarantia);
+      return LocalDateTime.now().isBefore(vencimento);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Exemplo: Estoque polimórfico com classe abstrata}
+    \begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-4,y=.5,type=abstract]{Produto}{-- descricao : String \\ -- quant : int \\ -- preco : float \\ -- dataFabricacao : LocalDateTime}{+ emEstoque() : boolean \\ + toString() : String \\ \umlvirt{+ emValidade() : boolean}}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-3]{BemDuravel}{ -- mesesGarantia : int}{ + toString() : String \\ + emValidade() : boolean}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-3]{BemDeConsumo}{-- dataValidade : LocalDate}{ + toString() : String \\ + emValidade() : boolean}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=1.5,y=.5]{Estoque}{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- produtos : Produto[] \\ -- numProdutos}{+ adicionar(Produto) \\
+     + consultar(String) : Produto \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float  \\ + toString() : String }
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+     \umluniaggreg{Estoque}{Produto}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+
+\end{document}

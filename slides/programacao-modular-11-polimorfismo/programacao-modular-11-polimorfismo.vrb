@@ -1,0 +1,30 @@
+\frametitle{Exemplo: Estoque Polimórfico}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Estoque {
+   private static final int MAX_PRODUTOS = 100;
+   private Produto[] listaDeProdutos;
+   private int numProdutos;
+
+   public void adicionar(Produto p) {
+      if (numProdutos < MAX_PRODUTOS) {
+         listaDeProdutos[numProdutos++] = p;
+      }
+   }
+
+   ...
+
+   @Override
+   public String toString() {
+      StringBuilder valor = new StringBuilder();
+      for (int i = 0; i < numProdutos; i++) {
+         valor.append(listaDeProdutos[i] + "\n");
+      }
+      return valor.toString();
+   }
+
+   public Estoque() {
+      listaDeProdutos = new Produto[MAX_PRODUTOS];
+      numProdutos = 0;
+   }
+}
+\end{lstlisting}

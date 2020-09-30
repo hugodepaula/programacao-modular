@@ -1,0 +1,295 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Padrões de projeto%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+        \includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-1.75cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+\section{Padrões de projeto}
+
+\begin{frame}{Padrões de projeto}
+
+\begin{block}{Padrão}
+Um padrão (\textit{pattern}) é uma descrição das características de uma solução comprovada para um problema recorrente, onde os elementos essenciais são considerados e os detalhes irrelevantes são omitidos. (Gamma et al, 1995)
+\end{block}
+
+\begin{itemize}
+\item Solução bem conhecida para um problema específico.
+
+\item Originária do conceito de arquitetura de software, e posteriormente transportada para o domínio da programação.
+
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Reuso de software}
+
+\begin{block}{Arquitetura de um software}
+Como os componentes do sistema são organizados, ou distribuídos, e como eles se relacionam externamente com outros softwares. 
+\end{block}
+
+\begin{itemize}
+\item Reuso de software:
+    \begin{itemize}
+    \item Aumenta produtividade.
+    \item Melhora qualidade do software.
+    \item Utiliza artefatos já testados e validados.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Design Pattern}
+
+\begin{itemize}
+\item  Beck e Cunningham apresentaram os primeiros padrões computacionais na conferência OOPSLA, em 1987, para a construção de janelas na linguagem Smalltalk.
+\item Popularizou-se com o livro de Gamma, Helm, Johnson,  Vlissides (Gang of 4), \textit{Design Patterns: Elements of Reusable Object-Oriented Software} (1995).
+\end{itemize}
+
+\begin{block}{}
+    Padrões são uma técnica que potencializa a reutilização de código. Padrões não garantem reutilização de código, mas servem como modelos que ajudam desenvolvedores a estruturar problemas.
+\end{block}
+
+\end{frame}
+
+\section{Desenvolvimento de padrões}
+
+
+\begin{frame}{Princípio de POO aplicados a padrões}
+
+\begin{itemize}
+\item \textbf{Encapsulamento}: um padrão encapsula uma solução bem definida.
+
+\item \textbf{Generalização}: deve ser possível a construção de
+várias realizações a partir deste padrão.
+
+\item \textbf{Abstração}: os padrões representam abstrações do conhecimento estrutural.
+
+\item \textbf{Abertura}: um padrão deve ser aberto para extensão.
+
+\item \textbf{Combinatoriedade}: é possível se relacionar padrões ou compor padrões hierarquicamente para tratar de problemas de maior nível de detalhes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estrutura de um padrão de projeto}
+
+\begin{itemize}
+\item \textbf{Nome}: ilustra como é arquitetada a proposta de solução. Exemplos de nomes: Conjunto unitário (Singleton), Fábrica abstrata (Abstract Factory), etc.
+
+\item \textbf{Problema}: A definição do problema que se pretende resolver. Em uma frase apresenta as restrições a serem atendidas.
+
+\item \textbf{Contexto}: São as situações em que o padrão se aplica.
+
+\item \textbf{Solução}: Relacionamentos entre as entidades.
+
+\item \textbf{Exemplo}: Diagramas que ilustram a aplicação da solução.
+
+\end{itemize}
+\end{frame}
+
+\section{Reuso de software}
+
+
+\begin{frame}{Reuso por herança (mecanismos de herança)}
+
+\begin{itemize}
+\item \textbf{Extensão} (\textit{extends}): subclasse estende a superclasse, acrescentando novos atributos e métodos. \\ Classe provê implementação de métodos e atributos.
+
+\item \textbf{Implementação} (\textit{implements}): interface define um padrão de comportamento que deve ser implementado pela subclasse. \\ Interface provê assinaturas de métodos e constante.
+
+\item \textbf{Polimórfica de inclusão} (\textit{override}): funciona como a extensão, mas a superclasse pode prover padrões de comportamento através de métodos abstratos (\textit{abstract}), que devem ser especificados nas subclasses. \\
+Classe provê atributos, implementação de métodos e assinaturas de métodos abstratos.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Reuso por delegação}
+
+\begin{itemize}
+\item Uma classe/objeto utiliza serviços de outro através de relações entre esses objetos. Por exemplo: Associação, Agregação, Composição. 
+
+\item Relações de uso produzem acoplamento:
+
+\begin{itemize}
+    \item Acoplamento pode ser fraco (unidirecional) ou forte (bidirecional).
+    
+    \item Acoplamento concreto: remetente deve ter conhecimento da classe do destinatário.
+    
+    \item Acoplamento abstrato: remetente não tem conhecimento da classe do destinatário. Implementado com classes abstratas e interfaces.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Exemplos de acoplamento}
+\vspace{-2mm}
+\begin{center}
+\includegraphics[angle=270, width=\textwidth]{acoplamento.pdf}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Formas de reuso: resumo}
+
+\begin{itemize}
+\item \textbf{Reuso por herança}: subclasses herdam comportamento de superclasses.
+
+\begin{itemize}
+\item é mais fácil de implementar.
+\item porém subclasse pode precisar acessar aspectos específicos da superclasse (viola o princípio da ocultação da informação).
+\item Pode violar o LSP (Princípio da Substituição de Liskov).
+\end{itemize}
+
+\item \textbf{Reuso por delegação}: se um objeto não pode realizar uma operação, ele delega para outro objeto.
+
+\begin{itemize}
+\item Objeto reusa operações de outro sem precisar ser subclasse do segundo.
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Formas de reuso: exemplo}
+\begin{center}
+\includegraphics[angle=270, width=\textwidth]{reusos.pdf}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Categorias de padrões em relação ao reuso}
+
+\begin{itemize}
+\item Dois tipos de escopo:
+\begin{itemize}
+\item \textbf{Escopo de classe}: utilizam herança para compor ou variar objetos.
+\item \textbf{Escopo de objeto}: utilizam delegação para delegar suas responsabilidades para outro objeto.
+\end{itemize}
+\item Classificação segundo Gamma et. al. (1995) 
+\begin{itemize}
+\item \textbf{Criacionais}: abstraem o processo de criação de objetos. relacionados com inicialização e configuração de objetos.
+\item  \textbf{Estruturais}: tratam do desacoplamento entre a interface e a implementação de objetos. Relacionados à composição de objetos.
+\item  \textbf{Comportamentais}: definem mecanismos de colaboração entre objetos. Distribuem as responsabilidades e padronizam as comunicações.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Classificação dos padrões (Gamma et. al., 1995)}
+
+\scriptsize
+\begin{tabular}{|r|r|r|r|r|}
+\cline{3-5}
+\multicolumn{2}{c|}{\;\;}      & \multicolumn{3}{c|}{\bf Propósito}           \\
+\cline{3-5}
+\multicolumn{2}{c|}{\;\;}      & \bf Criacional   & \bf Estrutural & \bf Comportamental \\
+\hline
+\multirow{11}[4]{*}{\bf Escopo} 
+                       & \multirow{2}[2]{*}{\bf Classe} 
+                               & Factory Method   & Class Adapter  & Interpreter \\
+                       &       &                  &                & Template Method \\
+\cline{2-5}
+                       & \multirow{9}[2]{*}{\bf Objeto}
+                               & Abstract Factory & Object Adapter & Chain of responsibility \\
+                       &       & Builder          & Bridge         & Command \\
+                       &       & Prototype        & Composite      & Iterator \\
+                       &       & Singleton        & Decorator      & Mediator \\
+                       &       &                  & Facade         & Memento \\
+                       &       &                  & Flyweight      & Observer \\
+                       &       &                  & Proxy          & State \\
+                       &       &                  &                & Strategy \\
+                       &       &                  &                & Visitor \\
+\hline
+\end{tabular}
+
+\end{frame}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

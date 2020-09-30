@@ -1,0 +1,11 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazil}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Polimorfismo}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Tipos de Polimorfismo: Class. de Carndelli}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Polimorfismo ad-hoc}{5}{0}{1}
+\beamer@subsectionintoc {1}{3}{Polimorfismo universal de inclus\~ao}{6}{0}{1}
+\beamer@sectionintoc {2}{Sobrepondo m\'etodos e ocultando campos}{8}{0}{2}
+\beamer@subsectionintoc {2}{1}{Palavra-chave super}{11}{0}{2}
+\beamer@subsectionintoc {2}{2}{A classe Object}{13}{0}{2}
+\beamer@sectionintoc {3}{Exemplo: Estoque polim\'orfico}{14}{0}{3}

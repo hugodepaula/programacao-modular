@@ -1,0 +1,372 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Padrões de projeto criacionais%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+        \includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}
+%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-1.48cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+\section{Padrões Criacionais}
+
+\begin{frame}{Padrões de projeto criacionais}
+
+\begin{block}{Padrões Criacionais}
+Lidam com a criação dos objetos. Ao invés de se criar um objeto diretamente, esses padrões oferecem flexibilidade na decisão de que objeto criar em cada caso.
+\end{block}
+
+\begin{itemize}
+\item Exemplos mais comuns: Factory Method, Abstract Factory, Singleton.
+\item Exemplos menos comuns: Builder, Prototype.
+
+
+\end{itemize}
+
+\end{frame}
+
+\section{Singleton}
+
+\subsection{Solução geral}
+
+\begin{frame}{Singleton}
+
+\begin{block}{Singleton}
+Garantir que uma classe possui apenas uma instância e provê acesso global a esta instância.
+\end{block}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Útil quando exatamente um único objeto é necessário para coordenar ações.
+\end{itemize}
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass{Singleton}{\umlstatic{-- INSTANCE: const Singleton}}{\umlstatic{+ getInstance() :  Singleton} \\ -- Singleton() }
+    \end{tikzpicture}
+\end{center}
+
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Singleton em Java -- com acesso global}
+
+\begin{lstlisting}
+public class Singleton {
+  private static final Singleton INSTANCE = new Singleton();
+
+  private Singleton() {}
+
+  public static Singleton getInstance() {
+     return INSTANCE;
+  }
+
+  // Outros métodos públicos
+}
+
+// Uso
+
+Singleton.getInstance().metodoDoSingleton();
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Singleton em Java -- sem acesso global}
+
+\begin{lstlisting}
+public class Singleton {
+  private static boolean CREATED = false;
+  public Singleton() {
+     if (CREATED)
+        throw new RuntimeException(
+           "Classe " + this.getClass() + 
+           " só pode ser instanciada uma vez.");
+     CREATED = true;
+  }
+    
+  // Outros métodos aqui.
+    
+  public static void main(String args[]) {
+    Singleton primeiro = new Singleton();
+    Singleton segundo = new Singleton();
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Exemplo: Logging}
+
+\begin{frame}[fragile]{Exemplo: Logging}
+
+\begin{multicols}{2}
+
+\vspace{1cm}
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass{Log}{\umlstatic{-- INSTANCE: const Log}}{-- Log() \\ \umlstatic{+ getInstance() :  Log} \\ + log(message: String)
+     }
+    \end{tikzpicture}
+\end{center}
+
+\vspace{2cm}
+
+\begin{lstlisting}
+public class Log {
+ private static final Log INSTANCE
+                       = new Log();
+
+ private Log() {}
+
+ public static Log getInstance() {
+    return INSTANCE;
+ }
+
+ public void logging(String message) {
+   LocalD
+   System.out.println();
+ }
+}
+\end{lstlisting}
+
+\end{multicols}
+\end{frame}
+
+\subsection{Classe utilitária estática}
+
+\begin{frame}{Classe utilitária estática}
+
+\begin{itemize}
+\item Alternativa ao padrão Singleton.
+
+\item Útil quando o comportamento geral não necessita de um estado e não será estendido.
+
+\item Não é adequada para armazenar estado (atributos).
+
+\item Por não possuírem estado, muitos consideram uma violação dos princípios da POO.
+
+\item Exemplo: Classe \texttt{System} e classe \texttt{Math}.
+\end{itemize}
+\end{frame}
+
+\section{Factory Method}
+
+\begin{frame}{Factory Method}
+    
+    \begin{block}{Factory Method}
+        Objetos são criados sem expor a lógica de criação dos mesmos ao cliente, e referenciam o novo objeto a partir de uma interface comum. 
+    \end{block}
+    
+    \begin{itemize}
+        \item Útil quando se deseja encapsular a instanciação de tipos concretos, que serão escolhidos posteriormente por subclasses.
+    \end{itemize}
+\end{frame}
+
+\subsection{Exemplo Fábrica de formas}
+
+\begin{frame}{Factory Method: exemplo Fábrica de formas}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+    \begin{umlpackage}{formas}
+    \umlinterface[font=\fontsize{8}{8}\selectfont]{Forma}{}{+ desenhar() : void}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=-3, y=-2]{Circulo}{}{+ desenhar() : void}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=0, y=-2]{Quadrado}{}{+ desenhar() : void}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=3, y=-2]{Retangulo}{}{+ desenhar() : void}
+    \umlVHVinherit{Circulo}{Forma} 
+    \umlVHVinherit{Quadrado}{Forma} 
+    \umlVHVinherit{Retangulo}{Forma}
+    \end{umlpackage}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=0, y=2.5]{FabricaDeFormas}{}{+ getForma() : Forma}
+    \umlclass[font=\fontsize{8}{8}\selectfont,x=4.3, y=2.5]{Aplicacao}{}{+ main() : void}
+    \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=cria, pos2=0.5]{FabricaDeFormas}{formas} 
+    \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=solicita, pos2=0.5]{Aplicacao}{FabricaDeFormas} 
+    \end{tikzpicture} \\[5mm]
+    \end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Factory Method: exemplo Fábrica de formas}
+    
+\begin{multicols}{2}
+    \begin{lstlisting}[basicstyle=\tiny]
+public enum TipoForma {
+ CIRCULO, QUADRADO, RETANGULO;
+}
+
+public interface Forma {
+ void desenhar();
+}
+
+public class Circulo implements Forma {
+
+ @Override
+ public void desenhar() {
+  System.out.println("Circulo::desenhar()");
+ }
+}
+
+public class Quadrado implements Forma {
+
+  @Override
+  public void desenhar() {
+    System.out.println("Quadrado::desenhar()");
+  }
+}
+
+public class Retangulo implements Forma {
+
+  @Override
+  public void desenhar() {
+    System.out.println("Retangulo::desenhar()");
+  }
+}
+    \end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{Factory Method: exemplo Fábrica de formas}
+    
+\begin{lstlisting}[basicstyle=\tiny]
+public class FabricaDeFormas {
+   public Forma getForma(TipoForma tipoForma) {
+      if (tipoForma == null) {
+         return null;
+      } else if (tipoForma.equals(TipoForma.CIRCULO)) {
+         return new Circulo();
+      } else if (tipoForma.equals(TipoForma.QUADRADO)) {
+         return new Retangulo();
+      } else if (tipoForma.equals(TipoForma.RETANGULO)) {
+         return new Quadrado();
+      }
+      return null;
+   }
+}
+
+public class Aplicacao {
+   public static void main(String[] args) throws Exception {
+      FabricaDeFormas fabricaDeFormas = new FabricaDeFormas();
+
+      Forma forma1 = fabricaDeFormas.getForma(TipoForma.CIRCULO);
+      forma1.desenhar();
+      
+      Forma forma2 = fabricaDeFormas.getForma(TipoForma.QUADRADO);
+      forma2.desenhar();
+      
+      Forma forma3 = fabricaDeFormas.getForma(TipoForma.RETANGULO);
+      forma3.desenhar();   
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Solução geral}
+
+\begin{frame}{Factory Method: solução geral}
+\begin{center}\tiny
+\begin{tikzpicture} 
+\umlemptyclass[type=interface, font=\fontsize{8}{8}\selectfont]{Produto}
+\umlemptyclass[font=\fontsize{8}{8}\selectfont,y=-2]{ProdutoConcreto}
+\umlemptyclass[type=interface, font=\fontsize{8}{8}\selectfont,x=5]{Criador}
+\umlemptyclass[font=\fontsize{8}{8}\selectfont,x=5,y=-2]{CriadorConcreto}
+\umlVHVimpl{ProdutoConcreto}{Produto} 
+\umlVHVinherit{CriadorConcreto}{Criador} 
+\umldep[font=\fontsize{8}{8}\selectfont,arg2=instancia,pos2=0.5]{CriadorConcreto}{ProdutoConcreto} 
+\end{tikzpicture} \\[5mm]
+\end{center}
+
+    \begin{itemize}
+        \item \textbf{Produto}: interface dos objetos que serão criados.
+        \item \textbf{ProdutoConcreto}: implementa a interface.
+        \item \textbf{Criador}: declara o \textit{factory method} que irá retornar um objeto do tipo Produto. Pode-se usar método \textit{default}
+        \item \textbf{CriadorConcreto}: implementa o método que retorna um ProdutoConcreto.
+    \end{itemize}
+
+\end{frame}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

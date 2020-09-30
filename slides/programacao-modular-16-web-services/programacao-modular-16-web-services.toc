@@ -1,0 +1,13 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Web services (WS)}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Servi\c cos web}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Acessando web services REST}{4}{0}{1}
+\beamer@sectionintoc {2}{Construindo um web service -- Spark framwork}{7}{0}{2}
+\beamer@subsectionintoc {2}{1}{Decomposi\c c\~ao de servi\c cos}{7}{0}{2}
+\beamer@subsectionintoc {2}{2}{Spark framework}{8}{0}{2}
+\beamer@subsectionintoc {2}{3}{Roteamento de requisi\c c\~oes}{15}{0}{2}
+\beamer@sectionintoc {3}{JSON e Redirecionamento}{19}{0}{3}
+\beamer@subsectionintoc {3}{1}{JSON em Java}{19}{0}{3}
+\beamer@subsectionintoc {3}{2}{Formatando um objeto em JSON}{21}{0}{3}
+\beamer@subsectionintoc {3}{3}{Redirecionamento}{22}{0}{3}

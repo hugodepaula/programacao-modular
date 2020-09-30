@@ -1,0 +1,916 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Web Services%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-2.02cm)    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Web services (WS)}
+
+\subsection{Serviços web}
+
+
+\begin{frame}{Serviços web -- \textit{web services}}
+
+\begin{block}{Serviço web (\textit{web services})}
+é uma tecnologia de chamada remota de objetos que utiliza protocolos da web (p. ex. HTTP) como meio de transporte e comunicação.
+\end{block}
+
+\begin{block}{Web services RESTful (Representational State Transfer)}
+    utiliza URIs e métodos HTTP para disponibilizar acesso aos recursos da aplicação.
+\end{block}
+
+\end{frame}
+ 
+ 
+\subsection{Acessando web services REST}
+
+\begin{frame}[fragile]{Acessando web services REST}
+
+Um serviço web REST disponibiliza dados ou recursos a partir de uma URI.
+
+\begin{block}{\small Resultado do acesso a \url{www.thomas-bayer.com/sqlrest/}}
+\begin{lstlisting}[language=HTML,basicstyle=\tiny]
+<resource xmlns:xlink="http://www.w3.org/1999/xlink">
+   <CUSTOMERList xlink:href="http://www.thomas-bayer.com/sqlrest/CUSTOMER/">
+                                                               CUSTOMER</CUSTOMERList>
+   <INVOICEList xlink:href="http://www.thomas-bayer.com/sqlrest/INVOICE/">
+                                                               INVOICE</INVOICEList>
+   <ITEMList xlink:href="http://www.thomas-bayer.com/sqlrest/ITEM/">
+                                                               ITEM</ITEMList>
+   <PRODUCTList xlink:href="http://www.thomas-bayer.com/sqlrest/PRODUCT/">
+                                                               PRODUCT</PRODUCTList>
+</resource>
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Acessando web services REST}
+\begin{itemize}
+\item O exemplo indica que existem 4 web services disponíveis:
+
+\begin{enumerate}
+    \item \textbf{CUSTOMER}: dados de cliente.
+    \item \textbf{INVOICE}: dados do pedido.
+    \item \textbf{ITEM}: dados do item do pedido.
+    \item \textbf{PRODUCT}: dados do produto.
+\end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Acessando web services REST}
+
+Para acessar um serviço web de clientes: {\small\url{http://www.thomas-bayer.com/sqlrest/CUSTOMER/}}.
+
+\begin{itemize}
+    \item Aparecerá a lista de clientes.
+\end{itemize}
+
+
+\begin{block}{\small Acesse o cliente 10: \url{http://www.thomas-bayer.com/sqlrest/CUSTOMER/10/}}
+\begin{lstlisting}[language=HTML,basicstyle=\footnotesize]
+<CUSTOMER xmlns:xlink="http://www.w3.org/1999/xlink">
+  <ID>10</ID>
+  <FIRSTNAME>Sue</FIRSTNAME>
+  <LASTNAME>Fuller</LASTNAME>
+  <STREET>135 Upland Pl.</STREET>
+  <CITY>Dallas</CITY>
+</CUSTOMER>
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+
+
+\section{Construindo um web service  -- framwork Simple}
+
+\subsection{Simple framework}
+
+\begin{frame}[fragile]{Framework Simple}
+
+\begin{block}{Framework Simple}
+    Servidor embutido em Java capaz de tratar requisições HTTP.
+\end{block}
+
+Para utilizar o framework em seu projeto:
+
+\begin{itemize}
+\item \url{http://www.simpleframework.org/}
+\item Descomprimir o arquivo simple-6.0.1.jar
+\item Adicionar o diretório criado no \textit{build path} do projeto.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Framework Simple}
+
+A interface \lstinline|Container| descreve o comportamento do servidor web.
+
+Método \lstinline|handle(Request request, Response response)| trata requisição HTTP.
+
+\begin{lstlisting}
+public class HTTPServer implements Container {
+
+public void handle(Request request, Response response) {
+    try {
+        PrintStream body = response.getPrintStream();
+        response.setValue("Content-Type", "text/plain");
+        body.println("Olá, você requisitou: " + request.getPath());
+        body.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+...
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Framework Simple}
+
+Método \lstinline|main| inicia o servidor, que ficará ``ouvindo'' uma porta.
+
+\begin{lstlisting}[basicstyle=\scriptsize]
+public static void main(String[] list) throws Exception {
+   int porta = 880;
+    
+   // Configura uma conexão soquete para o servidor HTTP.
+   Container container = new HTTPServer();
+   ContainerSocketProcessor servidor = 
+                            new ContainerSocketProcessor(container);
+   Connection conexao = new SocketConnection(servidor);
+   SocketAddress endereco = new InetSocketAddress(porta);
+   conexao.connect(endereco);
+    
+   System.out.println("Tecle ENTER para interromper o servidor...");
+   System.in.read();
+    
+   conexao.close();
+   servidor.stop();
+}
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Framework Simple}
+
+\begin{block}{\scriptsize \lstinline|Container container = new HTTPServer();|}
+Instancia uma classe que implementa a interface Container. Essa classe irá tratar (\textit{handle}) as requisições HTTP.
+\end{block}
+
+
+\begin{block}{\scriptsize \lstinline|ContainerSocketProcessor servidor = new ContainerSocketProcessor(container);|}
+\textit{SocketProcessor} recebe os dados enviados pelo protocolo HTTP e os converte em um objeto \lstinline|Request|, e converte o objeto \lstinline|Response| em um fluxo de dados enviado ao cliente.
+\end{block}
+
+
+\begin{block}{Abrir a conexão em uma porta pré-definida}
+\begin{lstlisting}[basicstyle=\scriptsize]
+Connection conexao = new SocketConnection(servidor);
+SocketAddress endereco = new InetSocketAddress(porta);
+conexao.connect(endereco);
+\end{lstlisting}
+\end{block}
+    
+\end{frame}
+
+\subsection{Trabalhando com dados de formulário}
+
+\begin{frame}[fragile]{Trabalhando com dados de formulário}
+
+\begin{block}{Classe \lstinline|Query|}
+Armazena os dados do formulário em um dicionário (\lstinline|Map|).
+\end{block}
+
+\begin{lstlisting}
+Query query = request.getQuery();
+String value = query.get(key);  
+\end{lstlisting}
+
+
+Principais métodos:
+
+\begin{lstlisting}
+List<String> lista = query.getAll(key); 
+String primeiro = list.get(0); 
+String segundo = list.get(1); 
+int inteiro = query.getInteger(key);
+int real = query.getFloat(key);
+boolean logico = query.getBoolean(key);
+\end{lstlisting}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Trabalhando com dados de formulário}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public void handle(Request request, Response response) {
+    try {
+        Query query = request.getQuery();
+        PrintStream body = response.getPrintStream();
+        long time = System.currentTimeMillis();
+        
+        response.setValue("Content-Type", "text/plain");
+        response.setValue("Server", "Formulario");
+        response.setDate("Date", time);
+        response.setDate("Last-Modified", time);
+        
+        // pode ser testado com a URL: 
+        // http://127.0.0.1:880/?nome=Ze;idade=32
+        String nome = query.get("nome");
+        int idade = query.getInteger("idade");
+        
+        body.println("Teste de requisição com dados de formulário.");
+        body.println("NOME: " + nome + "\nIDADE: " + idade + "");
+        body.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+\end{lstlisting}
+
+\end{frame}
+
+\subsection{Roteamento de requisições}
+
+\begin{frame}[fragile]{Roteamento de requisições}
+\begin{itemize}
+\item O caminho da requisição (\textit{path}) permite recuperar o recurso solicitado pelo cliente.
+
+\item Decomposição do \textit{path}:
+
+\begin{lstlisting}
+Path path = request.getPath(); 
+String directory = path.getDirectory();
+String name = path.getName(); 
+String[] segments = path.getSegments()
+\end{lstlisting}
+
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{AJAX e JSON}
+
+\subsection{JSON em Java}
+
+\begin{frame}{JavaScript Object Notation}
+    
+    \begin{block}{JavaScript Object Notation -- JSON}
+        É um formato leve para troca de informação. Baseado na linguagem JavaScript, é fácil de ser entendido pelo ser humano e pela máquina.
+    \end{block}
+    
+    Baseado em duas estruturas:
+    
+    \begin{itemize}
+        \item \texttt{JSONObject}: uma coleção de \texttt{pares <nome, valor>}, tais como um dicionário ou \lstinline|Map|, em Java.
+        \item \texttt{JSONArray}: uma lista ordenada de valores, ou \lstinline|Array|.
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]{Mapeamento entre JSON e entidades Java}
+    
+\begin{tabular}{cc}
+    \begin{minipage}{.4\linewidth}\small
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \bf JSON & \bf Java \\ \hline
+            \texttt{string} & \lstinline|java.lang.String| \\
+            \texttt{number} & \lstinline|java.lang.Number| \\
+            \texttt{true|false} & \lstinline|java.lang.Boolean| \\
+            \texttt{null} & \lstinline|null| \\
+            \texttt{array} & \lstinline|java.util.List| \\
+            \texttt{object} & \lstinline|java.util.Map| \\ \hline
+        \end{tabular}
+    \end{center}
+    \end{minipage} & 
+    
+    \begin{minipage}{.6\linewidth}
+    \begin{lstlisting}
+    JSONObject obj = new JSONObject();
+    
+    obj.put("string", "Shulambs");
+    obj.put("int", new Integer(1));
+    obj.put("real", new Double(1.99));
+    obj.put(log", new Boolean(true));
+    \end{lstlisting}
+    \end{minipage} \\    
+\end{tabular}
+    
+\end{frame}
+
+
+\subsection{Formatando um objeto em JSON}
+
+
+\begin{frame}[fragile]{Exemplo: Convertendo objetos Java para Json}
+    \begin{center}
+        \begin{tikzpicture} 
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-1,y=3,type=interface]{JSONFormatter}{}{\umlvirt{+ toJson() : JSONObject} \\ \umlvirt{+ default toJsonArray() : JSONArray}}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-4,y=.8,type=abstract]{Produto}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-1.5]{BemDuravel}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-1.5]{BemDeConsumo}{}{ + toJson() : JSONObject}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=1.5,y=.8]{Estoque}{}{ + toJson() : JSONObject \\ + toJsonArray() : JSONArray}
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+        \umluniaggreg{Estoque}{Produto}
+        \umlimpl{Produto}{JSONFormatter}
+        \umlimpl{Estoque}{JSONFormatter}
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+
+
+\subsection{AJAX e JSON}
+
+
+\begin{frame}[fragile]{Asynchronous JavaScript and XML (AJAX)}
+    \begin{itemize}
+        \item  Objeto XMLHttpRequest 
+    \end{itemize}
+    
+    \begin{center}
+        \includegraphics[width=9cm]{ajax-process-flow.png}
+    \end{center}
+    
+\end{frame}
+
+\begin{frame}[fragile]{AJAX e JSON juntos}
+    \begin{enumerate}
+        \item Formulário utiliza função JavaScript para capturar uma conexão \texttt{XMLHttpRequest}.
+        \item Servidor retorna um objeto JSON.
+        \item Cliente realiza o \textit{parsing} no objeto JSON e atualiza a tela.
+    \end{enumerate}
+    
+\end{frame}
+
+
+
+\begin{frame}{\textit{Disponibilização do serviço na Web}}
+    \begin{center}
+        \begin{tikzpicture} 
+        \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-5.5]{Cliente}
+        \umlclass[font=\fontsize{7}{7}\selectfont, x=-2]{EstoqueService}{-- headerTemplate: String}{+ adicionar(Request) \\
+            + consultar(Request) \\ + remover(Request) \\ + totalEmEstoque(Request) \\ + valorEmEstoque(Request)  \\ + toString(Request) }
+        
+        \umlclass[font=\fontsize{7}{7}\selectfont, x=2.5]{Estoque}{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- listaDeProdutos : Produto[] \\ -- numProdutos}{+ adicionar(Produto) \\
+            + consultar(String) : Produto \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float  \\ + toString() : String }
+        \umluniassoc{Cliente}{EstoqueService}
+        \umluniassoc{EstoqueService}{Estoque}
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{AJAX e JSON juntos}
+    \begin{itemize}
+        \item Classe \lstinline|EstoqueService| é responsável por fazer a tradução \texttt{Java} $\rightarrow$ \texttt{JSON} e \texttt{JSON} $\rightarrow$ \texttt{Java}.
+        \item Função \lstinline|FactoryXMLHttpRequest()| cria uma conexão AJAX (\lstinline|XMLHttpRequest|).
+        \item Função \lstinline|GetIt(url)| faz uma requisição ao servidor e realiza o \textit{parsing} no JSON retornado.
+        \item Documento HTML recebe o resultado da requisição.
+    \end{itemize}
+    
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque AJAX + JSON}
+    
+\begin{lstlisting}
+function FactoryXMLHttpRequest() {
+    if(window.XMLHttpRequest) {
+        // Opera 8.0+, Firefox, Chrome, Safari
+        return new XMLHttpRequest();
+    }
+    else if (window.XDomainRequest) {
+        return new XDomainRequest(); // Antigo Safari
+    } else if(window.ActiveXObject) {
+        var msxmls = new Array(// Internet Explorer
+        'Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 
+        'Msxml3.XMLHTTP', 'Msxml2.XMLHTTP.7.0', 
+        'Msxml2.XMLHTTP.6.0', 'Msxml2.XMLHTTP.5.0', 
+        'Msxml2.XMLHTTP.4.0', 'Msxml2.XMLHTTP.3.0');
+        for (var i = 0; i < msxmls.length; i++) {
+            try {
+                return new ActiveXObject(msxmls[i]);
+            } catch (e) {      }
+        }
+    } else throw new Error("Could not instantiate XMLHttpRequest");
+}
+\end{lstlisting}
+    
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque AJAX + JSON}
+    
+\begin{lstlisting}
+function GetIt(url) {
+   var xmlhttp = new FactoryXMLHttpRequest();
+    
+   xmlhttp.onreadystatechange = function(){
+      if (xmlhttp.readyState == 4) {
+         var jsonObj = JSON.parse(xmlhttp.responseText);
+         document.getElementById("id").innerHTML = jsonObj.id;
+         document.getElementById("descricao").innerHTML = 
+                                                  jsonObj.descricao;
+         document.getElementById("preco").innerHTML = jsonObj.preco;
+         document.getElementById("quant").innerHTML = jsonObj.quant;
+         document.getElementById("dataFabricacao").innerHTML = 
+         jsonObj.dataFabricacao;
+      }
+   }
+   if (xmlhttp) {
+      xmlhttp.open('get', url, true);
+      xmlhttp.send();
+   }
+}
+\end{lstlisting}
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Estoque AJAX + JSON}
+    
+\begin{lstlisting}[language=HTML]
+<button onclick="GetIt('http://127.0.0.1:880')">Carregar</button>
+
+<table border="1">
+<tr> 
+  <td>Produto id:</td><td><span id="id">Vazio</span></td>
+</tr>
+<tr>
+  <td>Descricao:</td><td><span id="descricao">Vazio</span></td>
+</tr>
+<tr>
+  <td>Preco:</td><td><span id="preco">Vazio</span></td>
+</tr>
+<tr>
+  <td>Quantidade:</td><td><span id="quant">Vazio</span></td>
+</tr>
+<tr>
+  <td>Dt. fab.:</td><td><span id="dataFabricacao">Vazio</span></td>
+</tr>
+</table>
+\end{lstlisting}
+    
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{Construindo um WS RESTful - Jersey/Grizzly}
+
+\subsection{Criando o projeto usando Maven}
+
+\begin{frame}[fragile]{Aplicação RESTful - Jersey/Grizzly}
+
+Infraestrutura:
+
+\begin{itemize}
+    \item Servidor Web: Grizzly 2 (Java SE).
+    \item Framewrok REST: Jersey REST Framework / JAX-RS API.
+    \item Gerenciador de configuração: Maven.
+\end{itemize}
+
+Processo:
+
+\begin{itemize}
+    \item Servidor web recebe \textbf{requests} e encaminha \textbf{responses}.
+    \item \textbf{Annotations} convertem métodos java em URLs REST.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Configuração do Maven}
+\begin{itemize}
+    \item Maven é uma ferramenta de gerenciamento de projeto.
+    \item Controla configuração e dependências.
+    \item Instalação: \url{https://maven.apache.org/download.cgi}
+    \begin{itemize}
+        \item Baixar e descomprimir o arquivo zip.
+        \item Adicionar o diretório \textbf{bin} ao \textbf{PATH}.
+    \end{itemize}
+    \item É necessário que a variável \textbf{JAVA\_HOME} esteja configurada.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Variáveis de ambiente}
+    \begin{columns}
+       \column{\dimexpr\paperwidth-10pt}
+       \includegraphics[width=1\linewidth]{ambvar.png}
+   \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Maven Archetypes}
+
+\begin{block}{Maven Archetypes (arquétipos)}
+São modelos (\textit{templates)} que já possuem o esqueleto básico de uma aplicação.
+\end{block}
+
+\begin{itemize}
+    \item Iremos utilizar o \texttt{jersey-quickstart-grizzly2}, disponível nos repositórios Maven.
+    \item É necessário adicionar o repositório ao Eclipse. \\
+    \texttt{Window} $\rightarrow$ \texttt{Preferences}  $\rightarrow$ \texttt{Maven}  $\rightarrow$ \texttt{Archetypes}  $\rightarrow$ \texttt{Add remote catalog}.
+    \item Adicionar: \url{http://repo1.maven.org/maven2/archetype-catalog.xml}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Configuração do catálogo Maven no Eclipse}
+        \includegraphics[width=.95\linewidth]{catalog.png}
+\end{frame}
+
+\begin{frame}[fragile]{Criando um projeto Maven}
+\begin{itemize}
+    \item No Eclipse: \texttt{New} $\rightarrow$ \texttt{Maven  Project}
+\end{itemize}
+
+    \includegraphics[width=\linewidth]{archetype.png}
+
+\end{frame}
+
+\begin{frame}{Configuração do projeto}
+    \begin{itemize}
+        \item 
+        \textbf{archetypeArtifactId}:Especifica o tipo do projeto a ser criado.
+        \item \textbf{archetypeGroupId}: Especifica o grupo em que o arquétipo está definido.
+        \item \textbf{groupId}: Usado para identificar unicamente o projeto. Normalmente baseado no domínio. Usado como o nome do pacote.
+        \item \textbf{artifactId}: O nome do seu projeto.
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Código padrão da Aplicação RESTful -- Jersey/Grizzly}
+\begin{itemize}
+    \item Classe \lstinline|Main| dispara a aplicação, executando o servidor web.
+\end{itemize}
+
+\begin{lstlisting}
+package br.pucminas.produto_service;
+
+public class Main {
+  // Base URI the Grizzly HTTP server will listen on
+  public static final String BASE_URI = 
+                            "http://localhost:8080/estoque/";
+\end{lstlisting}
+
+\begin{itemize}
+    \item \lstinline|BASE_URI| especifica a localização da sua aplicação. Qualquer método que você criar, será adicionado a partir dessa URI (nesse exemplo \texttt{/estoque}).
+    \item O método \lstinline|HttpServer startServer()| instancia o servidor web.
+    \item A classe \lstinline|ResourceConfig| especifica qual pacote contém as classes anotadas pelo Jersey que serão carregadas.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Código padrão da Aplicação RESTful -- Jersey/Grizzly}
+
+\lstinline|ResourceConfig| define o pacote em que serão armazenadas as classes que irão tratar as requisições HTTP.
+
+\begin{lstlisting}
+public static HttpServer startServer() {
+  // create a resource config that scans for JAX-RS resources
+  // and providers in br.pucminas.ws_03_produto_service package
+  final ResourceConfig rc = new
+       ResourceConfig().packages("br.pucminas.ws_03_produto_service");
+ 
+  // create and start a new instance of grizzly http server
+  // exposing the Jersey application at BASE_URI
+  return GrizzlyHttpServerFactory
+            .createHttpServer(URI.create(BASE_URI), rc);
+}
+\end{lstlisting}
+    
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Código padrão da Aplicação RESTful -- Jersey/Grizzly}
+
+Método \lstinline|Main| inicia e interrompe o servidor web.
+
+
+\begin{lstlisting}
+public static void main(String[] args) throws IOException {
+    final HttpServer server = startServer();
+    System.out.println(String.format("Jersey app started with WADL "
+    + "available at %sapplication.wadl\nHit enter to stop it...", 
+    BASE_URI));
+    System.in.read();
+    server.shutdownNow();
+}
+\end{lstlisting}
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe MyResource -- Jersey/Grizzly}
+    \begin{itemize}
+        \item Contém os métodos que serão publicados no web server.
+        \item \textit{Annotations} configuram os métodos. Por exemplo: 
+        \begin{list}{}{}
+            \item \lstinline|@GET| indica que responderá ao método \textbf{HTTP GET}.
+            \item \lstinline|@Produces(MediaType.TEXT_PLAIN)| indica que a resposta do método será enviada no formato texto.
+        \end{list}
+    \end{itemize}
+    \begin{lstlisting}
+@Path("webservice")
+public class MyResource {
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getIt() {
+        return "Serviço Web funcionando.";
+    }
+}
+    \end{lstlisting}
+    
+\end{frame}
+
+\subsection{Rotas com \textit{annotations}}
+
+
+\begin{frame}{Métodos (ou verbos) de requisição HTTP}
+
+\begin{itemize}
+    \item Principais métodos HTTP que podem ser usados em um serviço web.
+\end{itemize}    
+
+
+\begin{center}
+\begin{tabular}{p{1.3cm}p{.8\linewidth}}
+\hline
+\textbf{GET}    & Solicita um recurso. Pode passar parâmetro na própria URI. \\
+\textbf{POST}   & Cria um recurso. Dados encaminhados no corpo da requisição, e não na URI. \\
+\textbf{PUT}    & Atualiza um recurso caso já exista ou cria se não existir.\\
+\textbf{DELETE} & Exclui um recurso.\\
+\hline
+\end{tabular}   
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Roteamento de requisições}
+\begin{itemize}
+    \item é importante definir padrões para a criação de URIs.
+    \item  Em uma API REST, cada modelo (recurso que se deseja persistir), cria um conjunto de rotas associado às operações CRUD de armazenamento de dados.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{CRUD} 	  & \textbf{REST (Método / URI)} \\ \hline
+Create            & PUT    /modelName  \\ 
+                  & POST   /modelName \\
+Read (Retrieve)   & GET    /modelName?filter=...  \\
+Update (Modify)   &	PUT    /modelName 	\\
+Delete (Destroy)  & DELETE /modelName/modelID \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Criando rotas com annotations}
+    \begin{itemize}
+        \item Cada recurso deve ter uma rota raiz (\lstinline|@Path|): \\
+        
+        \begin{lstlisting}
+        @Path("duravel")
+        public class BemDuravelService { ...
+        \end{lstlisting}
+        
+        \item Cada método HTTP deve ser declarado e o tipo de dados consumido/produzido precisa ser especificado.
+
+Rota \textbf{all/} (GET): \\
+
+\begin{lstlisting}
+@GET
+@Path("/all")
+@Produces(MediaType.APPLICATION_JSON)
+public List<BemDuravel> getAllProducts() { ...
+\end{lstlisting}
+
+Rota \textbf{/\{id\}} (GET):\\
+
+\begin{lstlisting}
+@GET
+@Path("{id}")
+@Produces(MediaType.APPLICATION_JSON)
+public BemDuravel getProduto(@PathParam("id") String id) { ...
+\end{lstlisting}
+
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Criando rotas com annotations}
+    
+        
+Rota \textbf{/add} (POST): \\
+
+\begin{lstlisting}
+@POST
+@Path("/add")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response addProduct(BemDuravel produto) {
+\end{lstlisting}
+
+
+Rota \textbf{/update} (PUT): \\
+
+\begin{lstlisting}
+@PUT
+@Path("/update")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response updateProduct(BemDuravel produto) {
+\end{lstlisting}
+
+Rota \textbf{/delete\{id\}} (DELETE): \\
+
+\begin{lstlisting}
+@DELETE
+@Path("/{id}")
+public Response deleteProduct(@PathParam("id") String id) {
+BemDuravel produto = Estoque.bemDuravelDao.get(id);
+\end{lstlisting}
+    
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Criando o pacote de execução}
+\begin{itemize}
+    \item Adicionar plugins ao arquivo \texttt{pom.xml} para garantir que o pacote contenha todas as dependências. \\[2mm] {\small
+        \verb|<artifactId>maven-assembly-plugin</artifactId>| \\
+        \verb|<artifactId>maven-dependency-plugin</artifactId>|} \\[4mm]
+    
+   \item Adicionar plugins ao arquivo \texttt{pom.xml} para garantir que o pacote contenha todas as dependências. \\[2mm] {\small
+        \verb|<artifactId>jersey-media-moxy</artifactId>|} \\[4mm]
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Criando o pacote de execução}
+    \begin{itemize}
+ 
+        \item Executar os comandos a seguir no diretório do projeto: \\[2mm] {\small
+            \verb|mvn clean compile| \\
+            \verb|mvn package|} \\[4mm]
+        
+        \item Executar servidor: \\[2mm] {\footnotesize
+            \verb|java -jar | \\
+            \verb|     ws_03_produto_service-0.1-jar-with-dependencies.jar|}
+        
+        \item Verificar o arquivo \texttt{pom.xml} do projeto \texttt{produto-form} para configurar as dependências e plugins.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{CORS Filter}
+
+\begin{block}{Cross-Origin Resource Sharing (CORS)}
+    Mecanismo de segurança do HTTP que utiliza o cabeçalho de uma página (\textit{head}) para avisar que a aplicação está executando em uma origem.
+\end{block}
+
+Uma aplicação executa uma \textbf{cross-origin HTTP request} quando solicita recursos de outra origem. 
+\end{frame}
+
+    
+\begin{frame}{CORS Filter}
+
+\begin{center}
+    \includegraphics[width=.8\linewidth]{CORS_principle.png}
+\end{center} 
+
+{\scriptsize Fonte: \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{CORS Filter}
+\begin{lstlisting}
+@Provider
+public class CorsFilter implements ContainerResponseFilter {
+
+  @Override
+  public void filter(final ContainerRequestContext requestContext, 
+            final ContainerResponseContext cres) throws IOException {
+    cres.getHeaders().add("Access-Control-Allow-Origin", "*");
+    cres.getHeaders().add("Access-Control-Allow-Headers", 
+                      "origin, content-type, accept, authorization");
+    cres.getHeaders().add("Access-Control-Allow-Credentials", "true");
+    cres.getHeaders().add("Access-Control-Allow-Methods", 
+                      "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+    cres.getHeaders().add("Access-Control-Max-Age", "1209600");
+  }
+
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

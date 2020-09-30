@@ -1,0 +1,26 @@
+\frametitle{\textit {Liskov substitution principle (LSP)}}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Aplicacao {
+   public static void main(String[] args) {
+
+      Retangulo ret = new Retangulo();
+      ret.setaltura(3);
+      ret.setLargura(2);
+
+      if (ret.getArea() != 6) {
+         System.out.println("Algo está errado!");
+      }
+
+      ret = new Quadrado();
+      ret.setaltura(3);
+      ret.setLargura(2);
+
+      if (ret.getArea() != 6) {
+         System.out.println("Algo está errado!");
+      }
+   }
+}
+\end{lstlisting}
+
+\textbf{Em resumo}:
+Herança deve considerar a relação \textit{``é-um''} para o comportamento do objeto.

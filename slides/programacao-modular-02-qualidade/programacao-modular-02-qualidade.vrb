@@ -1,0 +1,45 @@
+\frametitle{Exemplo de qualidade de código}
+
+\begin{multicols}{2}
+\begin{lstlisting}[language=Java,numbers=none]
+int calcSubsidio() {
+  int subsidio;
+  if (!idade) {
+       // não acima do limite
+    if (!sub) { //sem subsidio
+      if (!naoIntegral) {
+        // não tempo parcial
+        subsidio = 500;
+      } else {
+        subsidio = 250;
+      }
+    } else { // já subsidiado
+      subsidio = 250;
+    }
+  } else { // acima do limite
+    subsidio = -1;
+  }
+  return subsidio;
+}
+\end{lstlisting}
+
+\columnbreak
+
+\begin{lstlisting}[language=Java,numbers=none]
+int calcSubsidio() {
+  int subsidio;
+  if (eMaior) {
+    subsidio = REJEITA_MAIOR;
+  } else if (jaSubsidiado) {
+    subsidio = JA_SUBSIDIADO;
+  } else if (eTempoParcial) {
+    subsidio = TEMPO_INTEGRAL*FATOR;
+  } else {
+    subsidio = TEMPO_INTEGRAL;
+  }
+  return subsidio;
+}
+\end{lstlisting}
+
+\end{multicols}
+

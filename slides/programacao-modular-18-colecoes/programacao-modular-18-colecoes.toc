@@ -1,0 +1,12 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\beamer@sectionintoc {1}{Cole\c c\~oes}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Java Collections Framework}{3}{0}{1}
+\beamer@sectionintoc {2}{Interfaces}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Collection}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Set e SortedSet -- conjuntos}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{List -- listas e Queue -- filas}{13}{0}{2}
+\beamer@subsectionintoc {2}{4}{Map -- mapeamentos}{18}{0}{2}
+\beamer@sectionintoc {3}{Streams e pipelines}{23}{0}{3}
+\beamer@subsectionintoc {3}{1}{Defini\c c\~ao}{23}{0}{3}
+\beamer@subsectionintoc {3}{2}{Exemplo Estoque}{27}{0}{3}

@@ -1,0 +1,336 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Introdução à linguagem Java%
+}
+\author[Prof. Hugo de Paula]
+{
+	Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-2.02cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+	
+\section{Linguagem Java}
+
+\subsection{Histórico da linguagem Java}
+
+
+
+\begin{frame}{Histórico do Java}
+    \bi
+    \item Linguagem orientada a objetos.
+    \item Desenvolvida em 1991 por James Gosling.
+    \item 1a versão lançada 1995.
+    \item Código fonte e objeto portáveis para diversas arquiteturas e sistemas operacionais.
+    \item Linguagem de propósito geral derivada do C++.
+    \item Linguagem compilada e depois interpretada: 
+   \bi
+  \item \textit{Bytecode} -- ling. assembly de uma máquina hipotética.
+   \ei
+    \ei
+    \begin{center}
+    \textit{``Linguagem simples, orientada por objetos, distribuída, interpretada, robusta, segura, independente de arquitetura, portável, de alta performance, multi-threaded e dinâmica.''} \\
+    SUN Microsystems,  Maio de 1995  
+    \end{center}
+    
+\end{frame}
+
+\begin{frame}{Características do Java}
+\begin{center}
+		\includegraphics[width=.6\linewidth]{java.png}
+\end{center}
+\end{frame}
+
+\subsection{Ranking do Java}
+
+\begin{frame}{Ranking Java}
+    
+
+\begin{table}[htbp]
+    \centering
+    \caption{Resumo do Índice Tiobe \url{http://www.tiobe.com/tiobe-index/}}
+    \begin{tabular}{lrr}
+   \toprule
+   \textbf{fev/20} & \textbf{Ling. Programação} & \textbf{Ranking} \\
+   \midrule
+   1   & Java           & 17,358\% \\
+   2   & C              & 16,766\% \\
+   3   & Python         &  9,345\% \\
+   4   & C++            &  6,164\% \\
+   5   & C\#            &  5,927\% \\
+   \bottomrule
+  \end{tabular}%
+  \label{tab:tiobe}%
+   \end{table}%
+\end{frame}
+
+\subsection{Características do Java}
+
+\begin{frame}{Java é mais simples que a linguagem $C++$}
+    \bi
+        \item Semântica de referência ao invés de ponteiros.  
+        \item Não permite variáveis globais, apenas atributos estáticos.
+        \item Coletor de lixo gerencia memória (sem \textsc{delete}).
+        \item Não possui arquivos de cabeçalho (\textit{header}).
+        \item Sem sobrecarga de operadores, apenas de métodos.
+        \item Sem herança múltipla de classes, mas com herança múltipla de interfaces.
+    \ei
+\end{frame}
+
+\begin{frame}{Diagrama conceitual do Java}
+    \begin{figure}[h] 
+        \begin{center}
+            \includegraphics[width=0.82\textwidth]{modeloconceitual.png}
+        \end{center}
+    \end{figure}
+    \begin{center}
+        \tiny \url{https://docs.oracle.com/javase/8/docs/}
+    \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Compilando e executando Java}
+\bi
+    \item Código-fonte: \lstinline|.java|
+    \item Compilador:
+    \bi
+        \item \lstinline|javac <nomearq.java>|
+    \ei
+    \item Arquivos objeto compilados: \lstinline|.class|
+    \item Para executar uma aplicação:
+    \bi
+        \item \lstinline|java <nomearq>|
+    \ei
+    \item Para executar um \textit{applet}:
+    \bi
+        \item \lstinline|appletviewer <nomearq.html>|
+        \item ou em algum navegador compatível.
+    \ei
+\ei
+\end{frame}
+    
+\subsection{Estrutura de uma aplicação Java}
+
+\begin{frame}{Estrutura de uma aplicação Java}
+    \bi
+        \item Classes são escritas em arquivos \lstinline|.java|.
+        \item Um arquivo \lstinline|.java| pode conter diversas classes, mas apenas uma será pública e estará visível ao resto da aplicação.
+        \item A classe pública de um arquivo \lstinline|.java| deve ter o mesmo nome do arquivo \lstinline|.java|.
+        \item As classes compiladas (arquivos \lstinline|.class|) devem estar em diretórios conhecidos do Java (variável de ambiente \lstinline|CLASSPATH|).
+        \item O diretório \textsc{<diretorio\_jdk>/jre/classes} é o local padrão para localização de classes.
+    \ei
+\end{frame}
+
+\begin{frame}{Estrutura de uma aplicação Java}
+    \bi
+        \item Classes são agrupadas em pacotes, definido pela cláusula \lstinline|package|.
+        \item Pacotes são conjuntos de classes, interface e subpacotes relacionados.
+        \item Pacotes são úteis porque:
+        \bi
+            \item Agrupam interfaces e classes relacionadas
+            \item Criam espaço de nomes para Interfaces e classes.
+            \item outro nível de encapsulamento.
+        \ei
+        \item Para utilizar um pacote, usa-se a cláusula \lstinline|import|; semelhante ao \#include da linguagem C.
+        \item Pacotes também são encontrados através do \lstinline|CLASSPATH|, e são considerados subdiretórios do caminho.
+   \ei
+\end{frame}
+
+\begin{frame}{Estrutura de uma aplicação Java}
+    \bi
+        \item Pacotes podem ser aninhados.
+        \item Exemplo:
+        \bi
+            \item package adaptativo.RedesNeurais;
+            \item package adaptativo.Genetico;
+        \ei
+        \item O aninhamento é puramente semântico. 
+        \item O pacote adaptativo é diferente do pacote adaptativo.genetico que é diferente do pacote adaptativo.RedesNeurais.
+        \item As classes do pacote Genetico devem estar em um sub-diretório Genetico do diretório adaptativo.
+        \item Pacotes podem ser referenciados diretamente sem utilizar a cláusula import, bastando chamar diretamente pelo nome do pacote.
+    \ei
+\end{frame}
+    
+\begin{frame}{Aplicações e Applets}
+
+\bi
+    \item Aplicações console:
+    \bi
+        \item Rodam sob a JVM, que faz a tradução direta para o sistema operacional.
+        \item Utilizam apenas as interfaces de entrada e saída padrão Java: java.System, java.io, java.lang, java.util.
+    \ei
+    \item Aplicações gráficas (rodam em janelas):
+    \bi
+        \item Devem utilizar bibliotecas gráficas contidas em alguma interface da JFC (Java Foundation Classes): AWT, Swing, Java 2D, etc...
+        \item São orientadas a eventos.
+    \ei
+    \item \textit{Applets}:
+    \bi
+        \item Aplicações leves que rodam no contexto do navegador web.
+        \item \textit{Applets} são sempre pequenas aplicações gráficas. Herdam de java.Applet
+    \ei
+\ei
+\end{frame}
+    
+\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
+        
+   \bi
+       \item Aplicação console:
+   \ei
+\begin{lstlisting}
+/* AloMundo.java */
+
+class AloMundo {
+    public static void main(String args[]) {
+        System.out.println("Alo Mundo!");
+    }
+}
+\end{lstlisting}
+    \bi
+        \item Colocado no arquivo \lstinline|AloMundo.java|
+        \item Java é sensível a maiúsculas e minúsculas.
+        \item Edite, compile e rode o arquivo \lstinline|AloMundo.java|
+    \ei
+\end{frame}
+    
+\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
+    
+    \bi
+        \item Applet:
+    \ei
+\begin{lstlisting}
+/* AloMundoApplet.java */
+
+import java.awt.Graphics; 
+
+public class AloMundoApplet extends java.applet.Applet {
+
+    public void paint(Graphics g) {
+        g.drawString("Alo Mundo!", 5, 25);
+    }
+}
+\end{lstlisting}
+    \bi
+        \item Colocado no arquivo AloMundoApplet.java
+        \item Edite, compile e rode o arquivo AloMundoApplet.java
+    \ei
+\end{frame}
+
+\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
+    
+    \bi
+        \item Rodando Applets
+        \item O compilador gera um arquivo \lstinline|AloMundoApplet.class| que deve ser executado dentro de uma página HTML.
+        \item Crie o arquivo \lstinline|AloMundoApplet.html| e abra-o em um navegador:
+    \ei
+\begin{lstlisting}[language=HTML]
+<HTML>
+<HEAD>
+<TITLE>Alo todo mundo!!!</TITLE>
+</HEAD>
+
+<BODY>
+    <P>O applet Java diz: 
+    <APPLET CODE="AloMundoApplet.class" WIDTH=150 HEIGHT=25>
+    </APPLET>
+</BODY>
+</HTML>
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
+    
+    \bi
+        \item Aplicações Gráficas:
+    \ei
+\begin{lstlisting}
+/* AloMundoGraphic.java */
+import javax.swing.JOptionPane; 
+
+public class AloMundoGraphic {
+    public static void main(String args[]) {
+        JOptionPane.showMessageDialog(null, "Alo Mundo!" );
+        System.exit(0);  // encerra a aplicação
+    }
+}
+\end{lstlisting}
+    \bi
+        \item Edite, compile e rode o arquivo \lstinline|AloMundoGraphic.java|.
+        \item Para fixar o conceito de pacotes, adicione a linha 
+        \item \lstinline|package AloPkg|;
+        \item No início no arquivo e tente compilar e executar o programa.
+    \ei
+\end{frame}
+
+\begin{frame}{Lançando programas Java}
+    \bi
+        \item Em aplicações, tudo começa pelo método \lstinline|main|.
+        \item \lstinline|public static void main(String args[]) { }|
+        \item \lstinline|args[]| é correspondente ao \lstinline|argv[]| do C, exceto que \lstinline|args[0]| é equivalente ao \lstinline|argv[1]|
+        \item \lstinline|main| não retorna um valor, apesar de que a JVM pode capturar códigos de saída: \lstinline|System.exit(0)|;
+    \item Em \textit{Applets} não há métodos main. Existem 3 métodos que rodam automaticamente (em ocasiões distintas) que constituem o disparo do programa: \lstinline|start|, \lstinline|init| e \lstinline|paint|.
+    \ei
+\end{frame}
+
+\end{document}

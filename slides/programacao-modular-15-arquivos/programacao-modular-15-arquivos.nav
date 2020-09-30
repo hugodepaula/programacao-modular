@@ -1,0 +1,48 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{Java Streams}{3}{Java Streams}{0}}
+\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Interfaces base}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{Interfaces base}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Destinos}}
+\headcommand {\slideentry {1}{2}{1}{4/4}{Destinos}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@sectionpages {3}{4}}
+\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\sectionentry {2}{Exemplo: Arquivo}{5}{Exemplo: Arquivo}{0}}
+\headcommand {\slideentry {2}{0}{1}{5/5}{}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{6}{Fechamento autom\'atico}}
+\headcommand {\slideentry {2}{1}{1}{6/6}{Fechamento autom\'atico}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Acesso aleat\'orio}}
+\headcommand {\slideentry {2}{2}{1}{7/7}{Acesso aleat\'orio}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@sectionpages {5}{7}}
+\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\sectionentry {3}{Data Access Object}{8}{Data Access Object}{0}}
+\headcommand {\beamer@subsectionpages {8}{7}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{8}{DAO Factory Pattern}}
+\headcommand {\slideentry {3}{1}{1}{8/8}{DAO Factory Pattern}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{9}{Tipagem}}
+\headcommand {\slideentry {3}{2}{1}{9/9}{Tipagem}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {3}{2}{2}{10/10}{Tipagem}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {3}{2}{3}{11/11}{Tipagem}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\beamer@sectionpages {8}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\gdef \inserttotalframenumber {11}}

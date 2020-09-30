@@ -1,0 +1,314 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Membros estáticos e finais%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+       \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+    
+\section{Membros estáticos}
+
+\begin{frame}[fragile]{Membros estáticos}
+    
+    \begin{block}{Membro estático}
+      Membro com tempo de vida global e escopo local.
+    \end{block}
+    
+    \bi
+    \item São atributos ou métodos comuns a todos os objetos de uma classe.
+    
+    \item Membros de classe.
+        \bi
+            \item Compartilhado por todos os objetos daquela classe.
+            \item Primeiro objeto inicializa a variável\footnote{Na verdade, em Java, membro é inicializado quando a classe é carregada.}.
+        \ei
+    \ei
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Membros estáticos}
+\begin{itemize}
+    \item Úteis para implementar contadores ou identificadores de autoincremento.
+    \item Podem ser usados para definir constantes. 
+    \begin{itemize}
+        \item Como a variável e compartilhada por todos os objetos de uma classe, a utilização de membros estáticos constantes pode permitir grande economia de memória.
+    \end{itemize}
+    \item Modificador de acesso \lstinline|static|.
+\end{itemize} 
+\end{frame}
+
+\section{Exemplo: Identificador de Produtos}
+
+\begin{frame}[fragile]{Exemplo: Identificador estático de Produtos}
+\begin{lstlisting}[basicstyle=\tiny]
+class Produto {
+    ...
+    private int id;
+    private static int cont = 0;
+
+    public static int getCont() {
+        return cont;
+    }
+    public int getId() {
+        return id;
+    }
+    ...
+    public Produto(String d, float p, int q) {
+        setDescricao(d);
+        setPreco(p);
+        setQuant(q);
+
+        id = ++cont;
+    }
+    public Produto() {
+        descricao = "Novo Produto";
+        preco = 0.01F;
+        quant = 0;
+        
+        id = ++cont;
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Identificador estático de Produtos}
+\begin{lstlisting}[basicstyle=\tiny]
+class Aplicacao {
+    public static void main(String args[]) {
+        
+        System.out.println("\nCont. prods: " + Produto.getCont());
+        
+        Produto p1 = new Produto();
+        System.out.println("\nCont. prods: " + Produto.getCont());
+        
+        Produto p2 = new Produto("Shulambs", 1.99F, 200);
+        System.out.println("\nCont. prods: " + Produto.getCont());
+        ...    
+        
+        System.out.println("Produto id: " + p1.getId());
+        System.out.println("Descrição:  " + p1.getDescricao());
+        System.out.println("Preço:      " + p1.getPreco());
+        System.out.println("Estoque:    " + p1.getQuant());
+        
+        System.out.println("Produto id: " + p2.getId());
+        System.out.println("Descrição:  " + p2.getDescricao());
+        System.out.println("Preço:      " + p2.getPreco());
+        System.out.println("Estoque:    " + p2.getQuant());
+
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Membros finais}
+
+\begin{frame}[fragile]{Membros finais}
+    
+    \begin{block}{Membro final}
+      Podem ser definidos/inicializados apenas uma vez.
+    \end{block}
+    
+    \bi
+    \item São atributos, métodos ou classes, em geral, constantes.
+    
+    \item Modificador de acesso \lstinline|final|.
+    
+    \item Sua função varia dependendo do tipo de membro. No caso de variáveis, define constantes.
+    \ei
+\end{frame}
+
+\begin{frame}{Classe Produto: diagrama UML (sem \textit{getters})}
+    \begin{center}
+        \tiny
+        \begin{tikzpicture} 
+        \umlclass{Produto}{ 
+            -- id : int \\
+            -- descricao : String \\ 
+            -- preco : float \\
+            -- quant : int \\
+            \umlstatic{-- cont : int} 
+        }{ 
+           \umlstatic{+ getCont() : int} \\
+            + getId() : int \\ 
+            + emEstoque() : boolean \\
+            + setDescricao(d : String) : void \\
+            + setPreco(p : float) : void \\
+            + setQuant(q : int) : void \\
+            + Produto(d : String, p : float, q : int) \\
+            + Produto() 	
+}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+\subsection{Exemplo: membros finais}
+    
+\begin{frame}[fragile]{Classe Produto: atributo final}
+\begin{lstlisting}
+class Produto {
+   public static final String DESCRICAO_PADRAO = "Shulambs";
+   public static final int MAX_ESTOQUE = 1000;
+   ...
+
+   public void setQuant(int q) {
+      if (q >= 0 && q <= MAX_ESTOQUE)
+         quant = q;
+   }
+   ...
+
+   public Produto() {
+      descricao = DESCRICAO_PADRAO;
+      preco = 0.01F;
+      quant = 0;
+        
+      id = ++cont;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe Produto: atributo final}
+\begin{lstlisting}
+class Aplicacao {
+   public static void main(String args[]) {
+   
+      Produto p1 = new Produto();
+      Produto p2 = new Produto("Shulambs", 1.99F, 600);
+
+      int novosProdutos = Integer.parseInt(
+           JOptionPane.showInputDialog(null, 
+           "Digite quantos produtos deseja adicionar ao estoque:", 
+           "Controle de estoque", 
+           JOptionPane.OK_CANCEL_OPTION));
+
+      if ((p2.getQuant() + novosProdutos) > Produto.MAX_ESTOQUE) {
+         JOptionPane.showMessageDialog(null, 
+            "Estourou o limite máximo do estoque.", 
+            "Erro alterando estoque", JOptionPane.ERROR_MESSAGE);
+      } else {
+         p2.setQuant(p2.getQuant() + novosProdutos);
+      }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Classe Produto: diagrama UML (sem métodos)}
+    \begin{center}
+        \tiny
+        \begin{tikzpicture} 
+        \umlclass{Produto}{ 
+            \umlstatic{+ DESCRICAO\_PADRAO : const String = ``Shulambs''} \\
+            \umlstatic{+ MAX\_ESTOQUE : const int = 1000} \\
+            \umlstatic{-- cont : int} \\
+            -- id : int \\
+            -- descricao : String \\ 
+            -- preco : float \\
+            -- quant : int \\
+        }{}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+\subsection{Atributo final não constante}
+
+\begin{frame}{Atributo final não constante}
+    \begin{itemize}
+        \item Constantes são atributos \lstinline|static final|.
+        \item São imutáveis:
+        \begin{itemize}
+        \item Não faz sentido um atributo imutável ser armazenado em nível de instância.
+        \end{itemize}
+        \item Se o estado do objeto pode mudar, então não é constante.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: atributo final não constante}
+\begin{lstlisting}
+// Constantes
+static final int NUMERO = 42;
+static final ImmutableList<String> MESES =
+           ImmutableList.of("janeiro", "fevereiro", "março");
+
+
+// Não constantes
+static String naoFinal = "atributo não final";
+final String naoStatic = "atrobuto não estático";
+static final String[] arranjoNaoVazio = 
+            {"esses", "valores", "podem", "mudar"};
+\end{lstlisting}
+\end{frame}
+
+
+\end{document}

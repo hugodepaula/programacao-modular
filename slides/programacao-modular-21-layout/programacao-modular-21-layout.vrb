@@ -1,0 +1,29 @@
+\frametitle{Desenhando sobre um componente}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class AplicacaoCanvas extends JFrame {
+   private JButton close = new JButton("Close");
+   private AreaDeDesenho ades = new AreaDeDesenho();
+
+   public AplicacaoCanvas() {
+      super("Caixa de desenho");
+
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      this.setLayout(new BorderLayout());
+      this.getContentPane().add(close, BorderLayout.SOUTH);
+      this.getContentPane().add(ades, BorderLayout.CENTER);
+
+      close.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+         }
+      });
+
+      pack();
+   }
+
+   public static void main(String args[]) {
+      new AplicacaoCanvas().setVisible(true);
+   }
+}\end{lstlisting}

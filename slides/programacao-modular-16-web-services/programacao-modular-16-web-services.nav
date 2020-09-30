@@ -1,0 +1,74 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{Web services (WS)}{3}{Web services (WS)}{0}}
+\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Servi\c cos web}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{Servi\c cos web}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Acessando web services REST}}
+\headcommand {\slideentry {1}{2}{1}{4/4}{Acessando web services REST}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {1}{2}{2}{5/5}{Acessando web services REST}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\slideentry {1}{2}{3}{6/6}{Acessando web services REST}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\beamer@sectionpages {3}{6}}
+\headcommand {\beamer@subsectionpages {4}{6}}
+\headcommand {\sectionentry {2}{Construindo um web service -- Spark framwork}{7}{Construindo um web service -- Spark framwork}{0}}
+\headcommand {\beamer@subsectionpages {7}{6}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{7}{Decomposi\c c\~ao de servi\c cos}}
+\headcommand {\slideentry {2}{1}{1}{7/7}{Decomposi\c c\~ao de servi\c cos}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{8}{Spark framework}}
+\headcommand {\slideentry {2}{2}{1}{8/8}{Spark framework}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {2}{2}{2}{9/9}{Spark framework}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {2}{2}{3}{10/10}{Spark framework}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {2}{2}{4}{11/11}{Spark framework}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {2}{2}{5}{12/12}{Spark framework}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {2}{2}{6}{13/13}{Spark framework}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {2}{2}{7}{14/14}{Spark framework}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionpages {8}{14}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{15}{Roteamento de requisi\c c\~oes}}
+\headcommand {\slideentry {2}{3}{1}{15/15}{Roteamento de requisi\c c\~oes}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {2}{3}{2}{16/16}{Roteamento de requisi\c c\~oes}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {2}{3}{3}{17/17}{Roteamento de requisi\c c\~oes}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {2}{3}{4}{18/18}{Roteamento de requisi\c c\~oes}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@sectionpages {7}{18}}
+\headcommand {\beamer@subsectionpages {15}{18}}
+\headcommand {\sectionentry {3}{JSON e Redirecionamento}{19}{JSON e Redirecionamento}{0}}
+\headcommand {\beamer@subsectionpages {19}{18}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{19}{JSON em Java}}
+\headcommand {\slideentry {3}{1}{1}{19/19}{JSON em Java}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {3}{1}{2}{20/20}{JSON em Java}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{21}{Formatando um objeto em JSON}}
+\headcommand {\slideentry {3}{2}{1}{21/21}{Formatando um objeto em JSON}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@subsectionpages {21}{21}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{22}{Redirecionamento}}
+\headcommand {\slideentry {3}{3}{1}{22/22}{Redirecionamento}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@partpages {1}{22}}
+\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\beamer@sectionpages {19}{22}}
+\headcommand {\beamer@documentpages {22}}
+\headcommand {\gdef \inserttotalframenumber {22}}

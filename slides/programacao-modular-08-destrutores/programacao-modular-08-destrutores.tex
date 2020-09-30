@@ -1,0 +1,243 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Destrutores em Java%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+       \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+    
+\section{Alias e semântica de referência}
+
+\begin{frame}[fragile]{Alias e semântica de referência}
+
+   \bi 
+   \item \textbf{Semântica de referência:} variáveis representam referências para objetos.
+   \begin{itemize}
+       \item Objetos podem ser alocados e desalocados a qualquer tempo, enquanto as referências possuem um escopo e tempo de vida definidos.
+   \end{itemize}
+   \item \textbf{Alias} ocorre quando o mesmo objeto é associado a dois nomes diferentes ao mesmo tempo (duas referências).
+   \ei
+
+\end{frame}
+
+\section{Lixo de memória e referência Dangling}
+
+
+\begin{frame}[fragile]{Lixo de memória e referência \textit{Dangling}}
+
+   \bi 
+   \item \textbf{Lixo} é a memória que foi alocada no ambiente mas se torna inacessível ao programa.
+      \bi 
+      \item Pode surgir quando um programador se esquece de desalocar uma variável dinâmica antes de alterar o estado do ponteiro que referencia esta região de memória.
+     \ei
+   \item \textbf{Referência \textit{dangling}:} ponteiro que aponta para uma área de memória que foi liberada.
+   \ei
+
+\end{frame}
+
+\section{Coletores de lixo}
+
+\begin{frame}{Coletores de lixo}
+
+   \bi 
+   \item \textbf{Coletor de lixo} é um processo que automaticamente elimina o lixo, liberando a memória que não é mais utilizada.
+   \bi 
+      \item Eliminam a necessidade de se desalocar memória explicitamente
+   \item Coletores de lixo eliminam o vazamento de memória.
+   \item Coletores de lixo eliminam referências \textit{dangling}.
+   \ei
+   \item Java
+      \bi 
+      \item Não possui ponteiros explícitos (apenas semântica de referência).
+         \item Não possui operadores de desalocação de memória (\textit{free} ou \textit{delete}).
+         \item Possui coletor de lixo que faz a gestão da desalocação de memória automaticamente.
+      \ei
+   \ei
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Java Garbage Collector}}
+\begin{itemize}
+\item Várias variáveis podem apontar para um mesmo objeto.
+\item Um objeto é elegível para coleta de lixo quando:
+\begin{itemize}
+\item não pode mais ser acessado por nenhuma referência;
+\item referencia um outro objeto que também o referencia formando um ciclo único e isolado.
+\end{itemize}
+\end{itemize}    
+
+\end{frame}
+
+
+
+
+
+\section{Finalizando um objeto}
+
+\begin{frame}[fragile]{Finalizando um objeto}
+\begin{itemize}
+\item Pode ser necessário resolver pendências antes de um objeto ser removido.
+\item Quando um objeto vai ser removido pelo coletor de lixo, um método de finalização é executado.
+\end{itemize}
+
+\begin{block}{Método \texttt{finalize} da classe \texttt{Object}}
+\begin{lstlisting}
+   protected void finalize() throws Throwable {
+      ...
+   }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\subsection{Exemplo: Processa Arquivo}
+
+\begin{frame}[fragile]{Exemplo: Processa Arquivo}
+\begin{lstlisting}
+public class ProcessaArquivo {
+   private Stream arq;
+
+   public processaArquivo(String caminho) {
+      arq = new Stream(caminho);
+   }
+   ...
+   public void close() {
+      if (arq != null) { arq.close(); 
+                         arq = null; }
+   }
+   protected void finalize() throws Thowable {
+      super.finalize();
+      close();
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Exemplo: Classe Produto}
+\begin{frame}[fragile]{Exemplo: Destrutor da classe Produto}
+\begin{lstlisting}[basicstyle=\tiny]
+class Produto {
+   private static int instancias = 0;
+
+   public static int getInstancias() {
+      return instancias;
+   }
+
+   public Produto(String d, float p, int q) {
+      instancias++;
+   }
+
+   public Produto() {
+      instancias++;
+   }
+
+   /**
+    * É executado quando um objeto está sendo removido da memória.
+    */
+   @Override
+   protected void finalize() throws Throwable {
+      super.finalize();
+      System.out.println("Finalizando um produto....");
+      instancias--;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Destrutor da classe Produto}
+\begin{lstlisting}[basicstyle=\tiny]
+class Aplicacao {
+   public static void main(String args[]) {
+      System.out.println("\nInstancias prods: " + Produto.getInstancias());
+
+      Produto p1 = new Produto();
+      System.out.println("\nInstancias prods: " + Produto.getInstancias());
+
+      Produto p2 = new Produto("Shulambs", 1.99F, 600);
+      System.out.println("\nInstancias prods: " + Produto.getInstancias());
+
+      System.out.println("Produto: " + p1.getDescricao());
+      System.out.println("Produto: " + p2.getDescricao());
+
+      // Referência p1 aponta para produto da referência p2.
+      // produto anteriormente apontado por p1 se torna inacessível.
+      p1 = p2;
+
+      System.out.println("Produto: " + p1.getDescricao());
+      System.out.println("Produto: " + p2.getDescricao());
+      // Coletor de lixo ainda não foi executado.
+      System.out.println("\nInstancias prods: " + Produto.getInstancias());
+
+      int i = System.in.read(); // artifício para parar o programa.
+      System.gc();
+      // Coletor de lixo já foi executado.
+      System.out.println("\nInstancias prods: " + Produto.getInstancias());
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\end{document}

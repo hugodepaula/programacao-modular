@@ -1,0 +1,379 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Fatores de qualidade de software%
+}
+\author[Prof. Hugo de Paula]
+{
+	Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+        basicstyle=\scriptsize,
+        commentstyle=\color{red},
+        showstringspaces=false,
+        numbers=left,
+        numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.92cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+	
+\section{Qualidade de Software}
+
+\subsection{Engenharia de software}
+
+\begin{frame}[fragile]{Qualidade de Software}
+
+
+	Engenharia de Software busca
+        
+        \begin{center}
+            \textit{produção de software de boa qualidade \\ e de forma sistemática.}
+        \end{center}
+        
+    Fases:
+    
+    \bi
+		\item Especificação.
+        \item Desenvolvimento.
+        \item Teste/manutenção.
+        \item Evolução
+	\ei 
+        
+\end{frame}
+
+\section{Fatores de qualidade}
+
+\begin{frame}[fragile]{Fatores de qualidade de software}
+    \bi 
+    
+    \item Dois tipos de fatores influenciam a qualidade de um software:\\[5mm]
+        \bi
+            \item \textbf{Fatores externos} são aqueles com os quais os usuários interagem. \\[5mm]
+            \item \textbf{Fatores internos} são aqueles com os quais os programadores interagem.
+        \ei
+    \ei
+\end{frame}
+
+\subsection{Fatores externos}
+
+\begin{frame}{Fatores externos de qualidade}
+    \bi 
+        \item \textbf{Correção}:
+        \bi
+            \item Executar exatamente sua função, conforme definida pelos requisitos e especificação: garante o funcionamento no que foi previsto. \\[5mm]
+        \ei
+        \item \textbf{Robustez}:
+        \bi
+            \item Funcionar mesmo em condições anormais: garante funcionamento em situações imprevistas
+            \item \textit{Graceful degradation} (degradação suave): sistema continua a operar mesmo no caso de falha de alguns dos seus componentes.
+        \ei
+    \ei
+\end{frame}
+
+\begin{frame}{Fatores externos de qualidade}
+    \bi 
+    \item \textbf{Extensibilidade}:
+    \bi
+    \item Medida da facilidade com que o software pode ser adaptado para atender a mudanças na sua especificação.
+    \item Facilitada por projetos simples e módulos autônomos.
+    \ei
+    \item \textbf{Reusabilidade}:
+    \bi
+    \item Ser usável em novas aplicações.
+    \ei
+    \item \textbf{Compatibilidade}:
+    \bi
+    \item Medida da facilidade com que um software pode ser combinado com outros.
+    \item O uso de padronização facilita a compatibilidade.
+    \ei
+    \ei
+\end{frame}
+
+\begin{frame}{Fatores externos de qualidade}
+    \bi 
+    \item \textbf{Eficiência}:
+        \bi
+            \item Relacionado ao desempenho. Consiste no bom uso dos recursos de hardware. \\[5mm]
+        \ei
+        \begin{block}{Correção $\times$ eficiência}
+            Para que serve um sistema muito eficiente, mas
+            que produz saídas incorretas?
+        \end{block} 
+        
+        \vspace{5mm}
+        \item Correção é recurso prioritário.
+
+    \ei
+\end{frame}
+
+
+\begin{frame}{Fatores externos de qualidade}
+    \bi 
+    \item \textbf{Portabilidade}:
+    \bi
+    \item Medida da facilidade de transporte de um software
+    para vários hardwares ou ambientes de programação. \\[5mm]
+    \ei
+    \item \textbf{Facilidade de uso}:
+    \bi
+    \item Preparação de dados de entrada, interpretação de
+    resultados, recuperação de erros de uso, etc.
+    \ei
+    \ei
+\end{frame}
+
+
+\begin{frame}{Fatores externos de qualidade}
+    \bi 
+    \item \textbf{Segurança (integridade)}:
+    \bi
+    \item Proteção dos componentes contra acesso ou
+    modificação não-autorizada. \\[5mm]
+    \ei
+    \item \textbf{Verificabilidade}:
+    \bi
+    \item Medida da facilidade de se preparar procedimentos
+    de aceitação, dados para testes, etc, durante a fase
+    de validação ou de operação.
+    \ei
+    \ei
+\end{frame}
+
+\subsection{Fatores internos}
+
+
+\begin{frame}{Fatores internos de qualidade}
+    \bi 
+    \item Fatores externos são os percebidos pelos usuários $\longrightarrow$ \textit{importante}.
+    
+    \item Mas só podem ser atingidos por meio dos fatores internos, como:
+        \bi
+            \item Modularidade;
+            \item Legibilidade;
+            \item Manutenibilidade.
+        \ei
+    \ei
+\end{frame}
+
+
+
+\begin{frame}{Legibilidade}
+    \bi 
+    \item \textbf{Legibilidade}:
+        \bi
+            \item Facilidade de entender o código-fonte
+
+            \item Exemplos: nomeação de componentes, organização do código.
+    
+            \item \textit{Inteligibilidade}
+    
+            \bi
+                \item Facilidade de compreender a coerência de um software
+                em um nível superior do que a legibilidade proporciona.
+            \ei
+        \ei
+    \ei
+\end{frame}
+
+
+\begin{frame}{Manutenibilidade}
+    \bi 
+    \item \textbf{Manutenibilidade}:
+        \bi
+            \item Facilidade para modificar um software ou corrigir problemas.
+            \item Refere-se à facilidade, precisão, segurança e economia na execução de ações de manutenção
+            nesse sistema ou produto.
+            \item Finalidades:
+            \bi
+                \item Corrigir defeitos.
+                \item Adequar-se a novos requisitos.
+                \item Adequar-se a um ambiente novo.
+            \ei
+        \ei
+    \ei
+\end{frame}
+
+
+
+\begin{frame}{Modularidade}
+\bi
+    \item Divisão do sistema em partes distintas.
+    \item Ideia da ``caixa preta'': mapeamento de entradas em saídas.
+    \item \textbf{Módulo}: grupo de comandos com uma funcionalidade bem definida e o mais independente possível em relação ao resto do algoritmo.
+    \bi
+        \item deve haver um módulo principal de controle e módulos específicos para as funções do sistema.
+    \ei
+\ei
+\end{frame}
+
+
+\begin{frame}{Modularidade}
+    \bi
+        \item O ideal é que os módulos não sejam grandes demais.
+        \bi
+            \item Facilidade de compreensão.
+            \item Isolamento de função. \\[5mm]
+        \ei
+        \item Vantagens:
+        \bi
+            \item Isolamento para testes e manutenção.
+            \item Interface pública uniforme.
+            \item Criação de bibliotecas reutilizáveis.
+            \item Economia de memória.
+        \ei
+    \ei
+\end{frame}
+
+\subsection{Custos de Manutenção}
+
+\begin{frame}{Custos de manutenção}
+\bi
+    \item Manutenção é modificação para atender mudanças do mundo externo.
+    \item Manutenção também é remoção dos erros que não deveriam estar lá.
+    \item Cerca de 70\% do custo de um software é manutenção.
+    \item A maioria dos erros apresentados por um software são gerados na fase de projeto.
+\ei
+\end{frame}
+
+\begin{frame}{Custos chave do desenvolvimento de software}
+    \begin{tabular}{p{6cm}cc}
+        \hline
+                         & \textbf{Passado} & \textbf{Presente} \\ \hline
+      Ciclos de \textit{release}  & longos & curtos \\ 
+      Requisitos  & detalhados & básicos \\ 
+      Interdependências  & poucas  & muitas  \\ 
+      Taxa de mudança    & Trimestral/ & Diária/ \\ 
+                         & Anual &  Semanal \\ 
+      Planejamento  & Completo & Ad-hoc \\ 
+      Pontos de coordenação  & poucos & muitos \\ 
+      \% do tempo em código de outra pessoa  & < 25\% & > 75\%  \\ 
+      Manutenção como \% do custo total  & < 50\% & > 50\%  \\ \hline 
+    \end{tabular} 
+    
+    {\scriptsize Adaptado de Krugle, \textit{The 4 hidden Costs of Code Maintenance}}
+\end{frame}
+
+\subsection{Qualidade de código}
+
+\begin{frame}[fragile]{Exemplo de qualidade de código}
+
+\begin{multicols}{2}
+\begin{lstlisting}[language=Java,numbers=none]
+int calcSubsidio() {
+  int subsidio;
+  if (!idade) { 
+       // não acima do limite
+    if (!sub) { //sem subsidio
+      if (!naoIntegral) { 
+        // não tempo parcial
+        subsidio = 500;
+      } else {
+        subsidio = 250;
+      }
+    } else { // já subsidiado
+      subsidio = 250; 
+    }
+  } else { // acima do limite
+    subsidio = -1; 
+  }
+  return subsidio;
+}   
+\end{lstlisting}
+    
+\columnbreak
+    
+\begin{lstlisting}[language=Java,numbers=none]
+int calcSubsidio() {
+  int subsidio;
+  if (eMaior) {
+    subsidio = REJEITA_MAIOR;
+  } else if (jaSubsidiado) {
+    subsidio = JA_SUBSIDIADO;
+  } else if (eTempoParcial) {
+    subsidio = TEMPO_INTEGRAL*FATOR;
+  } else {
+    subsidio = TEMPO_INTEGRAL;
+  }
+  return subsidio;
+}
+\end{lstlisting}
+    
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}{7 pecados capitais do desenvolvimento de software}
+    \begin{center}
+        \includegraphics[width=10cm]{./sonar_qube.png} \\
+        (SonarQube, 2014)
+    \end{center}
+\end{frame}
+
+\begin{frame}{Finalizando}
+    Martin Fowler \\[10mm]
+    
+       \begin{textblock}{3}(10.5,-4.8)
+           \includegraphics[width=3cm]{./martin_fowler.png}
+        \end{textblock}
+        
+\textit{``Any fool can write code that a computer can understand... \\[5mm]
+     But only good programmers write code that humans can understand.''} 
+
+    
+
+\end{frame}
+
+\end{document}

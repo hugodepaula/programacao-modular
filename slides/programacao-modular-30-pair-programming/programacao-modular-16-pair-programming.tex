@@ -1,0 +1,155 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Pair Programming%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas linhas 1.46
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.46cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Pair Programming}
+
+\subsection{O que é Pair Programming} 
+
+\begin{frame}{\textit{Pair Programming} (Programação em Par)}
+
+\begin{itemize}
+\item Técnica de programação baseada na metodologia ágil \textit{Extreme Programming (XP)}\footnote{\url{http://www.extremeprogramming.org/rules/pair.html}}.
+\end{itemize}
+
+\begin{block}{Pair Programming (Programação em Par)}
+Todo código a ser enviado para produção foi criado por duas pessoas trabalhando juntas em um único computador. \textit{Pair programming} aumenta a qualidade do software sem impactar no tempo para a entrega.
+\end{block}
+\end{frame}
+
+\begin{frame}{Como implementar a Programação em Par}
+Regras:
+
+\begin{itemize}
+   \item Alternância de papeis, entre o piloto e copiloto.
+   \item Atitude colaborativa. Um codifica e o outro supervisiona se os padrões de projeto e princípios de qualidade estão sendo aplicados. 
+   \item Não é \textit{mentoring}. Deve-se tentar ideias de ambos os membros da equipe.
+   \item Piloto deve sempre falar em voz alta o que está fazendo.
+\end{itemize}
+\end{frame}
+
+\subsection{Como implementar a Programação em Par} 
+
+\begin{frame}{Como implementar a Programação em Par}
+Passos:
+
+\begin{enumerate}
+\item Defina bem a tarefa antes de começar.
+    \begin{itemize}
+        \item Deve ser possível completá-la em até 2 horas.
+        \item Ex: Escrever comentário, ou adicionar código de manutenção.
+    \end{itemize}
+\item Objetivos pequenos para definir o foco da concentração.
+    \begin{itemize}
+        \item Verbalizar o objetivo ajuda a concentrar.
+        \item Pequenos objetivos devem ser alcançáveis em questão de minutos.
+    \end{itemize}
+\item Use TDD (\textit{Test-driven development})
+    \begin{itemize}
+        \item Primeiro escreva o teste unitário do micro objetivo.
+        \item Objetivo seguinte deve ser fazer o código passar no teste.
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Como implementar a Programação em Par}
+Passos (continuação):
+
+\begin{enumerate}\setcounter{enumi}{3}
+
+\item Confie e apoie o seu parceiro.
+    \begin{itemize}
+        \item Quando estiver pilotando, tente desenvolver o mais rápido possível.
+        \item Confie no observador para apontar os erros e te dar segurança.
+        \item Observador deve ler o código enquanto é desenvolvido.
+        \item Erros e trechos de código difíceis de entender devem ser corrigidos imediatamente,
+        \item Deixe problemas maiores e ideias de melhoria para depois.
+        \item Observador não pode ditar código.
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Como implementar a Programação em Par}
+Passos (continuação):
+
+\begin{enumerate}\setcounter{enumi}{4}
+
+\item Mantenha a sincronia.
+    \begin{itemize}
+        \item Diga o que vai fazer antes de fazer.
+        \item Se o parceiro pedir opinião, concordar ou discordar imediatamente.
+    \end{itemize}
+\item Seja cordial ao apontar erros.
+\item Comemore ao terminar uma tarefa.
+\item Troquem de papeis com frequência, de aproximadamente meia hora.
+\end{enumerate}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,978 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    \textit{Erros de Software e TDD}%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-2.01cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Princípios do teste de software}
+
+\begin{frame}[fragile]{Índice de Massa Corporal}
+
+Considere o exemplo a seguir que calcula o Índice de Massa Corporal (IMC) de uma pessoa, dados seu peso e altura.
+
+\begin{lstlisting}
+public class CalculadoraIMC {
+  private double peso, altura, imc;
+  
+  public CalculadoraIMC(double peso, double altura) {
+    this.peso = peso;
+    this.altura = altura;
+  }
+  public void calcular() {
+    this.imc = peso / (altura * altura);
+  }
+  public boolean comSobrepeso() {
+    return (imc > 25);
+  }
+  public double getImc() {
+    return this.imc;
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Índice de Massa Corporal}
+
+\begin{itemize}
+\item O estado do objeto corresponde ao \lstinline|peso|, à \lstinline|altura| e ao \lstinline|imc|.
+\item O comportamento do objeto é ditado pelos métodos \lstinline|calcular()| e \lstinline|comSobrepeso()|.
+\item O método \lstinline|getImc()| é apenas um método de acesso.
+\end{itemize}
+
+\begin{lstlisting}
+public static void main(String[] args) {
+  CalculadoraIMC calcImc = new CalculadoraIMC(70, 1.60);
+  calcImc.calcular();
+    
+  System.out.println("O IMC e: " + calcImc.getImc());
+ 
+  if (calcImc.comSobrepeso()) {
+    System.out.println("Tem sobrepeso.");
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+\subsection{Tipos de erro de software} 
+
+\begin{frame}{\textit{Debugging}}
+
+\begin{block}{\textit{Debugging}}
+Processo utilizado para remover erros de programação (\textit{bugs}).
+\end{block}
+
+Passos para o \textit{debugging}:
+
+\begin{enumerate}
+\item Detectar o erro.
+\item Localizar o erro.
+\item Solucionar o erro.
+\end{enumerate}
+
+Tipos de erros de programação:
+
+\begin{itemize}
+\item Erros de sintaxe / de compilação.
+\item Erros em tempo de execução.
+\item Erros semânticos ou de lógica.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Erros de sintaxe}
+
+\begin{itemize}
+\item Violam normas gramaticais da linguagem.
+\item São capturados previamente pelos compiladores ou interpretadores.
+\item São identificadas pela IDE.
+\end{itemize}
+
+\begin{lstlisting}
+  public void calcular() {
+    this.imc = peso / (altura * altura),
+  }
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Erros em tempo de execução}
+
+\begin{itemize}
+\item Ocorrem durante a execução do programa.
+\item Não podem ser capturados pelo compilador ou pela IDE. 
+\item Em algumas IDEs, o erro pode ser alertado. Exemplo: Variável não inicializada.
+\item Devem ser antecipados e tratados.
+\end{itemize}
+
+\begin{lstlisting}
+  public void calcular() {
+    this.imc = peso / (altura * altura);
+  }
+\end{lstlisting}
+
+Se a altura for igual a 0 (zero), ocorrerá o erro ``\textit{/ by zero}'' (divisão por zero).
+\end{frame}
+
+\begin{frame}[fragile]{Erros semânticos ou de lógica}
+
+\begin{itemize}
+\item Os mais difíceis de detectar. 
+\item Programa irá ``funcionar'', mas a saída estará incorreta.
+\end{itemize}
+
+\begin{lstlisting}
+  public void calcular() {
+    this.imc = (peso * peso) / altura;
+  }
+\end{lstlisting}
+
+\end{frame}
+
+
+\subsection{Princípios do teste de software}
+
+\begin{frame}{Princípios do teste de software}
+
+\begin{itemize}
+\item Objetivo do teste é verificação e validação.
+\end{itemize}
+
+\begin{block}{Verificação}
+objetiva responder se o sistema foi construído corretamente.
+\end{block}
+
+\begin{block}{Validação}
+tenta determinar se foi construído o sistema certo.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Custo do teste de software}
+
+\begin{itemize}
+\item O custo do erro aumenta, quanto mais se demora a detectá-lo.
+\end{itemize}
+
+{\centering \includegraphics[width=.73\textwidth]{custoTeste.pdf}
+
+{\tiny Adaptado de: \textit{Beginning Java Programming (2015) - Bart Baesens and Aimée Backiel}; Capítulo 1, pg. 7}}
+\end{frame}
+
+
+
+\section{Test-driven development (TDD)}
+
+\subsection{TDD: o que é} 
+
+\begin{frame}{\textit{Test-driven development}}
+
+\begin{block}{\textit{Test-driven development (TDD)}}
+Ou desenvolvimento dirigido por teste é uma metodologia de desenvolvimento de software que enfatiza o teste.
+\end{block}
+
+``Escreva o código de teste antes e então escreva o código operacional e depure o programa até que ele passe no teste.''
+\begin{itemize}
+\item TDD é uma metodologia de desenvolvimento, não de teste.
+
+\item Software é desenvolvido em pequenas iterações.
+
+\item Testes de unidade são desenvolvidos antes do código.
+\end{itemize}
+\end{frame}
+
+\subsection{TDD: como funciona}
+
+\begin{frame}{TDD: como funciona}
+
+\begin{enumerate}
+\item Adicione um teste.
+\begin{itemize}
+\item Estórias do usuário ajudam a entender os requisitos.
+\end{itemize}
+\item Execute todos os testes e veja o novo falhar.
+\begin{itemize}
+\item Garante que o mecanismo de teste está funcionando e que o teste não irá passar por engano. 
+\end{itemize}
+\item Escreva o código.
+\begin{itemize}
+\item Apenas o código que foi projetado para passar no teste.
+\item Nenhuma funcionalidade adicional deve ser incluída, pois não seria testada.
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}{TDD: como funciona}
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Execute os testes e veja eles serem bem sucedidos.
+\begin{itemize}
+\item Se o teste passou, tem-se confiança de que o código atende aos requisitos testados. 
+\end{itemize}
+\item Refatore o código.
+\begin{itemize}
+\item Limpe o código e reexecute os testes para garantir que nada foi quebrado.
+\end{itemize}
+\end{enumerate}
+
+Repita o processo.
+
+\end{frame}
+
+
+\section{Teste de unidade e JUnit}
+
+\subsection{Teste de unidade}
+
+\begin{frame}{Teoria do teste de unidade}
+
+\begin{block}{Teste unitário (ou teste de unidade)}
+Para cada trecho de código operacional -- uma classe ou um método, o código operacional deve estar pareado com um código de ``teste unitário''.
+\end{block} 
+
+\vspace{5mm}
+
+\textit{``If you can't write a test for what you are about to code, then you shouldn't even be thinking about coding.''}\footnote{George, Boby; Williams, Laurie. \textit{A Structured experiment of test-driven development}. 2003.}
+\end{frame}
+
+
+
+\begin{frame}{Teste de unidade}
+
+\begin{itemize}
+\item O código do teste unitário chama o código operacional a partir da sua interface pública, de diversas formas e verifica os resultados.
+\item O teste não precisa ser exaustivo -- código de teste já agrega um grande valor, mesmo nos casos centrais.
+\item Testes unitários são uma forma padronizada de manter os testes em paralelo com o desenvolvimento do programa.
+\item Testes de unidade são fáceis de executar.
+\begin{itemize}
+\item uma vez configurados, eles produzem \textit{feedback} rápido para você testar suas ideias.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tipos de teste de unidade}
+\begin{itemize}
+\item \textbf{Básicos}: entradas simples e óbvias que devem funcionar. São adicionados primeiro.
+
+\item \textbf{Avançados}: casos de teste mais complexos. Normalmente feitos posteriormente quando um maior conhecimento do problema leva a identificar potenciais casos estranhos.
+
+\item \textbf{Borda/fronteira}: são casos simples mas que representam condições extremas -- \lstinline|string| vazia, lista vazia, etc.
+
+\end{itemize}
+
+\end{frame}
+
+\subsection{JUnit com Eclipse}
+
+\begin{frame}{JUnit com Eclipse}
+\begin{itemize}
+\item JUnit é um sistema de teste de unidade em Java muito popular e bem integrado ao Eclipse.
+\item Para criar um caso de teste:
+\begin{itemize}
+\item Clique com o botão direito na classe que deseja testar.
+\item Selecione \texttt{New... JUnit Test Case}.
+\item Se a classe se chama \lstinline|Shulambs|, será criada uma classe chamada \lstinline|ShulambsTest|.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{JUnit.jar -- adicionando ao projeto}
+\begin{itemize}
+\item JUnit depende de classes disponíveis no arquivo \texttt{junit.jar}, já instalado como plugin do Eclipse.
+
+\item Ao criar uma classe de teste, o Eclipse irá perguntar se deseja adicionar o arquivo ao projeto automaticamente.
+
+\item Caso tenha que adicionar o arquivo manualmente, \texttt{Project}, selecione \texttt{properties... Java Build Path: Libraries.} Então utilize o botão \texttt{Add Jar} para adicionar o arquivo, que está na pasta \texttt{plugins}.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Exemplo de caso de teste JUnit}
+
+\begin{frame}{Exemplo JUnit: classe \texttt{Conjunto}}
+
+A clase \lstinline|Conjunto| é uma coleção
+
+\begin{itemize}
+\item possui até $N$ objetos.
+\item possui as operações básicas:
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\lstinline|adicionar| & adiciona um item \\ \hline
+\lstinline|contem|    & verifica se item no conjunto \\ \hline
+\lstinline|tamanho|   & número de itens \\ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{Exemplo JUnit: lista de testes}
+
+\begin{itemize}
+\item Decidindo como testar:
+\begin{itemize}
+\item $tamanho=0$ se \lstinline|Conjunto| está vazio.
+\item $tamanho=N$ após adicionar $N$ elementos.
+\item adicionar um elemento que já existe no \lstinline|Conjunto| não aumenta seu tamanho.
+\item lança uma exceção se \lstinline|Conjunto| já está lotado.
+\end{itemize}
+\item cada teste verifica uma característica específica de \lstinline|Conjunto|
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo JUnit: primeiro teste}
+
+\begin{tabular}{|c|c|}
+\hline
+\begin{minipage}{.35\textwidth}
+\begin{lstlisting}
+public class Conjunto {
+
+}
+\end{lstlisting}
+\end{minipage} &
+\begin{minipage}{.55\textwidth}
+\begin{lstlisting}
+public class ConjuntoTest {
+   @Test 
+   public void testConjuntoVazio() {
+      Conjunto c = new Conjunto();
+      assertEquals(0, c.tamanho());
+   }
+}
+\end{lstlisting}
+\end{minipage} \\ \hline
+\end{tabular}
+
+\begin{itemize}
+\item Não compila porque \lstinline|tamanho()| não foi definido.
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: Testando o método \texttt{tamanho()}}
+
+\textcolor[rgb]{.5,0,0}{\bf BARRA VERMELHA}: código falhou no teste.
+
+\begin{tabular}{ll}
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}
+public class Conjunto {
+   public int tamanho() {
+      return 42;
+   }
+}
+\end{lstlisting} 
+\end{minipage} & 
+\includegraphics[width=.45\textwidth]{falhaConjunto.png} \\
+\end{tabular}
+
+\textcolor[rgb]{0,.5,0}{\bf BARRA VERDE}: código passou no teste.
+
+\begin{tabular}{ll}
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}
+public class Conjunto {
+   public int tamanho() {
+      return 0;
+   }
+}
+\end{lstlisting} 
+\end{minipage} & 
+\includegraphics[width=.45\textwidth]{passaConjunto.png} \\
+\end{tabular}
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: testando adicionar itens}
+
+\begin{tabular}{|c|c|}
+\hline
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Conjunto {
+   public int tamanho() {
+      return 0;
+   }
+   public void adicionar(Object o) {
+      
+   }
+}
+\end{lstlisting}
+\end{minipage} &
+\begin{minipage}{.5\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public class ConjuntoTest {
+   @Test
+   public void testConjuntoVazio() {
+      Conjunto c = new Conjunto();
+      assertEquals(0, c.tamanho());
+   }
+
+   @Test
+   public void testAdicionarUm() {
+      Conjunto c = new Conjunto();
+      c.adicionar(new Object());
+      assertEquals(1,c.tamanho());
+   }
+}
+\end{lstlisting}
+\end{minipage} \\ \hline
+\end{tabular}
+
+\vspace{2mm}
+
+\textcolor[rgb]{.5,0,0}{\bf Falhou} como esperado, pois o tamanho não está sendo contado.
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: testando adicionar itens}
+
+\begin{tabular}{|c|c|}
+\hline
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Conjunto {
+   private int tamanho = 0;
+   
+   public int tamanho() {
+      return tamanho;
+   }
+   public void adicionar(Object o) {
+      tamanho++;
+   }
+}
+\end{lstlisting}
+\end{minipage} &
+\begin{minipage}{.5\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public class ConjuntoTest {
+   @Test
+   public void testConjuntoVazio() {
+      Conjunto c = new Conjunto();
+      assertEquals(0, c.tamanho());
+   }
+
+   @Test
+   public void testAdicionarUm() {
+      Conjunto c = new Conjunto();
+      c.adicionar(new Object());
+      assertEquals(1,c.tamanho());
+   }
+}
+\end{lstlisting}
+\end{minipage} \\ \hline
+\end{tabular}
+
+\vspace{2mm}
+
+\textcolor[rgb]{0,.5,0}{\bf Passou} no teste para adicionar um elemento.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: testando adicionar item já existente}
+
+\begin{framed}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class ConjuntoTest {
+   @Test
+   public void testConjuntoVazio() {
+      Conjunto c = new Conjunto();
+      assertEquals(0, c.tamanho());
+   }
+
+   @Test
+   public void testAdicionarUm() {
+      Conjunto c = new Conjunto();
+      c.adicionar(new Object());
+      assertEquals(1, c.tamanho());
+   }
+
+@Test
+public void testAdicionarJaExistente() {
+   Conjunto c = new Conjunto();
+   Object o = new Object();
+   c.adicionar(o);
+   c.adicionar(o);
+   assertEquals(1, c.tamanho());
+}
+
+}
+\end{lstlisting}
+\end{multicols}
+\end{framed}
+\vspace{2mm}
+
+\textcolor[rgb]{.5,0,0}{\bf Falhou} como esperado.
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: testando adicionar item já existente}
+
+\begin{framed}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Conjunto {
+   private int tamanho = 0;
+   public static final int MAX = 10;
+   private Object[] items = new Object[MAX];
+   
+   public int tamanho() {
+      return tamanho;
+   }
+   
+   public void adicionar(Object o) {
+      for (int i = 0; i < MAX; i++) {
+         if (items[i] == o) {
+            return ;
+         }
+      }
+      items[tamanho++] = o;
+   }
+}
+\end{lstlisting}
+\end{multicols}
+\end{framed}
+\vspace{2mm}
+
+\textcolor[rgb]{0,.5,0}{\bf Passou} como esperado. Agora que todos os testes passaram, podemos refatorar o loop.
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit: refatorando}
+
+\begin{tabular}{|c|c|}
+\hline
+\texttt{Conjunto} antes & \texttt{Conjunto} depois \\ \hline
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public void adicionar(Object o) {
+   for (int i = 0; i < MAX; i++) {
+      if (items[i] == o) {
+         return ;
+      }
+   }
+   items[tamanho++] = o;
+}
+\end{lstlisting}
+\end{minipage} &
+\begin{minipage}{.5\textwidth}
+\begin{lstlisting}[basicstyle=\tiny]
+public boolean contem(Object o) {
+   for (int i = 0; i < MAX; i++) {
+      if (items[i] == o) {
+         return true;
+      }
+   }
+   return false;
+}
+
+public void adicionar(Object o) {
+   if (!contem(o)) {
+      items[tamanho++] = o;
+   }
+}
+\end{lstlisting}
+\end{minipage} \\ \hline
+\end{tabular}
+
+\vspace{2mm}
+
+\textcolor[rgb]{0,.5,0}{\bf Passou} no teste. A refatoração não quebrou o código.
+
+\end{frame}
+
+
+
+\begin{frame}{Exemplo JUnit: finalizando}
+\begin{itemize}
+\item Ainda não foi testado o limite da lista, mas isso será feito quando for feito tratamento de exceções.
+\item O ciclo: testar primeiro $\longrightarrow$ desenvolver código $\longrightarrow$ verificar que testes passaram $\longrightarrow$ refatorar produziu um código com garantia de qualidade.
+\item Testes podem ser facilmente executados toda vez que a classe for modificada.
+\item O código estará correto se os testes tiverem sido bem definidos.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Métodos de asserção da JUnit}
+
+\begin{center}
+\begin{tabular}{|l|p{5cm}|}
+\hline
+\lstinline|assertTrue(teste)| & \footnotesize falha se teste booleano é \lstinline|false|.\\ \hline
+\lstinline|assertFalse(teste)| & \footnotesize falha se teste booleano é \lstinline|true|.\\ \hline
+\lstinline|assertEquals(esperado, teste real)| & \footnotesize falha se valores não são iguais.\\ \hline
+\lstinline|assertSame(esperado, teste real)| & \footnotesize falha se valores não são os mesmos (através de \lstinline|==|).\\ \hline
+\lstinline|assertNotSame(esperado, teste real)| & \footnotesize falha se valores são os mesmos (através de \lstinline|==|).\\ \hline
+\lstinline|assertNull(teste)| & \footnotesize falha se valor não for \lstinline|null|.\\ \hline
+\lstinline|assertNotNull(teste)| & \footnotesize falha se valor for \lstinline|null|.\\ \hline
+\lstinline|fail()| & \footnotesize faz com que o teste interrompa sua execução e falhe.\\ \hline
+\end{tabular}
+\end{center}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Melhorando a legibilidade dos testes}
+\begin{itemize}
+\item Anotação \lstinline|@DisplayName| define um nome para a classe ou o método de teste.
+\begin{itemize}
+\item Por exemplo: \lstinline|@DisplayName("Testando o metodo contem.")|
+\end{itemize}
+
+\item \lstinline|String| de informação é um parâmetro opcional que imprime informações no log de eventos durante a execução de um teste.
+\begin{itemize}
+  \item Será exibido caso o teste falhe.
+\end{itemize}
+
+\item Exemplo:
+
+\begin{itemize}
+\item \lstinline|assertTrue(shulambs(a. b), "chamada shulambs(" + a + "," + b + ")");|
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo JUnit}
+
+\begin{lstlisting}[basicstyle=\scriptsize]
+public class TestLista {
+ @Test
+ public void testAddGet() {
+   Lista lst = new Lista();
+   lst.add(1);
+   assertEquals(1, lst.get(0), "recupera 1o elemento");
+   lst.add(3);
+   assertEquals(3, lst.get(1), "recupera 2o elemento");
+ }
+ @Test
+ public void testIsEmpty() {
+   Lista lst = new Lista();
+   assertTrue(lst.isEmpty(), "lista vazia ao criar");
+   lst.add(1);
+   assertFalse(lst.isEmpty(), "lista nao vazia apos inserir");
+   lst.remove(0);
+   assertTrue(lst.isEmpty(), "lista vazia apos remover");
+ }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Inicialização e finalização}
+
+\begin{itemize}
+\item Métodos executados antes e depois de cada caso de teste. \vspace{-4mm}
+
+\begin{lstlisting}
+   @BeforeEach
+   void setUp() throws Exception {
+   }
+   @AfterEach
+   void tearDown() throws Exception {
+   }
+\end{lstlisting}
+
+\item Métodos executados uma única vez, antes ou depois da execução de toda a classe de testes. \vspace{-4mm}
+
+\begin{lstlisting}
+   @BeforeAll
+   static void setUpBeforeClass() throws Exception {
+   }
+   @AfterAll
+   static void tearDownAfterClass() throws Exception {
+   }
+\end{lstlisting}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo JUnit: pré-configuração do teste}
+
+\setlength{\FrameSep}{1pt}
+\begin{framed}
+\setlength{\columnsep}{0pt}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class ConjuntoTest {
+  public static Conjunto c;
+
+  @BeforeEach
+  public void setUp() throws Exception {
+    c = new Conjunto();
+  }
+
+  @Test
+  public void testConjuntoVazio() {
+    assertEquals(0, c.tamanho());
+  }
+
+  @Test
+  public void testAdicionarUm() {
+    int t = c.tamanho();
+    c.adicionar(new Object());
+    assertEquals(t+1, c.tamanho());
+  }
+
+  @Test
+  public void testAdicionarJaExistente() {
+    int t = c.tamanho();
+    Object o = new Object();
+    c.adicionar(o);
+    c.adicionar(o);
+    assertEquals(t+1, c.tamanho(), 
+                 "adic. Object 2 vezes");
+  }
+}
+\end{lstlisting}
+\end{multicols}
+\end{framed}
+
+\end{frame}
+
+
+
+
+
+\subsection{Exemplo de JUnit: Data}
+
+
+\begin{frame}[fragile]{Exemplo de JUnit: Data}
+
+{\tiny Baseado nos materiais de M. Ernst, S. Reges, D. Notkin, R. Mercer, http://www.cs.washington.edu/331/}
+
+\begin{itemize}
+\item Considere uma classe \lstinline|Data| com os seguintes métodos:
+\begin{lstlisting}
+public Data(int ano, int mes, int dia)
+public Data()                      // hoje
+public int getDia(), getMes(), getAno()
+public void adicionaDias(int dias) // avanca a data em dias
+public int diasNoMes()
+public String diaDaSemana()        // ex. "Segunda-feira"
+public boolean equals(Object o)
+public boolean eAnoBisexto()
+public void proximoDia()           // avanca um dia
+public String toString()           // ex. 5 de marco de 2035
+\end{lstlisting}
+
+\item Proponha testes unitários para as situações a seguir:
+\begin{itemize}
+\item Data não pode entrar em estado inválido.
+\item Função \lstinline|adicionaDias| funciona adequadamente.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo de JUnit: Data}
+
+\begin{itemize}
+\item O que está errado com o exemplo a seguir?
+\end{itemize}
+\vspace{-2mm}
+\begin{lstlisting}
+public class DataTest {
+  @Test
+  public void test1() {
+    Data d = new Data(2050, 2, 15);
+    d.adicionaDias(4);
+    assertEquals(d.getAno(), 2050);
+    assertEquals(d.getMes(), 2);
+    assertEquals(d.getDia(), 19);
+  }
+  @Test
+  public void test2() {
+    Data d = new Data(2050, 2, 15);
+    d.adicionaDias(14);
+    assertEquals(d.getAno(), 2050);
+    assertEquals(d.getMes(), 3);
+    assertEquals(d.getDia(), 1);
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo de JUnit: Data}
+\vspace{-2mm}
+\begin{lstlisting}
+public class DataTest {
+  @Test
+  public void test1() { // Usar nomes significativos.
+    Data d = new Data(2050, 2, 15);
+    d.adicionaDias(4);
+    assertEquals(2050, d.getAno());  // Valor esperado
+    assertEquals(2, d.getMes());     // a esquerda.
+    assertEquals(19, d.getDia());    
+  } // Valores esperado e real ja sao exibidos 
+    // e nao precisam estar na mensagem.
+  @Test
+  public void test2() {
+    Data d = new Data(2050, 2, 15);
+    d.adicionaDias(14);
+    assertEquals(2050, d.getAno(), "ano apos +14 dias");
+    assertEquals(3, d.getMes(), "mes apos +14 dias");
+    assertEquals(1, d.getDia(), "dia apos +14 dias");
+  } // Mensagens devem explicar o que esta sendo testado
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Eliminando redundâncias e tornando os testes curtos}
+
+\begin{itemize}
+\item Use objetos com valores esperados para reduzir testes.
+\end{itemize} \vspace{-2mm}
+
+\begin{lstlisting}
+public class DataTest {
+  @Test
+  public void testAdicionaDias_numMesmoMes() {
+    Data real = new Data(2050, 2, 15);
+    real.adicionaDias(4);
+    Data esperado = new Data(2050, 2, 19);
+    assertEquals(esperado, real);  
+  } // Data deve possuir metodo toString e equals.
+  
+  @Test                           
+  public void testAdicionaDias_proximoMes() {
+    Data real = new Data(2050, 2, 15);
+    real.adicionaDias(14);
+    Data esperado = new Data(2050, 3, 1);
+    assertEquals(esperado, real, "data apos +14 dias");
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Eliminando redundâncias e tornando os testes curtos}
+\vspace{-2mm}
+\begin{lstlisting}
+public class DataTest {
+  @Test
+  public void testAdicionaDias_numMesmoMes() {
+    adicionaHelper(2050, 2, 15, 4, 2050, 2, 19);
+  } 
+  
+  @Test
+  public void testAdicionaDias_proximoMes() {
+    adicionaHelper(2050, 2, 15, 14, 2050, 3, 1);
+  }
+  
+  private void adicionaHelper(int ano1, int mes1, int dia1,
+                    int adic, int ano2, int mes2, int dia2) {
+    Data real = new Data(ano1, mes1, dia1);
+    real.adicionaDias(adic);
+    Data esper = new Data(ano2, mes2, dia2);
+    assertEquals(esper, real, "data apos +" + adic + " dias");
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\end{document}

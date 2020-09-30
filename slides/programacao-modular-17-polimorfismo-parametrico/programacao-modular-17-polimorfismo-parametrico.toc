@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazil}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Polimorfismo universal param\'etrico}{3}{0}{1}
+\beamer@sectionintoc {2}{Generics em Java}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Generics: Classes}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Generics: vari\'aveis e arranjos}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{Generics: interfaces}{10}{0}{2}
+\beamer@subsectionintoc {2}{4}{Generics: m\'etodos}{11}{0}{2}

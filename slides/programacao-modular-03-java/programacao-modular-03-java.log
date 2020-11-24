@@ -1,36 +1,36 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7350 NEXT 64-bit) (preloaded format=pdflatex 2020.2.28)  28 FEB 2020 23:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7 NEXT) (preloaded format=pdflatex 2020.9.3)  7 OCT 2020 01:25
 entering extended mode
 **./programacao-modular-03-java.tex
 (programacao-modular-03-java.tex
-LaTeX2e <2020-02-02> patch level 4
-L3 programming layer <2020-02-25>
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-08-07>
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamer.cls"
-Document Class: beamer 2019/09/29 v3.57 A class for typesetting presentations
+Document Class: beamer 2020/07/22 v3.59 A class for typesetting presentations
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasem
 odes.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox\etoolbox.
 sty"
-Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count167
+Package: etoolbox 2020/08/24 v2.5j e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count168
 )
 \beamer@tempbox=\box45
-\beamer@tempcount=\count168
-\c@beamerpauses=\count169
+\beamer@tempcount=\count169
+\c@beamerpauses=\count170
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbased
 ecode.sty"
-\beamer@slideinframe=\count170
-\beamer@minimum=\count171
+\beamer@slideinframe=\count171
+\beamer@minimum=\count172
 \beamer@decode@box=\box46
 )
 \beamer@commentbox=\box47
-\beamer@modecount=\count172
+\beamer@modecount=\count173
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifpdf.sty"
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\iftex.sty"
-Package: iftex 2019/11/07 v1.0c TeX engine tests
+Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
 \headdp=\dimen134
 \footheight=\dimen135
@@ -55,32 +55,32 @@ Package: iftex 2019/11/07 v1.0c TeX engine tests
 \beamer@sectionbox=\box51
 \beamer@logobox=\box52
 \beamer@linebox=\box53
-\beamer@sectioncount=\count173
-\beamer@subsubsectionmax=\count174
-\beamer@subsectionmax=\count175
-\beamer@sectionmax=\count176
-\beamer@totalheads=\count177
-\beamer@headcounter=\count178
-\beamer@partstartpage=\count179
-\beamer@sectionstartpage=\count180
-\beamer@subsectionstartpage=\count181
-\beamer@animationtempa=\count182
-\beamer@animationtempb=\count183
-\beamer@xpos=\count184
-\beamer@ypos=\count185
-\beamer@ypos@offset=\count186
-\beamer@showpartnumber=\count187
-\beamer@currentsubsection=\count188
-\beamer@coveringdepth=\count189
-\beamer@sectionadjust=\count190
-\beamer@tocsectionnumber=\count191
+\beamer@sectioncount=\count174
+\beamer@subsubsectionmax=\count175
+\beamer@subsectionmax=\count176
+\beamer@sectionmax=\count177
+\beamer@totalheads=\count178
+\beamer@headcounter=\count179
+\beamer@partstartpage=\count180
+\beamer@sectionstartpage=\count181
+\beamer@subsectionstartpage=\count182
+\beamer@animationtempa=\count183
+\beamer@animationtempb=\count184
+\beamer@xpos=\count185
+\beamer@ypos=\count186
+\beamer@ypos@offset=\count187
+\beamer@showpartnumber=\count188
+\beamer@currentsubsection=\count189
+\beamer@coveringdepth=\count190
+\beamer@sectionadjust=\count191
+\beamer@tocsectionnumber=\count192
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaseo
 ptions.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.st
 y"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
+\KV@toks@=\toks15
 ))
 \beamer@paperwidth=\skip48
 \beamer@paperheight=\skip49
@@ -93,9 +93,9 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
 "
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count192
-\Gm@cntv=\count193
-\c@Gm@tempcnt=\count194
+\Gm@cnth=\count193
+\Gm@cntv=\count194
+\c@Gm@tempcnt=\count195
 \Gm@bindingoffset=\dimen150
 \Gm@wd@mp=\dimen151
 \Gm@odd@mp=\dimen152
@@ -104,7 +104,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen155
 \Gm@layouthoffset=\dimen156
 \Gm@layoutvoffset=\dimen157
-\Gm@dimlist=\toks15
+\Gm@dimlist=\toks16
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.
 cfg"))
@@ -143,7 +143,7 @@ fsys.sty"
 cs.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utilities\pg
 futil-common.tex"
-\pgfutil@everybye=\toks16
+\pgfutil@everybye=\toks17
 \pgfutil@tempdima=\dimen160
 \pgfutil@tempdimb=\dimen161
 
@@ -168,12 +168,12 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utilities\pg
 fkeys.code.tex"
-\pgfkeys@pathtoks=\toks17
-\pgfkeys@temptoks=\toks18
+\pgfkeys@pathtoks=\toks18
+\pgfkeys@temptoks=\toks19
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utilities\pg
 fkeysfiltered.code.tex"
-\pgfkeys@tmptoks=\toks19
+\pgfkeys@tmptoks=\toks20
 ))
 \pgf@x=\dimen162
 \pgf@y=\dimen163
@@ -187,14 +187,14 @@ fkeysfiltered.code.tex"
 \pgf@yd=\dimen171
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count195
-\c@pgf@countb=\count196
-\c@pgf@countc=\count197
-\c@pgf@countd=\count198
-\t@pgf@toka=\toks20
-\t@pgf@tokb=\toks21
-\t@pgf@tokc=\toks22
-\pgf@sys@id@count=\count199
+\c@pgf@counta=\count196
+\c@pgf@countb=\count197
+\c@pgf@countc=\count198
+\c@pgf@countd=\count199
+\t@pgf@toka=\toks21
+\t@pgf@tokb=\toks22
+\t@pgf@tokc=\toks23
+\pgf@sys@id@count=\count266
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systemlayer\
 pgf.cfg"
@@ -213,8 +213,8 @@ File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systemlayer\
 pgfsyssoftpath.code.tex"
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count266
-\pgfsyssoftpath@bigbuffer@items=\count267
+\pgfsyssoftpath@smallbuffer@items=\count267
+\pgfsyssoftpath@bigbuffer@items=\count268
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systemlayer\
 pgfsysprotocol.code.tex"
@@ -251,11 +251,11 @@ util.code.tex")
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pgfmath
 parser.code.tex"
 \pgfmath@dimen=\dimen172
-\pgfmath@count=\count268
+\pgfmath@count=\count269
 \pgfmath@box=\box55
-\pgfmath@toks=\toks23
-\pgfmath@stack@operand=\toks24
-\pgfmath@stack@operation=\toks25
+\pgfmath@toks=\toks24
+\pgfmath@stack@operand=\toks25
+\pgfmath@stack@operation=\toks26
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pgfmath
 functions.code.tex"
@@ -277,7 +277,7 @@ functions.misc.code.tex")
 functions.integerarithmetics.code.tex")))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pgfmath
 float.code.tex"
-\c@pgfmathroundto@lastzeros=\count269
+\c@pgfmathroundto@lastzeros=\count270
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pgfint.
 code.tex")
@@ -317,7 +317,7 @@ File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfpic=\box56
 \pgf@hbox=\box57
 \pgf@layerbox@main=\box58
-\pgf@picture@serial@count=\count270
+\pgf@picture@serial@count=\count271
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basiclayer\p
 gfcoregraphicstate.code.tex"
@@ -352,8 +352,8 @@ File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 gfcoreshade.code.tex"
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@max=\dimen196
-\pgf@sys@shading@range@num=\count271
-\pgf@shadingcount=\count272
+\pgf@sys@shading@range@num=\count272
+\pgf@shadingcount=\count273
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basiclayer\p
 gfcoreimage.code.tex"
@@ -383,8 +383,8 @@ File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/utilities\xxco
 lor.sty"
 Package: xxcolor 2003/10/24 ver 0.1
-\XC@nummixins=\count273
-\XC@countmixins=\count274
+\XC@nummixins=\count274
+\XC@countmixins=\count275
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/atbegshi\atbegsh
 i.sty"
@@ -400,11 +400,11 @@ Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperref.
 sty"
-Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdftexcmds\pdftexc
-mds.sty"
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pdftexcmds\pdfte
+xcmds.sty"
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
@@ -439,12 +439,12 @@ s.sty"
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
 \@linkdim=\dimen197
-\Hy@linkcounter=\count275
-\Hy@pagecounter=\count276
+\Hy@linkcounter=\count276
+\Hy@pagecounter=\count277
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\pd1enc.de
 f"
-File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -456,23 +456,23 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 s.sty"
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count277
-Package hyperref Info: Option `bookmarks' set `true' on input line 4421.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 4421.
-Package hyperref Info: Option `implicit' set `false' on input line 4421.
-Package hyperref Info: Hyper figures OFF on input line 4547.
-Package hyperref Info: Link nesting OFF on input line 4552.
-Package hyperref Info: Hyper index ON on input line 4555.
-Package hyperref Info: Plain pages OFF on input line 4562.
-Package hyperref Info: Backreferencing OFF on input line 4567.
+\Hy@SavedSpaceFactor=\count278
+Package hyperref Info: Option `bookmarks' set `true' on input line 4338.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4338.
+Package hyperref Info: Option `implicit' set `false' on input line 4338.
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
-Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count278
+Package hyperref Info: Bookmarks ON on input line 4717.
+\c@Hy@tempcnt=\count279
  ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty"
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5159.
+LaTeX Info: Redefining \url on input line 5076.
 \XeTeXLinkMargin=\dimen198
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bitset\bitset.st
@@ -484,19 +484,19 @@ tcalc.sty"
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count279
+\Fld@menulength=\count280
 \Field@Width=\dimen199
 \Fld@charsize=\dimen256
-Package hyperref Info: Hyper figures OFF on input line 6430.
-Package hyperref Info: Link nesting OFF on input line 6435.
-Package hyperref Info: Hyper index ON on input line 6438.
-Package hyperref Info: backreferencing OFF on input line 6445.
-Package hyperref Info: Link coloring OFF on input line 6450.
-Package hyperref Info: Link coloring with OCG OFF on input line 6455.
-Package hyperref Info: PDF/A mode OFF on input line 6460.
-LaTeX Info: Redefining \ref on input line 6500.
-LaTeX Info: Redefining \pageref on input line 6504.
-\Hy@abspage=\count280
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
+\Hy@abspage=\count281
 
 
 Package hyperref Message: Stopped early.
@@ -506,14 +506,14 @@ Package hyperref Info: Driver (autodetected): hpdftex.
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hpdftex.d
 ef"
-File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/atveryend\atveryen
 d.sty"
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count281
-\c@bookmark@seq@number=\count282
+\Fld@listcount=\count282
+\c@bookmark@seq@number=\count283
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/rerunfilecheck\rer
 unfilecheck.sty"
@@ -539,7 +539,7 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.
 sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks26
+\@emptytoks=\toks27
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -552,13 +552,13 @@ Package: sansmathaccent 2020/01/31
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/koma-script\scrlfi
 le.sty"
-Package: scrlfile 2020/01/24 v3.29 KOMA-Script package (loading files)
+Package: scrlfile 2020/07/22 v3.31 KOMA-Script package (loading files)
 )))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaset
 ranslator.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translator\transla
 tor.sty"
-Package: translator 2019-05-31 v1.12a Easy translation of strings in LaTeX
+Package: translator 2020-08-03 v1.12c Easy translation of strings in LaTeX
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasem
 isc.sty")
@@ -566,36 +566,36 @@ isc.sty")
 woscreens.sty")
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaseo
 verlay.sty"
-\beamer@argscount=\count283
+\beamer@argscount=\count284
 \beamer@lastskipcover=\skip50
-\beamer@trivlistdepth=\count284
+\beamer@trivlistdepth=\count285
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaset
 itle.sty")
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbases
 ection.sty"
-\c@lecture=\count285
-\c@part=\count286
-\c@section=\count287
-\c@subsection=\count288
-\c@subsubsection=\count289
+\c@lecture=\count286
+\c@part=\count287
+\c@section=\count288
+\c@subsection=\count289
+\c@subsubsection=\count290
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasef
 rame.sty"
 \beamer@framebox=\box60
 \beamer@frametitlebox=\box61
 \beamer@zoombox=\box62
-\beamer@zoomcount=\count290
-\beamer@zoomframecount=\count291
+\beamer@zoomcount=\count291
+\beamer@zoomframecount=\count292
 \beamer@frametextheight=\dimen257
-\c@subsectionslide=\count292
+\c@subsectionslide=\count293
 \beamer@frametopskip=\skip51
 \beamer@framebottomskip=\skip52
 \beamer@frametopskipautobreak=\skip53
 \beamer@framebottomskipautobreak=\skip54
-\beamer@envbody=\toks27
+\beamer@envbody=\toks28
 \framewidth=\dimen258
-\c@framenumber=\count293
+\c@framenumber=\count294
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasev
 erbatim.sty"
@@ -604,10 +604,10 @@ erbatim.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasef
 ramesize.sty"
 \beamer@splitbox=\box63
-\beamer@autobreakcount=\count294
+\beamer@autobreakcount=\count295
 \beamer@autobreaklastheight=\dimen259
-\beamer@frametitletoks=\toks28
-\beamer@framesubtitletoks=\toks29
+\beamer@frametitletoks=\toks29
+\beamer@framesubtitletoks=\toks30
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasef
 ramecomponents.sty"
@@ -623,7 +623,7 @@ otes.sty"
 oc.sty")
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaset
 emplates.sty"
-\beamer@sbttoks=\toks30
+\beamer@sbttoks=\toks31
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbasea
 uxtemplates.sty"
@@ -646,10 +646,10 @@ ocalstructure.sty"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\enumerate.st
 y"
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
-\@enLab=\toks31
+\@enLab=\toks32
 )
-\c@figure=\count295
-\c@table=\count296
+\c@figure=\count296
+\c@table=\count297
 \abovecaptionskip=\skip55
 \belowcaptionskip=\skip56
 )
@@ -673,7 +673,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty
 "
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks32
+\@emptytoks=\toks33
 \ex@=\dimen266
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty
@@ -685,13 +685,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 "
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count297
+\inf@bad=\count298
 LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count298
-\leftroot@=\count299
+\uproot@=\count299
+\leftroot@=\count300
 LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count300
-\DOTSCASE@=\count301
+\classnum@=\count301
+\DOTSCASE@=\count302
 LaTeX Info: Redefining \ldots on input line 486.
 LaTeX Info: Redefining \dots on input line 489.
 LaTeX Info: Redefining \cdots on input line 610.
@@ -700,42 +700,42 @@ LaTeX Info: Redefining \cdots on input line 610.
 \big@size=\dimen268
 LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count302
-\c@MaxMatrixCols=\count303
+\macc@depth=\count303
+\c@MaxMatrixCols=\count304
 \dotsspace@=\muskip17
-\c@parentequation=\count304
-\dspbrk@lvl=\count305
-\tag@help=\toks33
-\row@=\count306
-\column@=\count307
-\maxfields@=\count308
-\andhelp@=\toks34
+\c@parentequation=\count305
+\dspbrk@lvl=\count306
+\tag@help=\toks34
+\row@=\count307
+\column@=\count308
+\maxfields@=\count309
+\andhelp@=\toks35
 \eqnshift@=\dimen269
 \alignsep@=\dimen270
 \tagshift@=\dimen271
 \tagwidth@=\dimen272
 \totwidth@=\dimen273
 \lineht@=\dimen274
-\@envbody=\toks35
+\@envbody=\toks36
 \multlinegap=\skip58
 \multlinetaggap=\skip59
-\mathdisplay@stack=\toks36
+\mathdisplay@stack=\toks37
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amscls\amsthm.sty"
-Package: amsthm 2017/10/31 v2.20.4
-\thm@style=\toks37
-\thm@bodyfont=\toks38
-\thm@headfont=\toks39
-\thm@notefont=\toks40
-\thm@headpunct=\toks41
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks38
+\thm@bodyfont=\toks39
+\thm@headfont=\toks40
+\thm@notefont=\toks41
+\thm@headpunct=\toks42
 \thm@preskip=\skip60
 \thm@postskip=\skip61
 \thm@headsep=\skip62
-\dth@everypar=\toks42
+\dth@everypar=\toks43
 )
-\c@theorem=\count309
+\c@theorem=\count310
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamerbaset
 hemes.sty"))
@@ -765,11 +765,20 @@ themeorchid.sty")
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/beamer\beamercolor
 themewhale.sty"))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.sty"
-Package: babel 2020/02/14 3.40 The Babel package
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\switch.def
-"
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
+Package: babel 2020/07/13 3.47 The Babel package
+("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.def"
+File: babel.def 2020/07/13 3.47 Babel common definitions
+\babel@savecnt=\count311
+\U@D=\dimen277
+\l@babelnohyphens=\language6
+
+("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\txtbabel.d
+ef")
+\bbl@readstream=\read3
 )
+LaTeX Info: Redefining \textlatin on input line 682.
+\bbl@dirlevel=\count312
+
 *************************************
 * Local config file bblopts.cfg used
 *
@@ -777,41 +786,29 @@ File: switch.def 2020/02/14 3.40 Babel switching mechanism
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/babel-portuges\por
-tuges.ldf"
-Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
-
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.def"
-File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count310
-\U@D=\dimen277
-
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\txtbabel.d
-ef")
-\bbl@readstream=\read3
-LaTeX Info: Redefining \textlatin on input line 2319.
-\bbl@dirlevel=\count311
-)
+("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/babel-portuges\bra
+zil.ldf"
+Language: portuges 2020/05/04 v1.2r Portuguese support from the babel system
 Package babel Info: \l@brazil = using hyphenrules for portuguese
-(babel)             (\language1) on input line 113.
-Package babel Info: Making " an active character on input line 145.
+(babel)             (\language2) on input line 111.
+Package babel Info: Making " an active character on input line 143.
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.sty"
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks43
-\inpenc@posthook=\toks44
+\inpenc@prehook=\toks44
+\inpenc@posthook=\toks45
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\latin1.def"
 File: latin1.def 2018/08/11 v1.3c Input encoding file
 )) ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\times.st
 y"
-Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
 ) ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fontenc.sty
 "
 Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+phv on input line 11
 2.
  ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1phv.fd"
-File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\epsfig.st
 y"
@@ -821,51 +818,51 @@ Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
 sty"
-\lst@mode=\count312
+\lst@mode=\count313
 \lst@gtempboxa=\box73
-\lst@token=\toks45
-\lst@length=\count313
+\lst@token=\toks46
+\lst@length=\count314
 \lst@currlwidth=\dimen280
-\lst@column=\count314
-\lst@pos=\count315
+\lst@column=\count315
+\lst@pos=\count316
 \lst@lostspace=\dimen281
 \lst@width=\dimen282
-\lst@newlines=\count316
-\lst@lineno=\count317
+\lst@newlines=\count317
+\lst@lineno=\count318
 \lst@maxwidth=\dimen283
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.s
 ty"
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count318
-\lst@skipnumbers=\count319
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count319
+\lst@skipnumbers=\count320
 \lst@framebox=\box74
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
 cfg"
-File: listings.cfg 2019/09/10 1.8c listings configuration
+File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package: listings 2019/09/10 1.8c (Carsten Heinz)
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/multirow\multirow.
 sty"
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip63
-\multirow@cntb=\count320
+\multirow@cntb=\count321
 \multirow@dima=\skip64
 \bigstrutjot=\dimen284
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\multicol.sty
 "
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
-\c@tracingmulticols=\count321
+\c@tracingmulticols=\count322
 \mult@box=\box75
 \multicol@leftmargin=\dimen285
-\c@unbalance=\count322
-\c@collectmore=\count323
-\doublecol@number=\count324
-\multicoltolerance=\count325
-\multicolpretolerance=\count326
+\c@unbalance=\count323
+\c@collectmore=\count324
+\doublecol@number=\count325
+\multicoltolerance=\count326
+\multicolpretolerance=\count327
 \full@width=\dimen286
 \page@free=\dimen287
 \premulticols=\dimen288
@@ -916,15 +913,15 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \@tempa=\box116
 \@tempa=\box117
 \@tempa=\box118
-\c@minrows=\count327
-\c@columnbadness=\count328
-\c@finalcolumnbadness=\count329
+\c@minrows=\count328
+\c@columnbadness=\count329
+\c@finalcolumnbadness=\count330
 \last@try=\dimen291
 \multicolovershoot=\dimen292
 \multicolundershoot=\dimen293
 \mult@nat@firstbox=\box119
 \colbreak@box=\box120
-\mc@col@check@num=\count330
+\mc@col@check@num=\count331
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/frontendlayer\
 tikz.sty"
@@ -969,8 +966,8 @@ Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 .code.tex")
 \pgffor@iter=\dimen296
 \pgffor@skip=\dimen297
-\pgffor@stack=\toks46
-\pgffor@toks=\toks47
+\pgffor@stack=\toks47
+\pgffor@toks=\toks48
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/frontendlaye
 r/tikz\tikz.code.tex"
@@ -979,7 +976,7 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/libraries\pg
 flibraryplothandlers.code.tex"
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count331
+\pgf@plot@mark@count=\count332
 \pgfplotmarksize=\dimen298
 )
 \tikz@lastx=\dimen299
@@ -994,19 +991,19 @@ File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \tikz@figbox@bg=\box123
 \tikz@tempbox=\box124
 \tikz@tempbox@bg=\box125
-\tikztreelevel=\count332
-\tikznumberofchildren=\count333
-\tikznumberofcurrentchild=\count334
-\tikz@fig@count=\count335
+\tikztreelevel=\count333
+\tikznumberofchildren=\count334
+\tikznumberofcurrentchild=\count335
+\tikz@fig@count=\count336
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules\pgfm
 odulematrix.code.tex"
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count336
-\pgfmatrixcurrentcolumn=\count337
-\pgf@matrix@numberofcolumns=\count338
+\pgfmatrixcurrentrow=\count337
+\pgfmatrixcurrentcolumn=\count338
+\pgf@matrix@numberofcolumns=\count339
 )
-\tikz@expandcount=\count339
+\tikz@expandcount=\count340
 
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/frontendlaye
 r/tikz/libraries\tikzlibrarytopaths.code.tex"
@@ -1024,7 +1021,7 @@ Package: textpos 2019/04/15 1.9.1, absolute positioning of text on the page
 \TP@absmargin=\dimen310
 Grid set 16 x 16 = 22.7622pt x 17.07166pt
 \TPboxrulesize=\dimen311
-\TP@tbargs=\toks48
+\TP@tbargs=\toks49
 \TP@prevdepth=\dimen312
 ) ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/framed\framed.st
 y"
@@ -1039,16 +1036,16 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 y"
 \wrapoverhang=\dimen317
 \WF@size=\dimen318
-\c@WF@wrappedlines=\count340
+\c@WF@wrappedlines=\count341
 \WF@box=\box127
-\WF@everypar=\toks49
+\WF@everypar=\toks50
 Package: wrapfig 2003/01/31  v 3.6
 ) ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\array.sty"
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen319
 \ar@mcellbox=\box128
 \extrarowheight=\dimen320
-\NC@list=\toks50
+\NC@list=\toks51
 \extratabsurround=\skip68
 \backup@length=\skip69
 \ar@cellbox=\box129
@@ -1066,19 +1063,19 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen328
 \cmidrulekern=\dimen329
 \defaultaddspace=\dimen330
-\@cmidla=\count341
-\@cmidlb=\count342
+\@cmidla=\count342
+\@cmidlb=\count343
 \@aboverulesep=\dimen331
 \@belowrulesep=\dimen332
-\@thisruleclass=\count343
-\@lastruleclass=\count344
+\@thisruleclass=\count344
+\@lastruleclass=\count345
 \@thisrulewidth=\dimen333
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\verbatim.sty
 "
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks51
-\verbatim@line=\toks52
+\every@verbatim=\toks52
+\verbatim@line=\toks53
 \verbatim@in@stream=\read4
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tikzuml\tikz-uml.s
@@ -1091,29 +1088,29 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 y"
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xstring\xstring.
 tex"
-\integerpart=\count345
-\decimalpart=\count346
+\integerpart=\count346
+\decimalpart=\count347
 )
 Package: xstring 2019/02/06 v1.83 String manipulations (CT)
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count347
-\calc@Bcount=\count348
+\calc@Acount=\count348
+\calc@Bcount=\count349
 \calc@Adimen=\dimen334
 \calc@Bdimen=\dimen335
 \calc@Askip=\skip70
 \calc@Bskip=\skip71
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count349
+\calc@Ccount=\count350
 \calc@Cskip=\skip72
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgfopts\pgfopts.st
 y"
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-\pgfopts@list@add@a@toks=\toks53
-\pgfopts@list@add@b@toks=\toks54
+\pgfopts@list@add@a@toks=\toks54
+\pgfopts@list@add@b@toks=\toks55
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/frontendlaye
 r/tikz/libraries\tikzlibrarybackgrounds.code.tex"
@@ -1225,7 +1222,7 @@ oduledecorations.code.tex"
 \pgfdecoratedinputsegmentcompleteddistance=\dimen339
 \pgfdecoratedinputsegmentremainingdistance=\dimen340
 \pgf@decorate@distancetomove=\dimen341
-\pgf@decorate@repeatstate=\count350
+\pgf@decorate@repeatstate=\count351
 \pgfdecorationsegmentamplitude=\dimen342
 \pgfdecorationsegmentlength=\dimen343
 )
@@ -1233,7 +1230,7 @@ oduledecorations.code.tex"
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/libraries/de
 corations\pgflibrarydecorations.markings.code.tex"))
-\c@tikzumlPackageLayers=\count351
+\c@tikzumlPackageLayers=\count352
 \pgf@layerbox@package0=\box153
 \pgf@layerboxsaved@package0=\box154
 \pgf@layerbox@package1=\box155
@@ -1242,7 +1239,7 @@ corations\pgflibrarydecorations.markings.code.tex"))
 \pgf@layerboxsaved@package2=\box158
 \pgf@layerbox@package3=\box159
 \pgf@layerboxsaved@package3=\box160
-\c@tikzumlFragmentLayers=\count352
+\c@tikzumlFragmentLayers=\count353
 \pgf@layerbox@fragment0=\box161
 \pgf@layerboxsaved@fragment0=\box162
 \pgf@layerbox@fragment1=\box163
@@ -1251,7 +1248,7 @@ corations\pgflibrarydecorations.markings.code.tex"))
 \pgf@layerboxsaved@fragment2=\box166
 \pgf@layerbox@fragment3=\box167
 \pgf@layerboxsaved@fragment3=\box168
-\c@tikzumlStateLayers=\count353
+\c@tikzumlStateLayers=\count354
 \pgf@layerbox@state0=\box169
 \pgf@layerboxsaved@state0=\box170
 \pgf@layerbox@state1=\box171
@@ -1260,7 +1257,7 @@ corations\pgflibrarydecorations.markings.code.tex"))
 \pgf@layerboxsaved@state2=\box174
 \pgf@layerbox@state3=\box175
 \pgf@layerboxsaved@state3=\box176
-\c@tikzumlComponentLayers=\count354
+\c@tikzumlComponentLayers=\count355
 \pgf@layerbox@component0=\box177
 \pgf@layerboxsaved@component0=\box178
 \pgf@layerbox@component1=\box179
@@ -1275,46 +1272,46 @@ corations\pgflibrarydecorations.markings.code.tex"))
 \pgf@layerboxsaved@activity=\box188
 \pgf@layerbox@connections=\box189
 \pgf@layerboxsaved@connections=\box190
-\c@tikzumlPackageClassNum=\count355
-\c@tikzumlPackageSubPackageNum=\count356
-\c@tikzumlRelationNum=\count357
-\c@tikzumlNoteNum=\count358
-\c@pos=\count359
-\c@posT=\count360
-\c@posStereo=\count361
-\c@tikzumlPackageLevel=\count362
+\c@tikzumlPackageClassNum=\count356
+\c@tikzumlPackageSubPackageNum=\count357
+\c@tikzumlRelationNum=\count358
+\c@tikzumlNoteNum=\count359
+\c@pos=\count360
+\c@posT=\count361
+\c@posStereo=\count362
+\c@tikzumlPackageLevel=\count363
 \tikzumlNestingSymbolSize=\dimen344
-\c@tikzumlSystemUseCaseNum=\count363
-\c@tikzumlSystemLevel=\count364
-\c@tikzumlUseCaseNum=\count365
-\c@tikzumlActorNum=\count366
-\c@tikzumlStateJoinNum=\count367
-\c@tikzumlStateDecisionNum=\count368
-\c@tikzumlStateInitialNum=\count369
-\c@tikzumlStateFinalNum=\count370
-\c@tikzumlStateEnterNum=\count371
-\c@tikzumlStateExitNum=\count372
-\c@tikzumlStateEndNum=\count373
-\c@tikzumlStateHistoryNum=\count374
-\c@tikzumlStateDeepHistoryNum=\count375
-\c@tikzumlStateLevel=\count376
-\c@tikzumlStateSubStateNum=\count377
-\c@tikzumlStateText=\count378
-\c@tikzumlObjectNum=\count379
-\c@tikzumlCallLevel=\count380
-\c@tikzumlCallNum=\count381
-\c@tikzumlFragmentLevel=\count382
-\c@tikzumlFragmentLevelNum=\count383
-\c@tikzumlFragmentNum=\count384
-\c@tikzumlFragmentPartNum=\count385
-\c@tikzumlCallStartFragmentNum=\count386
-\c@tikzumlCallEndFragmentNum=\count387
-\c@tikzumlSDNodeNum=\count388
+\c@tikzumlSystemUseCaseNum=\count364
+\c@tikzumlSystemLevel=\count365
+\c@tikzumlUseCaseNum=\count366
+\c@tikzumlActorNum=\count367
+\c@tikzumlStateJoinNum=\count368
+\c@tikzumlStateDecisionNum=\count369
+\c@tikzumlStateInitialNum=\count370
+\c@tikzumlStateFinalNum=\count371
+\c@tikzumlStateEnterNum=\count372
+\c@tikzumlStateExitNum=\count373
+\c@tikzumlStateEndNum=\count374
+\c@tikzumlStateHistoryNum=\count375
+\c@tikzumlStateDeepHistoryNum=\count376
+\c@tikzumlStateLevel=\count377
+\c@tikzumlStateSubStateNum=\count378
+\c@tikzumlStateText=\count379
+\c@tikzumlObjectNum=\count380
+\c@tikzumlCallLevel=\count381
+\c@tikzumlCallNum=\count382
+\c@tikzumlFragmentLevel=\count383
+\c@tikzumlFragmentLevelNum=\count384
+\c@tikzumlFragmentNum=\count385
+\c@tikzumlFragmentPartNum=\count386
+\c@tikzumlCallStartFragmentNum=\count387
+\c@tikzumlCallEndFragmentNum=\count388
+\c@tikzumlSDNodeNum=\count389
 \tikzumlCall@xa=\skip73
 \tikzumlCall@xb=\skip74
-\c@tikzumlComponentLevel=\count389
-\c@tikzumlComponentSubComponentNum=\count390
-\c@tikzumlConnectorNum=\count391
+\c@tikzumlComponentLevel=\count390
+\c@tikzumlComponentSubComponentNum=\count391
+\c@tikzumlConnectorNum=\count392
 \tikzuml@AC@xa=\skip75
 \tikzuml@AC@ya=\skip76
 \tikzuml@AC@xb=\skip77
@@ -1339,12 +1336,12 @@ corations\pgflibrarydecorations.markings.code.tex"))
 ))
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.
 sty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
 d-pdfmode.def"
-File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count392
+File: l3backend-pdfmode.def 2020-08-07 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count393
 \l__pdf_internal_box=\box191
 ) (programacao-modular-03-java.aux)
 \openout1 = `programacao-modular-03-java.aux'.
@@ -1404,17 +1401,17 @@ LaTeX Font Info:    ... okay on input line 28.
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-p
 df.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count393
+\scratchcounter=\count394
 \scratchdimen=\dimen345
 \scratchbox=\box192
-\nofMPsegments=\count394
-\nofMParguments=\count395
-\everyMPshowfont=\toks55
-\MPscratchCnt=\count396
+\nofMPsegments=\count395
+\nofMParguments=\count396
+\everyMPshowfont=\toks56
+\MPscratchCnt=\count397
 \MPscratchDim=\dimen346
-\MPnumerator=\count397
-\makeMPintoPDFobject=\count398
-\everyMPtoPDFconversion=\toks56
+\MPnumerator=\count398
+\makeMPintoPDFobject=\count399
+\everyMPtoPDFconversion=\toks57
 )
 ("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epsto
 pdf-base.sty"
@@ -1437,7 +1434,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty"
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count399
+\c@section@level=\count400
 )
 LaTeX Info: Redefining \ref on input line 28.
 LaTeX Info: Redefining \pageref on input line 28.
@@ -1514,7 +1511,7 @@ Dictionary: translator-numbers-dictionary, Language: English
 tor-theorem-dictionary-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-\c@lstlisting=\count400
+\c@lstlisting=\count401
  (programacao-modular-03-java.nav)
 <puclogo_small_bw.pdf, id=66, 125.0271pt x 119.0046pt>
 File: puclogo_small_bw.pdf Graphic file (type pdf)
@@ -1719,13 +1716,26 @@ Overfull \vbox (0.8034pt too high) has occurred while \output is active []
 [11
 
 ]
+\openout4 = `programacao-modular-03-java.vrb'.
+
+ (programacao-modular-03-java.vrb
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+7.
+
+("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1phv.fd"
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+))
 File: puclogo_small_bw.pdf Graphic file (type pdf)
 <use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 233.
+Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 239.
 (pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
 
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 233--233
+Overfull \hbox (1.4399pt too wide) in paragraph at lines 239--239
 [][]  
+ []
+
+
+Overfull \vbox (0.98991pt too high) detected at line 239
  []
 
 
@@ -1737,19 +1747,13 @@ Overfull \vbox (0.8034pt too high) has occurred while \output is active []
 ]
 \openout4 = `programacao-modular-03-java.vrb'.
 
- (programacao-modular-03-java.vrb
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 7
-.
-
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1phv.fd"
-File: ts1phv.fd 2001/06/04 scalable font definitions for TS1/phv.
-))
+ (programacao-modular-03-java.vrb)
 File: puclogo_small_bw.pdf Graphic file (type pdf)
 <use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 254.
+Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 264.
 (pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
 
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 254--254
+Overfull \hbox (1.4399pt too wide) in paragraph at lines 264--264
 [][]  
  []
 
@@ -1760,15 +1764,12 @@ Overfull \vbox (0.8034pt too high) has occurred while \output is active []
 [13
 
 ]
-\openout4 = `programacao-modular-03-java.vrb'.
-
- (programacao-modular-03-java.vrb)
 File: puclogo_small_bw.pdf Graphic file (type pdf)
 <use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 277.
+Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 274.
 (pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
 
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 277--277
+Overfull \hbox (1.4399pt too wide) in paragraph at lines 274--274
 [][]  
  []
 
@@ -1777,68 +1778,6 @@ Overfull \vbox (0.8034pt too high) has occurred while \output is active []
 
 
 [14
-
-]
-\openout4 = `programacao-modular-03-java.vrb'.
-
- (programacao-modular-03-java.vrb
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.
-sty"
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-("C:\Users\hugod\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.s
-ty"
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-))
-File: puclogo_small_bw.pdf Graphic file (type pdf)
-<use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 300.
-(pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
-
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 300--300
-[][]  
- []
-
-
-Overfull \vbox (0.8034pt too high) has occurred while \output is active []
-
-
-[15
-
-]
-\openout4 = `programacao-modular-03-java.vrb'.
-
- (programacao-modular-03-java.vrb)
-File: puclogo_small_bw.pdf Graphic file (type pdf)
-<use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 324.
-(pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
-
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 324--324
-[][]  
- []
-
-
-Overfull \vbox (0.8034pt too high) has occurred while \output is active []
-
-
-[16
-
-]
-File: puclogo_small_bw.pdf Graphic file (type pdf)
-<use puclogo_small_bw.pdf>
-Package pdftex.def Info: puclogo_small_bw.pdf  used on input line 334.
-(pdftex.def)             Requested size: 29.89264pt x 28.45274pt.
-
-Overfull \hbox (1.4399pt too wide) in paragraph at lines 334--334
-[][]  
- []
-
-
-Overfull \vbox (0.8034pt too high) has occurred while \output is active []
-
-
-[17
 
 ]
 \tf@nav=\write6
@@ -1850,33 +1789,36 @@ Overfull \vbox (0.8034pt too high) has occurred while \output is active []
 \tf@snm=\write8
 \openout8 = `programacao-modular-03-java.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 336.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 336.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
  (programacao-modular-03-java.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 336.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 336.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
 Package rerunfilecheck Info: File `programacao-modular-03-java.out' has not cha
 nged.
 (rerunfilecheck)             Checksum: C15BD56786205991CB85372469EB842C;353.
  ) 
 Here is how much of TeX's memory you used:
- 29415 strings out of 483155
- 603047 string characters out of 2957557
- 1114258 words of memory out of 3000000
- 43922 multiletter control sequences out of 15000+200000
- 594702 words of font info for 96 fonts, out of 3000000 for 9000
+ 29313 strings out of 483054
+ 601867 string characters out of 2953558
+ 1113430 words of memory out of 3000000
+ 43937 multiletter control sequences out of 15000+200000
+ 597452 words of font info for 101 fonts, out of 3000000 for 9000
  38 hyphenation exceptions out of 8191
- 58i,19n,95p,796b,1413s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
-}<C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmss12.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw
-/courier/ucrr8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/urw/helvetic/uhvb8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX
- 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on programacao-modular-03-java.pdf (17 pages, 192828 bytes).
+ 63i,19n,95p,796b,1413s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{Navigation17} has been referenced but does not ex
+ist, replaced by a fixed one
+
+{C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<
+C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmss12.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/c
+ourier/ucrr8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/urw/helvetic/uhvb8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/urw/helvetic/uhvr8a.pfb><C:/Users/hugod/AppData/Local/Programs/MiKTeX 2
+.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on programacao-modular-03-java.pdf (14 pages, 181534 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 41 named destinations out of 1000 (max. 500000)
+ 274 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
  242 words of extra memory for PDF output out of 10000 (max. 10000000)
 

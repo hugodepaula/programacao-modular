@@ -69,7 +69,7 @@
 }
 
 
-	
+
 \section{Linguagem Java}
 
 \subsection{Histórico da linguagem Java}
@@ -83,16 +83,16 @@
     \item 1a versão lançada 1995.
     \item Código fonte e objeto portáveis para diversas arquiteturas e sistemas operacionais.
     \item Linguagem de propósito geral derivada do C++.
-    \item Linguagem compilada e depois interpretada: 
+    \item Linguagem compilada e depois interpretada:
    \bi
   \item \textit{Bytecode} -- ling. assembly de uma máquina hipotética.
    \ei
     \ei
     \begin{center}
     \textit{``Linguagem simples, orientada por objetos, distribuída, interpretada, robusta, segura, independente de arquitetura, portável, de alta performance, multi-threaded e dinâmica.''} \\
-    SUN Microsystems,  Maio de 1995  
+    SUN Microsystems,  Maio de 1995
     \end{center}
-    
+
 \end{frame}
 
 \begin{frame}{Características do Java}
@@ -104,7 +104,7 @@
 \subsection{Ranking do Java}
 
 \begin{frame}{Ranking Java}
-    
+
 
 \begin{table}[htbp]
     \centering
@@ -128,7 +128,7 @@
 
 \begin{frame}{Java é mais simples que a linguagem $C++$}
     \bi
-        \item Semântica de referência ao invés de ponteiros.  
+        \item Semântica de referência ao invés de ponteiros.
         \item Não permite variáveis globais, apenas atributos estáticos.
         \item Coletor de lixo gerencia memória (sem \textsc{delete}).
         \item Não possui arquivos de cabeçalho (\textit{header}).
@@ -138,7 +138,7 @@
 \end{frame}
 
 \begin{frame}{Diagrama conceitual do Java}
-    \begin{figure}[h] 
+    \begin{figure}[h]
         \begin{center}
             \includegraphics[width=0.82\textwidth]{modeloconceitual.png}
         \end{center}
@@ -168,7 +168,7 @@
     \ei
 \ei
 \end{frame}
-    
+
 \subsection{Estrutura de uma aplicação Java}
 
 \begin{frame}{Estrutura de uma aplicação Java}
@@ -204,14 +204,14 @@
             \item package adaptativo.RedesNeurais;
             \item package adaptativo.Genetico;
         \ei
-        \item O aninhamento é puramente semântico. 
+        \item O aninhamento é puramente semântico.
         \item O pacote adaptativo é diferente do pacote adaptativo.genetico que é diferente do pacote adaptativo.RedesNeurais.
         \item As classes do pacote Genetico devem estar em um sub-diretório Genetico do diretório adaptativo.
         \item Pacotes podem ser referenciados diretamente sem utilizar a cláusula import, bastando chamar diretamente pelo nome do pacote.
     \ei
 \end{frame}
-    
-\begin{frame}{Aplicações e Applets}
+
+\begin{frame}[fragile]{Aplicações}
 
 \bi
     \item Aplicações console:
@@ -224,89 +224,29 @@
         \item Devem utilizar bibliotecas gráficas contidas em alguma interface da JFC (Java Foundation Classes): AWT, Swing, Java 2D, etc...
         \item São orientadas a eventos.
     \ei
-    \item \textit{Applets}:
-    \bi
-        \item Aplicações leves que rodam no contexto do navegador web.
-        \item \textit{Applets} são sempre pequenas aplicações gráficas. Herdam de java.Applet
-    \ei
 \ei
-\end{frame}
-    
-\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
-        
-   \bi
-       \item Aplicação console:
-   \ei
+
 \begin{lstlisting}
-/* AloMundo.java */
+    /* AloMundo.java */
 
-class AloMundo {
-    public static void main(String args[]) {
-        System.out.println("Alo Mundo!");
+    class AloMundo {
+        public static void main(String args[]) {
+            System.out.println("Alo Mundo!");
+        }
     }
-}
-\end{lstlisting}
-    \bi
-        \item Colocado no arquivo \lstinline|AloMundo.java|
-        \item Java é sensível a maiúsculas e minúsculas.
-        \item Edite, compile e rode o arquivo \lstinline|AloMundo.java|
-    \ei
-\end{frame}
-    
-\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
-    
-    \bi
-        \item Applet:
-    \ei
-\begin{lstlisting}
-/* AloMundoApplet.java */
-
-import java.awt.Graphics; 
-
-public class AloMundoApplet extends java.applet.Applet {
-
-    public void paint(Graphics g) {
-        g.drawString("Alo Mundo!", 5, 25);
-    }
-}
-\end{lstlisting}
-    \bi
-        \item Colocado no arquivo AloMundoApplet.java
-        \item Edite, compile e rode o arquivo AloMundoApplet.java
-    \ei
-\end{frame}
-
-\begin{frame}[fragile]{Aplicações e Applets: Exemplo}
-    
-    \bi
-        \item Rodando Applets
-        \item O compilador gera um arquivo \lstinline|AloMundoApplet.class| que deve ser executado dentro de uma página HTML.
-        \item Crie o arquivo \lstinline|AloMundoApplet.html| e abra-o em um navegador:
-    \ei
-\begin{lstlisting}[language=HTML]
-<HTML>
-<HEAD>
-<TITLE>Alo todo mundo!!!</TITLE>
-</HEAD>
-
-<BODY>
-    <P>O applet Java diz: 
-    <APPLET CODE="AloMundoApplet.class" WIDTH=150 HEIGHT=25>
-    </APPLET>
-</BODY>
-</HTML>
 \end{lstlisting}
 
 \end{frame}
 
+
 \begin{frame}[fragile]{Aplicações e Applets: Exemplo}
-    
+
     \bi
         \item Aplicações Gráficas:
     \ei
 \begin{lstlisting}
 /* AloMundoGraphic.java */
-import javax.swing.JOptionPane; 
+import javax.swing.JOptionPane;
 
 public class AloMundoGraphic {
     public static void main(String args[]) {
@@ -317,7 +257,7 @@ public class AloMundoGraphic {
 \end{lstlisting}
     \bi
         \item Edite, compile e rode o arquivo \lstinline|AloMundoGraphic.java|.
-        \item Para fixar o conceito de pacotes, adicione a linha 
+        \item Para fixar o conceito de pacotes, adicione a linha
         \item \lstinline|package AloPkg|;
         \item No início no arquivo e tente compilar e executar o programa.
     \ei

@@ -3,8 +3,8 @@ public class Shulambs<T> {
 	private T[] arranjo; // ok
 
 	public Shulambs() {
-		campo = new T(); // erro
-		arranjo = new T[10]; // erro
+		// campo = new T(); // erro
+		// arranjo = new T[10]; // erro
 	}
 	
 	public void metodo() {

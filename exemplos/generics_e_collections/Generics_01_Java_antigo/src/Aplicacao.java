@@ -35,12 +35,12 @@ public class Aplicacao {
 		listaDeProfessores.add("Hugo de Paula");
 		listaDeProfessores.add("Zé da Silva");
 
-		String prof1 = listaDeProfessores.get(0);
+		//String prof1 = listaDeProfessores.get(0);
 		// Sem type casting
-		Professor prof2 = (Professor) listaDeProfessores.get(1);
+		// Professor prof2 = (Professor) listaDeProfessores.get(1); 
 		// Produz erro de compilação (erro de tipo)
 		
-		System.out.println("Prof1: " + prof1 + "  prof2: " + prof2);
+		// System.out.println("Prof1: " + prof1 + "  prof2: " + prof2);
 
 	}
 

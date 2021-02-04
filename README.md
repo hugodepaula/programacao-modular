@@ -2,6 +2,10 @@
 
 Material da disciplina de Programação Modular do curso de Engenharia de Software
 
+## Ementa da disciplina
+
+Fatores de qualidade de software. Modularidade. Projeto Orientado para Objetos. Polimorfismo, interfaces, tipos enumeráveis, genéricos e opcionais. Coleções. Tratamento de exceções. Programação Orientada a Eventos. Princípios SOLID. Padrões de projeto. Aspectos funcionais. Desenvolvimento dirigido por testes. Concorrência. Serialização.
+
 ## Versão
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 

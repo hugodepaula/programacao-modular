@@ -13,4 +13,8 @@
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
+	<section name="RenameInformationPopup">
+	</section>
+	<section name="org.eclipse.ltk.ui.refactoring.settings">
+	</section>
 </section>

@@ -24,7 +24,7 @@ class Aplicacao {
 		else 
 			quant = 0;
 		
-		lista.adicionar(new Produto(desc, preco, quant));
+		lista.addProduto(new Produto(desc, preco, quant));
 	}
 	
 	
@@ -35,17 +35,17 @@ class Aplicacao {
 		adicionarProduto(estoque);
 		adicionarProduto(estoque);
 
-		estoque.adicionar(new Produto("Leite", 4.00F, 120));
+		estoque.addProduto(new Produto("Leite", 4.00F, 120));
 				
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		Produto p = estoque.consultar("lEItE");
+		Produto p = estoque.getProdutoByName("lEItE");
 		p.setQuant(p.getQuant() + 200);
 
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		estoque.remover("LeiTE");
+		estoque.removeProduto("LeiTE");
 
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

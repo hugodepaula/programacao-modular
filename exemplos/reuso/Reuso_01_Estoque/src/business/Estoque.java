@@ -7,31 +7,31 @@ package business;
  */
 public class Estoque {
 	private static final int MAX_PRODUTOS = 100;
-	private Produto[] listaDeProdutos;
+	private Produto[] produtos;
 	private int numProdutos;
 
-	public void adicionar(Produto p) {
+	public void addProduto(Produto p) {
 		if (numProdutos < MAX_PRODUTOS) {
-			listaDeProdutos[numProdutos++] = p;
+			produtos[numProdutos++] = p;
 		}
 	}
 
-	public void remover(String descricao) {
+	public void removeProduto(String descricao) {
 		for (int pos = 0; pos < numProdutos; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeProdutos[pos].getDescricao())) {
+			if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
 				// remove produto
 				for (int i = pos + 1; i < numProdutos; i++)
-					listaDeProdutos[i - 1] = listaDeProdutos[i];
-				listaDeProdutos[numProdutos - 1] = null;
+					produtos[i - 1] = produtos[i];
+				produtos[numProdutos - 1] = null;
 				numProdutos--;
 			}
 		}
 	}
 
-	public Produto consultar(String descricao) {
+	public Produto getProdutoByName(String descricao) {
 		for (int pos = 0; pos < numProdutos; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeProdutos[pos].getDescricao())) {
-				return listaDeProdutos[pos];
+			if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
+				return produtos[pos];
 			}
 		}
 		return null; // Produto não encontrado.
@@ -40,28 +40,29 @@ public class Estoque {
 	public int totalEmEstoque() {
 		int total = 0;
 		for (int i = 0; i < numProdutos; i++)
-			total += listaDeProdutos[i].getQuant();
+			total += produtos[i].getQuant();
 		return total;
 	}
 
 	public float valorEmEstoque() {
 		float valor = 0;
 		for (int i = 0; i < numProdutos; i++)
-			valor += listaDeProdutos[i].getQuant() * listaDeProdutos[i].getPreco();
+			valor += produtos[i].getQuant() * produtos[i].getPreco();
 		return valor;
 	}
 
-	public String exibirEstoque() {
+	@Override
+	public String toString() {
 		StringBuilder valor = new StringBuilder();
 		for (int i = 0; i < numProdutos; i++)
-			valor.append("Produdo: "    + listaDeProdutos[i].getId() + " - " + listaDeProdutos[i].getDescricao() 
-					   + "   Preço: R$" + listaDeProdutos[i].getPreco() 
-					   + "   Quant.: "  + listaDeProdutos[i].getQuant() + "\n");
+			valor.append("Produdo: "    + produtos[i].getId() + " - " + produtos[i].getDescricao() 
+					   + "   Preço: R$" + produtos[i].getPreco() 
+					   + "   Quant.: "  + produtos[i].getQuant() + "\n");
 		return valor.toString();
 	}
 
 	public Estoque() {
-		listaDeProdutos = new Produto[MAX_PRODUTOS];
+		produtos = new Produto[MAX_PRODUTOS];
 		numProdutos = 0;
 	}
 }

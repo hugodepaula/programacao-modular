@@ -33,9 +33,9 @@ class Aplicacao {
 			op = Integer.parseInt(valor);
 
 			if (op == 1) {
-				lista.adicionar(new BemDuravel(desc, preco, quant, LocalDateTime.now(), 12));
+				lista.add(new BemDuravel(desc, preco, quant, LocalDateTime.now(), 12));
 			} else if (op == 2) {
-				lista.adicionar(new BemDeConsumo(desc, preco, quant, LocalDateTime.now(), LocalDate.now().plusMonths(12)));
+				lista.add(new BemDeConsumo(desc, preco, quant, LocalDateTime.now(), LocalDate.now().plusMonths(12)));
 			}
 		}
 
@@ -50,16 +50,16 @@ class Aplicacao {
 
 		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		estoque.adicionar(new BemDeConsumo("Leite", 4.00F, 120, LocalDateTime.now(), LocalDate.now().plusMonths(6)));
+		estoque.add(new BemDeConsumo("Leite", 4.00F, 120, LocalDateTime.now(), LocalDate.now().plusMonths(6)));
 		
 		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		BemDeConsumo p = estoque.consultarBemDeConsumo("lEItE");
+		BemDeConsumo p = estoque.getBemDeConsumoByName("lEItE");
 		p.setQuant(p.getQuant() + 200);
 
 		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		estoque.remover("LeiTE");
+		estoque.remove("LeiTE");
 
 		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 	}

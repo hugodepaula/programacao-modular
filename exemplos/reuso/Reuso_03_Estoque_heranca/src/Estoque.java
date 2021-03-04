@@ -8,56 +8,56 @@
  */
 public class Estoque {
 	private static final int MAX_PRODUTOS = 100;
-	private BemDuravel[] listaDeBensDuraveis;
-	private BemDeConsumo[] listaDeBensDeConsumo;
+	private BemDuravel[] bensDuraveis;
+	private BemDeConsumo[] bensDeConsumo;
 	private int numBensDuraveis, numBensDeConsumo;
 
-	public void adicionar(BemDuravel p) {
+	public void add(BemDuravel p) {
 		if (numBensDuraveis < MAX_PRODUTOS) {
-			listaDeBensDuraveis[numBensDuraveis++] = p;
+			bensDuraveis[numBensDuraveis++] = p;
 		}
 	}
 
-	public void adicionar(BemDeConsumo p) {
+	public void add(BemDeConsumo p) {
 		if (numBensDeConsumo < MAX_PRODUTOS) {
-			listaDeBensDeConsumo[numBensDeConsumo++] = p;
+			bensDeConsumo[numBensDeConsumo++] = p;
 		}
 	}
 
-	public BemDuravel consultarBemDuravel(String descricao) {
+	public BemDuravel getBemDuravelByName(String descricao) {
 		for (int pos = 0; pos < numBensDuraveis; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeBensDuraveis[pos].getDescricao())) {
-				return listaDeBensDuraveis[pos];
+			if (descricao.equalsIgnoreCase(bensDuraveis[pos].getDescricao())) {
+				return bensDuraveis[pos];
 			}
 		}
 		return null;
 	}
 
-	public BemDeConsumo consultarBemDeConsumo(String descricao) {
+	public BemDeConsumo getBemDeConsumoByName(String descricao) {
 		for (int pos = 0; pos < numBensDeConsumo; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeBensDeConsumo[pos].getDescricao())) {
-				return listaDeBensDeConsumo[pos];
+			if (descricao.equalsIgnoreCase(bensDeConsumo[pos].getDescricao())) {
+				return bensDeConsumo[pos];
 			}
 		}
 		return null;
 	}
 
-	public void remover(String descricao) {
+	public void remove(String descricao) {
 		for (int pos = 0; pos < numBensDuraveis; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeBensDuraveis[pos].getDescricao())) {
+			if (descricao.equalsIgnoreCase(bensDuraveis[pos].getDescricao())) {
 				// remove produto
 				for (int i = pos + 1; i < numBensDuraveis; i++)
-					listaDeBensDuraveis[i - 1] = listaDeBensDuraveis[i];
-				listaDeBensDuraveis[numBensDuraveis-1] = null;
+					bensDuraveis[i - 1] = bensDuraveis[i];
+				bensDuraveis[numBensDuraveis-1] = null;
 				numBensDuraveis--;
 			}
 		}
 		for (int pos = 0; pos < numBensDeConsumo; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeBensDeConsumo[pos].getDescricao())) {
+			if (descricao.equalsIgnoreCase(bensDeConsumo[pos].getDescricao())) {
 				// remove produto
 				for (int i = pos + 1; i < numBensDeConsumo; i++)
-					listaDeBensDeConsumo[i - 1] = listaDeBensDeConsumo[i];
-				listaDeBensDeConsumo[numBensDeConsumo-1] = null;
+					bensDeConsumo[i - 1] = bensDeConsumo[i];
+				bensDeConsumo[numBensDeConsumo-1] = null;
 				numBensDeConsumo--;
 			}
 		}
@@ -66,39 +66,39 @@ public class Estoque {
 	public int totalEmEstoque() {
 		int total = 0;
 		for (int i = 0; i < numBensDuraveis; i++)
-			total += listaDeBensDuraveis[i].getQuant();
+			total += bensDuraveis[i].getQuant();
 		for (int i = 0; i < numBensDeConsumo; i++)
-			total += listaDeBensDeConsumo[i].getQuant();
+			total += bensDeConsumo[i].getQuant();
 		return total;
 	}
 
 	public float valorEmEstoque() {
 		float valor = 0;
 		for (int i = 0; i < numBensDuraveis; i++)
-			valor += listaDeBensDuraveis[i].getQuant() * listaDeBensDuraveis[i].getPreco();
+			valor += bensDuraveis[i].getQuant() * bensDuraveis[i].getPreco();
 		for (int i = 0; i < numBensDeConsumo; i++)
-			valor += listaDeBensDeConsumo[i].getQuant() * listaDeBensDeConsumo[i].getPreco();
+			valor += bensDeConsumo[i].getQuant() * bensDeConsumo[i].getPreco();
 		return valor;
 	}
 
 	public String exibirEstoque() {
 		StringBuilder valor = new StringBuilder();
 		for (int i = 0; i < numBensDuraveis; i++)
-			valor.append("Produdo: " + listaDeBensDuraveis[i].getId() + " - " + listaDeBensDuraveis[i].getDescricao()
-					+ "   Preço: R$" + listaDeBensDuraveis[i].getPreco() + "   Quant.: " + listaDeBensDuraveis[i].getQuant()
-					+ "   Fabricação: " + listaDeBensDuraveis[i].getDataFabricacao()
-					+ "   Garantia: " + listaDeBensDuraveis[i].getMesesGarantia() + "\n");
+			valor.append("Produdo: " + bensDuraveis[i].getId() + " - " + bensDuraveis[i].getDescricao()
+					+ "   Preço: R$" + bensDuraveis[i].getPreco() + "   Quant.: " + bensDuraveis[i].getQuant()
+					+ "   Fabricação: " + bensDuraveis[i].getDataFabricacao()
+					+ "   Garantia: " + bensDuraveis[i].getMesesGarantia() + "\n");
 		for (int i = 0; i < numBensDeConsumo; i++)
-			valor.append("Produdo: " + listaDeBensDeConsumo[i].getId() + " - " + listaDeBensDeConsumo[i].getDescricao()
-					+ "   Preço: R$" + listaDeBensDeConsumo[i].getPreco() + "   Quant.: " + listaDeBensDeConsumo[i].getQuant()
-					+ "   Fabricação: " + listaDeBensDeConsumo[i].getDataFabricacao()
-					+ "   Validade: " + listaDeBensDeConsumo[i].getDataValidade() + "\n");
+			valor.append("Produdo: " + bensDeConsumo[i].getId() + " - " + bensDeConsumo[i].getDescricao()
+					+ "   Preço: R$" + bensDeConsumo[i].getPreco() + "   Quant.: " + bensDeConsumo[i].getQuant()
+					+ "   Fabricação: " + bensDeConsumo[i].getDataFabricacao()
+					+ "   Validade: " + bensDeConsumo[i].getDataValidade() + "\n");
 		return valor.toString();
 	}
 
 	public Estoque() {
-		listaDeBensDuraveis = new BemDuravel[MAX_PRODUTOS];
-		listaDeBensDeConsumo = new BemDeConsumo[MAX_PRODUTOS];
+		bensDuraveis = new BemDuravel[MAX_PRODUTOS];
+		bensDeConsumo = new BemDeConsumo[MAX_PRODUTOS];
 		numBensDuraveis = 0;
 		numBensDeConsumo = 0;
 	}

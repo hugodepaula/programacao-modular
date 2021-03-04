@@ -81,7 +81,8 @@ public class Estoque {
 		return valor;
 	}
 
-	public String exibirEstoque() {
+	@Override
+	public String toString() {
 		StringBuilder valor = new StringBuilder();
 		for (int i = 0; i < numBensDuraveis; i++)
 			valor.append("Produdo: " + bensDuraveis[i].getId() + " - " + bensDuraveis[i].getDescricao()

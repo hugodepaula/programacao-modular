@@ -48,19 +48,19 @@ class Aplicacao {
 		adicionarProduto(estoque);
 		adicionarProduto(estoque);
 
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
 		estoque.add(new BemDeConsumo("Leite", 4.00F, 120, LocalDateTime.now(), LocalDate.now().plusMonths(6)));
 		
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
 		BemDeConsumo p = estoque.getBemDeConsumoByName("lEItE");
 		p.setQuant(p.getQuant() + 200);
 
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
 		estoque.remove("LeiTE");
 
-		JOptionPane.showMessageDialog(null, estoque.exibirEstoque(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

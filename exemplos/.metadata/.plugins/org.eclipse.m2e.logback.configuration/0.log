@@ -250,3 +250,51 @@ java.lang.NullPointerException: null
 2021-04-10 01:17:51,151 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
 2021-04-10 01:17:51,209 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-04-10 01:17:51,209 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\src\test\resources
+2021-04-10 02:16:23,633 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-04-10 02:57:19,837 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2021-04-10 02:57:27,358 [Worker-9: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_02_Hello:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\pom.xml.
+2021-04-10 02:57:27,556 [Worker-9: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_05_JsonTransformer:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\pom.xml.
+2021-04-10 02:57:27,645 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_02_Hello:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\pom.xml.
+2021-04-10 02:57:31,167 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:31,167 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\main\resources
+2021-04-10 02:57:31,169 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:31,169 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\test\resources
+2021-04-10 02:57:31,218 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_03_ProdutoService:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\pom.xml.
+2021-04-10 02:57:32,347 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,350 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 02:57:32,353 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,353 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\src\test\resources
+2021-04-10 02:57:32,382 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_04_StaticResource:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\pom.xml.
+2021-04-10 02:57:32,618 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,619 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 02:57:32,620 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,620 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\src\test\resources
+2021-04-10 02:57:32,660 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_05_JsonTransformer:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\pom.xml.
+2021-04-10 02:57:32,936 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,936 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 02:57:32,937 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:32,937 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\src\test\resources
+2021-04-10 02:57:32,976 [Worker-11: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_06_Redirect:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\pom.xml.
+2021-04-10 02:57:33,275 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:33,276 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2021-04-10 02:57:33,277 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:33,277 [Worker-11: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\src\test\resources
+2021-04-10 02:57:34,013 [Worker-5: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_02_Hello:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\pom.xml.
+2021-04-10 02:57:34,121 [Worker-5: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_05_JsonTransformer:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\pom.xml.
+2021-04-10 02:57:34,169 [Worker-5: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_04_StaticResource:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\pom.xml.
+2021-04-10 02:57:34,223 [Worker-5: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_03_ProdutoService:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\pom.xml.
+2021-04-10 02:57:34,277 [Worker-5: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: pucminas.br:WS_06_Redirect:0.0.1-SNAPSHOT @ D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\pom.xml.
+2021-04-10 02:57:35,877 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:35,877 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\main\resources
+2021-04-10 02:57:35,878 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:35,878 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\test\resources
+2021-04-10 02:57:35,929 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:35,931 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-04-10 02:57:35,932 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:35,932 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\src\test\resources
+2021-04-10 02:57:36,003 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,004 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-04-10 02:57:36,005 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,005 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\src\test\resources
+2021-04-10 02:57:36,063 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,064 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

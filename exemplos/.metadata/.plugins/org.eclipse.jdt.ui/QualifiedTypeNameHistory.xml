@@ -6,4 +6,6 @@
     <fullyQualifiedTypeName name="business.BemDeConsumo"/>
     <fullyQualifiedTypeName name="business.Produto"/>
     <fullyQualifiedTypeName name="business.BemDuravel"/>
+    <fullyQualifiedTypeName name="business.ExcecaoEstoqueNegativo"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Assertions"/>
 </qualifiedTypeNameHistroy>

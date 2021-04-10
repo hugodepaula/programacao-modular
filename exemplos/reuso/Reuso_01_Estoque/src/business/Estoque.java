@@ -1,4 +1,5 @@
 package business;
+
 /**
  * Esta classe irá armazenar uma lista de produtos em estoque.
  * 
@@ -10,13 +11,13 @@ public class Estoque {
 	private Produto[] produtos;
 	private int numProdutos;
 
-	public void addProduto(Produto p) {
+	public void add(Produto produto) {
 		if (numProdutos < MAX_PRODUTOS) {
-			produtos[numProdutos++] = p;
+			produtos[numProdutos++] = produto;
 		}
 	}
 
-	public void removeProduto(String descricao) {
+	public void remove(String descricao) {
 		for (int pos = 0; pos < numProdutos; pos++) {
 			if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
 				// remove produto
@@ -40,14 +41,14 @@ public class Estoque {
 	public int totalEmEstoque() {
 		int total = 0;
 		for (int i = 0; i < numProdutos; i++)
-			total += produtos[i].getQuant();
+			total += produtos[i].getQuantidade();
 		return total;
 	}
 
 	public float valorEmEstoque() {
 		float valor = 0;
 		for (int i = 0; i < numProdutos; i++)
-			valor += produtos[i].getQuant() * produtos[i].getPreco();
+			valor += produtos[i].getQuantidade() * produtos[i].getPreco();
 		return valor;
 	}
 
@@ -55,9 +56,8 @@ public class Estoque {
 	public String toString() {
 		StringBuilder valor = new StringBuilder();
 		for (int i = 0; i < numProdutos; i++)
-			valor.append("Produdo: "    + produtos[i].getId() + " - " + produtos[i].getDescricao() 
-					   + "   Preço: R$" + produtos[i].getPreco() 
-					   + "   Quant.: "  + produtos[i].getQuant() + "\n");
+			valor.append("Produdo: " + produtos[i].getId() + " - " + produtos[i].getDescricao() + "   Preço: R$"
+					+ produtos[i].getPreco() + "   Quant.: " + produtos[i].getQuantidade() + "\n");
 		return valor.toString();
 	}
 

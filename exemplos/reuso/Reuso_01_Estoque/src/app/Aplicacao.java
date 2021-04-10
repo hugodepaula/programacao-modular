@@ -1,4 +1,6 @@
 package app;
+import java.time.LocalDateTime;
+
 import javax.swing.JOptionPane;
 
 import business.Estoque;
@@ -8,11 +10,11 @@ class Aplicacao {
 	
 	public static void adicionarProduto(Estoque lista)
 	{
-		String desc, valor;
+		String descricao, valor;
 		float preco;
-		int quant;
+		int quantidade;
 		
-		desc = JOptionPane.showInputDialog(null, "Digite descrição do produto:", "Cadastro de produto", JOptionPane.OK_CANCEL_OPTION);
+		descricao = JOptionPane.showInputDialog(null, "Digite descrição do produto:", "Cadastro de produto", JOptionPane.OK_CANCEL_OPTION);
 		valor = JOptionPane.showInputDialog(null, "Digite preço do produto:", "Cadastro de produto", JOptionPane.OK_CANCEL_OPTION);
 		if (valor != null)
 			preco = Float.parseFloat(valor);
@@ -20,11 +22,11 @@ class Aplicacao {
 			preco = 0;
 		valor = JOptionPane.showInputDialog(null, "Digite quantidade em estoque:", "Cadastro de produto", JOptionPane.OK_CANCEL_OPTION);
 		if (valor != null)
-			quant = Integer.parseInt(valor);
+			quantidade = Integer.parseInt(valor);
 		else 
-			quant = 0;
+			quantidade = 0;
 		
-		lista.addProduto(new Produto(desc, preco, quant));
+		lista.add(new Produto(descricao, preco, quantidade, LocalDateTime.now()));
 	}
 	
 	
@@ -35,16 +37,16 @@ class Aplicacao {
 		adicionarProduto(estoque);
 		adicionarProduto(estoque);
 
-		estoque.addProduto(new Produto("Leite", 4.00F, 120));
+		estoque.add(new Produto("Leite", 4.00F, 120, LocalDateTime.now()));
 				
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
 		Produto p = estoque.getProdutoByName("lEItE");
-		p.setQuant(p.getQuant() + 200);
+		p.setQuantidade(p.getQuantidade() + 200);
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		estoque.removeProduto("LeiTE");
+		estoque.remove("LeiTE");
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 	}

@@ -1,3 +1,5 @@
+package business;
+
 import java.time.LocalDateTime;
 
 public class BemDuravel extends Produto {
@@ -13,19 +15,17 @@ public class BemDuravel extends Produto {
 	}
 
 	public BemDuravel() {
-		super();
-		// o valor default é garantia de 6 meses.
 		mesesGarantia = 6;
 	}
 
-	public BemDuravel(String d, float p, int q, LocalDateTime f, int g) {
-		super(d, p, q, f);
-		setMesesGarantia(g);
+	public BemDuravel(String descricao, float preco, int quantidade, LocalDateTime dataFabricacao, int garantia) {
+		super(descricao, preco, quantidade, dataFabricacao);
+		setMesesGarantia(garantia);
 	}
-	
+
 	/**
-	 * Método sobreposto da classe Object.
-	 * É executado quando um objeto precisa ser exibido na forma de String.
+	 * Método sobreposto da classe Object. É executado quando um objeto precisa ser
+	 * exibido na forma de String.
 	 */
 	@Override
 	public String toString() {
@@ -37,6 +37,5 @@ public class BemDuravel extends Produto {
 		LocalDateTime vencimento = this.getDataFabricacao().plusMonths(mesesGarantia);
 		return LocalDateTime.now().isBefore(vencimento);
 	}
-
 
 }

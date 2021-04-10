@@ -1,7 +1,12 @@
+package app;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.swing.JOptionPane;
+
+import business.BemDeConsumo;
+import business.BemDuravel;
+import business.Estoque;
 
 class Aplicacao {
 
@@ -46,7 +51,13 @@ class Aplicacao {
 		Estoque estoque = new Estoque();
 
 		adicionarProduto(estoque);
-		adicionarProduto(estoque);
+		estoque.add(new BemDuravel("Televisao", 2490.00F, 20, LocalDateTime.now(), 36));
+		estoque.add(new BemDuravel("Notebook", 1200.00F, 10, LocalDateTime.now(), 12));
+		estoque.add(new BemDeConsumo("Pao", 12.990F, 320, LocalDateTime.now(), LocalDate.now().plusMonths(1)));
+		estoque.add(new BemDeConsumo("Manteiga", 13.00F, 200, LocalDateTime.now(), LocalDate.now().plusMonths(4)));
+		estoque.add(new BemDuravel("Geladeira", 3000.00F, 80, LocalDateTime.now(), 24));
+		estoque.add(new BemDeConsumo("Queijo", 30.00F, 220, LocalDateTime.now(), LocalDate.now().plusMonths(2)));
+		estoque.add(new BemDeConsumo("Arroz", 15.00F, 90, LocalDateTime.now(), LocalDate.now().plusMonths(12)));
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
@@ -55,7 +66,7 @@ class Aplicacao {
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
 		BemDeConsumo p = estoque.getBemDeConsumoByName("lEItE");
-		p.setQuant(p.getQuant() + 200);
+		p.setQuantidade(p.getQuantidade() + 200);
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 

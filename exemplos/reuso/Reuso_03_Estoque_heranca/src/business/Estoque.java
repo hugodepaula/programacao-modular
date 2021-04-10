@@ -1,9 +1,9 @@
+package business;
 /**
  * Esta classe irá armazenar uma lista de produtos em estoque. Os produtos podem
  * ser bens duráveis ou bens de consumo.
  * 
  * @author Hugo
- * @version 2016.8.29.08
  *
  */
 public class Estoque {
@@ -66,18 +66,18 @@ public class Estoque {
 	public int totalEmEstoque() {
 		int total = 0;
 		for (int i = 0; i < numBensDuraveis; i++)
-			total += bensDuraveis[i].getQuant();
+			total += bensDuraveis[i].getQuantidade();
 		for (int i = 0; i < numBensDeConsumo; i++)
-			total += bensDeConsumo[i].getQuant();
+			total += bensDeConsumo[i].getQuantidade();
 		return total;
 	}
 
 	public float valorEmEstoque() {
 		float valor = 0;
 		for (int i = 0; i < numBensDuraveis; i++)
-			valor += bensDuraveis[i].getQuant() * bensDuraveis[i].getPreco();
+			valor += bensDuraveis[i].getQuantidade() * bensDuraveis[i].getPreco();
 		for (int i = 0; i < numBensDeConsumo; i++)
-			valor += bensDeConsumo[i].getQuant() * bensDeConsumo[i].getPreco();
+			valor += bensDeConsumo[i].getQuantidade() * bensDeConsumo[i].getPreco();
 		return valor;
 	}
 
@@ -86,12 +86,12 @@ public class Estoque {
 		StringBuilder valor = new StringBuilder();
 		for (int i = 0; i < numBensDuraveis; i++)
 			valor.append("Produdo: " + bensDuraveis[i].getId() + " - " + bensDuraveis[i].getDescricao()
-					+ "   Preço: R$" + bensDuraveis[i].getPreco() + "   Quant.: " + bensDuraveis[i].getQuant()
+					+ "   Preço: R$" + bensDuraveis[i].getPreco() + "   Quant.: " + bensDuraveis[i].getQuantidade()
 					+ "   Fabricação: " + bensDuraveis[i].getDataFabricacao()
 					+ "   Garantia: " + bensDuraveis[i].getMesesGarantia() + "\n");
 		for (int i = 0; i < numBensDeConsumo; i++)
 			valor.append("Produdo: " + bensDeConsumo[i].getId() + " - " + bensDeConsumo[i].getDescricao()
-					+ "   Preço: R$" + bensDeConsumo[i].getPreco() + "   Quant.: " + bensDeConsumo[i].getQuant()
+					+ "   Preço: R$" + bensDeConsumo[i].getPreco() + "   Quant.: " + bensDeConsumo[i].getQuantidade()
 					+ "   Fabricação: " + bensDeConsumo[i].getDataFabricacao()
 					+ "   Validade: " + bensDeConsumo[i].getDataValidade() + "\n");
 		return valor.toString();

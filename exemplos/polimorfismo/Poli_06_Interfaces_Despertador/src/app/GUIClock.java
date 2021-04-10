@@ -9,10 +9,10 @@ import javax.swing.JPanel;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class GUIClock extends JFrame implements Sleeper {
+public class GUIClock extends JFrame implements Wakeable {
 
 	private static final long serialVersionUID = 1L;
-	private static Despertador alarmClock;
+	private static Timer alarmClock;
 	
 	public GUIClock() {
 		super("Dorminhoco");
@@ -28,15 +28,15 @@ public class GUIClock extends JFrame implements Sleeper {
 			}
 		}, BorderLayout.CENTER);
 		
-		alarmClock = new Despertador();
-		alarmClock.letMeSleepFor(this, Sleeper.ONE_SECOND);
+		alarmClock = new Timer();
+		alarmClock.letMeSleepFor(this, Wakeable.ONE_SECOND);
 
 	}
 
 
 	public void wakeUp() {
 		repaint();
-		alarmClock.letMeSleepFor(this, Sleeper.ONE_SECOND);
+		alarmClock.letMeSleepFor(this, Wakeable.ONE_SECOND);
 	}
 
 }

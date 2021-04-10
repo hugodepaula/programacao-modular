@@ -1,6 +1,6 @@
 package app;
 
-public interface Sleeper {
+public interface Wakeable {
 	
     public void wakeUp();
     

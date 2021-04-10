@@ -230,3 +230,13 @@ java.lang.NullPointerException: null
 2021-04-10 00:36:00,442 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
 2021-04-10 00:36:00,444 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-04-10 00:36:00,444 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\src\test\resources
+2021-04-10 01:17:51,023 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,037 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\main\resources
+2021-04-10 01:17:51,039 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,039 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_02_Hello\src\test\resources
+2021-04-10 01:17:51,046 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,047 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 01:17:51,075 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,076 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\src\test\resources
+2021-04-10 01:17:51,081 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,082 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource

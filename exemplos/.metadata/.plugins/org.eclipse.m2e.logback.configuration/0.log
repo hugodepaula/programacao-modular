@@ -240,3 +240,13 @@ java.lang.NullPointerException: null
 2021-04-10 01:17:51,076 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_03_ProdutoService\src\test\resources
 2021-04-10 01:17:51,081 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-04-10 01:17:51,082 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 01:17:51,114 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,114 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\src\test\resources
+2021-04-10 01:17:51,120 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,120 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-04-10 01:17:51,145 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,145 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\src\test\resources
+2021-04-10 01:17:51,151 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,151 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2021-04-10 01:17:51,209 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 01:17:51,209 [Worker-37: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\src\test\resources

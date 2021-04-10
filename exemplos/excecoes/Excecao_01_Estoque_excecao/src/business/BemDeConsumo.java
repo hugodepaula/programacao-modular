@@ -1,13 +1,8 @@
 package business;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Classe BemDeConsumo
- * 
- * @author Hugo de Paula
- *
- */
 public class BemDeConsumo extends Produto {
 	private LocalDate dataValidade;
 
@@ -23,18 +18,19 @@ public class BemDeConsumo extends Produto {
 
 	public BemDeConsumo() {
 		super();
-		// o default é uma validade de 6 meses.
-		dataValidade = LocalDate.now().plusMonths(6);
+		// o default é uma validade de 3 meses.
+		dataValidade = LocalDate.now().plusMonths(3);
 	}
 
-	public BemDeConsumo(String d, float p, int q, LocalDateTime f, LocalDate v)  throws ExcecaoEstoqueNegativo, ExcecaoEstoqueExcedido  {
-		super(d, p, q, f);
-		setDataValidade(v);
+	public BemDeConsumo(String descricao, float preco, int quantidade, LocalDateTime dataFabricacao,
+			LocalDate validade) throws ExcecaoEstoqueNegativo, ExcecaoEstoqueExcedido {
+		super(descricao, preco, quantidade, dataFabricacao);
+		setDataValidade(validade);
 	}
 
 	/**
-	 * Método sobreposto da classe Object. É executado quando um objeto precisa
-	 * ser exibido na forma de String.
+	 * Método sobreposto da classe Object. É executado quando um objeto precisa ser
+	 * exibido na forma de String.
 	 */
 	@Override
 	public String toString() {

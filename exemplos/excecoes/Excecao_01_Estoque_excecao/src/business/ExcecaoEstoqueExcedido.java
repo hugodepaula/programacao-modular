@@ -1,7 +1,9 @@
 package business;
 
-@SuppressWarnings("serial")
 public class ExcecaoEstoqueExcedido extends Exception {
+
+	private static final long serialVersionUID = -7546139900483470139L;
+	
 	private int quant;
 	
 	public int getQuant() {

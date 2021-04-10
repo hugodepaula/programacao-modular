@@ -1,37 +1,41 @@
 package business;
+
+import java.util.Arrays;
+
 /**
- * Esta classe irá armazenar uma lista de produtos em estoque.
+ * Esta classe irá armazenar uma lista de produtos em estoque. Os produtos podem
+ * ser bens duráveis ou bens de consumo.
  * 
  * @author Hugo
  *
  */
 public class Estoque {
 	private static final int MAX_PRODUTOS = 100;
-	private Produto[] listaDeProdutos;
+	private Produto[] produtos;
 	private int numProdutos;
 
-	public void adicionar(Produto p) {
+	public void add(Produto p) {
 		if (numProdutos < MAX_PRODUTOS) {
-			listaDeProdutos[numProdutos++] = p;
+			produtos[numProdutos++] = p;
 		}
 	}
 
-	public Produto consultar(String descricao) {
+	public Produto getByName(String descricao) {
 		for (int pos = 0; pos < numProdutos; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeProdutos[pos].getDescricao())) {
-				return listaDeProdutos[pos];
+			if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
+				return produtos[pos];
 			}
 		}
-		return null; // Produto não encontrado.
+		return null;
 	}
 
-	public void remover(String descricao) {
+	public void remove(String descricao) {
 		for (int pos = 0; pos < numProdutos; pos++) {
-			if (descricao.equalsIgnoreCase(listaDeProdutos[pos].getDescricao())) {
+			if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
 				// remove produto
 				for (int i = pos + 1; i < numProdutos; i++)
-					listaDeProdutos[i - 1] = listaDeProdutos[i];
-				listaDeProdutos[numProdutos - 1] = null;
+					produtos[i - 1] = produtos[i];
+				produtos[numProdutos-1] = null;
 				numProdutos--;
 			}
 		}
@@ -40,28 +44,31 @@ public class Estoque {
 	public int totalEmEstoque() {
 		int total = 0;
 		for (int i = 0; i < numProdutos; i++)
-			total += listaDeProdutos[i].getQuant();
+			total += produtos[i].getQuantidade();
 		return total;
 	}
 
 	public float valorEmEstoque() {
 		float valor = 0;
 		for (int i = 0; i < numProdutos; i++)
-			valor += listaDeProdutos[i].getQuant() * listaDeProdutos[i].getPreco();
+			valor += produtos[i].getQuantidade() * produtos[i].getPreco();
 		return valor;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder valor = new StringBuilder();
-		for (int i = 0; i < numProdutos; i++) {
-			valor.append(listaDeProdutos[i] + "\n");
-		}
+		for (int i = 0; i < numProdutos; i++)
+			valor.append(produtos[i] + "\n");
 		return valor.toString();
 	}
 
+	public void ordenar() {
+		Arrays.sort(produtos, 0, numProdutos);
+	}
+
 	public Estoque() {
-		listaDeProdutos = new Produto[MAX_PRODUTOS];
+		produtos = new Produto[MAX_PRODUTOS];
 		numProdutos = 0;
 	}
 }

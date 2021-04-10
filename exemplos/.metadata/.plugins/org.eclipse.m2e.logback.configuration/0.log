@@ -298,3 +298,9 @@ java.lang.NullPointerException: null
 2021-04-10 02:57:36,005 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_04_StaticResource\src\test\resources
 2021-04-10 02:57:36,063 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-04-10 02:57:36,064 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-04-10 02:57:36,065 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,065 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_05_JsonTransformer\src\test\resources
+2021-04-10 02:57:36,134 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,134 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-04-10 02:57:36,135 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-04-10 02:57:36,135 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exemplos\web_service\WS_06_Redirect\src\test\resources

@@ -2,13 +2,14 @@
 
     \begin{enumerate}
         \item Considere a necessidade de se ordenar o estoque de produtos pelo preço.
-        \item Sulução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
+        \item Solução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
     \end{enumerate}
 
     \begin{block}{}
-        \begin{lstlisting}
+        \begin{lstlisting}[basicstyle=\tiny]
 public void ordenarPorPreco() {
-   Arrays.sort(produtos, 0, numProdutos, (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
+   Arrays.sort(produtos, 0, numProdutos,
+                (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
 }
         \end{lstlisting}
     \end{block}

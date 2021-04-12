@@ -370,11 +370,11 @@ public interface Comparator<T> {
 
     \begin{enumerate}
         \item Considere a necessidade de se ordenar o estoque de produtos pela quantidade disponível.
-        \item Sulução possível: classe \lstinline|OrdenarPorQuantidade| implementa a interface \lstinline|Comparator<T>|.
+        \item Solução possível: classe \lstinline|OrdenarPorQuantidade| implementa a interface \lstinline|Comparator<T>|.
     \end{enumerate}
 
     \begin{block}{}
-        \begin{lstlisting}
+        \begin{lstlisting}[basicstyle=\tiny]
 private class OrdenarPorQuantidade implements Comparator<Produto> {
 
     @Override
@@ -384,7 +384,8 @@ private class OrdenarPorQuantidade implements Comparator<Produto> {
 }
 
 public void ordenarPorQuantidade() {
-    Arrays.sort(produtos, 0, numProdutos, new OrdenarPorQuantidade());
+    Arrays.sort(produtos, 0, numProdutos,
+                   new OrdenarPorQuantidade());
 }
         \end{lstlisting}
     \end{block}
@@ -397,18 +398,18 @@ public void ordenarPorQuantidade() {
 
     \begin{enumerate}
         \item Considere a necessidade de se ordenar o estoque de produtos pela Data de Fabricação.
-        \item Sulução possível: classe interna anônima que implementa a interface \lstinline|Comparator<T>|.
+        \item Solução possível: classe interna anônima que implementa a interface \lstinline|Comparator<T>|.
     \end{enumerate}
 
     \begin{block}{}
-        \begin{lstlisting}
+        \begin{lstlisting}[basicstyle=\tiny]
 public void ordenarPorFabricacao() {
-   Arrays.sort(produtos, 0, numProdutos, new Comparator<Produto>() {
-      @Override
-      public int compare(Produto o1, Produto o2) {
-         return o1.getDataFabricacao().compareTo(o2.getDataFabricacao());
-      }
-   });
+  Arrays.sort(produtos, 0, numProdutos, new Comparator<Produto>() {
+    @Override
+    public int compare(Produto o1, Produto o2) {
+     return o1.getDataFabricacao().compareTo(o2.getDataFabricacao());
+    }
+ });
 }
         \end{lstlisting}
     \end{block}
@@ -419,13 +420,14 @@ public void ordenarPorFabricacao() {
 
     \begin{enumerate}
         \item Considere a necessidade de se ordenar o estoque de produtos pelo preço.
-        \item Sulução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
+        \item Solução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
     \end{enumerate}
 
     \begin{block}{}
-        \begin{lstlisting}
+        \begin{lstlisting}[basicstyle=\tiny]
 public void ordenarPorPreco() {
-   Arrays.sort(produtos, 0, numProdutos, (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
+   Arrays.sort(produtos, 0, numProdutos,
+                (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
 }
         \end{lstlisting}
     \end{block}

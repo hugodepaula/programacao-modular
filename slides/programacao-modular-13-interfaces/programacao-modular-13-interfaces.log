@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2 Portable) (preloaded format=pdflatex 2021.3.4)  11 APR 2021 23:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2 Portable) (preloaded format=pdflatex 2021.3.4)  11 APR 2021 23:49
 entering extended mode
 **./programacao-modular-13-interfaces.tex
 (programacao-modular-13-interfaces.tex
@@ -1798,28 +1798,13 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 365--365
 ]
 \openout4 = `programacao-modular-13-interfaces.vrb'.
 
- (programacao-modular-13-interfaces.vrb
-Overfull \hbox (14.3134pt too wide) in paragraph at lines 10--12
-[][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (33.5136pt too wide) in paragraph at lines 14--15
-[][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (28.71355pt too wide) in paragraph at lines 19--20
-[][][][][][][][][][][][][][][][][][][] 
- []
-
-)
+ (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 391.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 392.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 391--391
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 392--392
 [][]  
  []
 
@@ -1828,23 +1813,13 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 391--391
 ]
 \openout4 = `programacao-modular-13-interfaces.vrb'.
 
- (programacao-modular-13-interfaces.vrb
-Overfull \hbox (19.11345pt too wide) in paragraph at lines 11--12
-[][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (43.1137pt too wide) in paragraph at lines 14--15
-[][][][][][][][][][][][][][][] 
- []
-
-)
+ (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 415.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 416.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 415--415
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 416--416
 [][]  
  []
 
@@ -1855,22 +1830,17 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 415--415
 
  (programacao-modular-13-interfaces.vrb
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-1.
+2.
 
 (D:\PortableApps\MikTex\texmfs\install\tex/latex/psnfss\ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-)
-Overfull \hbox (163.11491pt too wide) in paragraph at lines 11--12
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-)
+))
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 432.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 434.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 432--432
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 434--434
 [][]  
  []
 
@@ -1892,20 +1862,20 @@ ot changed.
 (rerunfilecheck)             Checksum: 320B07AB365EF22B3C1F9A20DDA121C8;1517.
  ) 
 Here is how much of TeX's memory you used:
- 32352 strings out of 479762
- 644292 string characters out of 2869908
+ 32356 strings out of 479762
+ 644284 string characters out of 2869908
  1201086 words of memory out of 3000000
- 48995 multiletter control sequences out of 15000+200000
- 465482 words of font info for 97 fonts, out of 3000000 for 9000
+ 48998 multiletter control sequences out of 15000+200000
+ 468212 words of font info for 99 fonts, out of 3000000 for 9000
  822 hyphenation exceptions out of 8191
- 131i,19n,132p,531b,1605s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 131i,19n,132p,531b,1619s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/PortableApps/MikTex/texmfs/install/fonts/enc/dvips/base/8r.enc}<D:/Portab
 leApps/MikTex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Porta
 bleApps/MikTex/texmfs/install/fonts/type1/urw/courier/ucrr8a.pfb><D:/PortableAp
 ps/MikTex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/PortableApps/M
 ikTex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb><D:/PortableApps/MikTe
 x/texmfs/install/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on programacao-modular-13-interfaces.pdf (22 pages, 198730 bytes
+Output written on programacao-modular-13-interfaces.pdf (22 pages, 198707 bytes
 ).
 PDF statistics:
  475 PDF objects out of 1000 (max. 8388607)

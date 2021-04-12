@@ -1,30 +1,18 @@
-\frametitle{\textit {Multi-catch}}
+\frametitle{TDD com exceções}
 
-\begin{itemize}
-\item Permite que dois tipos de exceção sejam capturados pela mesma instrução \lstinline|catch|.
-\end{itemize}
+    \begin{itemize}
+        \item É possível se aplicar o TDD também ao tratamento de exceções.
+        \item A JUnit prevê a instrução \lstinline|assertThrows|, que verifica se uma exceção está sendo lançada.
+        \item Exemplo de TDD com exceções no Controle de Estoque.
+    \end{itemize}
 
-\begin{lstlisting}[basicstyle=\tiny]
-class MultiCatch {
-  public static void main(String args[]) {
-    int a = 88, b = 0;
-    int result;
-    char chrs[] = { 'A', 'B', 'C' };
-
-    for(int i = 0; i < 2; i++) {
-       try {
-          if(i == 0)
-             result = a / b;     // gera uma ArithmeticException
-          else
-             chrs[5] = 'X';      // gera uma ArrayIndexOutOfBoundsException
-
-       // Captura ambas as exceções.
-       } catch(ArithmeticException | ArrayIndexOutOfBoundsException e) {
-          System.out.println("Excecao capturada: " + e);
-       }
-    }
-    System.out.println("Apos multi-catch.");
-  }
+\begin{block}{}
+\begin{lstlisting}
+@Test
+void testQuantidadeNegativa() {
+   assertThrows(ExcecaoEstoqueNegativo.class,
+                () -> {produto.setQuantidade(-10);});
 }
 \end{lstlisting}
+\end{block}
 

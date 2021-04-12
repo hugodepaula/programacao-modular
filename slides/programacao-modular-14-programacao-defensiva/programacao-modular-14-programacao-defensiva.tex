@@ -80,7 +80,7 @@
 
 \section{Programação defensiva}
 
-\subsection{Tipos de erro} 
+\subsection{Erros de software}
 
 \begin{frame}{O problema do diário final de uma turma}
 
@@ -158,12 +158,12 @@ Considere o problema de montar o diário final de uma turma com N alunos.
    \item \textbf{Verifique dados de todas as fontes externas.}
    \begin{itemize}
       \item Arquivos, usuários, rede...
-      \item Faixas de valores para tipos numéricos (int, float, ...); 
+      \item Faixas de valores para tipos numéricos (int, float, ...);
       \item Formato de texto em Strings (comprimento, valores restritos, ...).
    \end{itemize}
    \item \textbf{Verifique parâmetros nas chamadas de métodos.}
    \begin{itemize}
-      \item Semelhante ao anterior, mas dados vêm de outras rotinas. 
+      \item Semelhante ao anterior, mas dados vêm de outras rotinas.
       \item Evitar propagação de valores incorretos.
       \item Testar o parâmetro dentro da função.
     \end{itemize}
@@ -182,7 +182,7 @@ Considere o problema de montar o diário final de uma turma com N alunos.
 %    \item Quando uma asserção é falsa, então um erro foi detectado.
 %    \item Por exemplo:
 %    \begin{itemize}
-%        \item No Controle de Estoque, um produto não pode ter mais de 1000 unidades em estoque. 
+%        \item No Controle de Estoque, um produto não pode ter mais de 1000 unidades em estoque.
 %        \item Enquanto a variável \texttt{quant} está entre 0 e 1000, então a asserção permanece silenciosa. Quando a restrição é violada, a asserção notifica que um erro ocorreu.
 %    \end{itemize}
 %\end{itemize}
@@ -248,7 +248,7 @@ Considere o problema de montar o diário final de uma turma com N alunos.
 %  \node [text=black,below right] at (0, -1)  {Corretude};
 %  \draw [->] [ultra thick] (1.8, -1.5) -- (3.5,-2.8);
 %  \node [black, below] at (3.5,-2.8) {executa as tarefas especificadas};
-%  \draw [->]  [ultra thick] (-2, -.5) -- (-3,-3.5); 
+%  \draw [->]  [ultra thick] (-2, -.5) -- (-3,-3.5);
 %  \node [black, below] at (-1,-3.5) {continua respondendo em situações anormais};
 %\end{tikzpicture}
 %\end{frame}
@@ -265,7 +265,7 @@ Considere o problema de montar o diário final de uma turma com N alunos.
 %   \item Um visualizador de imagens que termina caso haja algum problema com uma foto digital.
 %   \item Um MP3 player que para de funcionar se o arquivo não está completo
 %   \end{itemize}
-%   
+%
 %\item Nem sempre: um sistema de impressão de raio-X digital. Caso um valor esperado não seja encontrado\ldots Manter o sistema funcionando e deixar de imprimir?
 %\end{itemize}
 %\end{frame}
@@ -275,6 +275,7 @@ Considere o problema de montar o diário final de uma turma com N alunos.
 
 \section{Tratamento de Exceções}
 
+\subsection{Tratamento de Exceções em Java}
 
 \begin{frame}{Programação por contrato}
 
@@ -288,32 +289,17 @@ Considere o problema de montar o diário final de uma turma com N alunos.
       \begin{itemize}
           \item Tratamento varia com o tipo de erro.
           \item Pode-se produzir uma \texttt{Exception} ou \texttt{Error} em Java.
-       \end{itemize}   
+       \end{itemize}
+   \item Vantagens
+       \begin{itemize}
+          \item Separa tratamento do erro do código normal.
+          \item Propaga erros na pilha de chamada de funções.
+          \item Agrupa e diferencia tipos de erros.
+       \end{itemize}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Tratamento de Exceções}
-
-\begin{itemize}
-    \item Vantagens
-   \begin{itemize}
-   \item Separa tratamento do erro do código normal.
-   \item Propaga erros na pilha de chamada de funções.
-   \item Agrupa e diferencia tipos de erros.
-   \end{itemize}
-\item Modelo de programação:
-   \begin{itemize}
-   \item Em caso de situação anormal, programa lança (\texttt{throw}) uma exceção.
-   \item Bloco de comandos em que a exceção foi lançada tem duas opções:
-   \begin{itemize}
-       \item Capturar (\texttt{catch}) e tratar a exceção.
-       \item Propagar a exceção para o bloco que o chamou (\texttt{throws}).
-    \end{itemize}
-    \item Finalmente (\texttt{finally}) executa código invariante, que deve ser executado independentemente se a execução foi bem sucedida ou se houve exceção.
-    \end{itemize}
-\end{itemize}
-\end{frame}
 
 \begin{frame}[fragile]{Código sujo: sem exceções}
 
@@ -334,11 +320,11 @@ int LeArquivo {
        FecheArquivo();
        if (ArquivoNaoFechou && errorCode == 0) {
           codigoErro = -4;
-       } else { codigoErro = codigoErro and -4; 
+       } else { codigoErro = codigoErro and -4;
        }
     } else { codigoErro = -5; }
     return codigoErro;
-} 
+}
 \end{lstlisting}
 \end{frame}
 
@@ -390,7 +376,7 @@ LeArquivo {
     \item A classe \texttt{Trowable} é a raiz da hierarquia de classes de exceções.
     \item A classe \texttt{Exception} é uma extensão de \texttt{Trowable}. Normalmente novas exceções estendem de \texttt{Exception}.
     \item Classe \texttt{Exception} possui apenas uma \texttt{String} para armazenar a mensagem de erro de uma exceção.
-    
+
 \end{itemize}
 \end{frame}
 
@@ -415,7 +401,7 @@ Quatro passos devem ser aprendidos:
 Por exemplo: \\
 
 \begin{lstlisting}
-public class ExcecaoListaCheia extends Exception { 
+public class ExcecaoListaCheia extends Exception {
    public ExcecaoListaCheia() {
       super("A lista está cheia.");
    }
@@ -474,30 +460,6 @@ public void adicionar(Object o) throws ExcecaoListaCheia {
 
 
 
-
-\begin{frame}[fragile]{Fluxo de execução de código}
-
-\begin{lstlisting}
-void metodo() {
-   try {
-      bloco de codigo 1;
-      
-      throw new EX();        // -- excecao EX lançada --
-      
-      bloco de código 2;     // não será executado.
-   } catch (EX e) {
-      bloco de código 3;     // irá capturar a exceção EX.
-   } finally {
-      bloco de código 4;     // será sempre executado.
-   }
-   bloco de código 5;        // não será executado, caso seja  
-                             // lançada uma exceção inesperada 
-                             // que não esteja sendo 
-                             // tratada por um bloco catch.
-}
-\end{lstlisting}
-\end{frame}
-
 \begin{frame}{Tratando exceções}
 
 \begin{itemize}
@@ -511,6 +473,31 @@ void metodo() {
 \end{itemize}
 \end{frame}
 
+
+
+\begin{frame}[fragile]{Fluxo de execução de código}
+
+    \begin{lstlisting}
+        void metodo() {
+            try {
+                bloco de codigo 1;
+
+                throw new EX();        // -- excecao EX lançada --
+
+                bloco de código 2;     // não será executado.
+            } catch (EX e) {
+                bloco de código 3;     // irá capturar a exceção EX.
+            } finally {
+                bloco de código 4;     // será sempre executado.
+            }
+            bloco de código 5;        // não será executado, caso seja
+            // lançada uma exceção inesperada
+            // que não esteja sendo
+            // tratada por um bloco catch.
+        }
+    \end{lstlisting}
+\end{frame}
+
 \subsection{Exemplo: Exceção de estoque}
 
 
@@ -519,11 +506,11 @@ void metodo() {
 \begin{lstlisting}
 public class ExcecaoEstoqueExcedido extends Exception {
    private int quant;
-   
+
    public int getQuant() {
       return quant;
    }
-   
+
    public ExcecaoEstoqueExcedido(int quant, int max) {
       super("O estoque de " + quant + " excedeu o limite de "
             + max + ".");
@@ -532,7 +519,7 @@ public class ExcecaoEstoqueExcedido extends Exception {
 }
 
 public class ExcecaoEstoqueNegativo extends Exception {
-   
+
    public ExcecaoEstoqueNegativo() {
       super("O estoque deve possuir um valor positivo.");
    }
@@ -556,7 +543,7 @@ public class Produto {
       else this.quant = quant;
    }
    ...
-   public Produto(String d, float p, int q, LocalDateTime f)  
+   public Produto(String d, float p, int q, LocalDateTime f)
              throws ExcecaoEstoqueNegativo, ExcecaoEstoqueExcedido {
      setDescricao(d);
      setPreco(p);
@@ -576,7 +563,7 @@ public class Produto {
 \begin{lstlisting}[basicstyle=\tiny]
 public class BemDuravel extends Produto {
    ...
-.   public BemDuravel(String d, float p, int q, LocalDateTime f, int g) 
+.   public BemDuravel(String d, float p, int q, LocalDateTime f, int g)
                    throws ExcecaoEstoqueNegativo, ExcecaoEstoqueExcedido {
       super(d, p, q, f);
       setMesesGarantia(g);
@@ -608,7 +595,7 @@ public class Aplicacao {}
         adicionarProduto(estoque);
         ...
         estoque.adicionar(
-           new BemDeConsumo("Leite", 4.00F, 120, 
+           new BemDeConsumo("Leite", 4.00F, 120,
                LocalDateTime.now(), LocalDate.now().plusMonths(6)));
         ...
         p.setQuant(p.getQuant() + 200);
@@ -631,6 +618,7 @@ public class Aplicacao {}
 \end{frame}
 
 
+\subsection{Aspectos de projeto}
 
 \begin{frame}{Aspectos de desempenho}
 \begin{itemize}
@@ -655,11 +643,11 @@ class MultiCatch {
     int a = 88, b = 0;
     int result;
     char chrs[] = { 'A', 'B', 'C' };
-    
+
     for(int i = 0; i < 2; i++) {
        try {
-          if(i == 0)  
-             result = a / b;     // gera uma ArithmeticException  
+          if(i == 0)
+             result = a / b;     // gera uma ArithmeticException
           else
              chrs[5] = 'X';      // gera uma ArrayIndexOutOfBoundsException
 
@@ -689,18 +677,39 @@ class MultiCatch {
 
 \begin{frame}{Aspectos de Projeto}
 \vspace{-.3cm}\begin{center}\tiny
-\begin{tikzpicture} 
+\begin{tikzpicture}
     \umlemptyclass[font=\fontsize{7}{7}\selectfont,x=5,y=2.3]{RuntimeException}
 	\umlclass[font=\fontsize{7}{7}\selectfont,type=interface]{CodigoErro}{}{\umlvirt{+ getCodigo() : int}}
 	\umlclass[font=\fontsize{7}{7}\selectfont,type=enum,x=-1.8, y=-3]{CodigoValidacao}{VALOR\_REQUERIDO \\ FORMATO\_INVALIDO \\ VALOR\_CURTO \\ VALOR\_LONGO}{}
 	\umlclass[font=\fontsize{7}{7}\selectfont,type=enum,x=1.8, y=-3]{CodigoPagamento}{TIMEOUT\_SERVICO \\ CARTAO\_EXPIRADO \\ LIMITE\_EXCEDIDO \\ SEM\_FUNDOS}{}
 	\umlclass[font=\fontsize{7}{7}\selectfont,x=5]{ExcecaoGeral}{-- codigoErro : CodigoErro \\ -- propriedades : Map<String, Object>}{+ getCodigoErro() : CodigoErro \\ + setCodigoErro(CodigoErro) : ExcecaoGeral \\ + getPropriedades() : Map<String, Object> \\ + get(String) : <T> T \\ + set(String, Object) : ExcecaoGeral}
-	\umlVHVimpl{CodigoValidacao}{CodigoErro} 
-	\umlVHVimpl{CodigoPagamento}{CodigoErro} 
-	\umluniaggreg{ExcecaoGeral}{CodigoErro} 
+	\umlVHVimpl{CodigoValidacao}{CodigoErro}
+	\umlVHVimpl{CodigoPagamento}{CodigoErro}
+	\umluniaggreg{ExcecaoGeral}{CodigoErro}
     \umlVHVinherit{ExcecaoGeral}{RuntimeException}
-\end{tikzpicture} 
+\end{tikzpicture}
 \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{TDD com exceções}
+
+    \begin{itemize}
+        \item É possível se aplicar o TDD também ao tratamento de exceções.
+        \item A JUnit prevê a instrução \lstinline|assertThrows|, que verifica se uma exceção está sendo lançada.
+        \item Exemplo de TDD com exceções no Controle de Estoque.
+    \end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+@Test
+void testQuantidadeNegativa() {
+   assertThrows(ExcecaoEstoqueNegativo.class,
+                () -> {produto.setQuantidade(-10);});
+}
+\end{lstlisting}
+\end{block}
+
 \end{frame}
 
 

@@ -1,8 +1,10 @@
 \babel@toc {brazil}{}
 \babel@toc {brazil}{}
 \beamer@sectionintoc {1}{Programa\c c\~ao defensiva}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{Tipos de erro}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Erros de software}{3}{0}{1}
 \beamer@subsectionintoc {1}{2}{Princ\IeC {\'\i }pios de McConnell}{5}{0}{1}
 \beamer@subsectionintoc {1}{3}{T\'ecnicas de tratamento de falhas}{8}{0}{1}
 \beamer@sectionintoc {2}{Tratamento de Exce\c c\~oes}{10}{0}{2}
-\beamer@subsectionintoc {2}{1}{Exemplo: Exce\c c\~ao de estoque}{21}{0}{2}
+\beamer@subsectionintoc {2}{1}{Tratamento de Exce\c c\~oes em Java}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{Exemplo: Exce\c c\~ao de estoque}{20}{0}{2}
+\beamer@subsectionintoc {2}{3}{Aspectos de projeto}{24}{0}{2}

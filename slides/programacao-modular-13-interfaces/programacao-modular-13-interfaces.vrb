@@ -1,20 +1,14 @@
-\frametitle{Métodos default (Java 8 em diante)}
+\frametitle{Interfaces funcionais com expressões lambda}
 
-\begin{lstlisting}
+    \begin{enumerate}
+        \item Considere a necessidade de se ordenar o estoque de produtos pelo preço.
+        \item Sulução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
+    \end{enumerate}
 
-public interface Ordenavel {
-
-   boolean menorQue(Ordenavel o);
-
-   boolean igual(Ordenavel o);
-
-   default boolean diferente(Ordenavel o) {
-      return !igual(o);
-   }
-
-   default boolean maiorQue(Ordenavel o) {
-      return !menorQue(o) && !igual(o);
-   }
-
+    \begin{block}{}
+        \begin{lstlisting}
+public void ordenarPorPreco() {
+   Arrays.sort(produtos, 0, numProdutos, (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
 }
-\end{lstlisting}
+        \end{lstlisting}
+    \end{block}

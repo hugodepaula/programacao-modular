@@ -1,7 +1,6 @@
 package business;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Esta classe irá armazenar uma lista de produtos em estoque. Os produtos podem
@@ -36,7 +35,7 @@ public class Estoque {
 				// remove produto
 				for (int i = pos + 1; i < numProdutos; i++)
 					produtos[i - 1] = produtos[i];
-				produtos[numProdutos - 1] = null;
+				produtos[numProdutos-1] = null;
 				numProdutos--;
 			}
 		}
@@ -68,35 +67,8 @@ public class Estoque {
 		Arrays.sort(produtos, 0, numProdutos);
 	}
 
-	private class OrdenarPorQuantidade implements Comparator<Produto> {
-
-		@Override
-		public int compare(Produto o1, Produto o2) {
-			return Integer.compare(o1.getQuantidade(), o2.getQuantidade());
-		}
-
-	}
-
-	public void ordenarPorQuantidade() {
-		Arrays.sort(produtos, 0, numProdutos, new OrdenarPorQuantidade());
-	}
-
-	public void ordenarPorFabricacao() {
-		Arrays.sort(produtos, 0, numProdutos, new Comparator<Produto>() {
-			@Override
-			public int compare(Produto o1, Produto o2) {
-				return o1.getDataFabricacao().compareTo(o2.getDataFabricacao());
-			}
-		});
-	}
-
-	public void ordenarPorPreco() {
-		Arrays.sort(produtos, 0, numProdutos, (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
-	}
-
 	public Estoque() {
 		produtos = new Produto[MAX_PRODUTOS];
 		numProdutos = 0;
 	}
-
 }

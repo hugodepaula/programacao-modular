@@ -1,6 +1,7 @@
 package app;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import javax.swing.JOptionPane;
 
 import business.BemDeConsumo;
@@ -44,7 +45,7 @@ class Aplicacao {
 		}
 
 	}
-	
+
 	public static void main(String args[]) {
 
 		Estoque estoque = new Estoque();
@@ -60,27 +61,8 @@ class Aplicacao {
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 
-		// Ordena pelo método "compareTo", da interface "Comparable", implementada por produto.
 		estoque.ordenar();
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
-
-		// Ordena pelo método "compare", da interface "Comparator", implementada pela classe interna OrdenarPorQuantidade.
-		estoque.ordenarPorQuantidade();
-
-		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
-
-		// Ordena pelo método "compare", da interface "Comparator", implementada per classe anônima.
-		estoque.ordenarPorFabricacao();
-
-		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
-
-		// Ordena pelo método "compare", da interface "Comparator", implementada por expressão lambda.
-		estoque.ordenarPorPreco();
-
-		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
-		
-	
-	
 	}
 }

@@ -12,9 +12,9 @@
     Prof.~Hugo~de~Paula
 }
 \institute[DCC / PUC Minas]
-{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
-  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
-    Departamento de Ciência da Computação
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
 }
 \date[]{}
 
@@ -64,11 +64,13 @@
 
 \addtobeamertemplate{frametitle}{}{%
    \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
-    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+		\includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
    \end{textblock*}
 }
 
 \section{Interfaces}
+
+\section{Fundamentos}
 
 \subsection{Definição de interface}
 
@@ -100,7 +102,7 @@ Se uma interface é definida e sempre é mantida, o sistema ganha em extensibilida
 \item Interfaces em Java possuem prioritariamente declarações de métodos (sem definição) e atributos ``\lstinline|public static final|''.
 \item A implementação fica a cargo de cada especialização desta interface.
 \item Interfaces são usadas para definir um protocolo de comportamento que pode ser implementado por qualquer classe na hierarquia de classes.
-\item Interfaces podem ser declaradas, mas não podem ser instanciadas, assim como classes abstratas. 
+\item Interfaces podem ser declaradas, mas não podem ser instanciadas, assim como classes abstratas.
 \item É uma saída elegante ao problema da herança múltipla.
 \end{itemize}
 \end{frame}
@@ -116,7 +118,7 @@ Se uma interface é definida e sempre é mantida, o sistema ganha em extensibilida
 \end{itemize}
 \begin{lstlisting}
 interface nomeInterface [extends OutraInterface] {
-  corpo da Interface; 
+  corpo da Interface;
 }
 \end{lstlisting}
 \begin{itemize}
@@ -125,94 +127,96 @@ interface nomeInterface [extends OutraInterface] {
 \end{frame}
 
 
-\section{Exemplo: Despertadores e dorminhocos}
+\subsection{Exemplo: Timer e Wakeable}
 
-\begin{frame}[fragile]{Exemplo: Despertadores e Dorminhocos}
+\begin{frame}[fragile]{Exemplo: Temporizador e classes acordáveis}
 \begin{itemize}
-\item A classe AlarmClock  é um serviço que notifica objetos dorminhocos que um certo tempo passou. 
-\item Um objeto dorminhoco deve fazer duas coisas:
+\item A classe Timer  é um serviço que notifica objetos acordáveis que um certo tempo passou.
+\item Um objeto acordável deve fazer duas coisas:
 	\begin{itemize}
-	\item Pedir para o Despertadores acordá-lo após certo tempo. 
+	\item Pedir para o Timers acordá-lo após certo tempo.
 	\item Implementar o método wakeUp.
     \end{itemize}
 \item Método \texttt{letMeSleepFor} é implementado da seguinte forma:
 \end{itemize}
 \begin{lstlisting}
 public synchronized boolean letMeSleepFor(Sleeper
-                                theSleeper, long time) { 
-   int index = findNextSlot(); 
-   if (index == NOROOM) { 
+                                theSleeper, long time) {
+   int index = findNextSlot();
+   if (index == NOROOM) {
        return false;
    } else {
        sleepers[index] = theSleeper;
        sleepFor[index] = time;
-       new AlarmThread(index).start(); return true; 
+       new AlarmThread(index).start(); return true;
    }
-} 
+}
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Exemplo: Despertadores e Dorminhocos}
+\begin{frame}[fragile]{Exemplo: Temporizador e classes acordáveis}
 \begin{itemize}
-\item Se o AlarmClock tem espaço na lista, ele registra o dorminhoco e começa uma nova tarefa (thread) para este dorminhoco.
-\item Um objeto que quiser usar o AlarmClock deve implementar o método. 
+\item Se o Timer tem espaço na lista, ele registra o dorminhoco e começa uma nova tarefa (thread) para este dorminhoco.
+\item Um objeto que quiser usar o Timer deve implementar o método.
 \item Como fazer um tipo genérico?
 	\begin{itemize}
-	\item O primeiro argumento de letMeSleepFor() é um objeto do tipo sleeper (dorminhoco).  Este tipo deve ser uma interface genérica para todos os tipos.
+	\item O primeiro argumento de letMeSleepFor() é um objeto do tipo Wakeable (acordável).  Este tipo deve ser uma interface genérica para todos os tipos.
 	\end{itemize}
 \begin{lstlisting}
-public interface Sleeper {
-   public void wakeUp();  
+public interface Wakeable {
+   public void wakeUp();
    public long ONE_SECOND = 1000;
-   public long ONE_MINUTE = 60000; 
+   public long ONE_MINUTE = 60000;
 }
 \end{lstlisting}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Exemplo: Despertadores e Dorminhocos}
+\begin{frame}[fragile]{Exemplo: Temporizador e classes acordáveis}
 
 \begin{itemize}
 \item A interface Sleeper declara o método wakeUp() mas não a implementa. Ela também define constantes úteis.
-\item As classes que implementarem esta interface ``herdam'' a constante e devem implementar o método wakeUp(). 
+\item As classes que implementarem esta interface ``herdam'' a constante e devem implementar o método wakeUp().
 \item Todo objeto será também um dorminhoco.
-\item Exemplo: um relógio que deve ser acordado a cada segundo para atualizar o display do tempo. 
+\item Exemplo: um relógio que deve ser acordado a cada segundo para atualizar o display do tempo.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Exemplo: Despertadores e Dorminhocos - Diagrama UML}
+\begin{frame}[fragile]{Exemplo: Temporizador e classes acordáveis - UML}
     \begin{center}
-    \begin{tikzpicture} 
-     \umlclass[font=\fontsize{7}{7}\selectfont,x=-5.5]{Applet}{}{\umlvirt{+ paint(Graphics)}}
-     
-     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2,type=interface]{Sleeper}%
+    \begin{tikzpicture}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-5.5]{JFrame}{}{\umlvirt{+ paint(Graphics)}}
+
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2,type=interface]{Wakeable}%
       {\umlstatic{+ ONE\_SECOND = 1000} \\%
        \umlstatic{+ ONE\_MINUTE = 60000}}%
       {\umlvirt{+ wakeUp() : void}}
-      
+
      \umlclass[font=\fontsize{7}{7}\selectfont,x=-3.2, y=-3]{GUIClock}%
      {}{+ wakeUp() \\ + paint(Graphics)}
-     
-     \umlclass[font=\fontsize{7}{7}\selectfont, x=2.5]{AlarmClock}%
-     {\umlstatic{-- MAX\_CAPACITY = 10} \\ \umlstatic{-- UNUSED = -1} \\ \umlstatic{-- NOROOM = -1} \\ -- sleepers : Sleeper[] \\ -- sleepFor : long[]}
-     {+ letMeSleepFor(Sleeper, long) \\  + wakeUpSleeper(int)}
-    \umlimpl{GUIClock}{Sleeper}
-    \umlinherit{GUIClock}{Applet}
-    \umluniassoc{AlarmClock}{Sleeper}
+
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=2.5]{Timer}%
+     {\umlstatic{-- MAX\_CAPACITY = 10} \\ \umlstatic{-- UNUSED = -1} \\ \umlstatic{-- NOROOM = -1} \\ -- wakeables : Wakeable[] \\ -- sleepFor : long[]}
+     {+ letMeSleepFor(Wakeable, long) \\  + wakeUp(int)}
+    \umlimpl{GUIClock}{Wakeable}
+    \umlinherit{GUIClock}{JFrame}
+    \umluniassoc{Timer}{Wakeable}
     \end{tikzpicture}
     \end{center}
 \end{frame}
 
 
-\section{Interfaces versus Classes Abstratas}
+\section{Aspectos de projeto}
+
+\subsection{Interfaces versus Classes Abstratas}
 
 \begin{frame}[fragile]{Porque utilizar interfaces ao invés de classes abstratas?}
 \begin{itemize}
 \item Seria a classe abstrata Sleeper abaixo equivalente à interface?
 \end{itemize}
 \begin{lstlisting}
-abstract class Sleeper {
-   public abstract void wakeUp(); 
+abstract class Wakeable {
+   public abstract void wakeUp();
 }
 \end{lstlisting}
 \begin{itemize}
@@ -233,9 +237,9 @@ abstract class Sleeper {
 \begin{itemize}
 \item Podem ser encarados como um paliativo, mas são coisas diferentes diferentes:
 	\begin{itemize}
-	\item Uma classe herda apenas constantes de uma interface. 
+	\item Uma classe herda apenas constantes de uma interface.
 	\item Uma classe não pode herdar implementações de uma interface.
-	\item A hierarquia de interfaces é independente da hierarquia de classes. Classes que implementam a mesma interface podem ou não estar relacionadas na hierarquia. 
+	\item A hierarquia de interfaces é independente da hierarquia de classes. Classes que implementam a mesma interface podem ou não estar relacionadas na hierarquia.
 	\end{itemize}
 \item Java permite herança múltipla de interfaces.
 \end{itemize}
@@ -243,17 +247,20 @@ abstract class Sleeper {
 
 \begin{frame}{Para que usar Interfaces?}
 \begin{itemize}
-\item Use interfaces para definir protocolos de comportamento que possam ser implementados em qualquer lugar na hierarquia de classes. 
-\item Interfaces são úteis para: 
+\item Use interfaces para definir protocolos de comportamento que possam ser implementados em qualquer lugar na hierarquia de classes.
+\item Interfaces são úteis para:
 	\begin{itemize}
-	\item Capturar similaridades entre classes não relacionadas. 
+	\item Capturar similaridades entre classes não relacionadas.
 	\item Declarar métodos que uma ou mais classes devem inevitavelmente implementar.
 	\item Revelar interfaces sem revelar os objetos que a implementam (útil na venda de pacotes de componentes).
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Métodos default (Java 8 em diante)}
+\subsection{Métodos \textit{default}}
+
+
+\begin{frame}{Métodos default}
 
 \begin{itemize}
 \item Até o Java 7, interface não podia prover nenhuma implementação.
@@ -264,7 +271,7 @@ abstract class Sleeper {
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Métodos default (Java 8 em diante)}
+\begin{frame}[fragile]{Métodos default}
 
 \begin{multicols}{2}
 \begin{lstlisting}
@@ -300,20 +307,20 @@ class Demo {
 \end{lstlisting}\footnote{Adaptado de: Herbert Schildt. \textit{Java Para Iniciantes.} Bookman 2015.}
 \end{frame}
 
-\begin{frame}[fragile]{Métodos default (Java 8 em diante)}
+\begin{frame}[fragile]{Métodos default}
 
 \begin{lstlisting}
 
 public interface Ordenavel {
-	
+
    boolean menorQue(Ordenavel o);
-	
+
    boolean igual(Ordenavel o);
-	
+
    default boolean diferente(Ordenavel o) {
       return !igual(o);
    }
-	
+
    default boolean maiorQue(Ordenavel o) {
       return !menorQue(o) && !igual(o);
    }
@@ -321,4 +328,110 @@ public interface Ordenavel {
 }
 \end{lstlisting}
 \end{frame}
+
+\subsection{Expressões Lambda e interfaces funcionais}
+
+\begin{frame}{Expressões Lambda e interfaces funcionais}
+
+    \begin{itemize}
+        \item Espressões lambda e interfaces funcionais são elementos da programação funcional incorporados ao Java.
+        \item Programação funcional, com sua ênfase em funções "puras", tratadas como valores de 1a classe (que retornam o mesmo resultado dadas as mesmas entradas, sem a produção de efeitos colaterais) e a imutabilidade simplificam a programação paralela.
+    \end{itemize}
+
+    \begin{block}{Interfaces funcionais  (\textit{functional interface})}
+       são interfaces com um único método abstrato. Sua implementação pode ser feita por uma classe regular, classe interna, classe anônima ou expressão lambda.
+    \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Expressões Lambda e interfaces funcionais}
+    \begin{enumerate}
+        \item Considere a interface \lstinline|Comparator<T>|, disponível no Java.
+        \item Ela é uma \textit{functional interface} baseada no método \lstinline|compare|, e pode ser implementada por uma expressão lambda ou referência de método.
+        \item Ela possui inúmeros métodos default e outros métodos que já são implementados a paritr da classe \lstinline|Object|.
+    \end{enumerate}
+
+\begin{block}{}
+    \begin{lstlisting}
+@FunctionalInterface
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+
+    ...
+}
+    \end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Interfaces funcionais com classes internas}
+
+    \begin{enumerate}
+        \item Considere a necessidade de se ordenar o estoque de produtos pela quantidade disponível.
+        \item Sulução possível: classe \lstinline|OrdenarPorQuantidade| implementa a interface \lstinline|Comparator<T>|.
+    \end{enumerate}
+
+    \begin{block}{}
+        \begin{lstlisting}
+private class OrdenarPorQuantidade implements Comparator<Produto> {
+
+    @Override
+    public int compare(Produto o1, Produto o2) {
+        return Integer.compare(o1.getQuantidade(), o2.getQuantidade());
+    }
+}
+
+public void ordenarPorQuantidade() {
+    Arrays.sort(produtos, 0, numProdutos, new OrdenarPorQuantidade());
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Interfaces funcionais com classes anônimas}
+
+    \begin{enumerate}
+        \item Considere a necessidade de se ordenar o estoque de produtos pela Data de Fabricação.
+        \item Sulução possível: classe interna anônima que implementa a interface \lstinline|Comparator<T>|.
+    \end{enumerate}
+
+    \begin{block}{}
+        \begin{lstlisting}
+public void ordenarPorFabricacao() {
+   Arrays.sort(produtos, 0, numProdutos, new Comparator<Produto>() {
+      @Override
+      public int compare(Produto o1, Produto o2) {
+         return o1.getDataFabricacao().compareTo(o2.getDataFabricacao());
+      }
+   });
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interfaces funcionais com expressões lambda}
+
+    \begin{enumerate}
+        \item Considere a necessidade de se ordenar o estoque de produtos pelo preço.
+        \item Sulução possível: expressão lambda que implementa a interface \lstinline|Comparator<T>|.
+    \end{enumerate}
+
+    \begin{block}{}
+        \begin{lstlisting}
+public void ordenarPorPreco() {
+   Arrays.sort(produtos, 0, numProdutos, (o1, o2) -> Float.compare(o1.getPreco(), o2.getPreco()));
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+
+
 \end{document}

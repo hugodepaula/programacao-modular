@@ -1,8 +1,6 @@
 package business;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * Classe Produto
@@ -10,7 +8,7 @@ import java.time.format.FormatStyle;
  * @author Hugo de Paula
  *
  */
-public class Produto {
+public abstract class Produto implements Comparable<Produto>  {
 	public static final String DESCRICAO_PADRAO = "Novo Produto";
 	public static final int MAX_ESTOQUE = 1000;
 	private int id;
@@ -22,6 +20,10 @@ public class Produto {
 	private static int cont = 0;
 	private static int instancias = 0;
 
+
+	public abstract boolean emValidade();
+
+	
 	public static int getCont() {
 		return cont;
 	}
@@ -106,7 +108,7 @@ public class Produto {
 	public String toString() {
 		return "Produdo: " + id + " - " + descricao
 		   + "   Preço: R$" + preco + "   Quant.: " + quantidade
-		   + "   Fabricação: " + dataFabricacao.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+		   + "   Fabricação: " + dataFabricacao;
 	}
 
 
@@ -120,5 +122,10 @@ public class Produto {
 		instancias--;
 	}
 	
+	@Override
+	public int compareTo(Produto o) {
+		return this.descricao.compareToIgnoreCase(((Produto) o).getDescricao());
+	}
+
 	
 }

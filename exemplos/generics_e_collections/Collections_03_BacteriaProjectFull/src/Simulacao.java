@@ -21,10 +21,9 @@ public class Simulacao {
 
 				bacteria.passaDia();
 				
-				
 			}
 			
-			//colonia.removeIf((bac) -> bac.morreu());
+			colonia.removeIf((bac) -> bac.morreu());
 			
 			colonia.addAll(novas);
 			novas.clear();

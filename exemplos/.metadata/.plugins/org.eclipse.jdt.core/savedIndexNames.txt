@@ -16,11 +16,11 @@ INDEX VERSION 1.131+D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exempl
 3319397997.index
 2317009818.index
 739137125.index
+2162862293.index
 2657114517.index
 1160012561.index
 1585282624.index
 3705556948.index
-2162862293.index
 1710898660.index
 268780700.index
 572053610.index
@@ -53,8 +53,8 @@ INDEX VERSION 1.131+D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exempl
 3651853795.index
 3918042345.index
 752444761.index
-3984617681.index
 608885321.index
+3984617681.index
 2805660810.index
 2050585432.index
 2623366175.index
@@ -73,6 +73,7 @@ INDEX VERSION 1.131+D:\OneDrive - sga.pucminas.br\git-code\disciplinas\pm\exempl
 1462860093.index
 577580498.index
 909084873.index
+2416497226.index
 3777939521.index
 66511038.index
 2884782647.index

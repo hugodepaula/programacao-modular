@@ -54,6 +54,7 @@
 <item elementID="=Poli_06_Interfaces_Despertador" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Poli_07_Produto_Comparavel" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Poli_08_Metodo_default" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Poli_09_Produto_Lambda" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1606186925150_9" label="Patterns" name="Patterns">
 <item elementID="=Pattern_01_SingletonLog" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>

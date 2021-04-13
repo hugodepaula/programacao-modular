@@ -1,6 +1,8 @@
 package business;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Classe Produto
@@ -108,7 +110,7 @@ public abstract class Produto implements Comparable<Produto> {
 	@Override
 	public String toString() {
 		return "Produdo: " + id + " - " + descricao + "   Preço: R$" + preco + "   Quant.: " + quantidade
-				+ "   Fabricação: " + dataFabricacao;
+				   + "   Fabricação: " + dataFabricacao.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 	}
 
 	/**

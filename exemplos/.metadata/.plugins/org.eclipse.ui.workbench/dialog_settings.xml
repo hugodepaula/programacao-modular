@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="workingset_selection_history">
+		<item value="Concorrencia"/>
 		<item value="Polimorfismo"/>
 		<item value="IO_DAO"/>
 		<item value="WebService"/>
 		<item value="Reuso"/>
-		<item value="Patterns"/>
 	</list>
 	<section name="ImportExportAction">
 		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.ExternalProject"/>

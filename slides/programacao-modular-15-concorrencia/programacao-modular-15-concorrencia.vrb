@@ -1,0 +1,23 @@
+\frametitle{Elementos de um \textit {Thread Pool}}
+
+    \begin{block}{Acoplamento entre uma \textit{Thread} e uma tarefa}
+        \begin{lstlisting}
+            void executeTasks() {
+                while (hasTasks()) {
+                    new Thread(new RunnableImpl()).start();
+                }
+            }
+        \end{lstlisting}
+    \end{block}
+
+    \begin{block}{Executor desvincula a tarefa da criação da \textit{Thread}}
+        \begin{lstlisting}
+            void executeTasks() {
+                Executor executor = new ExecutorImpl();
+                while (hasTasks()) {
+                    executor.execute(new RunnableImpl());
+                }
+            }
+        \end{lstlisting}
+    \end{block}
+

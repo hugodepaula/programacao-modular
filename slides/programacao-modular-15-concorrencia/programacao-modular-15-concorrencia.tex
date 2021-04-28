@@ -1,0 +1,404 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Concorrência%
+}
+\author[Prof. Hugo de Paula]
+{
+    Prof.~Hugo~de~Paula
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+
+% duas linhas 1.46
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1,61cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Introdução}
+
+\subsection{Sistema Operacional}
+
+\begin{frame}{Principais componentes de um SO}
+    \begin{itemize}
+        \item \textit{Process manager}: trata da criação e operação dos processos.
+        \item \textit{Thread manager}: trata da criação, sincronização e escalonamento das threads.
+        \item \textit{Communication manager}: trata da comunicação entre processos e threads num mesmo computador.
+        \item \textit{Memory manager}: trata do gerenciamento da memória física e virtual.
+        \item \textit{Supervisor}: dispara interrupções, \textit{traps} de chamadas de sistema e outras exceções.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kernel}
+    \begin{itemize}
+        \item Processo constantemente em execução com acesso total a todos os recursos físicos e privilégios de acesso no computador.
+        \item Possui espaço de endereçamento protegido.
+        \item Acesso ao espaço de endereçamento do kernel através de exceções como uma interrupção ou \textit{traps} de chamadas de sistema.
+        \begin{itemize}
+            \item Quando uma \textit{trap} é executada, assim como qualquer outro tipo de exceção, o hardware força o processador a executar o tratador do kernel para evitar acesso ilícito ao endereçamento do kernel.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Processos e Threads}
+
+\begin{frame}{Processos e Threads}
+    \begin{block}{Processo}
+        Consiste de um ambiente de execução, a unidade de gerenciamento de recursos. Possui seu espaço de endereçamento próprio.
+    \end{block}
+
+    \begin{block}{Thread}
+        É uma atividade, ou linha de execução.
+    \end{block}
+
+    \begin{itemize}
+        \item Um espaço de endereçamento é uma região contínua de memória virtual que é acessível para as threads do processo que a possui.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Espaço de endereçamento}
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[scale=0.77]{fig73enderecamento.pdf}
+        \footnote{Coulouris, Figura 7.3}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Estados de um Processo}
+    Processos podem coexistir em um desses três estados:
+
+    \begin{block}{Em execução}
+        processo está de posse do processador e está utilizando tempo de CPU.
+    \end{block}
+
+    \begin{block}{Bloqueado}
+        processo está suspenso, esperando alguma atividade, como I/O, completar.
+    \end{block}
+
+    \begin{block}{Em espera}
+        Processo está pronto, esperando pelo processador.
+    \end{block}
+\end{frame}
+
+
+\begin{frame}{Sistemas com memória compartilhada}
+    Quando múltiplos processos ou \textit{threads} modificam a mesma memória, podem ocorrer situações inexperadas:
+
+    \begin{block}{Condição de corrida (\textit{race condition})}
+        Múltiplos processos competindo pela mesma região de memória. É necessário implementar um mecanismo de exclusão mútua, em que um processo é bloqueado usando um mecanismo de trava (\textit{lock}) enquanto o outro processo estiver acessando a seção crítica.
+    \end{block}
+
+    \begin{block}{\textit{Deadlock}}
+        Ocorre quando múltiplos processos permanecem bloqueados esperando uns aos outros.
+    \end{block}
+
+\end{frame}
+
+
+\section{Concorrência em Linguagens de Programação}
+
+\subsection{Modelos de concorrência}
+
+\begin{frame}{Categorias de Concorrência}
+    \begin{block}{Concorrência física}
+        Múltiplos processadores independentes (controle de múltiplas \textit{threads})
+    \end{block}
+    \begin{block}{Concorrência lógica}
+        Simula concorrência física com o compartilhamento de processamento em \textit{slots} de tempo.
+    \end{block}
+    \begin{block}{Corotinas (\textit{quasi-concorrência})}
+        Única thread de controle, que é uma sequencia de pontos de programa que controlam o fluxo de execução.
+    \end{block}
+\end{frame}
+
+\subsection{Níveis de concorrência}
+
+
+\begin{frame}[fragile]{Níveis de concorrência}
+    \small
+    \begin{block}{Nível de instrução de máquina}
+        \textit{pipelining} e previsão são utilizadas, e duas ou mais instruções de máquina podem executar simultaneamente.
+    \end{block}
+
+    \begin{block}{Nível de instrução de linguagem de programação}
+        dois ou mais comandos da linguagem podem executar simultaneamente.
+    \end{block}
+
+    \begin{block}{Nível de unidade}
+        dois ou mais sub-programas podem executar simultaneamente, e é o caso das \textit{threads} e co-rotinas.
+    \end{block}
+
+    \begin{block}{Nível de programa}
+        dois ou mais programas podem executar simultaneamente.
+    \end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Níveis de concorrência}
+    \small
+
+{
+\setbeamercolor{block title}{bg=red!30,fg=black}
+    \begin{block}{Nível de instrução de máquina \;\; {\bf \it \color{red} Relacionado ao hardware.}}
+        \textit{pipelining} e previsão são utilizadas, e duas ou mais instruções de máquina podem executar simultaneamente.
+    \end{block}
+
+}
+    \begin{block}{Nível de instrução de linguagem de programação}
+        dois ou mais comandos da linguagem podem executar simultaneamente.
+    \end{block}
+
+    \begin{block}{Nível de unidade}
+        dois ou mais sub-programas podem executar simultaneamente, e é o caso das \textit{threads} e co-rotinas.
+    \end{block}
+
+{
+    \setbeamercolor{block title}{bg=red!30,fg=black}
+    \begin{block}{Nível de programa \;\; {\bf \it \color{red}  Relacionado ao Sistema operacional.}}
+        dois ou mais programas podem executar simultaneamente.
+    \end{block}
+
+}
+\end{frame}
+
+\subsection{Modelos de concorrência}
+
+
+\begin{frame}{Modelos de concorrência}
+    \small
+\begin{block}{\textit{Threads} e \textit{locks}}
+    \textit{Threads} se comunicam por memória compartilhada e lock, semáforos e monitores, gerenciam as condição de corrida. Ex.: Java
+\end{block}
+
+\begin{block}{Atores}
+    Atores são entidades independentes que se comunicam por troca de mensagem. São leves e evitam a condição de corrida. Ex.: Erlang
+\end{block}
+
+\begin{block}{CSP (\textit{Communicating Sequential Processes})}
+    Comunicação se dá por canais que podem ser criados, escritos, lidos ou passados entre processos de forma independente. Ex.: Go
+\end{block}
+
+
+\end{frame}
+
+
+\begin{frame}{Sincronização}
+
+
+\begin{block}{Sincronização}
+    é o mecanismo que controle a ordem em que as tarefas serão executadas.
+\end{block}
+
+\begin{block}{Sincronização Cooperativa}
+Sincronização cooperativa é necessária  entre a Task A e a Task B quando a Task A deve esperar que a Task B termine alguma atividade para continuar seu processamento.
+\end{block}
+
+\begin{block}{Sincronização Competitiva}
+Sincronização competitiva é necessária quando Task A e Task B precisam acessar o mesmo recurso simultaneamente.
+\end{block}
+\end{frame}
+
+
+\section{Concorrência em Java}
+
+\subsection{Threads em Java}
+
+\begin{frame}[fragile]{Threads em Java}
+    \begin{itemize}
+        \item Classe \lstinline|Thread| pertence ao pacote \lstinline|java.lang|.
+        \item Palavra chave \lstinline|synchronized| é usada para estabelecer exclusão mútua.
+        \item Java Runtime não detecta ou previne \textit{deadlocks}.
+        \item Recursos podem ser compartilhados passando-se objetos como parâmetro no construtor.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ciclo de vida de uma thread em Java}
+    \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=.8\linewidth]{javathreadlifecycle.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Métodos de gerenciamento de threads Java}
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[scale=0.9]{fig78metodothreads.pdf}
+        \footnote{Coulouris, Figura 7.8}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Chamadas de sincronização de thread Java}
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[scale=0.97]{fig79sincthreads.pdf}
+        \footnote{Coulouris, Figura 7.9}
+    \end{figure}
+\end{frame}
+
+\subsection{Semáforos e Monitores}
+
+
+\begin{frame}[fragile]{Exemplo de pilha compartilhada}
+   \begin{itemize}
+       \item Todo objeto em java possui um \textit{lock}.
+       \item Quando uma \textit{Thread} tenta executar um método \lstinline|synchronized|, ele primeiro precisa adquirir o \textit{lock} do objeto.
+       \begin{itemize}
+           \item Se o \textit{lock} está alocado a outra \textit{thread}, ela deve esperar.
+           \item Ao sair do método, o \textit{lock} deve ser liberado.
+       \end{itemize}
+       \item \lstinline|wait()| é usado para travar uma \textit{thread manualmente}.
+       \item \lstinline|notify()| ou \lstinline|notifyAll()| são usados para acordar uma \textit{Thread} em espera.
+   \end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{Concorrência em Java}
+    \begin{itemize}
+        \item Suporte à concorrência desenvolveu-se enormemente desde a versão do Java 8.
+        \begin{itemize}
+            \item Classe \lstinline|Semaphore| nativa.
+            \item Funcionalidade adicional em objetos em \textit{Lock/Condition}.
+        \end{itemize}
+        \item Interface \lstinline|Executor| provê diferentes mecanismos de suporte para Threads:
+        \begin{itemize}
+            \item Alocação de Threads em diferentes núcleos em uma máquina \textit{multicore}.
+            \item Retorna resultados de \textit{futures} de uma tarefa assíncrona.
+            \item \lstinline|ForkJoin|: usado para distribuir threads entre múltiplos núcleos.
+            \item \textit{Concurrent Annotations} com muitas aplicações como em JAX-WS para o gerenciamento de POJO para a geração de \textit{Web Services}.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Concurrent Annotations}}
+    \begin{itemize}
+        \item É boa prática de programação utilizar anotações para documentar o código.
+        \item Anotações são processadas em tempo de compilação ou em tempo de execução ou em ambos.
+        \item Alguns frameworks e bibliotecas utilizam anotações como no caso do JAX-WS, por exemplo, para transformar um, POJO em \textit{Web Services Resources}.
+    \end{itemize}
+
+    \begin{lstlisting}
+        public class ContaBancaria {
+            private Object credencial = new Object();
+
+            /* Saldo guardado por uma credencial porque o acesso
+            * só é possível se estiver com o lock da credencial.
+            */
+            @GuardedBy("credencial")
+            private int saldo;
+        }
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{\textit{Thread Pool Pattern}}
+    \begin{itemize}
+        \item Motivação: \textit{Thread} por tarefa ou request possui problemas de performance.
+        \begin{itemize}
+            \item \textit{Overhead} de recursos computacionais na criação/destruição das \textit{Threads}.
+            \item Excesso de \textit{Threads} também afeta desempenho do escalonador e \textit{overhead} de mudança de contexto.
+        \end{itemize}
+    \end{itemize}
+
+    \begin{block}{\textit{Thread Pool Pattern}}
+        O padrão \textit{Thread Pool} permite otimizar os recursos do sistema operacional, limitando o paralelismo e reaproveitando recursos de Thread.
+    \end{block}
+
+    \begin{itemize}
+        \item \textit{Thread Pool} gerencia um conjunto de trabalhadores (\textit{worker pool}) de Threads.
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{\textit{Thread Pool}}
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=\linewidth]{threadpool.png}
+        \footnote{Fonte: https://www.baeldung.com/thread-pool-java-and-guava}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Elementos de um \textit{Thread Pool}}
+
+    \textit{Executor Framework} possui três elementos essenciais:
+
+    \begin{itemize}
+        \item \texttt{Executor}: interface funcional com um único método para enviar instâncias de \textit{Runnable} para execução.
+        \item \texttt{ExecutorService}: sub-interface de \texttt{Executor} que contém vários métodos para controlar o andamento das tarefas e gerenciar o término dos serviços.
+        \item \texttt{ThreadPoolExecutor}: Implementa as interfaces anteriores e provê uma implementação concreta de um \textit{Thread Pool}.
+    \end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Elementos de um \textit{Thread Pool}}
+
+    \begin{block}{Acoplamento entre uma \textit{Thread} e uma tarefa}
+        \begin{lstlisting}
+            void executeTasks() {
+                while (hasTasks()) {
+                    new Thread(new RunnableImpl()).start();
+                }
+            }
+        \end{lstlisting}
+    \end{block}
+
+    \begin{block}{Executor desvincula a tarefa da criação da \textit{Thread}}
+        \begin{lstlisting}
+            void executeTasks() {
+                Executor executor = new ExecutorImpl();
+                while (hasTasks()) {
+                    executor.execute(new RunnableImpl());
+                }
+            }
+        \end{lstlisting}
+    \end{block}
+
+\end{frame}
+
+
+
+\end{document}

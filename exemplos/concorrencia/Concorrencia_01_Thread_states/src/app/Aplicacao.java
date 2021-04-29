@@ -1,6 +1,10 @@
 package app;
 
 /**
+ * Este exemplo foi adaptado do Java Concurrency Tutorial, da Oracle
+ *  
+ * {@link https://docs.oracle.com/javase/tutorial/essential/concurrency/} 
+ * 
  * Exemplo de aplicativo para ilustrar os estados de uma Thread em Java
  * 
  * @author Hugo de Paula
@@ -21,9 +25,7 @@ public class Aplicacao {
 
 		t1.start();
 
-		// Estado RUNNING
-		System.out.println(t1.getState());
-
+		// Aguarda a Thread t1 terminar.
 		t1.join();
 
 		// Estado TERMINATED
@@ -37,6 +39,9 @@ class Execucao implements Runnable {
 
 	@Override
 	public void run() {
+		// Estado RUNNABLE
+		System.out.println(Thread.currentThread().getState());
+
 		System.out.println("Programa em execucao...");
 	}
 	

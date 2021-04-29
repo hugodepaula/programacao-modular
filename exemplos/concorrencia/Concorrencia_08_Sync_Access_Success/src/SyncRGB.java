@@ -66,7 +66,6 @@ public class SyncRGB {
 				System.out.println("Color int: " + myColorInt);
 				System.out.println("Color name: " + myColorName);
 			}
-			Thread.sleep(1);
 		} catch (InterruptedException e) {
 
 		}

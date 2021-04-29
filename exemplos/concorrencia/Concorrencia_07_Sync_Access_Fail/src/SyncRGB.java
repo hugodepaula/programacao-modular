@@ -1,7 +1,12 @@
-/*
- * Exemplo adaptado de: 
+/**
+ * Este exemplo foi adaptado do Java Concurrency Tutorial, da Oracle
+ * 
  * https://docs.oracle.com/javase/tutorial/essential/concurrency/syncrgb.html
  * A Synchronized Class Example
+ * 
+ * Note que, apesar de todos os métodos da classes serem synchronized, os nomes
+ * das cores não batem com os respectivos códigos. Isto ocorre porque as múltiplas
+ * threads podem alternar a execução durante a recuperação do estado do objeto. 
  * 
  * @author Oracle
  * 
@@ -31,6 +36,7 @@ public class SyncRGB {
 
 	public void set(int red, int green, int blue, String name) {
 		check(red, green, blue);
+		
 		synchronized (this) {
 			this.red = red;
 			this.green = green;
@@ -57,7 +63,7 @@ public class SyncRGB {
 	public static void execute() {
 		try {
 			int myColorInt = color.getRGB();
-			Thread.sleep(10);
+			Thread.sleep(1);
 			String myColorName = color.getName();
 			System.out.println("Color int: " + myColorInt);
 			System.out.println("Color name: " + myColorName);
@@ -67,13 +73,17 @@ public class SyncRGB {
 	}
 
 	public static void main(String[] args) {
-		color = new SyncRGB(0, 0, 0, "Pitch Black");
+		color = new SyncRGB(0, 0, 0, "PRETO");
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(255, 0, 0, "RED")).start();
+		new Thread(() -> color.set(255, 0, 0, "VERMELHO")).start();
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(0, 255, 0, "GREEN")).start();
+		new Thread(() -> color.set(0, 255, 0, "VERDE")).start();
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(0, 0, 255, "BLUE")).start();
+
+		new Thread(() -> color.set(0, 0, 255, "AZUL")).start();
 		new Thread(() -> execute()).start();
 
 	}

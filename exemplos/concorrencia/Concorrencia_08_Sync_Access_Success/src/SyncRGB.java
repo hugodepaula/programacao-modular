@@ -1,4 +1,15 @@
-
+/**
+ * Este exemplo foi adaptado do Java Concurrency Tutorial, da Oracle
+ * 
+ * https://docs.oracle.com/javase/tutorial/essential/concurrency/syncrgb.html
+ * A Synchronized Class Example
+ * 
+ * Note que, o bloco execute() agora é synchronized. Isto causa perda de desempenho
+ * e faz com que as threads sejam executadas de forma sequencial. 
+ * 
+ * @author Oracle
+ * 
+ */
 public class SyncRGB {
 	private int red;
 	private int green;
@@ -55,19 +66,24 @@ public class SyncRGB {
 				System.out.println("Color int: " + myColorInt);
 				System.out.println("Color name: " + myColorName);
 			}
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 
 		}
 	}
 
 	public static void main(String[] args) {
-		color = new SyncRGB(0, 0, 0, "Pitch Black");
+		color = new SyncRGB(0, 0, 0, "PRETO");
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(255, 0, 0, "RED")).start();
+		new Thread(() -> color.set(255, 0, 0, "VERMELHO")).start();
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(0, 255, 0, "GREEN")).start();
+		new Thread(() -> color.set(0, 255, 0, "VERDE")).start();
+
 		new Thread(() -> execute()).start();
-		new Thread(() -> color.set(0, 0, 255, "BLUE")).start();
+
+		new Thread(() -> color.set(0, 0, 255, "AZUL")).start();
 		new Thread(() -> execute()).start();
 
 	}

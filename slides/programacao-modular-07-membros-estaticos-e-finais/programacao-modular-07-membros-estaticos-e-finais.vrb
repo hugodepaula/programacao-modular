@@ -1,0 +1,14 @@
+\frametitle{Exemplo: atributo final não constante}
+\begin{lstlisting}
+// Constantes
+static final int NUMERO = 42;
+static final ImmutableList<String> MESES =
+           ImmutableList.of("janeiro", "fevereiro", "março");
+
+
+// Não constantes
+static String naoFinal = "atributo não final";
+final String naoStatic = "atributo não estático";
+static final String[] arranjoNaoVazio =
+            {"esses", "valores", "podem", "mudar"};
+\end{lstlisting}

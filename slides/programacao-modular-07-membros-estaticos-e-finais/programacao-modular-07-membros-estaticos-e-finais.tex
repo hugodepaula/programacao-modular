@@ -69,18 +69,18 @@
 }
 
 
-    
+
 \section{Membros estáticos}
 
 \begin{frame}[fragile]{Membros estáticos}
-    
+
     \begin{block}{Membro estático}
       Membro com tempo de vida global e escopo local.
     \end{block}
-    
+
     \bi
     \item São atributos ou métodos comuns a todos os objetos de uma classe.
-    
+
     \item Membros de classe.
         \bi
             \item Compartilhado por todos os objetos daquela classe.
@@ -94,12 +94,12 @@
 \begin{frame}[fragile]{Membros estáticos}
 \begin{itemize}
     \item Úteis para implementar contadores ou identificadores de autoincremento.
-    \item Podem ser usados para definir constantes. 
+    \item Podem ser usados para definir constantes.
     \begin{itemize}
         \item Como a variável e compartilhada por todos os objetos de uma classe, a utilização de membros estáticos constantes pode permitir grande economia de memória.
     \end{itemize}
     \item Modificador de acesso \lstinline|static|.
-\end{itemize} 
+\end{itemize}
 \end{frame}
 
 \section{Exemplo: Identificador de Produtos}
@@ -129,7 +129,7 @@ class Produto {
         descricao = "Novo Produto";
         preco = 0.01F;
         quant = 0;
-        
+
         id = ++cont;
     }
 }
@@ -141,21 +141,21 @@ class Produto {
 \begin{lstlisting}[basicstyle=\tiny]
 class Aplicacao {
     public static void main(String args[]) {
-        
+
         System.out.println("\nCont. prods: " + Produto.getCont());
-        
+
         Produto p1 = new Produto();
         System.out.println("\nCont. prods: " + Produto.getCont());
-        
+
         Produto p2 = new Produto("Shulambs", 1.99F, 200);
         System.out.println("\nCont. prods: " + Produto.getCont());
-        ...    
-        
+        ...
+
         System.out.println("Produto id: " + p1.getId());
         System.out.println("Descrição:  " + p1.getDescricao());
         System.out.println("Preço:      " + p1.getPreco());
         System.out.println("Estoque:    " + p1.getQuant());
-        
+
         System.out.println("Produto id: " + p2.getId());
         System.out.println("Descrição:  " + p2.getDescricao());
         System.out.println("Preço:      " + p2.getPreco());
@@ -169,16 +169,16 @@ class Aplicacao {
 \section{Membros finais}
 
 \begin{frame}[fragile]{Membros finais}
-    
+
     \begin{block}{Membro final}
       Podem ser definidos/inicializados apenas uma vez.
     \end{block}
-    
+
     \bi
     \item São atributos, métodos ou classes, em geral, constantes.
-    
+
     \item Modificador de acesso \lstinline|final|.
-    
+
     \item Sua função varia dependendo do tipo de membro. No caso de variáveis, define constantes.
     \ei
 \end{frame}
@@ -186,22 +186,22 @@ class Aplicacao {
 \begin{frame}{Classe Produto: diagrama UML (sem \textit{getters})}
     \begin{center}
         \tiny
-        \begin{tikzpicture} 
-        \umlclass{Produto}{ 
+        \begin{tikzpicture}
+        \umlclass{Produto}{
             -- id : int \\
-            -- descricao : String \\ 
+            -- descricao : String \\
             -- preco : float \\
             -- quant : int \\
-            \umlstatic{-- cont : int} 
-        }{ 
+            \umlstatic{-- cont : int}
+        }{
            \umlstatic{+ getCont() : int} \\
-            + getId() : int \\ 
+            + getId() : int \\
             + emEstoque() : boolean \\
             + setDescricao(d : String) : void \\
             + setPreco(p : float) : void \\
             + setQuant(q : int) : void \\
             + Produto(d : String, p : float, q : int) \\
-            + Produto() 	
+            + Produto()
 }
     \end{tikzpicture}
 \end{center}
@@ -210,7 +210,7 @@ class Aplicacao {
 
 
 \subsection{Exemplo: membros finais}
-    
+
 \begin{frame}[fragile]{Classe Produto: atributo final}
 \begin{lstlisting}
 class Produto {
@@ -228,7 +228,7 @@ class Produto {
       descricao = DESCRICAO_PADRAO;
       preco = 0.01F;
       quant = 0;
-        
+
       id = ++cont;
    }
 }
@@ -240,19 +240,19 @@ class Produto {
 \begin{lstlisting}
 class Aplicacao {
    public static void main(String args[]) {
-   
+
       Produto p1 = new Produto();
       Produto p2 = new Produto("Shulambs", 1.99F, 600);
 
       int novosProdutos = Integer.parseInt(
-           JOptionPane.showInputDialog(null, 
-           "Digite quantos produtos deseja adicionar ao estoque:", 
-           "Controle de estoque", 
+           JOptionPane.showInputDialog(null,
+           "Digite quantos produtos deseja adicionar ao estoque:",
+           "Controle de estoque",
            JOptionPane.OK_CANCEL_OPTION));
 
       if ((p2.getQuant() + novosProdutos) > Produto.MAX_ESTOQUE) {
-         JOptionPane.showMessageDialog(null, 
-            "Estourou o limite máximo do estoque.", 
+         JOptionPane.showMessageDialog(null,
+            "Estourou o limite máximo do estoque.",
             "Erro alterando estoque", JOptionPane.ERROR_MESSAGE);
       } else {
          p2.setQuant(p2.getQuant() + novosProdutos);
@@ -264,13 +264,13 @@ class Aplicacao {
 \begin{frame}{Classe Produto: diagrama UML (sem métodos)}
     \begin{center}
         \tiny
-        \begin{tikzpicture} 
-        \umlclass{Produto}{ 
+        \begin{tikzpicture}
+        \umlclass{Produto}{
             \umlstatic{+ DESCRICAO\_PADRAO : const String = ``Shulambs''} \\
             \umlstatic{+ MAX\_ESTOQUE : const int = 1000} \\
             \umlstatic{-- cont : int} \\
             -- id : int \\
-            -- descricao : String \\ 
+            -- descricao : String \\
             -- preco : float \\
             -- quant : int \\
         }{}
@@ -304,8 +304,8 @@ static final ImmutableList<String> MESES =
 
 // Não constantes
 static String naoFinal = "atributo não final";
-final String naoStatic = "atrobuto não estático";
-static final String[] arranjoNaoVazio = 
+final String naoStatic = "atributo não estático";
+static final String[] arranjoNaoVazio =
             {"esses", "valores", "podem", "mudar"};
 \end{lstlisting}
 \end{frame}

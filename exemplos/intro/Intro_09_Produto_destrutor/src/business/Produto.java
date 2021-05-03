@@ -84,9 +84,10 @@ public class Produto {
 	 */
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("Finalizando um produto....");
+		System.out.println("Finalizando o produto " + this.id + "...");
 		instancias--;
 	}
 	
+
 	
 }

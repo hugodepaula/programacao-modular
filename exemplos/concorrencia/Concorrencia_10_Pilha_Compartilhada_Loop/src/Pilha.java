@@ -1,13 +1,13 @@
 
 public class Pilha {
 	private Produto[] vetor;
-	private int num = 0;
+	private int count = 0;
 	private int produced = 0;
 	private int consumed = 0;
 
 	public boolean empilha(Produto elemento) {
-		if (num < vetor.length) {
-			vetor[num++] = elemento;
+		if (count < vetor.length) {
+			vetor[count++] = elemento;
 			produced++;
 			return true;
 		} else
@@ -15,19 +15,19 @@ public class Pilha {
 	}
 
 	public Produto desempilha() {
-		if (num > 0) {
+		if (count > 0) {
 			consumed++;
-			return vetor[--num];
+			return vetor[--count];
 		}
 		return null;
 	}
 
 	public boolean eVazia() {
-		return (num == 0);
+		return (count == 0);
 	}
 	
-	public int getNum() {
-		return num;
+	public int getCount() {
+		return count;
 	}
 	
 	public int getProduced() {

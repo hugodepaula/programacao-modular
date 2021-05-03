@@ -11,7 +11,7 @@ public class Aplicacao {
 		Thread.sleep(500);
 		System.out.println("[produced: " + estoque.getProduced() + 
 						   " consumed: " + estoque.getConsumed() + 
-						   " size: " + estoque.getNum() + "]");
+						   " size: " + estoque.getCount() + "]");
 
 	}
 }

@@ -3,12 +3,17 @@ public class Aplicacao {
 	public static void main(String args[]) throws InterruptedException {
 		Pilha estoque = new Pilha();
 
-		new Thread(new Produtor(estoque)).start();
-		new Thread(new Consumidor(estoque)).start();
+		Thread p = new Thread(new Produtor(estoque));
+		Thread c = new Thread(new Consumidor(estoque));
 		
+		p.start();
+		c.start();
 		
 		
 		Thread.sleep(500);
+		p.interrupt();
+		c.interrupt();
+		
 		System.out.println("[produced: " + estoque.getProduced() + 
 						   " consumed: " + estoque.getConsumed() + 
 						   " size: " + estoque.getCount() + "]");

@@ -8,10 +8,11 @@ public class Aplicacao {
 		new Thread(new Consumidor(estoque)).start();
 		
 		
-		Thread.sleep(500);
+		Thread.sleep(100);
 		System.out.println("[produced: " + estoque.getProduced() + 
 						   " consumed: " + estoque.getConsumed() + 
 						   " size: " + estoque.getNum() + "]");
+		System.exit(0);
 
 	}
 }

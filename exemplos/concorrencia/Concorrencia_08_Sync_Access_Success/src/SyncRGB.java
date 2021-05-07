@@ -61,7 +61,7 @@ public class SyncRGB {
 		try {
 			synchronized (color) {  // perda de desempenho monstruosa!!!!!!
 				int myColorInt = color.getRGB();
-				Thread.sleep(1000);
+				Thread.sleep(2);
 				String myColorName = color.getName();
 				System.out.println("Color int: " + myColorInt);
 				System.out.println("Color name: " + myColorName);

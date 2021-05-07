@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import business.Produto;
 
@@ -29,7 +30,7 @@ class ProdutoTest {
 	void testPrecoNegativo() {
 		float preco = produto.getPreco();
 		produto.setPreco(-10);
-		assertEquals(preco, produto.getPreco(), 0.01F);
+		assertEquals(preco, produto.getPreco(), 0.001F);
 	}
 
 }

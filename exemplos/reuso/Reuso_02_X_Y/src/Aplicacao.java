@@ -6,9 +6,9 @@ public class Aplicacao {
 		Y y = new Y();
 		
 		System.out.println("\nResultado Final: ");
-		System.out.println("X.mascaraX = " + String.format("%04X",y.mascaraX));
-		System.out.println("X.mascaraY = " + String.format("%04X",y.mascaraY));
-		System.out.println("X.mascaraTotal = " + String.format("%04X",y.mascaraTotal));
+		System.out.println("Y.mascaraX = " + String.format("%04X",y.mascaraX));
+		System.out.println("Y.mascaraY = " + String.format("%04X",y.mascaraY));
+		System.out.println("Y.mascaraTotal = " + String.format("%04X",y.mascaraTotal));
 		
 	}
 }

@@ -5,7 +5,9 @@ public class X {
 	public X() {
 		System.out.println("X().mascaraX = " + String.format("%04X",mascaraX) + 
 				"    X().mascaraTotal = " + String.format("%04X",mascaraTotal));
+		
 		mascaraTotal = mascaraX;
+		
 		System.out.println("X().mascaraX = " + String.format("%04X",mascaraX) + 
 				"    X().mascaraTotal = " + String.format("%04X",mascaraTotal));
 	}

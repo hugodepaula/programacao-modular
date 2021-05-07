@@ -50,7 +50,7 @@ class Aplicacao {
 
 		Estoque estoque = new Estoque();
 
-		adicionarProduto(estoque);
+		//adicionarProduto(estoque);
 		estoque.add(new BemDuravel("Televisao", 2490.00F, 20, LocalDateTime.now(), 36));
 		estoque.add(new BemDuravel("Notebook", 1200.00F, 10, LocalDateTime.now(), 12));
 		estoque.add(new BemDeConsumo("Pao", 12.990F, 320, LocalDateTime.now(), LocalDate.now().plusMonths(1)));

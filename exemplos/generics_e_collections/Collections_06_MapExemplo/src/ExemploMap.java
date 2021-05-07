@@ -9,7 +9,7 @@ public class ExemploMap {
 		Integer UM = Integer.valueOf(1);
 		String palavra;
 		
-		Map<String, Integer> mapeamento = new HashMap<String, Integer>();
+		Map<String, Integer> termFrequency = new HashMap<String, Integer>();
 		
 		for (String s: args)
 			System.out.print(s + " ");
@@ -23,19 +23,19 @@ public class ExemploMap {
 			else
 				palavra = args[i].replaceAll("[^a-zA-Z ·ÈÌÛ˙‡‚Í„ıÁ¸]", "");
 			
-			Integer frequencia = mapeamento.get(palavra);
+			Integer frequencia = termFrequency.get(palavra);
 			if (frequencia == null) {
 				frequencia = UM;
 			} else {
-				frequencia = Integer.valueOf(frequencia.intValue() + 1);
+				frequencia++;
 			}
 			
-			mapeamento.put(palavra, frequencia);
+			termFrequency.put(palavra, frequencia);
 		}
 		
-		System.out.println(mapeamento);
+		System.out.println(termFrequency);
 		
-		Map<String, Integer> mapeamentoOrdenado = new TreeMap<String, Integer>(mapeamento);
+		Map<String, Integer> mapeamentoOrdenado = new TreeMap<String, Integer>(termFrequency);
 		
 		System.out.println(mapeamentoOrdenado);
 	}

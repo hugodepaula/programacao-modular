@@ -13,15 +13,17 @@ public class Aplicacao {
 		est.mostra();
 		sup.mostra();
 	
-		System.out.println("\n----\n");
+		System.out.println("\n-------------\n");
 		System.out.println("sup.str = " + sup.str);
 		System.out.println("sup.str = " + ((EstendeMostra) sup).str);
 		
 		
-		//sup = new SuperMostra();
-		//sup.mostra();
+		sup = new SuperMostra();
+		sup.mostra();
 		
-		
+	
+		System.out.println("\n-------------\n");
+
 		if (sup instanceof EstendeMostra)
 		      ((EstendeMostra) sup).mostra2();
 		else if (sup instanceof SuperMostra) 
@@ -32,21 +34,21 @@ public class Aplicacao {
 		System.out.println("Objeto  super: " + sup);
 		
 
-		 EstendeMostra est2;
-		 
-		 
-		 est2 = (EstendeMostra) est.clone();
-		 est2.str = "novaString";
-			
-		 System.out.println("est.str  = " + est.str);
-			
-			
-		
-		 est.mostra();
-		 System.out.println("est.str  = " + est.str);
-		
-		 sup.mostra();
-		 System.out.println("sup.str  = " + sup.str + "\n");
+//		 EstendeMostra est2;
+//		 
+//		 
+//		 est2 = (EstendeMostra) est.clone();
+//		 est2.str = "novaString";
+//			
+//		 System.out.println("est.str  = " + est.str);
+//			
+//			
+//		
+//		 est.mostra();
+//		 System.out.println("est.str  = " + est.str);
+//		
+//		 sup.mostra();
+//		 System.out.println("sup.str  = " + sup.str + "\n");
 		
 	
 		

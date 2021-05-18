@@ -18,4 +18,6 @@
 			<item value="org.eclipse.debug.ui"/>
 		</list>
 	</section>
+	<section name="NewWizardAction">
+	</section>
 </section>

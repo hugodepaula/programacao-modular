@@ -58,6 +58,7 @@ class Aplicacao {
 		estoque.add(new BemDuravel("Geladeira", 3000.00F, 80, LocalDateTime.now(), 24));
 		estoque.add(new BemDeConsumo("Queijo", 30.00F, 220, LocalDateTime.now(), LocalDate.now().plusMonths(2)));
 		estoque.add(new BemDeConsumo("Arroz", 15.00F, 90, LocalDateTime.now(), LocalDate.now().plusMonths(12)));
+		estoque.add(new Produto("Shulambs", 1, 2, LocalDateTime.now()));
 
 		JOptionPane.showMessageDialog(null, estoque.toString(), "Estoque de produtos", JOptionPane.INFORMATION_MESSAGE);
 

@@ -1,5 +1,5 @@
 package app;
-public class SuperMostra {
+public final class SuperMostra {
 	public String str = "superStr";
 
 	public void mostra() {

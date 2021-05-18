@@ -71,16 +71,16 @@
 
 \section{Coleções}
 
-\subsection{Java Collections Framework} 
+\subsection{Java Collections Framework}
 
 \begin{frame}{\textit{Collections}}
 
 \begin{block}{\textit{Collections}}
-Uma coleção é um objeto que agrupo múltiplos objetos, como um \textit{container}. 
+Uma coleção é um objeto que agrupo múltiplos objetos, como um \textit{container}.
 \end{block}
 
 \begin{block}{\textit{Java Collections Framework}}
-É uma arquitetura unificada para representação e manipulação de coleções, independentes de implementação. 
+É uma arquitetura unificada para representação e manipulação de coleções, independentes de implementação.
 \end{block}
 
 
@@ -105,15 +105,15 @@ Uma coleção é um objeto que agrupo múltiplos objetos, como um \textit{container}
 
 \begin{block}{}
 \lstinline|List<String> list = new ArrayList<String>();|
-\end{block} 
+\end{block}
 
 \item Processamento:
    \begin{itemize}
    \item for-each
 
 \begin{block}{}
-\lstinline|for (Object o: list) System.out.println(o);|
-\end{block} 
+\lstinline|for (String s: list) System.out.println(s);|
+\end{block}
 
 
 
@@ -123,10 +123,10 @@ Uma coleção é um objeto que agrupo múltiplos objetos, como um \textit{container}
 \begin{lstlisting}
 Iterator<?> it = list.iterator();
 while(it.hasNext())
-    if (!cond(it.next())) 
+    if (!cond(it.next()))
         it.remove();
 \end{lstlisting}
-\end{block} 
+\end{block}
 
     \end{itemize}
 \end{itemize}
@@ -141,7 +141,7 @@ while(it.hasNext())
 \begin{itemize}
    \item Inclusão / remoção:
       \begin{lstlisting}
-       boolean add(E elemento) 
+       boolean add(E elemento)
        boolean remove(E elemento)
       \end{lstlisting}
    \item Consultas:
@@ -194,11 +194,11 @@ while(it.hasNext())
       \begin{lstlisting}
       E first()
       E last()
-      
+
       SortedSet<E> headSet(E aoElemento)
       SortedSet<E> subSet(E doElemento, E aoElemento)
       SortedSet<E> tailSet(E doElemento)
-      
+
       Comparator<? super E> comparator()
     \end{lstlisting}
 \end{itemize}
@@ -208,20 +208,20 @@ while(it.hasNext())
 \begin{lstlisting}
 public class ExemploSet {
     public static void main( String[] args ) {
-    
+
         Set<String> conjunto = new HashSet<String>();
-        
+
         conjunto.add( "Bernardo" );
         conjunto.add( "Carolina" );
         conjunto.add( "Felipe" );
         conjunto.add( "Carolina" );
         conjunto.add( "Ana" );
-    
+
         System.out.println( conjunto );
-        
-        Set<String> conjuntoOrdenado = 
+
+        Set<String> conjuntoOrdenado =
                             new TreeSet<String>( conjunto );
-        
+
         System.out.println( conjuntoOrdenado );
     }
 }
@@ -231,13 +231,13 @@ public class ExemploSet {
 \begin{frame}[fragile]{Exemplo de Problema: Bacteria}
 
 \begin{itemize}
-\item Cientistas criaram uma bactéria que come lixo. Ela pesa 10g e consome metade do seu peso a cada dia. O peso não se altera, ou seja, o lixo é todo metabolizado. 
+\item Cientistas criaram uma bactéria que come lixo. Ela pesa 10g e consome metade do seu peso a cada dia. O peso não se altera, ou seja, o lixo é todo metabolizado.
 \item A cada dia, todas as bactérias existentes são clonadas. Cada nova bactéria dura apenas 5 dias e depois morre.
 \item Modele a classe \lstinline|Bacteria|. Deve haver métodos para:
     \begin{itemize}
          \item Retornar quanto lixo ela come (que é um valor fixo);
          \item Criar uma nova bactéria (clonando a atual);
-         \item Simular a passagem de um dia. 
+         \item Simular a passagem de um dia.
      \end{itemize}
 \item A seguir, implemente uma simulação: crie uma bactéria e simule a passagem de 10 dias, exibindo a quantidade de bactérias existentes e o total de lixo consumido. Utilize os métodos da classe \lstinline|Bacteria|.
 \end{itemize}
@@ -300,11 +300,11 @@ public static void main(String[] args) {
    \item Principais métodos:
 \end{itemize}
 \begin{lstlisting}
-      void add( int índice, E elemento ) 
+      void add( int índice, E elemento )
       boolean add( E elemento )
       boolean addAll( int índice, Collection<? extends E> coleção )
-      
-      E get( int índice )      
+
+      E get( int índice )
       E set( int índice, E element )
       int indexOf( Object elemento )
       int lastIndexOf( Object elemento )
@@ -359,7 +359,7 @@ public static void main(String[] args) {
       E getLast()
       Object removeFirst()
       Object removeLast()
-\end{lstlisting}         
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Exemplo de listas}
@@ -369,7 +369,7 @@ public class ExemploDeListas {
       List<String> lista = new ArrayList<String>();
       lista.add("Bernardo");      lista.add("Carolina");
       lista.add("Felipe");        lista.add("Carolina");
-      lista.add("Clara");     
+      lista.add("Clara");
       System.out.println(lista);
       System.out.println("2: " + lista.get(2));
       LinkedList<String> fila = new LinkedList<String>();
@@ -405,7 +405,7 @@ E remove() // recupera e remove ou lança exceção.
    \begin{itemize}
    \item Elem. ordenados por ordenação natural ou por \lstinline|Comparator| .
    \item Objetos devem ser comparáveis (\lstinline|interface Comparable<E>|): \\
-   
+
    \lstinline|public int compareTo( E e ) throws ClassCastException|
    \end{itemize}
 \end{itemize}
@@ -450,7 +450,7 @@ E remove() // recupera e remove ou lança exceção.
    \begin{lstlisting}
       boolean equals( Object objeto )
       K getKey();
-      V getValue(); 
+      V getValue();
       V setValue( V valor );
    \end{lstlisting}
 \item Implementações de mapeamentos:
@@ -534,7 +534,7 @@ max() // acha o maior valor em uma coleção
     \item Para aprendermos \textit{streams}, precisamos relembrar a hierarquia de produtos.
 \end{itemize}
 \begin{center}
-    \begin{tikzpicture} 
+    \begin{tikzpicture}
         \umlclass[font=\fontsize{7}{7}\selectfont,x=-4.3,y=1.1, type=abstract]{Produto}{-- descricao : String \\ -- quant : int \\ -- preco : float \\ -- dataFabricacao : LocalDateTime}{+ emEstoque() : boolean \\ + toString() : String}
         \umlclass[font=\fontsize{7}{7}\selectfont,x=-6.1, y=-2]{BemDuravel}{ -- mesesGarantia : int}{+ toString() : String}
         \umlclass[font=\fontsize{7}{7}\selectfont,x=-2.3, y=-2]{BemDeConsumo}{-- dataValidade : LocalDate}{ + toString() : String}
@@ -632,7 +632,7 @@ public class Estoque {
    private Produto[] listaDeProdutos;
    private int numProdutos;
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}
@@ -643,7 +643,7 @@ public class Estoque {
       return listaDeProdutos;
    }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -657,7 +657,7 @@ public void adicionar(Produto p) {
   }
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}
@@ -665,7 +665,7 @@ public void adicionar(Produto p) {
   listaDeProdutos.add(p);
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -686,7 +686,7 @@ public void remover(String descricao) {
    }
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}[basicstyle=\tiny]
@@ -694,7 +694,7 @@ public void remover(String descricao) {
    listaDeProdutos.removeIf((prod) -> descricao.equals(prod.getDescricao()));
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -712,7 +712,7 @@ public Produto consultar(String descricao) {
   return null;
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}[basicstyle=\tiny]
@@ -724,7 +724,7 @@ public Produto consultar(String descricao) {
   return null;
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -741,7 +741,7 @@ public int totalEmEstoque() {
   return total;
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}
@@ -751,7 +751,7 @@ public int totalEmEstoque() {
                   .reduce(0, (x, y) -> x + y);
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -765,12 +765,12 @@ public int totalEmEstoque() {
 public float valorEmEstoque() {
   float valor = 0;
   for (int i = 0; i < numProdutos; i++)
-    valor += listaDeProdutos[i].getQuant() * 
+    valor += listaDeProdutos[i].getQuant() *
              listaDeProdutos[i].getPreco();
   return valor;
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}
@@ -780,7 +780,7 @@ public float valorEmEstoque() {
            .reduce(0.0F, (x, y) -> x + y);
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -799,7 +799,7 @@ public String toString() {
    return valor.toString();
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 
 \begin{block}{Collections e Streams}
 \begin{lstlisting}
@@ -809,7 +809,7 @@ public String toString() {
            .reduce("", (x, y) -> x + y);
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -832,7 +832,7 @@ public void ordenar() {
   });
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -847,14 +847,14 @@ public void ordenar() {
 \begin{block}{}
 \begin{lstlisting}
 public void ordenar() {
- listaDeProdutos = 
+ listaDeProdutos =
    listaDeProdutos.stream()
      .sorted(
          (x, y) -> x.getDescricao().compareTo(y.getDescricao()))
      .collect(toList());
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -870,7 +870,7 @@ public void ordenar() {
 
 \begin{block}{}
 \begin{lstlisting}
-public List<Produto> ordenarStream(Predicate<Produto> p, 
+public List<Produto> ordenarStream(Predicate<Produto> p,
                                    Comparator<Produto> c) {
   return listaDeProdutos.stream()
               .filter(p)
@@ -878,7 +878,7 @@ public List<Produto> ordenarStream(Predicate<Produto> p,
               .collect(toList());
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 
@@ -894,11 +894,11 @@ public List<Produto> ordenarStream(Predicate<Produto> p,
 public static void main(String args[]) {
    ...
    estoque.ordenar();
-   
+
    List<Produto> filtrado = estoque.ordenarStream(
                 ((pf) -> pf.getQuant() > 100),
                 ((p1, p2)  -> Float.compare(p1.getPreco(), p2.getPreco())));
-   
+
    filtrado.forEach(prod -> System.out.println(prod));
 
    double media = estoque.getListaDeProdutos()
@@ -907,13 +907,13 @@ public static void main(String args[]) {
       .mapToInt(Produto::getQuant)
       .average()
       .getAsDouble();
-   
+
    System.out.println("Quantidade média por produto: " + media);
    System.out.println("Total em estoque: " + estoque.totalEmEstoque());
    System.out.println("Valor em estoque: " + estoque.valorEmEstoque());
 }
 \end{lstlisting}
-\end{block} 
+\end{block}
 \end{frame}
 
 

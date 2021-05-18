@@ -134,21 +134,22 @@ interface nomeInterface [extends OutraInterface] {
 \item A classe Timer  é um serviço que notifica objetos acordáveis que um certo tempo passou.
 \item Um objeto acordável deve fazer duas coisas:
 	\begin{itemize}
-	\item Pedir para o Timers acordá-lo após certo tempo.
+	\item Pedir para o Timer acordá-lo após certo tempo.
 	\item Implementar o método wakeUp.
     \end{itemize}
 \item Método \texttt{letMeSleepFor} é implementado da seguinte forma:
 \end{itemize}
 \begin{lstlisting}
-public synchronized boolean letMeSleepFor(Sleeper
-                                theSleeper, long time) {
+public synchronized boolean letMeSleepFor(Wakeable
+                                wakeable, long timeInterval) {
    int index = findNextSlot();
    if (index == NOROOM) {
        return false;
    } else {
-       sleepers[index] = theSleeper;
-       sleepFor[index] = time;
-       new AlarmThread(index).start(); return true;
+       wakeables[index] = wakeable;
+       howLong[index] = timeInterval;
+       new AlarmThread(index).start();
+       return true;
    }
 }
 \end{lstlisting}
@@ -175,7 +176,7 @@ public interface Wakeable {
 \begin{frame}[fragile]{Exemplo: Temporizador e classes acordáveis}
 
 \begin{itemize}
-\item A interface Sleeper declara o método wakeUp() mas não a implementa. Ela também define constantes úteis.
+\item A interface Wakeable declara o método wakeUp() mas não a implementa. Ela também define constantes úteis.
 \item As classes que implementarem esta interface ``herdam'' a constante e devem implementar o método wakeUp().
 \item Todo objeto será também um dorminhoco.
 \item Exemplo: um relógio que deve ser acordado a cada segundo para atualizar o display do tempo.
@@ -212,7 +213,7 @@ public interface Wakeable {
 
 \begin{frame}[fragile]{Porque utilizar interfaces ao invés de classes abstratas?}
 \begin{itemize}
-\item Seria a classe abstrata Sleeper abaixo equivalente à interface?
+\item Seria a classe abstrata Wakeable abaixo equivalente à interface?
 \end{itemize}
 \begin{lstlisting}
 abstract class Wakeable {
@@ -221,7 +222,7 @@ abstract class Wakeable {
 \end{lstlisting}
 \begin{itemize}
 \item Resposta: Não.
-\item Se Sleeper fosse classe abstrata apenas objetos que herdassem de Sleeper poderiam ser utilizados no AlarmClock.
+\item Se Wakeable fosse classe abstrata apenas objetos que herdassem de Wakeable poderiam ser utilizados no Timer.
 \end{itemize}
 \end{frame}
 
@@ -275,20 +276,21 @@ abstract class Wakeable {
 
 \begin{multicols}{2}
 \begin{lstlisting}
-public interface IFace {
+public interface UserProfile {
   // decl. método normal
-  int getUserID();
+  int getId();
+
   // decl. método default
-  default int getAdminID() {
-   return 1;
+  default int getAdminId() {
+   return -1;
   }
 }
 \end{lstlisting}
 
 \begin{lstlisting}
-class IFaceImpl implements IFace {
-  public int getUserID() {
-    return 100;
+class MyUserProfile implements UserProfile {
+  public int getId() {
+    return 101;
   }
 }
 \end{lstlisting}
@@ -297,14 +299,14 @@ class IFaceImpl implements IFace {
 \begin{lstlisting}
 class Demo {
   public static void main(String args[]) {
-    IFaceImpl obj = new IFaceImpl();
+    UserProfile obj = new MyUserProfile();
 
-    System.out.println("User ID is " + obj.getUserID());
-    System.out.println("Administrator ID is " + obj.getAdminID());
+    System.out.println("ID: " + obj.getId());
+    System.out.println("Admin ID: " + obj.getAdminId());
   }
 }
 
-\end{lstlisting}\footnote{Adaptado de: Herbert Schildt. \textit{Java Para Iniciantes.} Bookman 2015.}
+\end{lstlisting}\footnote{Adaptado de: Herbert Schildt. \textit{Java Para Iniciantes.} Bookman 2018.}
 \end{frame}
 
 \begin{frame}[fragile]{Métodos default}

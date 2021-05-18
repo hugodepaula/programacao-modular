@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2 Portable) (preloaded format=pdflatex 2021.3.4)  11 APR 2021 23:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2 Portable) (preloaded format=pdflatex 2021.3.4)  18 MAY 2021 13:52
 entering extended mode
 **./programacao-modular-13-interfaces.tex
 (programacao-modular-13-interfaces.tex
@@ -1585,11 +1585,15 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ))
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 155.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 156.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 155--155
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 156--156
 [][]  
+ []
+
+
+Overfull \vbox (7.6411pt too high) detected at line 156
  []
 
 [7
@@ -1600,10 +1604,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 155--155
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 173.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 174.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 173--173
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 174--174
 [][]  
  []
 
@@ -1615,10 +1619,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 173--173
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 183.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 184.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 183--183
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 184--184
 [][]  
  []
 
@@ -1650,10 +1654,10 @@ Overfull \hbox (18.73831pt too wide) in paragraph at lines 20--21
 )
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 206.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 207.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 206--206
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 207--207
 [][]  
  []
 
@@ -1665,24 +1669,24 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 206--206
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 226.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 227.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 226--226
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 227--227
 [][]  
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 226.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 227.
 [11
 
 ]
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 234.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 235.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 234--234
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 235--235
 [][]  
  []
 
@@ -1691,10 +1695,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 234--234
 ]
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 246.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 247.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 246--246
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 247--247
 [][]  
  []
 
@@ -1703,10 +1707,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 246--246
 ]
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 258.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 259.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 258--258
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 259--259
 [][]  
  []
 
@@ -1715,10 +1719,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 258--258
 ]
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 272.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 273.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 272--272
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 273--273
 [][]  
  []
 
@@ -1728,26 +1732,27 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 272--272
 \openout4 = `programacao-modular-13-interfaces.vrb'.
 
  (programacao-modular-13-interfaces.vrb
-Overfull \hbox (14.55673pt too wide) in paragraph at lines 16--17
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+1.
+
+(D:\PortableApps\MikTex\texmfs\install\tex/latex/psnfss\ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+Overfull \hbox (62.55722pt too wide) in paragraph at lines 17--18
 [][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (9.51335pt too wide) in paragraph at lines 30--31
-[][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 34.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 35.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 34.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 35.
 )
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 308.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 310.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 308--308
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 310--310
 [][]  
  []
 
@@ -1759,10 +1764,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 308--308
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 330.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 332.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 330--330
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 332--332
 [][]  
  []
 
@@ -1771,10 +1776,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 330--330
 ]
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 344.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 346.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 344--344
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 346--346
 [][]  
  []
 
@@ -1786,10 +1791,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 344--344
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 365.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 367.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 365--365
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 367--367
 [][]  
  []
 
@@ -1801,10 +1806,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 365--365
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 392.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 394.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 392--392
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 394--394
 [][]  
  []
 
@@ -1816,10 +1821,10 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 392--392
  (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 416.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 418.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 416--416
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 418--418
 [][]  
  []
 
@@ -1828,19 +1833,13 @@ Overfull \hbox (36.53152pt too wide) in paragraph at lines 416--416
 ]
 \openout4 = `programacao-modular-13-interfaces.vrb'.
 
- (programacao-modular-13-interfaces.vrb
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-2.
-
-(D:\PortableApps\MikTex\texmfs\install\tex/latex/psnfss\ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-))
+ (programacao-modular-13-interfaces.vrb)
 File: puc_engesoft_logo.png Graphic file (type png)
 <use puc_engesoft_logo.png>
-Package pdftex.def Info: puc_engesoft_logo.png  used on input line 434.
+Package pdftex.def Info: puc_engesoft_logo.png  used on input line 436.
 (pdftex.def)             Requested size: 64.98427pt x 27.5992pt.
 
-Overfull \hbox (36.53152pt too wide) in paragraph at lines 434--434
+Overfull \hbox (36.53152pt too wide) in paragraph at lines 436--436
 [][]  
  []
 
@@ -1863,19 +1862,19 @@ ot changed.
  ) 
 Here is how much of TeX's memory you used:
  32356 strings out of 479762
- 644284 string characters out of 2869908
+ 644297 string characters out of 2869908
  1201086 words of memory out of 3000000
  48998 multiletter control sequences out of 15000+200000
- 468212 words of font info for 99 fonts, out of 3000000 for 9000
+ 468525 words of font info for 100 fonts, out of 3000000 for 9000
  822 hyphenation exceptions out of 8191
- 131i,19n,132p,531b,1619s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 131i,19n,132p,531b,1419s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/PortableApps/MikTex/texmfs/install/fonts/enc/dvips/base/8r.enc}<D:/Portab
 leApps/MikTex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Porta
 bleApps/MikTex/texmfs/install/fonts/type1/urw/courier/ucrr8a.pfb><D:/PortableAp
 ps/MikTex/texmfs/install/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/PortableApps/M
 ikTex/texmfs/install/fonts/type1/urw/helvetic/uhvr8a.pfb><D:/PortableApps/MikTe
 x/texmfs/install/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on programacao-modular-13-interfaces.pdf (22 pages, 198707 bytes
+Output written on programacao-modular-13-interfaces.pdf (22 pages, 198569 bytes
 ).
 PDF statistics:
  475 PDF objects out of 1000 (max. 8388607)

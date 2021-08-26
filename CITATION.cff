@@ -1,0 +1,24 @@
+# YAML 1.2
+---
+abstract: |
+    "Material de apoio da disciplina de \"Programação Modular\", do curso de Engenharia de Software da PUC Minas.
+    
+    Ementa:
+    Fatores de qualidade de software. Modularidade. Projeto Orientado para Objetos. Polimorfismo, interfaces, tipos enumeráveis, genéricos e opcionais. Coleções. Tratamento de exceções. Programação Orientada a Eventos. Princípios SOLID. Padrões de projeto. Aspectos funcionais. Desenvolvimento dirigido por testes. Concorrência. Serialização.
+    "
+authors: 
+  -
+    affiliation: "PUC Minas"
+    family-names: "de Paula"
+    given-names: Hugo
+cff-version: "1.1.0"
+keywords: 
+  - "Programação Modular"
+  - "Programação Orientada para Objetos"
+  - Java
+message: |
+    "If you use this software, please cite it using these metadata.
+    Se você utilizar este software, por favor cite-o utilizando estes metadados."
+repository-code: "https://github.com/hugodepaula/programacao-modular"
+title: "Programação Modular"
+...

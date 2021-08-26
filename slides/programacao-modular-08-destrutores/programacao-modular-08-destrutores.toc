@@ -1,0 +1,8 @@
+\babel@toc {brazil}{}\relax 
+\babel@toc {brazil}{}\relax 
+\beamer@sectionintoc {1}{Alias e sem\^antica de refer\^encia}{3}{0}{1}
+\beamer@sectionintoc {2}{Lixo de mem\'oria e refer\^encia Dangling}{4}{0}{2}
+\beamer@sectionintoc {3}{Coletores de lixo}{5}{0}{3}
+\beamer@sectionintoc {4}{Finalizando um objeto}{7}{0}{4}
+\beamer@subsectionintoc {4}{1}{Exemplo: Processa Arquivo}{8}{0}{4}
+\beamer@subsectionintoc {4}{2}{Exemplo: Classe Produto}{9}{0}{4}

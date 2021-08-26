@@ -199,7 +199,6 @@ class Produto {
     */
    @Override
    protected void finalize() throws Throwable {
-      super.finalize();
       System.out.println("Finalizando um produto....");
       instancias--;
    }
@@ -231,8 +230,10 @@ class Aplicacao {
       // Coletor de lixo ainda não foi executado.
       System.out.println("\nInstancias prods: " + Produto.getInstancias());
 
-      int i = System.in.read(); // artifício para parar o programa.
+      // Estimula a execução do coletor de lixo.
       System.gc();
+      Thread.sleep(10); 
+      
       // Coletor de lixo já foi executado.
       System.out.println("\nInstancias prods: " + Produto.getInstancias());
    }

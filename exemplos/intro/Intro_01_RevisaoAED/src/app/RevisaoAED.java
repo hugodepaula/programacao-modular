@@ -5,7 +5,11 @@ import java.lang.Math;
 
 /**
  * <p>
+<<<<<<< HEAD:exemplos/intro/Intro_01_RevisaoAED/src/app/RevisaoAED.java
  * Ilusta o conceito de semântica de referência com o uso de uma classe
+=======
+ * Ilustra o conceito de semântica de referência com o uso de uma classe
+>>>>>>> ad5ca93c5a20d22dff5b738bdb3a85a84bb90ee6:codes/java/intro/Intro_01_RevisaoAED/src/app/RevisaoAED.java
  * (semelhante à <code>struct</code>) e de um vetor.
  * </p>
  *

@@ -118,7 +118,7 @@
      \umlemptyclass{Aluno}
      \umlemptyclass[x=6]{Escola}
      \umluniassoc[mult1=*, mult2=1, name=estuda]{Aluno}{Escola}
-     \node[above] at (estuda-1) {possui};
+     \node[above] at (estuda-1) {estuda};
 
     \end{tikzpicture} \\[15mm]
     \begin{tikzpicture}
@@ -542,7 +542,7 @@ class Carro {
 
  private Pessoa dono;
 
- public Carro(Pessoa dono) {
+ public Carro() {
    this.dono = null;
  }
 

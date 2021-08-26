@@ -1,5 +1,5 @@
-\babel@toc {brazil}{}
-\babel@toc {brazil}{}
+\babel@toc {brazil}{}\relax 
+\babel@toc {brazil}{}\relax 
 \beamer@sectionintoc {1}{Relacionamento entre objetos}{3}{0}{1}
 \beamer@subsectionintoc {1}{1}{Associa\c c\~ao}{5}{0}{1}
 \beamer@subsectionintoc {1}{2}{Agrega\c c\~ao e composi\c c\~ao}{7}{0}{1}

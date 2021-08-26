@@ -1,7 +1,0 @@
-2020-06-01T07:52:43.751674900: Fazendo a chamada ao método 2 da classe Shulambs.
-2020-06-01T07:52:43.751674900: Executando a operacao Shulambs 2.
-2020-06-01T07:53:36.486738100: Construindo um objeto da classe Shulambs.
-2020-06-01T07:53:36.487735900: Fazendo a chamada ao método 1 da classe Shulambs.
-2020-06-01T07:53:36.487735900: Executando a operacao Shulambs 1.
-2020-06-01T07:53:36.487735900: Fazendo a chamada ao método 2 da classe Shulambs.
-2020-06-01T07:53:36.487735900: Executando a operacao Shulambs 2.

@@ -344,9 +344,12 @@ int calcSubsidio() {
     subsidio = JA_SUBSIDIADO;
   } else if (eTempoParcial) {
     subsidio = TEMPO_INTEGRAL*FATOR;
-  } else {
+  } else if (eTempoIntegral) {
     subsidio = TEMPO_INTEGRAL;
+  } else {
+    subsidio = -1;
   }
+}
   return subsidio;
 }
 \end{lstlisting}

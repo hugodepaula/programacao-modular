@@ -10,12 +10,13 @@ Fatores de qualidade de software. Modularidade. Projeto Orientado para Objetos. 
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-## Autor
+## Autors
 
 * **Prof. Hugo de Paula** - *Initial work* - [PurpleBooth](https://github.com/hugodepaula)
+* **Prof. Pedro Pongelupe** - *Semestre 01-2024* - [RedBus](https://github.com/Pongelupe)
 
 ## License
 
-Este projeto lé licenciado sob a _Creative Commons Zero v1.0 Universal_  - vejo arquivo a [LICENSE.md](LICENSE) para mais detalhes.
+Este projeto é licenciado sob a _Creative Commons Zero v1.0 Universal_  - vejo arquivo a [LICENSE.md](LICENSE) para mais detalhes.
 
 

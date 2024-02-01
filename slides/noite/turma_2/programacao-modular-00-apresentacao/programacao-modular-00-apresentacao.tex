@@ -1,0 +1,167 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Apresentação da Disciplina%
+}
+\author[Prof. Pedro Pongelupe]
+{
+	Prof.~Pedro.~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+        basicstyle=\scriptsize,
+        commentstyle=\color{red},
+        showstringspaces=false,
+        numbers=left,
+        numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+\section{Apresentação Pessoal}
+\begin{frame}[fragile]{Apresentação Pessoal}
+        \begin{block}{Mais sobre mim}
+                \bi
+                \item Prof. Pedro Pongelupe
+                        \bi
+                \item pedro.pongelupe@sga.pucminas.br
+                        \ei
+                \item Engenheiro de Software Sênior 
+                \item Bacharel em Engenharia de Software (PUC-MG)
+                \item Mestre em Ciências da Computação (PUC-MG)
+                        \ei
+                \end{block}
+        \begin{block}{Áreas de Pesquisa}
+                \bi
+                \item Mobilidade Humana
+                \item Bicicletas e Ônibus
+                \item Redes Complexas e Deep Learning for Graphs
+                        \ei
+                \end{block}
+        \end{frame}
+
+\begin{frame}[fragile]{Em resumo...}
+        \begin{center}
+                \includegraphics[width=10cm]{./github.png}
+        \end{center}
+\end{frame}
+\begin{frame}[fragile]{Eterno Retorno do Programador}
+        \begin{center}
+                \includegraphics[width=5cm]{./junior_senior.png}
+        \end{center}
+\end{frame}
+
+\section{Programação Modular}
+\begin{frame}[fragile]{Programação Modular}
+        \begin{block}{Como vai funcionar}
+                \bi
+        \item Disciplina de 80 h/a - 2 aulas semanais. 
+                \bi
+        \item Segunda-feira 19:00-20:40 
+        \item Quarta-feira 19:00-20:40
+        \item Quarta-feira 20:50-22:30*
+                \ei
+        \item Debate teórico e aplicação prática. 
+        \item Conteúdos principais:
+                \bi
+        \item Programação Orientada a Objetos utilizando Java
+        \item Padrões de projeto
+        \item Ecossistema Java
+                \ei
+                \ei
+        \end{block}
+\end{frame}
+\begin{frame}[fragile]{Processo Avaliativo}
+        \begin{block}{Distribuição de Pontos}
+                \bi
+        \item Provas: 75 pontos.
+                \bi
+        \item 3 x 25 pontos.*
+                \ei
+        \item Exercíos e trabalhos: 20 pontos
+                \bi
+        \item Exercíos e trabalhos teóricos e práticos: 15 pontos
+        \item Prática investigativa: 5 pontos
+                \ei
+        \item Avalição de Desempenho Acadêmico (ADA): 5 pontos
+                \ei
+        \end{block}
+        \begin{block}{Exercícios não pontuados}
+                \bi
+        \item Prática de modelagem
+        \item Notação e Trechos de Código
+                \ei
+        \end{block}
+\end{frame}
+\begin{frame}[fragile]{Processo Avaliativo}
+        \begin{block}{Reavaliação}
+                Prova Escrita que substitui a menor nota das provas anteriores, ou seja, vale \textbf{25 pontos}.
+        \end{block}
+        \begin{block}{Últimas Considerações}
+                \bi
+        \item Chamada e limite de faltas
+        \item SGA: Estas e outras informações estão disponíveis no Plano de Ensino da Disciplina que pode ser acessado no SGA.
+                \ei
+        \end{block}
+\end{frame}
+
+\section{Nivelamento}
+\begin{frame}[fragile]{Apresentação}
+                E vocês? Quem são vocês? O quê esperam desta disciplina? E o Java, hein?? 
+        \begin{figure}[H]
+                \centering
+                \includegraphics[width=4.5cm]{./duke_joia.png}
+        \end{figure}
+\end{frame}
+\end{document}

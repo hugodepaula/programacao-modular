@@ -1,0 +1,222 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+	Introdução à linguagem Java%
+}
+\author[Prof. Pedro Pongelupe]
+{
+	Prof.~Pedro Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-2.02cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+
+\section{Linguagem Java}
+
+\subsection{Histórico da linguagem Java}
+
+
+
+\begin{frame}{Histórico do Java}
+    \bi
+    \item Linguagem orientada a objetos.
+    \item Desenvolvida em 1991 por James Gosling.
+    \item 1a versão lançada 1995.
+    \item Código fonte e objeto portáveis para diversas arquiteturas e sistemas operacionais.
+    \item Linguagem de propósito geral derivada do C++.
+    \item Linguagem compilada e depois interpretada:
+   \bi
+  \item \textit{Bytecode} -- ling. assembly de uma máquina hipotética.
+   \ei
+    \ei
+    \begin{center}
+    \textit{``Linguagem simples, orientada por objetos, distribuída, interpretada, robusta, segura, independente de arquitetura, portável, de alta performance, multi-threaded e dinâmica.''} \\
+    SUN Microsystems,  Maio de 1995
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Características do Java}
+\begin{center}
+		\includegraphics[width=.6\linewidth]{java.png}
+\end{center}
+\end{frame}
+
+
+\subsection{Características do Java}
+
+\begin{frame}{Java é mais simples que a linguagem $C++$}
+    \bi
+        \item Linguagem \textit{C-like} 
+        \item Semântica de referência ao invés de ponteiros.
+        \item Não permite variáveis globais, apenas atributos estáticos.
+        \item Coletor de lixo gerencia memória (sem \textsc{delete}).
+        \item Não possui arquivos de cabeçalho (\textit{header}).
+        \item Sem sobrecarga de operadores, apenas de métodos.
+        \item Sem herança múltipla de classes, mas com herança múltipla de interfaces.
+    \ei
+\end{frame}
+
+\begin{frame}{Diagrama conceitual do Java}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=0.82\textwidth]{modeloconceitual.png}
+        \end{center}
+    \end{figure}
+    \begin{center}
+        \tiny \url{https://docs.oracle.com/javase/8/docs/}
+    \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Compilando e executando Java}
+\bi
+    \item Código-fonte: \lstinline|.java|
+    \item Compilador:
+    \bi
+        \item \lstinline|javac <nomearq.java>|
+    \ei
+    \item Arquivos objeto compilados: \lstinline|.class|
+    \item Para executar uma aplicação:
+    \bi
+        \item \lstinline|java <nomearq>|
+    \ei
+\ei
+\end{frame}
+
+\subsection{Estrutura de uma aplicação Java}
+
+\begin{frame}{Estrutura de uma aplicação Java}
+    \bi
+        \item Classes são escritas em arquivos \lstinline|.java|.
+        \item Um arquivo \lstinline|.java| pode conter diversas classes, mas apenas uma será pública e estará visível ao resto da aplicação.
+        \item A classe pública de um arquivo \lstinline|.java| deve ter o mesmo nome do arquivo \lstinline|.java|.
+        \item As classes compiladas (arquivos \lstinline|.class|) devem estar em diretórios conhecidos do Java (variável de ambiente \lstinline|CLASSPATH|).
+        \item O diretório \textsc{<diretorio\_jdk>/jre/classes} é o local padrão para localização de classes.
+    \ei
+\end{frame}
+
+\begin{frame}{Lançando programas Java}
+    \bi
+        \item Em aplicações, tudo começa pelo método \lstinline|main|.
+        \item \lstinline|public static void main(String args[]) { }|
+        \item \lstinline|args[]| é correspondente ao \lstinline|argv[]| do C, exceto que \lstinline|args[0]| é equivalente ao \lstinline|argv[1]|
+        \item \lstinline|main| não retorna um valor, apesar de que a JVM pode capturar códigos de saída: \lstinline|System.exit(0)|;
+    \ei
+\end{frame}
+
+\begin{frame}[fragile]{Aplicações}
+\bi
+    \item Aplicações console:
+    \bi
+        \item Rodam sob a JVM, que faz a tradução direta para o sistema operacional.
+        \item Utilizam apenas as interfaces de entrada e saída padrão Java: java.System, java.io, java.lang, java.util.
+    \ei
+\ei
+
+\begin{lstlisting}
+    /* AloMundo.java */
+
+    class AloMundo {
+        public static void main(String args[]) {
+            System.out.println("Alo Mundo!");
+        }
+    }
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Estrutura de uma aplicação Java}
+    \bi
+        \item Classes são agrupadas em pacotes, definido pela cláusula \lstinline|package|.
+        \item Pacotes são conjuntos de classes, interface e subpacotes relacionados.
+        \item Pacotes são úteis porque:
+        \bi
+            \item Agrupam interfaces e classes relacionadas
+            \item Criam espaço de nomes para Interfaces e classes.
+            \item outro nível de encapsulamento.
+        \ei
+        \item Para utilizar um pacote, usa-se a cláusula \lstinline|import|; semelhante ao \#include da linguagem C.
+        \item Pacotes também são encontrados através do \lstinline|CLASSPATH|, e são considerados subdiretórios do caminho.
+   \ei
+\end{frame}
+\begin{frame}{Exemplo do uso de pacotes no Java}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=0.65\textwidth]{exemplo_packages.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+\begin{frame}{Exemplo do uso de pacotes no Java}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{exemplo_packages2.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{A prática é o critério da verdade.}"
+        \end{block}
+\end{frame}
+\end{document}

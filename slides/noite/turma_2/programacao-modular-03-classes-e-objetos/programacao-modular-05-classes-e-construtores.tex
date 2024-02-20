@@ -5,7 +5,7 @@
 
 \title[Programação Modular]
 {%
-	Classes e objetos%
+	Classes e objetos: Utilizando Construtores%
 }
 \author[Prof. Pedro Pongelupe]
 {
@@ -180,8 +180,7 @@
         \ei
         \item Métodos:
         \bi
-            \item \lstinline|emEstoque() : bool|
-            \item \lstinline|incializaProduto(String, float, int)|
+            \item \lstinline|emEstoque() : boolean|
         \ei
     \ei 
 \end{frame}
@@ -198,15 +197,10 @@
         + preco : float \\
         + quant :  int  
     }{ 
-    + inicializaProduto(descricao : String, preco : float, quant : int) : void \\ 
     + emEstoque() : boolean} 
 \end{tikzpicture}
 \end{center}
 \end{frame}
-
-
-
-
 
 \begin{frame}[fragile]{Definindo a classe Produto}
 \begin{lstlisting}
@@ -219,11 +213,6 @@ class Produto {
         return (quant > 0);
     }
     
-    void inicializaProduto(String d, float p, int q) {
-        descricao = d;
-        preco = p;
-        quant = q;
-    }
 }
 \end{lstlisting}
 \end{frame}
@@ -251,52 +240,8 @@ class Aplicacao {
 \end{lstlisting}
 \end{frame}
 
-\subsection{Semântica de referência}
-
-\begin{frame}{Semântica de referência}
-\begin{itemize}
-    \item Conceito de referência:
-    \begin{itemize}
-        \item Uma referência é um ponteiro (apontador) constante.
-        \item Referências são chamadas de alias (sinônimos). \\[5mm]
-    \end{itemize}
-    \item Em Java, uma instância de uma classe é interpretada como uma referência para um objeto e não o objeto propriamente dito.
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Criando Objetos: C++ vs Java}
- C++:
-    \begin{itemize}
-        \item Declaração de um Objeto:
-        \begin{itemize}
-            \item \lstinline|nomeClasse nomeObjeto;|
-            \item Objeto é inicializado no momento da declaração e um estado lhe é atribuído.
-        \end{itemize}
-        \item Declaração de apontadores:
-        \begin{itemize}
-            \item \lstinline|nomeClasse *nomeObjeto;|
-            \item Cria-se o apontador mas não se cria o objeto.
-            \item Criação do objeto através da cláusula \lstinline|new|.
-            \item Apontador pode apontar para qualquer objeto.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Criando Objetos: C++ vs Java}
-Java:
-    \begin{itemize}
-        \item Declaração de um Objeto:
-        \begin{itemize}
-            \item \lstinline|nomeClasse nomeObjeto;|
-            \item Semelhante ao apontador no C++.
-            \item Cria-se a referência mas não se cria o objeto.
-            \item Criação do objeto através da cláusula \lstinline|new|.
-            \item Uma vez criado o objeto, a referência não pode ser manipulada numericamente.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
+\section{Construtores}
+\subsection{Motivação}
 
 \begin{frame}{Criando Objetos}
 \lstinline|Produto p;|
@@ -311,7 +256,6 @@ Java:
     \end{itemize}
 \end{frame}
 
-\section{Construtores}
 
 \begin{frame}{Construindo um objeto}
     
@@ -331,68 +275,186 @@ Java:
             \item \lstinline|p = new Produto();| cria $(null, 0.0, 0)$
         \end{itemize}
     \end{itemize}
+    \begin{block}{}
+            E se a gente quiser criar um objeto com outros valores?
+    \end{block}
 \end{frame}
 
-\subsection{Construtores}
-
-\begin{frame}{Construtores}
-    \begin{itemize}
-        \item Construtores são usados para inicializar objetos com valores diferentes do padrão.
-        \item Construtores:
-        \begin{itemize}
-            \item Possuem o mesmo nome da classe.
-            \item Não possuem valores de retorno.
-        \end{itemize}
-        \item Uma classe pode ter de 0 a muitos construtores.
-    \end{itemize}
+\begin{frame}[fragile]{Aumentando a classe Produto: UML}
+\begin{center}
+    \tiny
+\begin{tikzpicture} 
+    \umlclass{Produto}{ 
+        + descricao : String \\ 
+        + preco : float \\
+        + quant :  int  
+    }{ 
+    + inicializaProduto(descricao : String, preco : float, quant : int) : void \\ 
+    + emEstoque() : boolean} 
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
-\begin{frame}{Construtores}
-    
-    \begin{itemize}
-        \item Razões para se usar construtores especializados:
-        \begin{itemize}
-            \item Algumas classes não possuem estado inicial aceitável sem parâmetros.
-            \item Fornecer um estado inicial é conveniente e aceitável quando da construção de alguns tipos de objetos.
-            \item Construir um objeto aos poucos pode ser desgastante de forma que pode ser conveniente que se tenha um estado inicial correto quando forem criados.
-            \item Um construtor que não é publico restringe quem irá criar objetos utilizando-o. Pode-se assim restringir o uso de sua classe.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\subsection{Usando construtores}
-
-    
-\begin{frame}[fragile]{Classe Produto: usando construtores}
+\begin{frame}[fragile]{Aumentando a classe Produto}
 \begin{lstlisting}
 class Produto {
-    ...
+    String descricao;
+    float preco;
+    int quant;
     
-    Produto(String d, float p, int q)
-    {
-        if (d.length() >= 3)
-            descricao = d;
-        if (p > 0)
-            preco = p;
-        if (q >= 0)
-            quant = q;
+    boolean emEstoque() {
+        return (quant > 0);
     }
     
-    Produto() {
-        descricao = "Novo Produto";
-        preco = 0.01F;
-        quant = 0; 
+    void inicializaProduto(String d, float p, int q) {
+        descricao = d;
+        preco = p;
+        quant = q;
     }
 }
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]{Usando a classe Produto tunada}
+\begin{lstlisting}
+class Aplicacao {
+    public static void main(String args[]) {
+        Produto p = new Produto();
+
+        p.inicializaProduto("Shulambs", 1.99F, 200);
+        // p.descricao = "Shulambs";
+        // p.preco = 1.99F;
+        // p.quant = 200;
+    
+        System.out.println("Produto: " + p.descricao);
+        System.out.println("Preço: " + p.preco);
+        System.out.println("Estoque: " + p.quant);
+        
+        if (p.emEstoque()) {
+            System.out.println("Produto em estoque.");
+        }
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Hmmmmmmmmmmmmmm}
+    \begin{figure}[h]
+        \begin{center}
+           \includegraphics[width=8cm]{./martinFowler.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Construtores}
+        \begin{itemize}
+                \item Construtores são usados para inicializar objetos com valores diferentes do padrão.
+                \item Construtores:
+                        \begin{itemize}
+                                \item Possuem o mesmo nome da classe.
+                                \item Não possuem valores de retorno.
+                        \end{itemize}
+                \item Uma classe pode ter de 0 a muitos construtores.
+                \item O Construtor com paramêtros para nossa classe Produto: 
+        \end{itemize}
+        \begin{lstlisting}
+    Produto(String d, float p, int q) {
+      descricao = d;
+      preco = p;
+      quant = q;
+    }
+        \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Classe Produto versão final}
+\begin{lstlisting}
+class Produto {
+    String descricao;
+    float preco;
+    int quant;
+
+    Produto(String d, float p, int q) {
+      descricao = d;
+      preco = p;
+      quant = q;
+    }
+
+    boolean emEstoque() {
+        return (quant > 0);
+    }
+
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{UML final da classe Produto}
+\begin{center}
+    \tiny
+\begin{tikzpicture} 
+    \umlclass{Produto}{ 
+        + descricao : String \\ 
+        + preco : float \\
+        + quant :  int  
+    }{ 
+    + emEstoque() : boolean} 
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\subsection{Usando construtores}
+
 
 \begin{frame}[fragile]{Usando construtores da classe Produto}
 \begin{lstlisting}
 class Aplicacao {
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
+        Produto p1 = new Produto();
+        
+        Produto p2 = new Produto("Shulambs", 1.99F, 200);
+        
+        System.out.println("Produto: " + p1.descricao);
+        System.out.println("Preço: " + p1.preco);
+        System.out.println("Estoque: " + p1.quant);
+        
+        System.out.println("Produto: " + p2.descricao);
+        System.out.println("Preço: " + p2.preco);
+        System.out.println("Estoque: " + p2.quant);
+        
+    }
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Classe Produto versão final 2: agora vai!}
+\begin{lstlisting}
+class Produto {
+    String descricao;
+    float preco;
+    int quant;
+
+    Produto() {
+      descricao = "Novo produto";
+      preco = 4.20;
+      quant = 0;
+    }
+
+    Produto(String d, float p, int q) {
+      descricao = d;
+      preco = p;
+      quant = q;
+    }
+
+    boolean emEstoque() {
+        return (quant > 0);
+    }
+
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Usando construtores da classe Produto}
+\begin{lstlisting}
+class Aplicacao {
+    public static void main(String args[]) {
         Produto p1 = new Produto();
         
         Produto p2 = new Produto("Shulambs", 1.99F, 200);
@@ -411,5 +473,11 @@ class Aplicacao {
 \end{frame}
 
 
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{De derrota em derrota até a vitória final.}"
+        \end{block}
+\end{frame}
 
 \end{document}

@@ -1,0 +1,294 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+\usepackage{xcolor}
+\usepackage{ulem}
+
+
+\title[Programação Modular]
+{%
+	Abstração, static e final
+}
+
+\author[Prof. Pedro Pongelupe]
+{
+	Prof.~Pedro Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+\section{Abstração}
+
+\begin{frame}{Abstração}
+        \begin{block}{O quê é??}
+                \begin{itemize}
+                        \item "Capacidade de \underline{enxergar} uma operação complexa de uma \underline{forma simplificada}."
+                        \item "Visualização ou representação de uma entidade que inclui somente os atributos de importância em um contexto particular." (Sebesta, 2000)
+                \end{itemize}
+        \end{block}
+\end{frame}
+
+\begin{frame}{Abstração}
+        \begin{block}{Representação}
+                Vamos pensar num módulo Usuário.  
+                \begin{itemize}
+                        \item Quais atributos? 
+                        \item Quais métodos? 
+                \end{itemize}
+        \end{block}
+\end{frame}
+
+\begin{frame}{Abstração: Representação}
+        \begin{block}{Peraiiii}
+        Um módulo deve prover uma boa abstração da função pela qual é responsável.
+                Antes de pensar no módulo Pessoa. Vamos pensar em qual contexto esse módulo será utilizado:   
+                \begin{itemize}
+                        \item \href{https://github.com/Pongelupe/DonactionBackEndJava/blob/master/backend/java/Usuario.java}{Sistema de doação de sangue} 
+                        \item \href{https://github.com/Pongelupe/NAASP-Backend/blob/master/src/main/java/br/com/naasp/models/Usuario.java}{Sistema de gerenciamento de leitos de um hospital} 
+                        \item \href{https://github.com/Pongelupe/coworkingSystem/blob/master/back-end/src/main/java/com/br/coworkingSystem/model/Usuario.java}{Sistema de gerenciamento de salas de coworking} 
+                        \item \href{https://github.com/Pongelupe/mol-api/blob/master/src/main/java/br/com/mol/molapi/entity/User.java}{App para genrenciamento de receitas digitais} 
+                \end{itemize}
+        \end{block}
+\end{frame}
+
+\begin{frame}{Abstração: operação simplificada}
+        \begin{itemize}
+                \item Conceito da caixa-preta:
+                        \begin{itemize}
+                                \item Entrada e saída bem conhecidas 
+                                \item Detalhes ocultos
+                        \end{itemize}
+                        \begin{block} {Ideia Principal}
+                                Não é necessário saber detalhes do funcionamento de um objeto para utilizá-lo
+                                \\Como funciona classe Scanner do Java?
+                        \end{block}
+
+        \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Como funciona a classe Scanner?}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=\textwidth]{scanner1.png}
+        \end{center}
+    \end{figure}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=\textwidth]{scanner2.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Como funciona a classe Scanner? \\ Não precisamos saber!!!!}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=.5\textwidth]{abstration_meme.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Abstração: operação simplificada}
+        \begin{block} {Mas mesmo assim podemos usar esses métodos tranquilamente}
+                \begin{itemize}
+                        \item Scanner s = new Scanner(System.in); 
+                        \item s.nextLine(); 
+                        \item s.hasNext(); 
+                \end{itemize}
+        \end{block}
+\end{frame}
+        
+\section{static}     
+\begin{frame}[fragile]{Membros estáticos}
+
+        \begin{block}{Membro estático}
+                Membro com tempo de vida global e escopo local.
+        \end{block}
+
+        \bi
+\item São atributos ou métodos comuns a todos os objetos de uma classe.
+
+\item Membros de classe.
+        \bi
+\item Compartilhado por todos os objetos daquela classe.
+\item Primeiro objeto inicializa a variável\footnote{Na verdade, em Java, membro é inicializado quando a classe é carregada.}.
+        \ei
+        \ei
+\end{frame}
+\begin{frame}[fragile]{Membros estáticos}
+
+        \begin{block}{Quais as principais utilidadeas?}
+                \bi
+        \item Implementação de contadores e identificadores de autoincremento
+
+        \item Definição de constantes.
+                \ei
+        \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Membros estáticos}
+        Exemplos no Eclipse (Classe Aluno)
+\end{frame}
+\begin{frame}{Diagrama UML (sem \textit{getters})}
+    \begin{center}
+        \tiny
+        \begin{tikzpicture}
+        \umlclass{Produto}{
+            -- id : int \\
+            -- descricao : String \\
+            -- preco : float \\
+            -- quant : int \\
+            \umlstatic{-- cont : int}
+        }{
+           \umlstatic{+ getCont() : int} \\
+            + getId() : int \\
+            + emEstoque() : boolean \\
+            + setDescricao(d : String) : void \\
+            + setPreco(p : float) : void \\
+            + setQuant(q : int) : void \\
+            + Produto(d : String, p : float, q : int) \\
+            + Produto()
+}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\section{Membros finais}
+
+\begin{frame}[fragile]{Membros finais}
+
+    \begin{block}{Membro final}
+      Podem ser definidos/inicializados apenas uma vez.
+    \end{block}
+
+    \bi
+    \item São atributos, métodos ou classes, em geral, constantes.
+
+    \item Modificador de acesso \lstinline|final|.
+
+    \item Sua função varia dependendo do tipo de membro. No caso de variáveis, define constantes.
+    \ei
+\end{frame}
+
+
+
+
+\subsection{Exemplo: membros finais}
+
+\begin{frame}[fragile]{Classe Produto: atributo final}
+        Exemplos no Eclipse (Classe SalaDeEstudos)
+\end{frame}
+
+
+
+\begin{frame}{Classe Produto: diagrama UML (sem métodos)}
+    \begin{center}
+        \tiny
+        \begin{tikzpicture}
+        \umlclass{Produto}{
+            \umlstatic{+ DESCRICAO\_PADRAO : const String = ``Shulambs''} \\
+            \umlstatic{+ MAX\_ESTOQUE : const int = 1000} \\
+            \umlstatic{-- cont : int} \\
+            -- id : int \\
+            -- descricao : String \\
+            -- preco : float \\
+            -- quant : int \\
+        }{}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+\subsection{Atributo final não constante}
+
+\begin{frame}{Atributo final não constante}
+    \begin{itemize}
+        \item Constantes são atributos \lstinline|static final|.
+        \item São imutáveis:
+        \begin{itemize}
+        \item Não faz sentido um atributo imutável ser armazenado em nível de instância.
+        \end{itemize}
+        \item Se o estado do objeto pode mudar, então não é constante.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: atributo final não constante}
+\begin{lstlisting}
+// Constantes
+static final int NUMERO = 42;
+static final ImmutableList<String> MESES =
+           ImmutableList.of("janeiro", "fevereiro", "março");
+
+
+// Não constantes
+static String naoFinal = "atributo não final";
+final String naoStatic = "atributo não estático";
+static final String[] arranjoNaoVazio =
+            {"esses", "valores", "podem", "mudar"};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Um passo para trás, para depois dar dois à frente}"
+        \end{block}
+\end{frame}
+
+\end{document}

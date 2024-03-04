@@ -284,6 +284,45 @@ static final String[] arranjoNaoVazio =
 \end{lstlisting}
 \end{frame}
 
+\section{Destrutores}
+\begin{frame}[fragile]{Destrutores}
+        \begin{block}{O quê é??}
+                Métodos especiais invocados quando um objeto é finalizado (recolhido pelo coletor de lixo).  
+        \end{block}
+        \begin{block}{  }
+                \begin{itemize}
+                        \item Só há um destrutor por classe. 
+                        \item Um destrutor não tem parâmetros. 
+                        \item Não deve ser chamado diretamente
+                \end{itemize}
+        \end{block}
+\end{frame}
+\begin{frame}[fragile]{Coletor de Lixo - Garbage Collector}
+        \begin{block}{Quando o objeto está apto para ser coletado? }
+                Métodos especiais invocados quando um objeto é finalizado (recolhido pelo coletor de lixo).  
+                Não é mais acessado por nenhuma referência (ou referencias circulares)
+                \begin{itemize}
+                        \item O coletor de lixo é autônomo. 
+                        \item System.gc() 
+                \end{itemize}
+        \end{block}
+        \begin{block}{Como isso nos ajuda}
+                \begin{itemize}
+                        \item Eliminam a necessidade de se desalocar memória explicitamente. 
+                        \item Eliminam o vazamento de memória 
+                        \item Eliminam referências pendentes (\textit{dangling pointer})
+                \end{itemize}
+        \end{block}
+\end{frame}
+\begin{frame}[fragile]{Coletor de Lixo - Garbage Collector}
+        \begin{block}{Quando coletor de lixo passa? }
+                \begin{itemize}
+                        \item \textit{finalize()} 
+                        \item Java 9: Classe \textit{Cleaner} e método \textit{clean()} 
+                \end{itemize}
+        \end{block}
+\end{frame}
+
 \begin{frame}[fragile]{Obrigado!!}
         Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
         \begin{block}{  }

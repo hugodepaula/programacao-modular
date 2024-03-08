@@ -1,0 +1,499 @@
+
+%\renewcommand\year{2017}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Logo da PUC Minas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\logoPUC}[1]{
+\lhead{\begin{tabular*}{18.0cm}{p{2cm}p{14cm}@{\extracolsep{\fill}}}
+ \multirow{3}{2.4cm}{\epsfig{file=#1,width=1.5cm}}
+   & \\
+   &  \multicolumn{1}{c}{\usefont{T1}{cmss}{bx}{n} \UNIVERSIDADE} \\
+   &  \multicolumn{1}{c}{\usefont{T1}{cmss}{x}{n} \UNIDADE $~-~$ \INSTITUTO $~-~$ \CURSO }\\
+\end{tabular*}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caracteristicas da disciplina
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\dadosDisciplina{\DISCIPLINA}{\CURSO}{\TURNO}{\ANO}{\SEMESTRE}{\PROFESSOR}{\EMAILPROFESSOR}
+
+\newcommand{\dadosDisciplina}[7]{\noindent
+\resizebox{.95\textwidth}{!}{
+\begin{tabular*}{18.5cm}{|p{8.6cm}@{\extracolsep{\fill}}|p{4.5cm}|p{1.7cm}|}
+\hline
+
+\sf Disciplina & \sf \hspace{-1cm} Curso  & \hspace{-1cm} \sf Semestre \\
+
+\multicolumn{1}{|r|}{#1} &
+\multicolumn{1}{r|}{#2} &
+\multicolumn{1}{r|}{#4/#5$^\circ$} \\ \hline \hline
+\multicolumn{3}{|l|}{\sf Professor} \\
+\multicolumn{3}{|c|}{#6~(#7)} \\ \hline
+\end{tabular*}
+}
+}
+
+
+%%%%%%%%%%
+%%%%%
+%%%%%%%%%%
+
+\newcommand\dadosAvancadosDisciplina[9]
+{
+    \def\tempa{#1}%
+    \def\tempb{#2}%
+    \def\tempc{#3}%
+    \def\tempd{#4}%
+    \def\tempe{#5}%
+    \def\tempf{#6}%
+    \def\tempg{#7}
+    \def\temph{#8}%
+    \def\tempi{#9}%
+    \dadosAvancadosDisciplinaCont
+}
+\newcommand{\dadosAvancadosDisciplinaCont}[2]{
+\noindent
+\resizebox{.95\textwidth}{!}{
+\begin{tabular*}{18.5cm}{|p{3cm}<{\centering}@{\extracolsep{\fill}}|p{3.5cm}<{\centering}|p{3cm}<{\centering}|p{5cm}<{\centering}@{\extracolsep{\fill}}|p{4.7cm}<{\centering}|}
+\hline
+%\multicolumn{3}{|c|}{\sf Carga Horária Semanal} & \sf Carga Horária Semestral & \sf Número de Créditos \\
+%\hline
+%\sf Teórica & \sf Prática & \sf Total &  &  \\
+%\tempa & \tempb & \tempc & \tempd\textbf{} & \tempe \\
+%\hline
+\multicolumn{5}{|l|}{\sf Objetivos} \\
+\multicolumn{5}{|l|}{\hspace{0.3cm} \begin{minipage}{17cm}
+\vspace{0.3cm}
+\input{\tempf}
+\vspace{0.3cm}
+\end{minipage}}\\ \hline
+
+\multicolumn{5}{|l|}{\sf Ementa} \\
+\multicolumn{5}{|l|}{\hspace{0.3cm} \begin{minipage}{17cm}
+\vspace{0.3cm}
+\input{\tempg}
+\vspace{0.3cm}
+\end{minipage}}\\ \hline
+%\end{tabular*}
+
+
+\multicolumn{5}{|l|}{\sf Processo de Avaliação} \\ %\hline
+%\multicolumn{4}{|l}{\hspace{0.3cm} Provas}     & \temph \\
+%\multicolumn{4}{|l}{\hspace{0.3cm} Trabalhos Práticos} &  \tempi \\ 
+%\multicolumn{4}{|l}{\hspace{0.3cm} Total}              & 100 \\
+
+
+%\hline
+
+%\multicolumn{5}{|l|}{\sf Trabalhos Práticos} \\
+\multicolumn{5}{|l|}{\hspace{0.3cm} \begin{minipage}{17.6cm}
+\vspace{0.3cm}
+\input{#1}
+\vspace{0.3cm}
+\end{minipage}}\\ \hline
+\multicolumn{5}{|l|}{\sf Bibliografia} \\
+\multicolumn{5}{|l|}{\hspace{0.3cm} \begin{minipage}{17cm}
+\vspace{0.3cm} \small
+\input{#2}
+\vspace{0.3cm}
+\end{minipage}}\\ \hline
+
+\end{tabular*}
+}
+}
+
+
+\newcommand{\tikzcalhead}[1]{\node[anchor=mid](seg){S};
+\node[base right=of seg](ter){T}; \node[base right=of ter](qua){Q};
+\node[base right=of qua](qui){Q}; \node[base right=of qui](sex){S};
+\node[base right=of sex](sab){S}; \node[darkgreen,base right=of sab](dom){D};
+\node[darkgreen,above=of qui]{\textbf{#1}};}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calendário Tikz Colorido
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Definicao de Cores
+\newcommand{\coraula}{blue}
+\newcommand{\cordomingo}{gray}
+
+\newcommand{\markprova}{\node [fill=yellow!50!white,circle, minimum size=.5cm] {};}
+\newcommand{\markexerc}{\node [fill=green!50!white,circle, minimum size=.5cm] {};}
+\newcommand{\markferiado}{\node [fill=red!35!white,circle, minimum size=.5cm] {};}
+
+\input{infos/marca-dia-feriado}
+
+%% Devem ser editados de acordo com disciplina!!!%%%%%%%%
+\input{infos/marca-dia-exerc}
+\input{infos/marca-dia-prova}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\calVisualColorido}[5]{
+\noindent
+\resizebox{.95\textwidth}{!}{
+\ifnum#1=1 %
+%\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+%\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+%draw=darkgreen,thick,rounded corners=5pt,%
+%postaction={decorate,decoration={markings,mark=at position 0.51 with
+\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list},every day/.style={anchor=mid},day text=\%d0]
+\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+draw=darkgreen,thick,rounded corners=5pt,%
+postaction={decorate,decoration={markings,mark=at position 0.20 with
+        {\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#4) {#4};}}} % year on frame: decorations.markings library
+]{%
+    \tikzcalhead{Fevereiro}  \& 
+    \tikzcalhead{Março} \&
+    \tikzcalhead{Abril}  \&
+    \tikzcalhead{Maio}  \&
+   \tikzcalhead{Junho} \\
+    \calendar(fev)[dates=#4-02-01 to #4-02-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(mar)[dates=#4-03-01 to #4-03-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(abr)[dates=#4-04-01 to #4-04-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(mai)[dates=#4-05-01 to #4-05-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(jun)[dates=#4-06-01 to #4-06-last,if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}, if={(at least=#5) [black]}] \markdiasferiados \markdiasexerc \markdiasprova;  \\
+};	
+\end{tikzpicture}
+\else% 
+\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list},every day/.style={anchor=mid},day text=\%d0]
+\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+draw=darkgreen,thick,rounded corners=5pt,%
+postaction={decorate,decoration={markings,mark=at position 0.20 with
+        {\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#4) {#4};}}} % year on frame: decorations.markings library
+]{%
+    \tikzcalhead{Agosto}   \& 
+    \tikzcalhead{Setembro} \&
+    \tikzcalhead{Outubro}  \&
+    \tikzcalhead{Novembro} \&
+    \tikzcalhead{Dezembro} \\
+    \calendar(ago)[dates=#4-08-01 to #4-08-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}]  \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(set)[dates=#4-09-01 to #4-09-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}]  \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(out)[dates=#4-10-01 to #4-10-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}]  \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(nov)[dates=#4-11-01 to #4-11-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}]  \markdiasferiados \markdiasexerc \markdiasprova; \&
+    \calendar(dez)[dates=#4-12-01 to #4-12-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]}, if={(at least=#5) [black]}]  \markdiasferiados \markdiasexerc \markdiasprova; \\
+};	
+\end{tikzpicture}
+\fi
+}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calendário Tikz Colorido Estendido para 3 vezes por semana
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\calVisualTresColorido}[6]{
+	\noindent
+	\resizebox{.95\textwidth}{!}{
+		\ifnum#1=1 %
+		%\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		%\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		%draw=darkgreen,thick,rounded corners=5pt,%
+		%postaction={decorate,decoration={markings,mark=at position 0.51 with
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list},every day/.style={anchor=mid},day text=\%d0]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#5) {#5};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Fevereiro}  \& 
+			\tikzcalhead{Março} \&
+			\tikzcalhead{Abril}  \&
+			\tikzcalhead{Maio}  \&
+			\tikzcalhead{Junho} \\
+			\calendar(fev)[dates=#5-02-01 to #5-02-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(mar)[dates=#5-03-01 to #5-03-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(abr)[dates=#5-04-01 to #5-04-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(mai)[dates=#5-05-01 to #5-05-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(jun)[dates=#5-06-01 to #5-06-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}, if={(at least=#6) [black]}] \markdiasferiados \markdiasexerc \markdiasprova;  \\
+		};	
+		\end{tikzpicture}
+		\else% 
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list},every day/.style={anchor=mid},day text=\%d0]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#5) {#5};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Agosto}   \& 
+			\tikzcalhead{Setembro} \&
+			\tikzcalhead{Outubro}  \&
+			\tikzcalhead{Novembro} \&
+			\tikzcalhead{Dezembro} \\
+			\calendar(ago)[dates=#5-08-01 to #5-08-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(set)[dates=#5-09-01 to #5-09-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(out)[dates=#5-10-01 to #5-10-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(nov)[dates=#5-11-01 to #5-11-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}] \markdiasferiados \markdiasexerc \markdiasprova; \&
+			\calendar(dez)[dates=#5-12-01 to #5-12-last, if={(Sunday) [\cordomingo]},if={(#2) [\coraula]},if={(#3) [\coraula]},if={(#4) [\coraula]}, if={(at least=#6) [black]}] \markdiasferiados \markdiasexerc \markdiasprova; \\
+		};	
+		\end{tikzpicture}
+		\fi
+	}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calendário Tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\calVisual}[4]{
+	\noindent
+	\resizebox{.95\textwidth}{!}{
+		\ifnum#1=1 %
+		%\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		%\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		%draw=darkgreen,thick,rounded corners=5pt,%
+		%postaction={decorate,decoration={markings,mark=at position 0.51 with
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#4) {#4};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Fevereiro}  \& 
+			\tikzcalhead{Março} \&
+			\tikzcalhead{Abril}  \&
+			\tikzcalhead{Maio}  \&
+			\tikzcalhead{Junho} \\
+			\calendar(fev)[dates=#4-02-01 to #4-02-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(mar)[dates=#4-03-01 to #4-03-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(abr)[dates=#4-04-01 to #4-04-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(mai)[dates=#4-05-01 to #4-05-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(jun)[dates=#4-06-01 to #4-06-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}];  \\
+		};	
+		\end{tikzpicture}
+		\else% 
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#4) {#4};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Agosto}   \& 
+			\tikzcalhead{Setembro} \&
+			\tikzcalhead{Outubro}  \&
+			\tikzcalhead{Novembro} \&
+			\tikzcalhead{Dezembro} \\
+			\calendar(ago)[dates=#4-08-01 to #4-08-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(set)[dates=#4-09-01 to #4-09-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(out)[dates=#4-10-01 to #4-10-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(nov)[dates=#4-11-01 to #4-11-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \&
+			\calendar(dez)[dates=#4-12-01 to #4-12-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]}]; \\
+		};	
+		\end{tikzpicture}
+		\fi
+	}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calendário Tikz Estendido para 3 vezes por semana
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\calVisualTres}[5]{
+	\noindent
+	\resizebox{.95\textwidth}{!}{
+		\ifnum#1=1 %
+		%\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		%\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		%draw=darkgreen,thick,rounded corners=5pt,%
+		%postaction={decorate,decoration={markings,mark=at position 0.51 with
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list},every day/.style={anchor=mid}]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#5) {#5};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Fevereiro}  \& 
+			\tikzcalhead{Março} \&
+			\tikzcalhead{Abril}  \&
+			\tikzcalhead{Maio}  \&
+			\tikzcalhead{Junho} \\
+			\calendar(fev)[dates=#5-02-01 to #5-02-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(mar)[dates=#5-03-01 to #5-03-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(abr)[dates=#5-04-01 to #5-04-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(mai)[dates=#5-05-01 to #5-05-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(jun)[dates=#5-06-01 to #5-06-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}];  \\
+		};	
+		\end{tikzpicture}
+		\else% 
+		\begin{tikzpicture}[ampersand replacement=\&, every calendar/.style={week list}]
+		\matrix[row 1/.style={ampersand replacement=\&, node distance=.3ex}, row 3/.style={node distance=.3ex}, column sep=1ex,%
+		draw=darkgreen,thick,rounded corners=5pt,%
+		postaction={decorate,decoration={markings,mark=at position 0.20 with
+				{\node[fill=white,text=darkgreen,font={\bfseries\Large}] (#5) {#5};}}} % year on frame: decorations.markings library
+		]{%
+			\tikzcalhead{Agosto}   \& 
+			\tikzcalhead{Setembro} \&
+			\tikzcalhead{Outubro}  \&
+			\tikzcalhead{Novembro} \&
+			\tikzcalhead{Dezembro} \\
+			\calendar(ago)[dates=#5-08-01 to #5-08-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(set)[dates=#5-09-01 to #5-09-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(out)[dates=#5-10-01 to #5-10-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(nov)[dates=#5-11-01 to #5-11-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \&
+			\calendar(dez)[dates=#5-12-01 to #5-12-last, if={(Sunday) [darkgreen]},if={(#2) [darkred]},if={(#3) [darkred]},if={(#4) [darkred]}]; \\
+		};	
+		\end{tikzpicture}
+		\fi
+	}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preambulo - Termcal 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\aviso}[2]{%
+	\caltext{#1}{\vbox{\vspace{1mm}\scriptsize \color{darkgreen} \textit{#2} \vspace{1mm}}}
+}
+
+\newcommand{\feriado}[2]{%
+	\options{#1}{\noclassday}
+	\caltext{#1}{\cellcolor{red!40} \centering \bf \sf #2}
+}
+
+\newcommand\Segunda{Monday}
+\newcommand\Terca{Tuesday}
+\newcommand\Quarta{Wednesday}
+\newcommand\Quinta{Thursday}
+\newcommand\Sexta{Friday}
+\newcommand\Sabado{Saturday}
+
+
+\newcommand{\prova}[1]{%
+	\caltextnext{\cellcolor{yellow!40} \centering \bf \sf #1}
+}
+\newcommand{\seminario}[1]{%
+	\caltextnext{\cellcolor{green!20} \centering \bf \sf #1}
+}
+\newcommand{\exercicios}[1]{%
+	\caltextnext{\cellcolor{green!20} \centering \bf \sf #1}
+}
+
+\newcommand{\semanaSegTer}{%
+	\calday[Segunda-feira]{\classday}
+	\calday[Terça-feira]{\classday}
+	\skipday % Quarta-feira (sem aulas)
+	\skipday % Quinta-feira (sem aulas)
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+\newcommand{\semanaSegQua}{%
+	\calday[Segunda-feira]{\classday}
+	\skipday % Terça-feira (sem aulas)
+	\calday[Quarta-feira]{\classday}
+	\skipday % Quinta-feira (sem aulas)
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaSegQui}{%
+	\calday[Segunda-feira]{\classday}
+	\skipday % Terça-feira (sem aulas)
+	\skipday % Quarta-feira (sem aulas)
+	\calday[Quinta-feira]{\classday}
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaSegSex}{%
+	\calday[Segunda-feira]{\classday}
+	\skipday % Terça-feira (sem aulas)
+	\skipday % Quarta-feira (sem aulas)
+	\skipday % Quinta-feira (sem aulas)
+	\calday[Sexta-feira]{\classday}
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaSegSab}{%
+    \calday[Segunda-feira]{\classday}
+    \skipday % Terça-feira (sem aulas)
+    \skipday % Quarta-feira (sem aulas)
+    \skipday % Quinta-feira (sem aulas)
+    \skipday % Sexta-feira (sem aulas)
+    \calday[Sábado]{\classday}
+    \skipday % domingo (sem aulas)
+}
+
+
+\newcommand{\semanaTerQua}{%
+	\skipday % Segunda-feira (sem aulas)
+	\calday[Terça-feira]{\classday}
+	\calday[Quarta-feira]{\classday}
+	\skipday % Quinta-feira (sem aulas)
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaTerQui}{%
+	\skipday % Segunda-feira (sem aulas)
+	\calday[Terça-feira]{\classday}
+	\skipday % Quarta-feira (sem aulas)
+	\calday[Quinta-feira]{\classday}
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+\newcommand{\semanaTerSex}{%
+	\skipday % Segunda-feira (sem aulas)
+	\calday[Terça-feira]{\classday}
+	\skipday % Quarta-feira (sem aulas)
+	\skipday % Quinta-feira (sem aulas)
+	\calday[Sexta-feira]{\classday}
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaQuaQui}{%
+	\skipday % Segunda-feira (sem aulas)
+	\skipday % Terça-feira (sem aulas)
+	\calday[Quarta-feira]{\classday}
+	\calday[Quinta-feira]{\classday}
+	\skipday % Sexta-feira (sem aulas)
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+\newcommand{\semanaQuaSex}{%
+	\skipday % Segunda-feira (sem aulas)
+	\skipday % Terça-feira (sem aulas)
+	\calday[Quarta-feira]{\classday}
+	\skipday % Quinta-feira (sem aulas)
+	\calday[Sexta-feira]{\classday}
+	\skipday\skipday % fim de semana (sem aulas)
+}
+
+\newcommand{\semanaQuiSex}{%
+    \skipday % Segunda-feira (sem aulas)
+    \skipday % Terça-feira (sem aulas)
+    \skipday % Quarta-feira (sem aulas)
+    \calday[Quinta-feira]{\classday}
+    \calday[Sexta-feira]{\classday}
+    \skipday\skipday % fim de semana (sem aulas)
+}
+
+
+\newcommand{\semanaSab}{%
+    \skipday % Segunda-feira (sem aulas)
+    \skipday % Terça-feira (sem aulas)
+    \skipday % Quarta-feira (sem aulas)
+    \skipday % Quinta-feira (sem aulas)
+    \skipday % Sexta-feira (sem aulas)
+    \calday[Sábado]{\classday}
+    \skipday % domingo (sem aulas)
+}
+
+\newcommand{\semanaQuaQuiSex}{%
+	\skipday % Segunda-feira (sem aulas)
+	\skipday % Terça-feira (sem aulas)
+	\calday[Quarta-feira]{\classday}
+	\calday[Quinta-Feira]{\classday}
+	\calday[Sexta-feira]{\classday}
+	\skipday\skipday % fim de semana (sem aulas)
+}
+

@@ -236,19 +236,19 @@
 
 \subsection{Agregação x Composição}
 \begin{frame}{Agregação x composição}
-\begin{itemize}
-    \item \textbf{Agregação}: a existência da ``parte'' faz sentido, mesmo não existindo ``todo''.
         \begin{itemize}
-            \item partes podem eventualmente pertencer a mais de um todo (não simultaneamente).
-            \item Ex: Atleta $\longrightarrow$ Time\\[2mm]
+                \item \textbf{Agregação}: a existência da ``parte'' faz sentido, mesmo não existindo ``todo''.
+                        \begin{itemize}
+                                \item partes podem eventualmente pertencer a mais de um todo (não simultaneamente).
+                                \item Ex: Atleta $\longrightarrow$ Time\\[2mm]
+                        \end{itemize}
+                \item \textbf{Composição}: relacionamento mais forte. A existência da parte \textit{\textbf{não}} faz sentido se o todo não existir.
+                        \begin{itemize}
+                                \item as partes não podem ser compartilhadas.
+                                \item Ex: Itens $\longrightarrow$ Pedido \\[2mm]
+                        \end{itemize}
+                \item Relacionamentos do tipo ``composição'' indicam que se apaguem os objetos associados quando o todo for destruído/finalizado.
         \end{itemize}
-    \item \textbf{Composição}: relacionamento mais forte. A existência da parte \textit{\textbf{não}} faz sentido se o todo não existir.
-        \begin{itemize}
-            \item as partes não podem ser compartilhadas.
-            \item Ex: Itens $\longrightarrow$ Pedido \\[2mm]
-        \end{itemize}
-    \item Relacionamentos do tipo ``composição'' indicam que se apaguem os objetos associados quando o todo for destruído/finalizado.
-\end{itemize}
 \end{frame}
 \begin{frame}{Exemplo de agregação e composição}
     \begin{center}
@@ -278,11 +278,353 @@
     \end{tikzpicture}
 \end{center}
 \end{frame}
+\begin{frame}{Agregação x composição}
+        A dirença de entendimento entre agregação e composição é sutil e pode variar com o contexto.
+        \begin{itemize}
+                \item Turmas de disciplinas e horários. 
+                \item Time e atletas. 
+        \end{itemize}
+\end{frame}
+
+\section{Cardinalidade das associações}
+
+\begin{frame}{Cardinalidade das associações}
+        Indicam a quantidade de objetos possíveis em cada lado da relação
+
+        \begin{itemize}
+                \item \textit{um-para-um}
+                        \begin{itemize}
+                                \item Ex: um Curso tem um Coordenador\\[3mm]
+                        \end{itemize}
+                \item \textit{um-para-muitos}
+                        \begin{itemize}
+                                \item Ex: um Departamento tem muitos Professores, mas um Professor está alocado a um Departamento apenas   \\[3mm]
+                        \end{itemize}
+                \item \textit{muitos-para-muitos}
+                        \begin{itemize}
+                                \item Ex: um professor tem muitos alunos e um aluno tem aulas com vários professores\\[3mm]
+                        \end{itemize}
+                \item A cardinalidade \textit{muitos} pode ser qualificada.
+                        \begin{itemize}
+                                \item Ex: um aluno pode solicitar muitos livros na biblioteca, mas esse número é limitado a no máximo 5 ($[0..5]$)
+                        \end{itemize}
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Multiplicidade na UML}
+        \begin{description}
+                \item [1] -- exatamente 1 \\[2mm]
+                \item [0..1] -- zero ou 1 \\[2mm]
+                \item [*]  -- zero ou mais \\[2mm]
+                \item [1..*] -- um ou mais \\[2mm]
+                \item [1..10] -- um até dez \\[2mm]
+                \item [1,10] -- um ou dez \\[2mm]
+                \item [0,5..10] -- zero ou de 5 a dez
+        \end{description}
+\end{frame}
+
+\begin{frame}{Cardinalidade}
+    \begin{center}
+    \begin{tikzpicture}
+     \umlemptyclass{Curso}
+     \umlemptyclass[x=6]{Coordenador}
+     \umlassoc[mult1=1, mult2=1]{Curso}{Coordenador}
+    \end{tikzpicture} \\[5mm]
+    \begin{tikzpicture}
+     \umlemptyclass{Departamento}
+     \umlemptyclass[x=5]{Professor}
+     \umlaggreg[mult1=1, mult2=*]{Departamento}{Professor}
+    \end{tikzpicture} \\[5mm]
+    \begin{tikzpicture}
+     \umlemptyclass{Aluno}
+     \umlemptyclass[x=6]{Professor}
+     \umlassoc[mult1=*, mult2=*]{Aluno}{Professor}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\section{Exemplo: Controle de Estoque}
+
+\begin{frame}[fragile]{Exemplo: Controle de Estoque}
+\begin{center}\tiny
+    \begin{tikzpicture}
+     \umlclass{Estoque}{}{
+        + totalEmEstoque()  : int \\
+        + valorEmEstoque() : float
+     }
+     \umlclass[x=7.]{Produto}{\umlstatic{+ DESC\_PADRAO} \\
+                             \umlstatic{+ MAX\_ESTOQUE} \\
+                             \umlstatic{-- cont : int} \\
+                             -- id : int \\
+                             -- descricao : String \\
+                             -- preco : float \\
+                             -- quant : int}{}
+     \umluniassoc[arg=produtos, pos=0.6, mult=0..100, name=produtos]{Estoque}{Produto}
+     \umlnote[x=1, y=-2.5]{produtos-1}{\tiny Pressupoe o codigo Java: \\ \texttt{List<Produto> produtos} \\ \texttt{addProduto()} \\ \texttt{removeProduto()} \\ \texttt{getProduto()} \\ \texttt{replaceProduto()} \\ \texttt{getAllProdutos()}}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Controle de Estoque}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Estoque {
+   private static final int MAX_PRODUTOS = 100;
+   private Produto[] produtos;
+   private int numProdutos;
+
+   public void addProduto(Produto p) {
+      if (numProdutos < MAX_PRODUTOS) {
+         produtos[numProdutos++] = p;
+      }
+   }
+
+   public void removeProduto(String descricao) {
+      if (numProdutos > 0) {
+         for (int pos = 0; pos < numProdutos; pos++) {
+            if (descricao.equalsIgnoreCase(produtos[pos].getDescricao())) {
+               // remove produto
+               for (int i = pos + 1; i < numProdutos; i++)
+                  produtos[i - 1] = produtos[i];
+            }
+
+         }
+      }
+   }
+
+   ...
+\end{lstlisting}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Controle de Estoque}
+\begin{lstlisting}[basicstyle=\tiny]
+   public int totalEmEstoque() {
+      int total = 0;
+      for (int i = 0; i < numProdutos; i++)
+         total += produtos[i].getQuant();
+      return total;
+   }
+   public float valorEmEstoque() {
+      float valor = 0;
+      for (int i = 0; i < numProdutos; i++)
+         valor += produtos[i].getQuant() * produtos[i].getPreco();
+      return valor;
+   }
+   public String exibirEstoque()
+   {
+      StringBuilder valor = new StringBuilder();
+      for (int i = 0; i < numProdutos; i++)
+         valor.append("Produdo: " + produtos[i].getId()
+                  + "- " + produtos[i].getDescricao()
+                  + "   Preço: " + produtos[i].getPreco()
+                  + "   Quant.: " + produtos[i].getQuant() + "\n");
+      return valor.toString();
+   }
+   public Estoque() {
+      produtos = new Produto[MAX_PRODUTOS];
+      numProdutos = 0;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Projeto de relações}
+
+\subsection{Papeis}
+
+\begin{frame}{Associação e papeis}
+        Nome de associação:
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=6]{Carro}
+                        \umlassoc[name=possui]{Pessoa}{Carro}
+                        \node[above] at (possui-1) {possui};
+                \end{tikzpicture}
+        \end{center}
+        Nomes de papeis da associação:
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=7]{Carro}
+                        \umlassoc[arg1=dono, mult1=1, arg2=frota, mult2=*]{Aluno}{Carro}
+                \end{tikzpicture}
+        \end{center}
+        Múltiplos papeis:
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=7]{Carro}
+                        \umlassoc[anchors=-25 and -155, arg1=dono, mult1=1, arg2=frota, mult2=*]{Pessoa}{Carro}
+                        \umlassoc[anchors=25 and 155, arg1=motorista, mult1=0..1, mult2=0..1]{Pessoa}{Carro}
+                \end{tikzpicture}
+        \end{center}
+\end{frame}
+
+\begin{frame}{Múltiplos papeis como classes de associação}
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=8]{Empresa}
+                        \umlemptyclass[x=8, y=-2.3]{Pedido}
+                        \umlassoc[anchors=25 and 155, attr1=*|dadosPessoais, attr2=localTrab|*, name=func]{Pessoa}{Empresa}
+                        \umlassoc[anchors=-25 and -155, attr1=*|comprador, attr2=loja|*, name=cli]{Pessoa}{Empresa}
+                        \node[above](fnode) at (4,0.2) {};
+                        \node[below](cnode) at (4,-0.2) {};
+
+                        \umlassocclass[x=4, y=2.3, anchor1=130]{Funcionario}{fnode}{-- cargo : Cargo \\ -- salario: Moeda}{}
+                        \umlassocclass[x=4, y=-2.3, anchor1=130]{Cliente}{cnode}{-- limiteCred: Moeda}{}
+                        \umlassoc[arg1=1, arg2=*, name=cli]{Cliente}{Pedido}
+                \end{tikzpicture}
+        \end{center}
+\end{frame}
+
+\subsection{Navegabilidade}
+
+\begin{frame}{Navegabilidade}
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlclass{Cliente}{-- nome \\ -- endereço}{}
+                        \umlclass[x=8]{Pedido}{-- data \\ -- situação}{+ calcTaxa():double \\ + calcTotal():double}
+                        \umlclass[x=3, y=-3]{Pagamento}{-- valor}{}
+                        \umluniassoc[geometry=|-, arg1=1, arg2=1..*, mult2=formaPagto, pos2=2, align2=left]{Pedido}{Pagamento}
+                        \umlassoc[mult1=1,  mult2=0..*, name=cliped]{Cliente}{Pedido}
+                        \node[above] at (cliped-1) {faz $\blacktriangleright$};
+                \end{tikzpicture}
+        \end{center}
+\end{frame}
+
+
+
+\begin{frame}{Implementação de associações}
+
+        \begin{description}
+                \item [1] -- atributo simples (não pode ser \lstinline|null|) \\[2mm]
+                \item [0..1] -- atributo simples (pode ser \lstinline|null|) \\[2mm]
+                \item [*]  -- estruturas de dados ou coleções (listas, filas, pilhas, sets) \\[2mm]
+        \end{description}
+
+        \begin{block}{Navegabilidade e atributos}
+                Associações unidirecionais sugerem a implementação de atributos apenas na origem. Mas alguns casos exigem uma análise mais aprofundada.
+                \begin{center}
+                        \begin{tikzpicture}
+                                \umlemptyclass{Pessoa}
+                                \umlemptyclass[x=7]{Carro}
+                                \umluniassoc[mult1=1, mult2=*]{Pessoa}{Carro}
+                        \end{tikzpicture}
+                \end{center}
+
+        \end{block}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Associação unidirecional para 1}
+
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=7]{Carro}
+                        \umluniassoc[mult1=*, arg2=dono, mult2=1]{Carro}{Pessoa}
+                \end{tikzpicture}
+        \end{center}
+
+        \begin{lstlisting}
+class Carro {
+   private Pessoa dono;
+
+   public Carro(Pessoa dono) {
+      this.dono = dono;
+   }
+
+   public Pessoa getDono() {
+      return this.dono;
+   }
+
+   public void replaceDono(Pessoa novoDono) {
+      this.dono = novoDono;
+   }
+}
+        \end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Associação unidirecional para 0..1}
+
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlemptyclass{Pessoa}
+                        \umlemptyclass[x=7]{Carro}
+                        \umluniassoc[mult1=*, arg2=dono, mult2=0..1]{Carro}{Pessoa}
+                \end{tikzpicture}
+        \end{center}
+
+        \setlength\columnsep{-10pt}
+        \begin{multicols}{2}
+                \begin{lstlisting}
+class Carro {
+
+ private Pessoa dono;
+
+ public Carro() {
+   this.dono = null;
+ }
+
+ public Pessoa getDono() {
+   return this.dono;
+ }
+
+
+ public Pessoa addDono(Pessoa novo) {
+   if (this.dono == null)
+     this.dono = novo;
+ }
+
+ public removeDono() {
+   this.dono = null;
+ }
+
+ public void replaceDono(Pessoa novo){
+   this.dono = novo;
+ }
+}
+                \end{lstlisting}
+        \end{multicols}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Associações reflexivas}
+
+        \begin{itemize}
+                \item Uma classe pode estar associada a si mesma.
+        \end{itemize}
+
+        \begin{center}
+                \begin{tikzpicture}
+                        \umlclass{Funcionario}{-- gerente: Funcionario}{}
+                        \umlassoc[loopsize=5cm, angle1=30, angle2=-30, arg1=gerente, mult1=1, arg2=equipe, mult2=0..*]{Funcionario}{Funcionario}
+                \end{tikzpicture}
+        \end{center}
+
+
+\end{frame}
 
 \begin{frame}[fragile]{Obrigado!!}
         Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
         \begin{block}{  }
-                "\textit{O conhecimento nos faz responsáveis.}"
+                "\textit{Mas qualquer pequena divergência pode
+                tornar-se grande se insistirmos nela.}"
         \end{block}
 \end{frame}
 \end{document}

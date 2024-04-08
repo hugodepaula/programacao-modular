@@ -1,0 +1,387 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Polimorfismo%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+    
+\section{Polimorfismo}
+
+\begin{frame}{Polimorfismo}
+    \begin{itemize}
+    \item Polimorfismo $\longrightarrow$ muitas formas.
+    \item Algumas funções se aplicam a objetos de diferentes classes, alcançando o mesmo resultado semântico.
+    \item É o princípio que permite que classes filhas tenham métodos iguais, mas comportamentos diferentes.
+        \begin{itemize}
+            \item Métodos iguais $\longrightarrow$ mesma assinatura.
+            \item Comportamentos diferentes $\longrightarrow$ ações diferentes.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Tipos de Polimorfismo: Class. de Carndelli}
+
+\begin{frame}{Polimorfismo: Classificação de Cardelli}
+\begin{itemize}
+   \item Polimorfismo \textit{ad-hoc}
+   \begin{itemize}
+      \item Sobrecarga
+      \item Coerção \\[5mm]
+   \end{itemize}
+   \item Polimorfismo universal
+   \begin{itemize}
+      \item Polimorfismo universal paramétrico
+      \item Polimorfismo universal de inclusão
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\subsection{Polimorfismo ad-hoc}
+
+
+\begin{frame}{Polimorfismo \textit{ad-hoc}}
+
+\begin{itemize}
+\item Sobrecarga (\textit{overloading}) é uma forma limitada de polimorfismo
+   \begin{itemize}
+   \item permite definir funções com o mesmo nome em um mesmo escopo (assinaturas diferentes).
+   \item o compilador, pelos parâmetros, determina a função a ser chamada:  a / b (real), a / b (inteiro) \\[5mm]
+   \end{itemize}
+\item Coerção ocorre quando objeto diferente do esperado o compilador força a conversão automática
+   \begin{itemize}
+   \item $5.0 / 2 = ? \;\;\; \longmapsto float / float = float$ 
+   \item $int  \longmapsto   float\;\;\;$ (inteiro convertido para real)
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+\subsection{Polimorfismo universal de inclusão}
+
+
+
+\begin{frame}{Polimorfismo universal de inclusão}
+\begin{itemize}
+   \item Funções com mesmo nome e mesma assinatura, mas em escopo diferente.
+   \begin{itemize}
+   \item O programador não precisa determinar qual implementação será efetivamente executada.
+   \item Amarração tardia (\textit{late binding})
+   \end{itemize}
+   \item Pode ocorrer perda de desempenho (por causa da \textit{late binding})
+   \item Requisitos (deve haver):
+   \begin{itemize}
+   \item Herança.
+   \item Sobreposição de métodos.
+   \item Referência de uma superclasse apontando para um objeto de uma subclasse (referências polimórficas).
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Exemplo de herança simples}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{8}{8}\selectfont]{Brinquedo}{-- velocidade : double \\ -- aceleracao : double}{ + mover() \\ + velocidade(int) \\ + velocidade(double) \\ + velocidade(vel: float, ac: double)}
+     \umlclass[font=\fontsize{8}{8}\selectfont,x=-2.2, y=-3]{Carro}{}{+ mover()}
+     \umlclass[font=\fontsize{8}{8}\selectfont,x=0, y=-3]{Aviao}{}{+ mover()}
+     \umlclass[font=\fontsize{8}{8}\selectfont,x=2.2, y=-3]{Barco}{}{+ mover()}
+     \umlclass[font=\fontsize{8}{8}\selectfont,x=6]{ControleRemoto}{-- brinquedo : Brinquedo}{+ controleRemoto(: Brinquedo) \\ + ControleRemoto() \\ + mover()}
+        \umlVHVinherit{Carro}{Brinquedo} 
+        \umlVHVinherit{Aviao}{Brinquedo} 
+        \umlVHVinherit{Barco}{Brinquedo}
+    \umlassoc{ControleRemoto}{Brinquedo} 
+    \end{tikzpicture} \\[5mm]
+    Adaptado de: Bezerra, Gomes, Kulesza, \textit{Programação Orientada a Objetos, Aula 12}.
+\end{center}
+\end{frame}
+
+
+
+\section{Sobrepondo métodos e ocultando campos}
+
+
+\begin{frame}{Sobrepondo métodos e ocultando campos}
+
+\begin{itemize}
+\item Sobreposição (\textit{overriding}): métodos com mesmo nome e assinatura idênticas. 
+   \begin{itemize}
+           \item Métodos devem ser \textbf{não estáticos}.
+   \end{itemize}
+\end{itemize}
+\begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{8}{8}\selectfont]{SuperMostra}{+ str : String = "superStr"}{+ mostra() : void}
+     \umlclass[font=\fontsize{8}{8}\selectfont,y=-2]{EstendeMostra}{+ str : String = "estendeStr"}{+ mostra() : void}
+        \umlVHVinherit{EstendeMostra}{SuperMostra} 
+    \end{tikzpicture} 
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Sobrepondo métodos e ocultando campos}
+\begin{lstlisting}
+public class SuperMostra {
+   public String str = "superStr";
+
+   public void mostra() {
+      System.out.println("SuperMostra:  " + str);
+   }
+   
+}
+public class EstendeMostra extends SuperMostra {
+
+   public String str = "estendeStr";
+
+   public void mostra() {
+      System.out.println("EstendeMostra :  " + str);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Sobrepondo métodos e ocultando campos}
+\begin{lstlisting}
+public class Aplicacao {
+   public static void main(String[] args) {
+      EstendeMostra est = new EstendeMostra();
+      SuperMostra sup = est;
+      
+      System.out.println("est.str = " + est.str);
+      System.out.println("sup.str = " + sup.str);
+
+      est.mostra();
+      sup.mostra();
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Palavra-chave super}
+
+\begin{frame}{A palavra-chave \texttt{super}}
+
+\begin{itemize}
+\item Disponível para todos os métodos não estáticos de uma classe estendida.
+\item Pode corresponder ao método equivalente da superclasse.
+\item Pode corresponder a uma referência explícita à superclasse.
+   \begin{itemize}
+   \item super.método sempre utiliza a implementação da superclasse do método.
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{A palavra-chave \texttt{final}}
+
+\begin{itemize}
+\item Métodos \lstinline|final|:
+   \begin{itemize}
+   \item Significa que nenhuma classe estendida poderá sobrepor o método.
+   \end{itemize}
+\item Classes \lstinline|final|
+   \begin{itemize}
+   \item Não pode ser sub-classificada (herdada) por outra classe, e todos os métodos são final.
+   
+   \item Segurança: Comportamento não mudará
+   \item Otimização: Define previamente qual método será chamado (evita \textit{late binding}).
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{A classe Object}
+
+\begin{frame}{A classe \texttt{Object}}
+\begin{itemize}
+\item Todas as classes estendem a classe \lstinline|Object|, direta ou indiretamente.
+   \begin{itemize}
+   \item Métodos de utilidade geral
+   \item Métodos de linha (fluxo) de execução (threads)
+   \end{itemize}
+\item Alguns métodos de utilidade geral:
+   \begin{itemize}
+   \item \lstinline|public boolean equals(Object obj)|: compara estado de dois objetos.
+   \item \lstinline|public int hashCode()|: retorna código hash para uso em tabelas \lstinline|HashTable|.
+   \item \lstinline|protected Object clone() throws ClonenotSupportedException|: retorna um clone.
+   \item \lstinline|public final Class getclass()| : retorna o objeto do tipo class que representa a classe deste objeto.
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Exemplo: Estoque polimórfico}
+
+\begin{frame}{Exemplo: Estoque polimórfico}
+    \begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-4,y=.5]{Produto}{-- descricao : String \\ -- quant : int \\ -- preco : float \\ -- dataFabricacao : LocalDateTime}{+ emEstoque() : boolean \\ + toString() : String}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-3]{BemDuravel}{ -- mesesGarantia : int}{+ toString() : String}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-3]{BemDeConsumo}{-- dataValidade : LocalDate}{ + toString() : String}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=1.5,y=.5]{Estoque}{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- listaDeProdutos : Produto[] \\ -- numProdutos}{+ adicionar(Produto) \\
+     + consultar(String) : Produto \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float  \\ + toString() : String }
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+     \umluniaggreg[mult1=1, mult2=*]{Estoque}{Produto}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Produto}
+\begin{lstlisting}
+public class Produto {
+    ...
+
+   /**
+    * Método sobreposto da classe Object.
+    */
+   @Override
+   public String toString() {
+      return "Produdo: " + id + " - " + descricao
+         + "   Preço: R$" + preco + "   Quant.: " + quant
+         + "   Fabricação: " + dataFabricacao;
+   }
+
+   @Override
+   protected void finalize() throws Throwable {
+      super.finalize();
+      System.out.println("Finalizando um produto....");
+      instancias--;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Bem de Consumo e Bem Durável}
+\begin{lstlisting}
+public class BemDeConsumo extends Produto {
+   ...
+   
+   @Override
+   public String toString() {
+      return super.toString() + " Data de Validade: " + dataValidade;
+   }
+}
+
+public class BemDuravel extends Produto {
+   ...
+   
+   @Override
+   public String toString() {
+      return super.toString() + "   Garantia: " + mesesGarantia;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Estoque Polimórfico}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Estoque {
+   private static final int MAX_PRODUTOS = 100;
+   private Produto[] listaDeProdutos;
+   private int numProdutos;
+
+   public void adicionar(Produto p) {
+      if (numProdutos < MAX_PRODUTOS) {
+         listaDeProdutos[numProdutos++] = p;
+      }
+   }
+
+   ...
+   
+   @Override
+   public String toString() {
+      StringBuilder valor = new StringBuilder();
+      for (int i = 0; i < numProdutos; i++) {
+         valor.append(listaDeProdutos[i] + "\n");
+      }
+      return valor.toString();
+   }
+
+   public Estoque() {
+      listaDeProdutos = new Produto[MAX_PRODUTOS];
+      numProdutos = 0;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Devemos ousar inventar o futuro"}
+        \end{block}
+\end{frame}
+
+
+
+\end{document}

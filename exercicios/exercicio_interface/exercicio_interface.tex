@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício Interfaces}
+
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Baseando-se na modelagem do diagrama de classes a seguir do sistema de gestão acadêmica,
+complete-o para atender o novo requisito. Agora será possível alunos, professores e monitores de laboratório terem acesso às máquinas do laborátorio. Para acessar as máquinas é necessário utilizar
+um usuário de login e uma senha, o usuário é a matrícula da pessoa e a senha é gerada pela seguinte 
+combinação: \{CódigoPessoa\}@\{idade\}$>$\{primeiro nome\}.
+
+Exemplo: Professor Pedro Pongelupe Lopes, código pessoa 1046730, 25 anos.
+\begin{itemize}
+        \item usuário: PF1046730
+        \item senha: 1046730@25$>$Pedro
+\end{itemize}
+
+Complete o digrama para atender o novo requsito proposto, além disso, escreva o código e o testes 
+unitários para essa nova funcionalidade.
+
+\vspace{0.5cm}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{7}{7}\selectfont,x=-8,y=2,anchor=west,type=abstract]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \umlvirt{\# getPrefixo(): string}}
+         \umlclass[font=\fontsize{7}{7}\selectfont,x=-8, y=-4]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{7}{7}\selectfont,x=-3, y=-4]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{7}{7}\selectfont,x=2, y=-4]{FuncionarioAdministrativo}{-- setor : string}{ + getSetor() : string \\ \# getPrefixo() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+         \umlVHVinherit{FuncionarioAdministrativo}{PessoaUniversitaria}
+         \umlemptyclass[font=\fontsize{7}{7}\selectfont,x=0, y=-7]{Limpeza}
+         \umlemptyclass[font=\fontsize{7}{7}\selectfont,x=3, y=-7]{MonitorLaboratório}
+         \umlVHVinherit{Limpeza}{FuncionarioAdministrativo}
+         \umlVHVinherit{MonitorLaboratório}{FuncionarioAdministrativo}
+      \end{tikzpicture}
+
+\vspace{0.5cm}
+\textbf{Observação}: Esse diagrama segue as regras que definimos em sala de aula, caso dúvidas, olhar o slide de classes abstratas que explica mais detalhadamente as regras.
+
+\end{document}

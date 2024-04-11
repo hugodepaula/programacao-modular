@@ -1,0 +1,461 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Interfaces%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+		\includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Interfaces}
+
+\section{Fundamentos}
+
+\subsection{Definição de interface}
+
+\begin{frame}{Interface}
+\begin{center}
+``\textbf{Interface}: parte visível de um módulo a outros módulos. \\
+A interface deve oferecer um grupo de métodos coerente. \\
+Se uma interface é definida e sempre é mantida, o sistema ganha em extensibilidade e em baixo acoplamento.''
+\end{center}
+\end{frame}
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item \textbf{Interfaces}:
+\begin{itemize}
+    \item ``determinado conjunto de métodos que serão implementados em uma classe''.
+    \item ``contrato que define tudo o que uma classe deve fazer se quiser ter um determinado status''.
+\end{itemize}
+\item Podemos, então, especificar uma interface; e uma ou mais classes ``assinariam este contrato'', comprometendo-se a implementar o que foi especificado.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Interfaces em Java}
+
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item Interfaces em Java possuem prioritariamente declarações de métodos (sem definição) e atributos ``\lstinline|public static final|''.
+\item A implementação fica a cargo de cada especialização desta interface.
+\item Interfaces são usadas para definir um protocolo de comportamento que pode ser implementado por qualquer classe na hierarquia de classes.
+\item Interfaces podem ser declaradas, mas não podem ser instanciadas, assim como classes abstratas.
+\item É uma saída elegante ao problema da herança múltipla.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Definindo uma interface}
+
+\begin{itemize}
+\item Definição de interfaces:
+	\begin{itemize}
+	\item Declaração da interface: declara os atributos tais como nome da interface e se ela herda de outra interface.
+	\item Corpo da interface: contém as definições de constantes e  as declarações dos métodos da interface.
+	\end{itemize}
+\end{itemize}
+\begin{lstlisting}
+interface nomeInterface [extends OutraInterface] {
+  corpo da Interface;
+}
+\end{lstlisting}
+\begin{itemize}
+\item Para se usar uma interface usa-se a palavra-chave \lstinline|implements|.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Exemplo: Scanner e Closeable}
+%\begin{frame}{Pensando a classe FuncionarioAdministrativo}
+   %\begin{center}
+      %\begin{tikzpicture} 
+         %\umlclass[font=\fontsize{5}{5}\selectfont,x=-8,y=2,anchor=west,type=abstract]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \umlvirt{\# getPrefixo(): string}}
+         %\umlclass[font=\fontsize{5}{5}\selectfont,x=-8, y=-2]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         %\umlclass[font=\fontsize{5}{5}\selectfont,x=-5, y=-2]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         %\umlclass[font=\fontsize{5}{5}\selectfont,x=-2, y=-0]{FuncionarioAdministrativo}{-- setor : string}{ + getSetor() : string \\ \# getPrefixo() : string}
+         %\umlVHVinherit{Aluno}{PessoaUniversitaria}
+         %\umlVHVinherit{Professor}{PessoaUniversitaria}
+         %\umlVHVinherit[geometry=-|]{FuncionarioAdministrativo}{PessoaUniversitaria}
+         %\umlemptyclass[font=\fontsize{5}{5}\selectfont,x=-2, y=-2]{Limpeza}
+         %\umlemptyclass[font=\fontsize{5}{5}\selectfont,x=.5, y=-2]{MonitorLaboratório}
+         %\umlVHVinherit{Limpeza}{FuncionarioAdministrativo}
+         %\umlVHVinherit{MonitorLaboratório}{FuncionarioAdministrativo}
+      %\end{tikzpicture}
+   %\end{center}
+%\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Scanner e classes fecháveis}
+   \begin{itemize}
+      \item A classe Scanner é um leitor de texto simples para converter tipos primitivos utilizando expressões regulares.
+      \item A classe Scanner \textbf{implementa} a interface Closeable, portanto é um objeto fechável.
+      \item Um objeto fechável deve implementar o método close:
+         \begin{lstlisting}
+public interface Closeable extends AutoCloseable {
+   public void close() throws IOException;
+}
+         \end{lstlisting}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Scanner e classes fecháveis}
+   Implementação do método close na classe Scanner
+\begin{lstlisting}
+    @Override
+    public void close() {
+        if (closed)
+            return;
+        if (source instanceof Closeable) {
+            try {
+                ((Closeable)source).close();
+            } catch (IOException ioe) {
+                lastException = ioe;
+            }
+        }
+        sourceClosed = true;
+        source = null;
+        closed = true;
+    }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Scanner e classes fecháveis}
+
+\begin{itemize}
+\item A interface Closeable declara o método close() mas não a implementa. 
+\item As classes que implementarem esta interface devem implementar o método close().
+\item Todo objeto será também um fechável.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Scanner e classes fecháveis - UML}
+    \begin{center}
+    \begin{tikzpicture}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-5.5,type=abstract]{InputStream}{}{\umlvirt{+ read(): int}}
+
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-2,type=interface]{Closeable}%
+      {}%
+      {\umlvirt{+ close() : void}}
+     \umlemptyclass[font=\fontsize{6}{6}\selectfont,x=2]{HikariConfig}%
+
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-6.5, y=-3]{AudioInputStream}%
+     {}{+ close(): void \\ + read(): int \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-3.75, y=-3]{Scanner}%
+     {}{+ close(): void \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-0.95, y=-3, type=abstract]{FtpClient}%
+     {}{+ close(): void \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=2, y=-3]{HikariDataSource}%
+     {}{+ close(): void \\ (... outros métodos...)}
+
+    \umlimpl{Scanner}{Closeable}
+    \umlimpl{FtpClient}{Closeable}
+    \umlimpl{InputStream}{Closeable}
+    \umlimpl{HikariDataSource}{Closeable}
+    \umlinherit{AudioInputStream}{InputStream}
+    \umlinherit{HikariDataSource}{HikariConfig}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+\section{Aspectos de projeto}
+
+\subsection{Interfaces versus Classes Abstratas}
+
+\begin{frame}[fragile]{Porque utilizar interfaces ao invés de classes abstratas?}
+\begin{itemize}
+\item Seria a classe abstrata Closeable abaixo equivalente à interface?
+\end{itemize}
+\begin{lstlisting}
+abstract class Closeable {
+   public abstract void close() throws IOException;
+}
+\end{lstlisting}
+\begin{itemize}
+\item Resposta: Não.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Interfaces provêm Herança Múltipla?}
+\begin{itemize}
+\item Podem ser encarados como um paliativo, mas são coisas diferentes diferentes:
+	\begin{itemize}
+	\item Uma classe herda apenas constantes de uma interface.
+	\item Uma classe não pode herdar implementações de uma interface.
+	\item A hierarquia de interfaces é independente da hierarquia de classes. Classes que implementam a mesma interface podem ou não estar relacionadas na hierarquia.
+	\end{itemize}
+\item Java permite herança múltipla de interfaces.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Para que usar Interfaces?}
+\begin{itemize}
+\item Use interfaces para definir protocolos de comportamento que possam ser implementados em qualquer lugar na hierarquia de classes.
+\item Interfaces são úteis para:
+	\begin{itemize}
+	\item Capturar similaridades entre classes não relacionadas.
+	\item Declarar métodos que uma ou mais classes devem inevitavelmente implementar.
+	\item Revelar interfaces sem revelar os objetos que a implementam (útil na venda de pacotes de componentes).
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Métodos \textit{default}}
+
+
+\begin{frame}{Métodos default}
+
+\begin{itemize}
+\item Até o Java 7, interface não podia prover nenhuma implementação.
+\item No Java 8, um método \textit{default} permite definir um método de interface com implementação.
+\item Permite expandir a interface sem violar o código existente.
+\item Permite implementar métodos que são opcionais, dependendo da forma como a interface é usada.
+\item Pode produzir erro de herança múltipla de método.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Métodos default}
+
+\begin{multicols}{2}
+\begin{lstlisting}
+public interface UserProfile {
+  // decl. método normal
+  int getId();
+
+  // decl. método default
+  default int getAdminId() {
+   return -1;
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+class MyUserProfile implements 
+   UserProfile {
+  public int getId() {
+    return 101;
+  }
+}
+\end{lstlisting}
+\end{multicols}
+
+\begin{lstlisting}
+class Demo {
+  public static void main(String args[]) {
+    UserProfile obj = new MyUserProfile();
+
+    System.out.println("ID: " + obj.getId());
+    System.out.println("Admin ID: " + obj.getAdminId());
+  }
+}
+
+\end{lstlisting}\footnote{Adaptado de: Herbert Schildt. \textit{Java Para Iniciantes.} Bookman 2018.}
+\end{frame}
+
+\begin{frame}[fragile]{Métodos default}
+
+\begin{lstlisting}
+
+public interface Ordenavel {
+
+   boolean menorQue(Ordenavel o);
+
+   boolean igual(Ordenavel o);
+
+   default boolean diferente(Ordenavel o) {
+      return !igual(o);
+   }
+
+   default boolean maiorQue(Ordenavel o) {
+      return !menorQue(o) && !igual(o);
+   }
+
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Expressões Lambda e interfaces funcionais}
+
+\begin{frame}{Expressões Lambda e interfaces funcionais}
+
+    \begin{itemize}
+        \item Espressões lambda e interfaces funcionais são elementos da programação funcional incorporados ao Java.
+        \item Programação funcional, com sua ênfase em funções "puras", tratadas como valores de 1a classe (que retornam o mesmo resultado dadas as mesmas entradas, sem a produção de efeitos colaterais) e a imutabilidade simplificam a programação paralela.
+    \end{itemize}
+
+    \begin{block}{Interfaces funcionais  (\textit{functional interface})}
+       São interfaces com um único método abstrato. Sua implementação pode ser feita por uma classe regular, classe interna, classe anônima ou expressão lambda. A boa prática é anotar essas classes com \textit{@FunctionalInterface}.
+    \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Expressões Lambda e interfaces funcionais}
+    \begin{enumerate}
+        \item Considere a interface \lstinline|Runnable|, disponível no Java.
+        \item Ela é uma \textit{functional interface} baseada no método \lstinline|run|, e pode ser implementada por uma expressão lambda ou referência de método.
+    \end{enumerate}
+
+\begin{block}{}
+    \begin{lstlisting}
+@FunctionalInterface
+public interface Runnable {
+    public void run();
+
+}
+    \end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Interfaces funcionais com classes internas}
+   \begin{block}{}
+        \begin{lstlisting}[basicstyle=\tiny]
+public class ImprimeNomeThreadRunnable implements Runnable {
+
+    @Override
+    public void run() {
+         System.out.println("O nome dessa thread é " 
+         + Thread.currentThread().getName());
+    }
+}
+
+public class Driver {
+
+  public static void main(String[] args) {
+    System.out.println("O nome dessa thread é " + Thread.currentThread().getName());
+    new Thread(new ImprimeNomeThreadRunnable()).start();
+  }
+
+}
+   \end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Interfaces funcionais com classes anônimas}
+
+    \begin{enumerate}
+        \item Solução possível: classe interna anônima que implementa a interface \lstinline|Runnable|.
+    \end{enumerate}
+
+    \begin{block}{}
+        \begin{lstlisting}[basicstyle=\tiny]
+public class DriverClasseImplementaInterface {
+
+	public static void main(String[] args) {
+		System.out.println("O nome dessa thread é " + 
+            Thread.currentThread().getName());
+
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				System.out.println("O nome dessa thread é " + 
+						Thread.currentThread().getName());
+			}
+		}).start();
+	}	
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interfaces funcionais com expressões lambda}
+
+    \begin{enumerate}
+        \item Solução possível: expressão lambda que implementa a interface \lstinline|Runnable|.
+    \end{enumerate}
+
+    \begin{block}{}
+        \begin{lstlisting}[basicstyle=\tiny]
+public class DriverLambda {
+
+	public static void main(String[] args) {
+		System.out.println("O nome dessa thread é " + 
+				Thread.currentThread().getName());
+
+		new Thread(() -> System.out.println("O nome dessa thread é " + 
+				Thread.currentThread().getName()))
+			.start();
+	}
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Ser radical é atacar o problema em suas raízes"}
+        \end{block}
+\end{frame}
+
+\end{document}

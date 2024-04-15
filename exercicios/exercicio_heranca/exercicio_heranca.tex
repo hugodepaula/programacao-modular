@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício}
+
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Em uma Universidade, um aluno é cadastrado no sistema acadêmico com nome, número de matrícula e código do
+curso que está realizando. Para se formar, além de cursar todas as disciplinas do currículo, o aluno precisa cumprir uma
+carga de atividades complementares.
+
+Uma atividade complementar pode ser de três tipos: formativa, extensionista ou monitoria. Cada atividade tem
+uma descrição e uma carga horária. As atividades geram 1 crédito de acordo com a carga horária e seu tipo: as formativas
+geram 1 crédito a cada 30h; as extensionistas, a cada 15h e as de monitoria a cada 20h. Os créditos podem ter valores
+fracionários. Para se formar, o aluno precisa acumular pelo menos 4 créditos e ter participado de pelo menos 2 tipos
+diferentes de atividade.
+
+Como o sistema acadêmico já tem implementado e funcionando a parte de matrículas, disciplinas, notas e
+aprovação, cabe a você planejar esta parte das atividades complementares.
+
+
+\subproblem Utilizando todos os conceitos vistos até hoje na disciplina, \textbf{modele um diagrama de classes UML} para o problema proposto. O modelo deve incluir \textbf{classes, relacionamentos, atributos e métodos} necessários para resolver completamente o problema.
+\textbf{Não é necessário incluir} construtores ou métodos get/set, mas indique as visibilidades de métodos e atributos. 
+
+\subproblem Considerando seu modelo em (a), escreva o código dos métodos envolvidos na tarefa de \textbf{calcular quantos créditos foram gerados por uma atividade complementar}. Note que, dependendo do seu modelo, pode ser necessário escrever o código de mais de um método nesta questão.
+
+\subproblem Considerando seu modelo em (a), escreva o código dos métodos envolvidos na tarefa de \textbf{verificar se um aluno já cumpriu os requisitos de atividades complementares para poder se formar}. Note que, dependendo do seu modelo, pode ser necessário escrever o código de mais de um método nesta questão.
+
+\subproblem Utilizando sintaxe JUnit, escreva o \textbf{código de testes unitários} para seu(s) método(s) da resposta (c).
+
+\end{document}

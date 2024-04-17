@@ -1,0 +1,258 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Herança, Classes Abstratas, Interfaces e Polimorfismo%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+		\includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Herança}
+\begin{frame}{Herança}
+    \begin{itemize}
+    \item Mecanismo para definição de uma classe  em termos de outra classe existente.
+    \item Relação: \textit{é um tipo de} / \textit{é um}.
+    \item Herança permite o reuso do comportamento de uma classe na definição de outra.
+    \item A classe derivada herda todas as características de sua classe base, podendo adicionar novas características.
+    \item Baseada em dois princípios fundamentais do projeto de software:
+        \begin{itemize}
+            \item especificação \textit{(top-down)}
+            \item generalização / abstração \textit{(bottom-up)}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Herança Simples}
+\begin{itemize}
+   \item Novas classes, chamadas de classes derivadas (ou subclasses), são definidas a partir de apenas uma classe base (ou superclasse).
+    \item Exemplos:
+   \begin{itemize}
+   \item Um professor é uma Pessoa.
+   \item Um ônibus é um Veículo.
+   \item Um automóvel é um Veículo.
+   \end{itemize}
+\item Membros da classe base podem ser \underline{redefinidos} na classe derivada.
+   \item Em Java, qualquer classe herda da classe \lstinline|Object|.
+   \item Em Java, usa-se a palavra chave \lstinline|extends|, para indicar herança.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo de herança simples}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass{Pessoa}{\# cargaHoraria : int \\ \# nome : String}{ + getCargaHoraria() : int \\+ setCargaHoraria(m : int) : void \\ + getNome(): String\\+ setNome(n : String) : void }
+     \umlclass[x=-3, y=-4.25]{Professor}{-- dataAdmissao: Date \\ -- cargaHoraria : int }{+ calcularSalario() : double}
+     \umlclass[x=3, y=-4.25]{Aluno}{-- idCurso : int \\ -- cargaMatriculada : int}{+ calculaMensalidade():  double}
+        \umlVHVinherit{Professor}{Pessoa} 
+        \umlVHVinherit{Aluno}{Pessoa} 
+    \end{tikzpicture}
+\end{center}\end{frame}
+
+
+\begin{frame}{Classes abstratas}
+   \begin{itemize}
+      \item Classes abstratas permitem que se definam métodos sem implementação que devem ser redefinidos em classes derivadas. 
+      \item Classes abstratas podem ou não ter métodos abstratos.
+      \item Classes abstratas não podem ser instanciadas.
+      \item As classes derivadas de classes abstratas herdam todos os métodos, incluindo os abstratos.
+      \item As classes derivadas de classes abstratas são abstratas até que implementem os métodos abstratos.
+      \item Em Java: palavra-chave \lstinline|abstract|.
+   \end{itemize}
+\end{frame}
+
+
+
+\section{Interfaces}
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item \textbf{Interfaces}:
+\begin{itemize}
+    \item ``determinado conjunto de métodos que serão implementados em uma classe''.
+    \item ``contrato que define tudo o que uma classe deve fazer se quiser ter um determinado status''.
+\end{itemize}
+\item Podemos, então, especificar uma interface; e uma ou mais classes ``assinariam este contrato'', comprometendo-se a implementar o que foi especificado.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Interfaces}
+\begin{itemize}
+\item Interfaces em Java possuem prioritariamente declarações de métodos (sem definição) e atributos ``\lstinline|public static final|''.
+\item A implementação fica a cargo de cada especialização desta interface.
+\item Interfaces são usadas para definir um protocolo de comportamento que pode ser implementado por qualquer classe na hierarquia de classes.
+\item Interfaces podem ser declaradas, mas não podem ser instanciadas, assim como classes abstratas.
+\item É uma saída elegante ao problema da herança múltipla.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Scanner e classes fecháveis - UML}
+    \begin{center}
+    \begin{tikzpicture}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-5.5,type=abstract]{InputStream}{}{\umlvirt{+ read(): int}}
+
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-2,type=interface]{Closeable}%
+      {}%
+      {\umlvirt{+ close() : void}}
+     \umlemptyclass[font=\fontsize{6}{6}\selectfont,x=2]{HikariConfig}%
+
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-6.5, y=-3]{AudioInputStream}%
+     {}{+ close(): void \\ + read(): int \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-3.75, y=-3]{Scanner}%
+     {}{+ close(): void \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=-0.95, y=-3, type=abstract]{FtpClient}%
+     {}{+ close(): void \\ (... outros métodos...)}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=2, y=-3]{HikariDataSource}%
+     {}{+ close(): void \\ (... outros métodos...)}
+
+    \umlimpl{Scanner}{Closeable}
+    \umlimpl{FtpClient}{Closeable}
+    \umlimpl{InputStream}{Closeable}
+    \umlimpl{HikariDataSource}{Closeable}
+    \umlinherit{AudioInputStream}{InputStream}
+    \umlinherit{HikariDataSource}{HikariConfig}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+
+
+
+\begin{frame}{Interfaces provêm Herança Múltipla?}
+\begin{itemize}
+\item Podem ser encarados como um paliativo, mas são coisas diferentes diferentes:
+	\begin{itemize}
+	\item Uma classe herda apenas constantes de uma interface.
+	\item Uma classe não pode herdar implementações de uma interface.
+	\item A hierarquia de interfaces é independente da hierarquia de classes. Classes que implementam a mesma interface podem ou não estar relacionadas na hierarquia.
+	\end{itemize}
+\item Java permite herança múltipla de interfaces.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Para que usar Interfaces?}
+\begin{itemize}
+\item Use interfaces para definir protocolos de comportamento que possam ser implementados em qualquer lugar na hierarquia de classes.
+\item Interfaces são úteis para:
+	\begin{itemize}
+	\item Capturar similaridades entre classes não relacionadas.
+	\item Declarar métodos que uma ou mais classes devem inevitavelmente implementar.
+	\item Revelar interfaces sem revelar os objetos que a implementam (útil na venda de pacotes de componentes).
+  \item Polimorfismo. 
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Poliformismo}
+\begin{frame}{Polimorfismo}
+    \begin{itemize}
+    \item Polimorfismo $\longrightarrow$ muitas formas.
+    \item Algumas funções se aplicam a objetos de diferentes classes, alcançando o mesmo resultado semântico.
+    \item É o princípio que permite que classes filhas tenham métodos iguais, mas comportamentos diferentes.
+        \begin{itemize}
+            \item Métodos iguais $\longrightarrow$ mesma assinatura.
+            \item Comportamentos diferentes $\longrightarrow$ ações diferentes.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\section{Polimorfismo}
+\begin{frame}[fragile]{Polimorfismo}
+   \begin{itemize}
+      \item Polimorfismo
+         \begin{itemize}
+            \item É a característica que permite que diferente objetos respondam a \underline{mesma} mensagem cada um a sua maneira. 
+            \item Uma referência para a superclasse só pode acessar os métodos previstos na interface da superclasse, porém,
+               o Java automaticamente ativa a implementação correspondente no objeto apontado.
+         \end{itemize}
+   \end{itemize}
+\end{frame}
+\begin{frame}{Exemplo: Reserva Sala de Estudos polimórfica}
+   \begin{center}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-6,y=.75, type=abstract]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \umlvirt{\# getPrefixo(): string}}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-6, y=-2.67]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-2, y=-2.67]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=2, y=-2.67]{FuncionarioAdministrativo}{-- setor : string}{ + getSetor() : string \\ \# getPrefixo() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+         \umlVHVinherit{FuncionarioAdministrativo}{PessoaUniversitaria}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=1.35, y=.8]{SalaDeEstudos}{+ \umlstatic{CAPACIDADE : int}= 4 \\ + \umlstatic{HORA\_ABERTURA: Hora}= 9:00 \\ + \umlstatic{HORA\_FECHAMENTO: Hora} = 22:00}{}
+         \umlassoc[name=emp]{SalaDeEstudos}{PessoaUniversitaria}
+         \umlassocclass[font=\fontsize{5}{5}\selectfont,x=-2, y=2.5, , anchor1=-130]{Reserva}{emp-1}{-- pessoas : PessoaUniversitaria[] \\ -- sala : SalaEstudos \\ -- hora: Hora}{+ getMatriculas(): string[]}
+      \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{o ponto de vista da vida, da prática, deve ser o ponto de vista primeiro e fundamental da teoria do conhecimento"}
+        \end{block}
+\end{frame}
+
+\end{document}

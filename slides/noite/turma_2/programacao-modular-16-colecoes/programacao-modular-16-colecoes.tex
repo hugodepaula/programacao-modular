@@ -527,29 +527,59 @@ max() // acha o maior valor em uma coleção
 \begin{itemize}
     \item \textbf{\textit{Stream}} é uma sequência de elementos. Ao contrário da \textit{Collection}, não é uma estrutura de dados que armazena elementos, mas transporta valores através de um \textit{pipeline}, como um fluxo de dados.
     \item \textbf{\textit{Pipeline}} é uma sequência de operações sobre \textit{streams}.
-    \item O exemplo imprime os produtos com $preco > 100.0$.
+    \item Para utilizar as \textit{streams} é necessário apenas chamar o método \textit{.stream} 
+       sobre uma collection
 \end{itemize}
-
-\begin{block}{}
+\begin{block}{Primeiro exemplo}
 \begin{lstlisting}
-List<Produto> produtos = new ArrayList<Produto>();
-
-produtos.stream()
-        .filter(prod -> prod.getPreco() > 100)
-        .forEach(prod -> System.out.println(prod));
+List.of(1, 2, 3, 4)
+   .stream()
+   .map(e -> e * e)
+   .toList();
 \end{lstlisting}
 \end{block}
-\end{frame}
 
+\end{frame}
 
 \begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
 
+\begin{block}{Principais operações dos \textit{streams}}
 \begin{itemize}
-    \item Compare o exemplo anterior com:
+   \item .map: Mapeia itens para um novo tipo
+   \item .filter: Remove do stream todos os itens que não atendam uma determinada condição
+   \item .count: Conta quantos items estão no \textit{stream}
+   \item .toList: Reune todos os itens de um \textit{stream} para uma Lista
+   \item .allMatch: Operação booleana se todos os itens de um \textit{stream} atendam uma determinada condição. 
+   \item .noneMatch: Operação booleana se nenhum os itens de um \textit{stream} atendam uma determinada condição. 
+   \item .anyMatch: Operação booleana se pelo menos um item de um \textit{stream} atenda uma determinada condição. 
 \end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+\begin{block}{Principais operações dos \textit{streams}}
+\begin{itemize}
+   \item .findAny: Devolve um opcional com qualquer elemento do stream
+   \item .findFirst: Devolve um opcional com o primeiro elemento do stream
+   \item .reduce: Recebe uma sequência de elementos como entrada e combina eles em um apenas um elemento.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
 
 \begin{block}{}
 \begin{lstlisting}
+// O exemplo imprime os produtos com $preco > 100.0$.
+List<Produto> produtos = new ArrayList<Produto>();
+produtos.stream()
+        .filter(prod -> prod.getPreco() > 100)
+        .forEach(prod -> System.out.println(prod));
+// ------- Stream x Java Array ------------
 for (Produto prod: produtos) {
     if (prod.getPreco() > 100) {
         System.out.println(prod);
@@ -691,11 +721,11 @@ public Produto consultar(String descricao) {
 \begin{block}{Collections e Streams}
 \begin{lstlisting}[basicstyle=\tiny]
 public Produto consultar(String descricao) {
-  for (Produto p : listaDeProdutos) {
-     if (descricao.equalsIgnoreCase(p.getDescricao()))
-        return p;
-  }
-  return null;
+   return produtos
+            .stream()
+            .filter(p -> descricao.equalsIgnoreCase(p.getDescricao()))
+            .findAny()
+            .orElse(null);
 }
 \end{lstlisting}
 \end{block}
@@ -722,7 +752,7 @@ public int totalEmEstoque() {
 public int totalEmEstoque() {
   return listaDeProdutos.stream()
                   .mapToInt(Produto::getQuant)
-                  .reduce(0, (x, y) -> x + y);
+                  .sum();
 }
 \end{lstlisting}
 \end{block}
@@ -825,7 +855,7 @@ public void ordenar() {
    listaDeProdutos.stream()
      .sorted(
          (x, y) -> x.getDescricao().compareTo(y.getDescricao()))
-     .collect(toList());
+     .toList();
 }
 \end{lstlisting}
 \end{block}

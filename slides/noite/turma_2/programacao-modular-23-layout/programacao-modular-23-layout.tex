@@ -1,0 +1,327 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Layouts Java%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-2.02cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Layouts Java}
+
+\begin{frame}[fragile]{Entendendo Layouts}
+
+\begin{itemize}
+\item Note que a disposição dos \lstinline|Components| sobre o \lstinline|Container| não foi indicada por um par ordenado (x,y).
+\item \textit{Layout} define a maneira pela qual os componentes irão se distribuir sobre o \lstinline|Container|.
+\item É possível definir seus próprios layouts, mas a linguagem oferece um conjunto de \lstinline|LayoutManagers| que facilitam o trabalho.
+\item Para especificar um \lstinline|LayoutManager| para um \lstinline|Container|, basta chamar o seguinte método do \lstinline|Container|:
+\end{itemize}
+
+\begin{lstlisting}
+public void setLayout(LayoutManager manager)
+\end{lstlisting}
+
+Por exemplo:
+
+\begin{lstlisting}
+JPanel painel = new JPanel();
+painel.setLayout(new BorderLayout());
+\end{lstlisting}
+\end{frame}
+
+\subsection{FlowLayout}
+
+\begin{frame}[fragile]{FlowLayout}
+
+\begin{itemize}
+\item FlowLayout: os \lstinline|Components| são distribuídos da esquerda para a direita e de cima para baixo. 
+\item Ele é o layout default do \lstinline|JPanel|.
+\item Você pode definir a dimensão dos componentes com o comando \lstinline|panel.setPreferredSize(new Dimension(100, 100));|
+\item Os métodos \lstinline|setBounds| e \lstinline|setSize| só têm efeito quando o \lstinline|LayoutManager| é \lstinline|null|.
+\item Ele possui três construtores:
+
+\begin{lstlisting}
+public FlowLayout();
+public FlowLayout(int align);
+public FlowLayout(int align, int hgap, int vgap);
+\end{lstlisting}
+
+\item \textit{align} pode receber: \lstinline|FlowLayout.LEFT (ou FlowLayout.LEADING)|,  \lstinline|FlowLayout.RIGHT (ou FlowLayout.TRAILING)| ou  \lstinline|FlowLayout.CENTER|.
+\end{itemize}
+\end{frame}
+
+\subsection{BorderLayout}
+
+\begin{frame}[fragile]{BorderLayout}
+
+\begin{itemize}
+\item BorderLayout: Divide o \lstinline|Container| em 5 áreas: North, South, East, West e Center. 
+\item É o layout default para a maioria das aplicações com janelas (p. ex. \lstinline|JFrame|). 
+\item Construtores:
+
+\begin{lstlisting}
+public BorderLayout();
+public BorderLayout (int hgap, int vgap);
+\end{lstlisting}
+
+\item  Quando se adiciona um componente é necessário especificar em qual das áreas ele deve ser adicionado. 
+\item Ex: 
+
+\begin{lstlisting}
+add(butOK, BorderLayout.WEST);
+\end{lstlisting}
+
+\end{itemize}
+\end{frame}
+
+\subsection{GridLayout}
+
+\begin{frame}[fragile]{GridLayout}
+
+\begin{itemize}
+
+\item \lstinline|GridLayout| é similar ao \lstinline|FlowLayout|, mas cada \lstinline|Component| é alocado em uma célula de igual tamanho. 
+
+\item Permite definir um vetor ou matriz de células nas quais os componentes são alocados.
+
+\item Construtores:
+
+\begin{lstlisting}
+public GridLayout(int rows, int columns);
+public GridLayout(int rows, int columns, int hgap, int vgap);
+\end{lstlisting}
+
+\item  Componentes são alocados na ordem em que são adicionados, da esquerda para a direita, de cima para baixo.
+
+\item Se o número de colunas ou o número de linhas é zero, ele é definido pelo quantidade de componentes adicionados. Se ambos os valores são setados, o número de colunas é ignorado.
+
+\end{itemize}
+\end{frame}
+
+\subsection{Outros layouts}
+
+\begin{frame}{Outros layouts}
+
+\begin{itemize}
+\item \lstinline|CardLayout|: usado para exibir um componente de cada vez como em uma pilha de cartas.
+\item \lstinline|BoxLayout|: empilha os componentes, um em cima do outro, ou em uma fila. Uma espécie de \lstinline|FlowLayout| mais flexível.
+\item \lstinline|GridBagLayout|: um layout flexível e complicado usado quando se deseja um layout complexo e com muitos componentes.
+\item \lstinline|GroupLayout| e \lstinline|SpringLayout| são extremamente complexos e não devem ser usados manualmente.
+
+\item \lstinline|GroupLayout| agrupa os componentes hierarquicamente e os grupos podem ser posicionados sequencialmente ou em paralelo.
+
+\item \lstinline|SpringLayout| permite misturar características de diversos \lstinline|LayoutManagers| para compor um novo layout.
+
+\end{itemize}
+\end{frame}
+
+\section{Compondo layouts}
+
+\begin{frame}[fragile]{Compondo layouts usando painéis}
+
+\begin{itemize}
+\item A classe \lstinline|JPanel| é derivada de \lstinline|Container| e, por isso, possui seu próprio \lstinline|LayoutManager|. 
+\item Pode ser usada para compor interfaces complexas.
+\end{itemize}
+
+\begin{lstlisting}
+public class AplicacaoGrafica extends JFrame{
+  private JButton butOK;
+  private JTextField campo1,campo2,campoR;
+  private JLabel texto1,texto2,textoR;
+  private JPanel p1 = new JPanel();
+  private JPanel p2 = new JPanel();
+
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Compondo layouts usando painéis}
+
+\begin{lstlisting}[basicstyle=\tiny]
+  public AplicacaoGrafica(){
+    super("Aplicacao grafica simples");
+     
+    // Cria os componentes
+    texto1  = new JLabel("Nome:");   campo1  = new JTextField(15);
+    texto2  = new JLabel("Fone:");   campo2  = new JTextField(15);
+    butOK   = new JButton("OK");   
+    textoR  = new JLabel("Resp:");   campoR  = new JTextField(20);
+   
+    // Define o layout do container básico
+    setLayout(new GridLayout(2,1));
+    // Define o layout dos Panels
+    p1.setLayout(new GridLayout(2,2));
+    p2.setLayout(new FlowLayout(FlowLayout.CENTER));
+      
+    // Adiciona os componentes aos panels
+    p1.add(texto1); p1.add(campo1);
+    p1.add(texto2); p1.add(campo2);
+    p2.add(butOK);
+    p2.add(textoR); p2.add(campoR);
+           
+    // Adiciona os panels ao container básico
+    getContentPane().add(p1); getContentPane().add(p2);
+  }
+}
+\end{lstlisting}
+
+
+\end{frame}
+
+
+\section{Desenhando sobre um componente}
+
+
+
+\begin{frame}[fragile]{Desenhando sobre um componente}
+
+\begin{itemize}
+\item Bibliotecas gráficas: desenha retas, círculos, polígonos etc.
+\item Método ``paint'' desenha conteúdo de um \lstinline|Component|.
+\item \lstinline|Graphics| é o contexto gráfico do dispositivo onde será desenhado o código de  ``paint''.
+\item Para capturar eventos de mouse basta criar um \lstinline|MouseListener| e registra-lo junto ao componente desejado.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Desenhando sobre um componente}
+
+\begin{lstlisting}[basicstyle=\tiny]
+class AreaDeDesenho extends JComponent {
+  BufferedImage img;
+  Random r = new Random();
+
+  public AreaDeDesenho() {
+    img = new  BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+    Graphics2D ig2 = img.createGraphics();
+    ig2.setBackground(Color.WHITE);
+    ig2.clearRect(0, 0, img.getWidth(), img.getHeight());      
+
+    this.setPreferredSize(new Dimension(200, 200));
+    this.setBackground(Color.WHITE);
+    this.setOpaque(true);
+
+    this.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+          Graphics g = img.getGraphics();
+          g.setColor(new Color(r.nextInt(256),  r.nextInt(256), r.nextInt(256)));
+          g.fillOval(e.getX(), e.getY(), 10, 10);
+          g.dispose();
+          repaint();
+      }
+   });
+  }
+  public void paintComponent(Graphics g) {
+        g.drawImage(img, 0, 0, null);
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Desenhando sobre um componente}
+
+\begin{lstlisting}[basicstyle=\tiny]
+public class AplicacaoCanvas extends JFrame {
+   private JButton close = new JButton("Close");
+   private AreaDeDesenho ades = new AreaDeDesenho();
+
+   public AplicacaoCanvas() {
+      super("Caixa de desenho");
+
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      this.setLayout(new BorderLayout());
+      this.getContentPane().add(close, BorderLayout.SOUTH);
+      this.getContentPane().add(ades, BorderLayout.CENTER);
+
+      close.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+         }
+      });
+
+      pack();
+   }
+
+   public static void main(String args[]) {
+      new AplicacaoCanvas().setVisible(true);
+   }
+}\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Todo o conhecimento genuíno tem origem na experiência direta."}
+        \end{block}
+\end{frame}
+
+
+\end{document}

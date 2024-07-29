@@ -1,0 +1,214 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício de Revisão Prova 2}
+
+\lstset{language=Java,
+        basicstyle=\scriptsize,
+        commentstyle=\color{red},
+        showstringspaces=false,
+        numbers=none,
+numberstyle=\tiny}
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Analise os seguintes fragmentos de código e responda: Houve violação de algum princípio SOLID? Se sim, qual e por quê? Reescreva o fragmento para ajustar o problema, caso necessário. 
+
+\textbf{Para todos os problemas, todas as classes têm os getters, setters e os construtores que forem necessários.}
+
+\subproblem
+\begin{lstlisting}
+public abstract class Estabelecimento  {
+        private String razaoSocial;
+}
+public class Cafeteria extends Estabelecimento {
+        public int getAreaConstruidaCafeteria() { return 70; }
+        public double getValorMetroQuadradoCafeteria() { return 40d; }
+        public double getAliquotaCafeteria() { return 0.5; }
+}
+public class Livraria extends Estabelecimento {
+        public int getAreaConstruidaLivraria() { return 150; }
+        public double getValorMetroQuadradoLivraria() { return 10d; }
+        public double getAliquotaLivraria() { return 0.8; }
+}
+
+public class CalculadoraIPTU {
+
+   public double calculaIPTU(Estabelecimento e) {
+        double iptu = 0;
+
+        if (e instanceOf Cafeteria) {
+                Cafeteria c  = (Cafeteria) e;
+                iptu = c.getAreaConstruidaCafeteria() * c.getValorMetroQuadradoCafeteria() * c.getAliquotaCafeteria();
+        }
+        if (e instanceOf Livraria) {
+                Livraria l  = (Livraria) e;
+                iptu = l.getAreaConstruidaLivraria() * l.getValorMetroQuadradoLivraria() * l.getAliquotaLivraria();
+        }
+
+        return iptu;
+   }
+
+}
+\end{lstlisting}
+\answer O princípio representado pela letra 'O', \textit{Open-Close Principle}, foi violado, 
+pois as classes \textit{Cafeteria} e \textit{Livraria} estabelecem métodos que deveriam estar na superclasse como métodos abstratos.
+Consequentemente, a classe \textit{CalculadoraIPTU} deverá ser alterada para cada nova especialização de \textit{Estabelecimento}.
+\begin{lstlisting}
+public abstract class Estabelecimento  {
+        private String razaoSocial;
+        public abstract int getAreaConstruida();
+        public abstract double getValorMetroQuadrado();
+        public abstract double getAliquota();
+}
+public class Cafeteria extends Estabelecimento {
+        @Override
+        public int getAreaConstruida() { return 70; }
+        @Override
+        public double getValorMetroQuadrado() { return 40d; }
+        @Override
+        public double getAliquota() { return 0.5; }
+}
+public class Livraria extends Estabelecimento {
+        @Override
+        public int getAreaConstruida() { return 150; }
+        @Override
+        public double getValorMetroQuadrado() { return 10d; }
+        @Override
+        public double getAliquota() { return 0.8; }
+}
+
+public class CalculadoraIPTU {
+
+   public double calculaIPTU(Estabelecimento e) {
+        return e.getAreaConstruida() * e.getValorMetroQuadrado() * e.getAliquota();
+   }
+
+}
+\end{lstlisting}
+
+\vspace{0.25cm}
+\subproblem
+\begin{lstlisting}
+public abstract class InstrumentoMusical {
+        private String modelo;
+        private String ano;
+
+        public abstract void tocar();
+
+        public abstract void afinar();
+}
+public class Piano implements InstrumentoMusical {
+        private Corda[] cordas;
+
+        @Override
+        public void tocar() { /*...*/ }
+
+        @Override
+        public void afinar() { /*...*/ }
+
+        public void trocarCordas(Corda[] cordas) { this.cordas = cordas; }
+}
+public class Trompete implements InstrumentoMusical {
+        private Surdina surdina;
+
+        @Override
+        public void tocar() { /*...*/ }
+
+        @Override
+        public void afinar() { /*...*/ }
+
+        public void adicionarSurdina(Surdina s) { this.surdina = s; } 
+}
+\end{lstlisting}
+
+\answer Não há violação dos princípios SOLID neste fragmento.
+\vspace{1cm}
+
+\subproblem
+\begin{lstlisting}
+public class GerenciadorDeSistema {
+
+        public void adicionaUsuario(Usuario u) { /*..*/ }
+
+        public void removeUsuario(Usuario u) { /*..*/ }
+
+        public void enviaNotificacao(String notificacao) { /*..*/ }
+
+        public void enviaEmail(String email, Usuario destinatario, Usuario remetente) { /*..*/ }
+
+} 
+\end{lstlisting}
+\answer O princípio representado pela letra 'S', \textit{Single Responsibility Principle}, 
+foi violado, pois a classe \textit{GerenciadorDeSistema} possui inumeras responsabilidades, sendo uma classe deus.
+Portanto, o melhor procedimento a ser feito é refatorar a classe \textit{GerenciadorDeSistema} em outras.
+\begin{lstlisting}
+public class GerenciadorDeUsuarios {
+
+        public void adicionaUsuario(Usuario u) { /*..*/ }
+
+        public void removeUsuario(Usuario u) { /*..*/ }
+} 
+
+public class GerenciadorDeComunicacoes {
+
+        public void enviaNotificacao(String notificacao) { /*..*/ }
+
+        public void enviaEmail(String email, Usuario destinatario, Usuario remetente) { /*..*/ }
+} 
+\end{lstlisting}
+\vspace{0.5cm}
+
+\problem Para cada cenário proposto, discuta uma possível implementação utilizando uma \textit{collection} para resolver o problema.
+Justifique a escolha da \textit{collection}.
+
+\vspace{0.5cm}
+\subproblem Em um sistema de gestão acadêmica, precisamos de uma classe Aluno é responsável por armazenar os dados
+e comportamentos dessa entidade do sistema. Essa classe é responsável por gerir as notas, permitindo adicionar, editar, consultar
+e deletar dessas notas.
+
+\answer Para o cenário descrito, a utilização de uma lista, \textit{List}, é ideal, pois, provê todas as funcionalidades
+necessárias. Além disso, não há requisitos quanto a ordem de inserção ou de remoção.
+
+\vspace{0.5cm}
+\vspace{1.0cm}
+\subproblem Em um sistema de restaurante, precisamos de uma classe para gerenciar todas as reservas de clientes caso o restaurante
+não tenha mesas vagas. A ordem de chegada deve ser a mesma ordem da saída, ou seja, o primeiro a chegar deve ser o primeiro
+a sair. \answer Para o cenário descrito, a utilização de uma Fila, \textit{Queue}, é ideal, pois, provê a inserção e a remoção
+utilizando a lógica de uma fila, logo, o primeiro que chega, é o primeiro que sai.
+
+\vspace{0.5cm}
+\subproblem Em um sistema de stream de música, precisamos de uma classe para a playlist de músicas. Uma playlist pode conter entre 0 e 150 músicas únicas,
+ela pode ordernar as músicas de várias maneiras, como: ordem alfabética, duração das músicas e pela ordem de inserção. Nesse
+sistema, a playlist só pode ter uma ordernação e a ordenação padrão é feita pela ordem de inserção. \answer Para o cenário
+descrito, a utilização de um conjuto, \textit{Set}, é ideal, pois, permite apenas itens únicos. A implementação que poderia ser utilizada é
+o TreeSet que pode receber um compartor para ordernar as músicas.
+
+\vspace{0.5cm} 
+\subproblem Em um
+sistema para a agência de transito, precisamos de uma classe para calcular o valor do IPVA de um carro. O IPVA é calculado pela
+multiplicação do valor venal do veículo pela alíquota referente ao Estado qual o veículo foi registrado, portanto, existem 27
+alíquotas no Brasil.
+
+\answer Para o cenário descrito, a utilização de um mapa, \textit{Map}, é ideal, pois, podemos guardar todas as alíquotas por estado.
+Ou seja, a chave seria o Estado e o valor seria a alíquota associada.
+
+
+\end{document}

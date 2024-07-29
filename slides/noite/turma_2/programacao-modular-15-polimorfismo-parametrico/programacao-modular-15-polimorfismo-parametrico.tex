@@ -1,0 +1,312 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Polimorfismo paramétrico%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas linhas 1.46
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.46cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Polimorfismo universal paramétrico}
+
+\begin{frame}[fragile]{Polimorfismo universal paramétrico: \textit{Generics}}
+
+
+\begin{itemize}
+\item Funções ou tipos abstratos que operam da mesma forma sobre objetos de tipos diferentes (funções ou tipos genéricos).
+    \begin{itemize}
+        \item Trata valores de forma idêntica, sem depender do conhecimento sobre seus tipos. \\[5mm]
+    \end{itemize}
+
+\item E as funções genéricas baseadas na classe \lstinline|Object|?
+    \begin{itemize}
+        \item Código se baseia no polimorfismo de inclusão. Para se usar funções específicas do objeto é necessário fazer \textit{type casting} (como no \textit{Java Collections v1.4} ou anterior).
+   
+        \item  Não era \textit{type safe}  (não previne erros de tipos) .
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Polimorfismo universal paramétrico: \textit{Generics}}
+
+\begin{itemize}
+\item Exemplo de Coleções no \textit{Java Collections Framework v1.4}: \\[5mm]
+\end{itemize}
+
+\begin{lstlisting}
+ArrayList listaDeProfessores = new ArrayList();
+
+listaDeProfessores.add("Pedro Lopes"); 
+     // Adiciona um professor na lista
+listaDeProfessores.add("Zé da Silva");
+     // Adiciona um professor na lista
+
+String prof1 = (String) listaDeProfessores.get(0);      
+     // Recupera o 1o professor da lista
+
+Professor prof2 = (Professor) listaDeProfessores.get(1);
+     // Essa última linha irá compilar, uma vez que a função
+     // get(n) retorna Object, mas irá produzir erro de execução. 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Polimorfismo paramétrico: Tipos como parâmetros}
+
+\begin{block}{Listas com tipos parametrizados}
+\lstinline|List<Tipo> variavel = new ArrayList<Tipo>();|
+\end{block}
+
+\begin{itemize}
+   \item A classe \lstinline|ArrayList| aceita um tipo como parâmetro:
+   \begin{itemize}
+       \item Tipo passado como parâmetro usando \texttt{<  >}.
+       \item Por compatibilidade: Versão antiga funciona, mas produz \textit{warnings}.
+   \end{itemize}
+\end{itemize}
+
+\begin{lstlisting}
+ArrayList<String> listaDeProfessores = new ArrayList();
+     // Define tipo da lista como parâmetro
+
+listaDeProfessores.add("Pedro Lopes"); 
+listaDeProfessores.add("Zé da Silva");
+
+String prof1 = listaDeProfessores.get(0);    
+     // Sem type casting
+Professor prof2 = (Professor) listaDeProfessores.get(1); 
+     // Produz erro de compilação (erro de tipo)
+\end{lstlisting}
+\end{frame}
+
+\section{Generics em Java}
+
+\subsection{Generics: Classes}
+
+\begin{frame}[fragile]{Generics: Classes}
+
+
+\begin{block}{Classes parametrizadas}
+\lstinline|public class Nome<Tipo> { }|
+
+ou
+
+\lstinline|public class Nome<Tipo1, Tipo2, ..., TipoN> { }|
+\end{block}
+
+\begin{itemize}
+   \item Um tipo deve ser passado como parâmetro para \lstinline|<Tipo>| no momento da construção do objeto.
+   \item o resto da sua classe pode ser implementada baseada nesse nome de tipo.
+      \begin{itemize}
+      \item Convenção de nomenclatura -- usar apenas um caractere: \\[3mm]
+      
+      T para Tipo, E para Elemento, N para Número, K  para Chave -- \textit{Key}, e V para Valor.
+      \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Generics: variáveis e arranjos}
+
+\begin{frame}[fragile]{Generics: variáveis e arranjos}
+
+\begin{itemize}
+   \item Não é possível se construir objetos ou arranjos com tipos parametrizados.
+\end{itemize}
+
+\begin{lstlisting}
+public class Shulambs<T> {
+  private T campo;            // ok
+  private T[] arranjo;        // ok
+
+  public Shulambs(T param) {
+        campo = new T();      // erro
+        arranjo = new T[10];  // erro
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Generics: variáveis e arranjos}
+
+\begin{itemize}
+   \item Pode-se criar variáveis e passar parâmetros.
+   \item Pode-se fazer \textit{type casting} de arranjos a partir de \lstinline|Object[]|.
+\end{itemize}
+
+\begin{lstlisting}
+public class ShulambsFixed<T> {
+   private T campo;
+   private T[] arranjo;
+
+   @SuppressWarnings("unchecked")
+   public ShulambsFixed(T param) {
+      campo = param;
+      arranjo = (T[]) new Object[10];
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Generics: comparação de objetos}
+
+\begin{itemize}
+   \item Generics usam semântica de referência.
+   \item Deve-se comparar objetos de tipos parametrizados usando o método \lstinline|T.equals(T)|.
+\end{itemize}
+
+\begin{lstlisting}
+public class ArrayList<E> {
+  ...
+  public int indexOf(E value) {
+    for (int i = 0; i < size; i++) {
+    // if (elementData[i] == value) {
+       if (elementData[i].equals(value)) {
+           return i;
+       }
+    }
+    return -1;
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Generics: interfaces}
+
+
+\begin{frame}[fragile]{Generics: interfaces}
+
+\begin{lstlisting}
+// Representa uma lista de valores
+public interface List<E> {
+   public void add(E value);
+   public void add(int index, E value);
+   public E get(int index);
+   public int indexOf(E value);
+   public boolean isEmpty();
+   public void remove(int index);
+   public void set(int index, E value);
+   public int size();
+}
+
+public class ArrayList<E> implements List<E> { ... }
+
+public class LinkedList<E> implements List<E> { ... }
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Generics: métodos}
+
+\begin{frame}[fragile]{Generics: métodos}
+
+\begin{itemize}
+   \item Para tornar apenas um método genérico, o tipo de retorno deve ser precedido pelo parâmetro de tipo.
+\end{itemize}
+
+\begin{lstlisting}
+public class Collections {
+    ...
+    public static <T> void copy(List<T> dst, List<T> src) {
+        for (T t : src) {
+            dst.add(t);
+        }
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Generics: herança}
+
+\begin{frame}[fragile]{Generics: Herança}
+
+\begin{itemize}
+    \item É possível determinar heranças quando utilizamos a palavra-chave \textit{extends}.
+\end{itemize}
+
+\begin{lstlisting}
+public class FechadorRecurso {
+
+	public static <T extends Closeable> void 
+    closeAll(T... fechaveis)	throws IOException {
+		for (T t : fechaveis) {
+			t.close();
+		}
+	}
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{A leitura do mundo precede a leitura da palavra."}
+        \end{block}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,706 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Princípios SOLID%
+}
+\author[Prof. Pedro Pongelupe Lopes]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+    \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Curso de Engenharia de Software
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas   linhas 1.48cm
+% tres   linhas 1.75cm
+% quatro linhas 2.02cm
+% cinco  linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{10mm}(.8785\textwidth,-2.27cm)
+        \includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+    \end{textblock*}
+}
+%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-2.26cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+\section{SOLID}
+
+
+\begin{frame}{\textit{SOLID Principles}}
+
+Proposto por Robert Martin\footnote{\textit{\tiny Martin, Robert Cecil (2002). Agile software development: principles, patterns, and practices. Upper Saddle River, NJ: Pearson Education. ISBN 9780135974445.}}: 
+\begin{itemize}
+    \item \textit{\textbf{S}ingle responsibility}
+    \item \textit{\textbf{O}pen/Closed}
+    \item \textit{\textbf{L}iskov substitution}
+    \item \textit{\textbf{I}nterface segregation}
+    \item \textit{\textbf{D}ependency inversion}
+\end{itemize}
+\end{frame}
+
+\subsection{Single responsibility principle (SRP)}
+
+\begin{frame}{\textit{Single responsibility principle (SRP)}}
+
+\begin{block}{\textit{Single responsibility principle (SRP)}}
+``Uma classe deve ter apenas um motivo para mudar, o que significa que ela deve ter uma única função.''
+\end{block}
+
+\begin{itemize}
+	\item ``Responsabilidade'': motivo para mudança.
+	\item Obtida com coesão e encapsulamento.
+\end{itemize}
+
+\begin{block}{\footnotesize Roger Whitney, 2016, \textit{Advanced Object-Oriented Design \& Programming} }
+Tente descrever uma classe com 25 palavras ou menos, e não use ``e'' ou ``ou''. Se você não consegue fazer isso, pode ser que você tenha mais de uma classe.
+\end{block}
+\end{frame}
+
+\begin{frame}{\textit{Single responsibility principle (SRP)}}
+
+Considere uma classe que realiza as seguintes operações:
+
+\begin{block}{}
+    \begin{enumerate}
+        \item Abrir uma conexão com o banco de dados.
+        \item Realizar consulta ao banco de dados.
+        \item Escrever esses dados em um arquivo.
+    \end{enumerate}
+\end{block}
+
+
+Quais seriam seus "motivos para mudança":
+
+\begin{block}{}
+    \begin{enumerate}
+        \item E se for utilizado um novo banco de dados?
+        \item E se for utilizado um ORM para gerenciar as consultas?
+        \item E se a estrutura dos dados de escrita for alterada?
+    \end{enumerate}
+\end{block}
+
+Cada mudança pode afetar as demais operações. O ideal seria ter três classes distintas, cada uma com sua responsabilidade.
+
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Single responsibility principle (SRP)}}
+
+\textbf{Exemplo 1}: Relatório de vendas (viola o SRP)
+	\begin{itemize}
+    	\item Razões para mudança: estética x no conteúdo
+    	\item Proposta: separar conteúdo da apresentação.
+	\end{itemize}
+
+\textbf{Exemplo 2}: Gerar um pedido de compra de Produtos (viola o SRP). \\[5mm]
+
+\begin{tabular}{ll}
+\begin{minipage}{.35\textwidth}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-2]{Pedido}{}{+ adicionarProduto(: Produto, : int) \\ + cacularTotal() : double \\ + gerarPlanilhaExcel()}
+    \end{tikzpicture}
+\end{minipage} &
+\begin{lstlisting}[basicstyle=\tiny]
+public class Pedido
+{
+  public void adicionarProduto(Produto p, int q) { }
+  public double calcularTotal() { }
+  public void gerarPlanilhaExcel() { }
+}
+\end{lstlisting} \\
+\end{tabular}
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Single responsibility principle (SRP)}}
+Exemplo 2 (cont.): Gerar um pedido de compra de Produtos. \\[5mm]
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-5.5, y=-2]{Pedido}{}{+ adicionarProduto(: Produto, : int) \\ + cacularTotal() : double}
+     \umlclass[font=\fontsize{6}{6}\selectfont, type=interface]{Relatorio}{}{ \umlvirt{+ gerarPlanilha()}}
+     \umlclass[font=\fontsize{6}{6}\selectfont, y=-2]{RelatorioPedidoExcel}{}{ + gerarPlanilha()}
+     \umluniassoc[font=\fontsize{6}{6}\selectfont, arg=atualiza]{Pedido}{RelatorioPedidoExcel}
+     \umlimpl{RelatorioPedidoExcel}{Relatorio}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Single responsibility principle (SRP)}}
+    \begin{block}{Ideia geral do SRP}
+        Uma classe deve ter um, e somente um, motivo para mudar. Sendo assim, 
+        uma determinada classe deve ter apenas uma responsabilidade dentro do sistema.
+    \end{block}
+    \begin{block}{Problemas causados por violar o SRP}
+        \begin{itemize}
+            \item Falta de coesão
+            \item Alto acoplamento
+            \item Dificuldade de testar
+            \item Objeto deus
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
+
+
+\subsection{Open/closed principle (OCP)}
+
+\begin{frame}{\textit{Open/closed principle (OCP)}}
+
+\begin{block}{\textit{Open/closed principle (OCP)}}
+``Objetos ou entidades devem ser abertos para extensão, mas fechados para modificação.''
+\end{block}
+
+
+\begin{itemize}
+	\item Uma classe deve ser facilmente extensível, sem a necessidade de modificação.
+	\item Mudanças apenas para correção de código.
+	\item Extensão: classes abstratas e interfaces.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\textit{Open/closed principle (OCP)}}
+Exemplo: Gerenciar arquivos de diversos formatos (viola o OCP). \\[5mm]
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, type=abstract]{Arquivo}{}{}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-1.5, y=-2.5]{Docx}{}{ + abrirDocx() \\ + fecharDocx() \\ + salvarDocx()}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=1.5, y=-2.5]{Txt}{}{ + abrirTxt() \\ + fecharTxt() \\ + salvarTxt()}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-5.5]{GerenciadorDeArquivos}{}{+ salvarTodos(Arquivo[  ] arquivos)}
+     \umluniassoc{GerenciadorDeArquivos}{Arquivo}
+    \umlVHVinherit{Docx}{Arquivo}
+     \umlVHVinherit{Txt}{Arquivo}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Open/closed principle (OCP)}}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public abstract class Arquivo {
+
+}
+
+public class Docx extends Arquivo {
+
+   public void abrirDocx() { }
+   public void fecharDocx() { }
+   public void salvarDocx() { }
+}
+
+public class Txt extends Arquivo {
+
+   public void abrirTxt() { }
+   public void fecharTxt() { }
+   public void salvarTxt() { }
+}
+
+
+
+public class GerenciadorDeArquivos {
+   
+   public salvartodos(Arquivo[] arquivos) {
+      for (Arquivo arquivo : arquivos) {
+         if (arquivo instanceof Docx)
+            ((Docx) arquivo).salvarDocx();
+         else if (arquivo instanceof Txt)
+            ((Txt) arquivo).salvarTxt();
+      }
+   }
+}
+
+
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\textit{Open/closed principle (OCP)}}
+Exemplo: Gerenciar arquivos de diversos formatos. \\[5mm]
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, type=abstract]{Arquivo}{}{\umlvirt{+ abrir()} \\ \umlvirt{+ fechar()} \\ \umlvirt{+ salvar()}}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-1.5, y=-3]{Docx}{}{ + abrir() \\ + fechar() \\ + salvar()}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=1.5, y=-3]{Pdf}{}{ + abrir() \\ + fechar() \\ + salvar()}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-5.5]{GerenciadorDeArquivos}{}{+ salvarTodos(Arquivo[  ] arquivos)}
+     \umluniassoc{GerenciadorDeArquivos}{Arquivo}
+     \umlVHVinherit{Docx}{Arquivo}
+     \umlVHVinherit{Pdf}{Arquivo}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Open/closed principle (OCP)}}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public abstract class Arquivo {
+
+   public abstract void abrir();
+   public abstract void fechar();
+   public abstract void salvar();
+}
+
+
+public class Docx extends Arquivo {
+
+   public void abrir() { }
+   public void fechar() { }
+   public void salvar() { }
+}
+
+
+public class Pdf extends Arquivo {
+
+   public void abrir() { }
+   public void fechar() { }
+   public void salvar() { }
+}
+
+public class GerenciadorDeArquivos {
+   
+   public salvartodos(Arquivo[] arquivos) {
+      for (Arquivo arquivo : arquivos) {
+         arquivo.salvar();
+      }
+   }
+}
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{\textit{Open/closed principle (OCP)}}
+    \begin{block}{Ideia geral do OCP}
+        Se a classe \lstinline|Shulambs| foi escrita pelo desenvolvedor A, e o desenvolvedor B precisa de alguma modificação nessa classe, ele deveria conseguir fazer isso facilmente estendendo a classe \lstinline|Shulambs|, mas não modificando a mesma.
+    \end{block}
+    \begin{block}{Problemas causados por violar o OCP}
+        Ao adicionar um novo comportamento em uma classe podemos gerar um erro em
+        uma funcionalidade já existente.
+    \end{block}
+\end{frame}
+
+\subsection{Liskov substitution principle (LSP)}
+
+\begin{frame}{\textit{Liskov substitution principle (LSP)}}
+
+\begin{block}{\textit{Liskov substitution principle (LSP)}}
+Se $q(x)$ é uma propriedade demonstrável dos objetos $x$ de tipo $T$. Então $q(y)$ deve ser verdadeiro para objetos $y$ de tipo $S$, onde $S$ é um subtipo de $T$\footnote{\textit{\tiny LISKOV, Barbara: Data abstraction and hierarchy, 1987}}.
+\end{block}
+
+\begin{itemize}
+\item Objetos que fazem parte de um programa podem ser substituídos por instâncias de seus subtipos sem prejuízo para a correção do programa.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Liskov substitution principle (LSP)}}
+\begin{tabular}{ll}
+\begin{minipage}{.68\textwidth}
+\begin{itemize}
+\item Violação comum do LSP: verificação de tipo em tempo de execução.
+\item Violação sutil: uso da herança desconsiderando o comportamento.
+	\begin{itemize}
+	\item Ex: \texttt{Quadrado} \textit{é um tipo de} \texttt{Retângulo}.
+    \end{itemize}
+\end{itemize}
+\end{minipage} & 
+\begin{minipage}{.3\textwidth}
+    \begin{center}
+    \begin{tikzpicture} 
+     \umlemptyclass[font=\fontsize{7}{7}\selectfont]{Retangulo}
+     \umlemptyclass[font=\fontsize{7}{7}\selectfont,y=-2]{Quadrado}
+     \umlinherit{Quadrado}{Retangulo}
+    \end{tikzpicture}
+    \end{center}
+\end{minipage} \\
+\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Liskov substitution principle (LSP)}}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Retangulo {
+
+  private double altura;
+  private double largura;
+  
+  public double getArea() { 
+    return altura * largura; 
+  }
+  
+  public void setAltura(double altura) {
+    if (altura > 0) 
+      this.altura = altura;
+  }
+  
+  public void setLargura(double largura) {
+    if (largura > 0) 
+      this.largura = largura;
+  }
+}
+public class Quadrado extends Retangulo {
+
+  @Override
+  public void setAltura(double altura) {
+      super.setLargura(altura);
+      super.setAltura(altura);
+  }
+  
+  
+  @Override
+  public void setLargura(double largura) {
+      super.setLargura(largura);
+      super.setAltura(largura);
+  }
+  
+  
+}
+
+
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{\textit{Liskov substitution principle (LSP)}}
+\begin{lstlisting}[basicstyle=\tiny]
+public class Aplicacao {
+   public static void main(String[] args) {
+   
+      Retangulo ret = new Retangulo();
+      ret.setaltura(3);
+      ret.setLargura(2);
+      
+      if (ret.getArea() != 6) {
+         System.out.println("Algo está errado!");
+      }
+      
+      ret = new Quadrado();
+      ret.setaltura(3);
+      ret.setLargura(2);
+      
+      if (ret.getArea() != 6) {
+         System.out.println("Algo está errado!");
+      }
+   }
+}
+\end{lstlisting}
+
+\textbf{Em resumo}: 
+Herança deve considerar a relação \textit{``é-um''} para o comportamento do objeto.
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Liskov substitution principle (LSP)}}
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, type=interface]{AreaCalculavel}{}{\umlvirt{+ getArea() : double}}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=0, y=-2.5]{Retangulo}{-- largura: double \\ -- altura: double}{ + getArea(): double }
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-3.5, y=-2.5]{Quadrado}{-- lado: double}{ + getArea(): double }
+     \umlimpl{Retangulo}{AreaCalculavel}
+     \umlimpl{Quadrado}{AreaCalculavel}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{\textit{Liskov substitution principle (LSP)}}
+    \begin{block}{Ideia geral do LSP}
+        Uma classe derivada deve ser substituível por sua classe base. 
+    \end{block}
+    \begin{block}{Problemas causados por violar o LSP}
+        \begin{itemize}
+            \item Retornos inesperados quando usamos polimorfismo. 
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\subsection{Interface segregation principle (ISP)}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+
+\begin{block}{\textit{Interface segregation principle (ISP)}}
+Clientes não devem ser forçados a implementar uma interface que não usam, ou seja, não devem ser forçados a depender de métodos que não usam.
+\end{block}
+
+\begin{itemize}
+\item O acúmulo de funções em uma interface pode torná-la não-coesa e forçar comportamentos não comuns a uma classe.
+\item Exemplo: 
+\begin{itemize}
+	\item Uma \texttt{Porta} e um \texttt{Temporizador} (\textit{timer}).
+	\item Uma porta de geladeira que deve disparar um alarme se ficar mais de 20s aberta.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+\begin{center}
+    \begin{tikzpicture} 
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-6]{Temporizador}
+     \umlclass[font=\fontsize{7}{7}\selectfont, type=interface]{Temporizavel}{}{\umlvirt{+ timeOut() : void}}
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, y=-2]{Porta}
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, y=-3.5]{PortaComAlarme}
+     \umlimpl{Porta}{Temporizavel}
+     \umlinherit{PortaComAlarme}{Porta}
+     \umluniassoc{Temporizador}{Temporizavel}
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Problema:} nem toda \texttt{Porta} é \texttt{Temporizável}. 
+\end{frame}
+
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+\begin{center}
+    \begin{tikzpicture} 
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-6]{Temporizador}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=-2, type=interface]{Temporizavel}{}{\umlvirt{+ timeOut() : void}}
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=1]{Porta}
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-.5, y=-2.5]{PortaComAlarme}
+     \umlVHVimpl{PortaComAlarme}{Temporizavel}
+     \umlVHVinherit{PortaComAlarme}{Porta}
+     \umluniassoc{Temporizador}{Temporizavel}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+\begin{center}
+    \begin{tikzpicture} 
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=-6]{Temporizador}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=-2, type=interface]{Temporizavel}{}{\umlvirt{+ timeOut() : void}}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=-2, y=-2.5]{Timer}{}{+ timeOut() : void}
+     \umlsimpleclass[font=\fontsize{7}{7}\selectfont, x=1.5]{Porta}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=1.5, y=-2.5]{PortaComAlarme}{- timer : Timer}{}
+     \umlimpl{Timer}{Temporizavel}
+     \umlinherit{PortaComAlarme}{Porta}
+     \umluniassoc{Temporizador}{Temporizavel}
+     \umluniassoc{PortaComAlarme}{Timer}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+    \begin{center}
+        \begin{tikzpicture} 
+            \umlclass[font=\fontsize{7}{7}\selectfont,y=3,x=3,type=interface]{Ave}{}{\umlvirt{+ voar(): void} \\ \umlvirt{+ comer(): void} \\ \umlvirt{+ cantar(): void}}
+            \umlclass[font=\fontsize{7}{7}\selectfont, x=1.5]{Papagaio}{}{+ voar(): void \\ + comer(): void \\ + cantar(): void}
+            \umlclass[font=\fontsize{7}{7}\selectfont, x=4]{Pinguim}{}{+ voar(): void \\ + comer(): void \\ + cantar(): void}
+            \umlclass[font=\fontsize{7}{7}\selectfont, x=6.5]{Bem-ti-vi}{}{+ voar(): void \\ + comer(): void \\ + cantar(): void}
+            \umlimpl{Papagaio}{Ave}
+            \umlimpl{Pinguim}{Ave}
+            \umlimpl{Bem-ti-vi}{Ave}
+        \end{tikzpicture}
+    \end{center}
+    \textbf{Problema:} nem toda \texttt{Ave} é capaz de \texttt{voar} e \texttt{cantar}. 
+\end{frame}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+\begin{center}
+    \begin{tikzpicture} 
+        \umlclass[font=\fontsize{7}{7}\selectfont,y=3,x=4,type=interface]{Voavel}{}{\umlvirt{+ voar(): void}}
+     \umlclass[font=\fontsize{7}{7}\selectfont,y=3,x=1.5,type=interface]{Alimentavel}{}{\umlvirt{+ comer(): void}}
+     \umlclass[font=\fontsize{7}{7}\selectfont,y=3,x=6.5,type=interface]{Cantavel}{}{\umlvirt{+ cantar(): void}}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=1.5]{Pinguim}{}{+ comer(): void}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=4]{Bem-ti-vi}{}{+ voar(): void \\ + comer(): void \\ + cantar(): void}
+     \umlclass[font=\fontsize{7}{7}\selectfont, x=6.5]{Papagaio}{}{+ comer(): void \\ + cantar(): void}
+     \umlimpl{Papagaio}{Alimentavel}
+     \umlimpl{Papagaio}{Cantavel}
+     \umlimpl{Pinguim}{Alimentavel}
+     \umlimpl{Bem-ti-vi}{Alimentavel}
+     \umlimpl{Bem-ti-vi}{Voavel}
+     \umlimpl{Bem-ti-vi}{Cantavel}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{\textit{Interface segregation principle (ISP)}}
+    \begin{block}{Ideia geral do ISP}
+        Uma classe não deve ser forçada a implementar métodos que não irão utilizar.
+    \end{block}
+\end{frame}
+
+\subsection{Dependency inversion principle (DIP)}
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+
+\begin{block}{\textit{Dependency inversion principle (DIP)}}
+``Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações; Abstrações não devem depender de detalhes. Detalhes devem depender de abstrações.''.
+\end{block}
+
+\begin{itemize}
+    \item Nenhuma variável deve conter referência para uma classe concreta.
+    \item Nenhuma classe deve derivar de uma classe concreta.
+    \item Nenhum método deve sobrescrever métodos implementados em sua classe base.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+
+Exemplo: Um sistema de uma loja que vende telefones (\textit{viola o DIP}).
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlsimpleclass[font=\fontsize{5}{5}\selectfont, y=2]{Aplicacao}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-5, width=5ex]{iPhone}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-3.4, width=5ex]{Samsung}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-1.7, width=5ex]{Motorola}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-0.1, width=5ex]{OnePlus}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=1.5, width=5ex]{Xiaomi}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=3.2, width=5ex]{Google Pixel}{}{}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=5, width=5ex]{Huawei}{}{}
+     \umluniassoc{Aplicacao}{iPhone}
+     \umluniassoc{Aplicacao}{Samsung}
+     \umluniassoc{Aplicacao}{Motorola}
+     \umluniassoc{Aplicacao}{OnePlus}
+     \umluniassoc{Aplicacao}{Xiaomi}
+     \umluniassoc{Aplicacao}{Google Pixel}
+     \umluniassoc{Aplicacao}{Huawei}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+
+Exemplo: Um sistema de uma loja que vende telefones.
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlsimpleclass[font=\fontsize{5}{5}\selectfont, y=3.5]{Aplicacao}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, y=2, type=abstract]{Phone}
+     \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-5, width=5ex]{iPhone}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-3.4, width=5ex]{Samsung}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-1.7, width=5ex]{Motorola}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=-0.1, width=5ex]{OnePlus}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=1.5, width=5ex]{Xiaomi}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=3.2, width=5ex]{Google Pixel}{}{}
+    \umlemptyclass[font=\fontsize{5}{5}\selectfont, x=5, width=5ex]{Huawei}{}{}
+     \umluniassoc{Aplicacao}{Phone}
+     \umlimpl{iPhone}{Phone}
+     \umlimpl{Samsung}{Phone}
+     \umlimpl{Motorola}{Phone}
+     \umlimpl{OnePlus}{Phone}
+     \umlimpl{Xiaomi}{Phone}
+     \umlimpl{Google Pixel}{Phone}
+     \umlimpl{Huawei}{Phone}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+Exemplo: Um botão para controlar uma lâmpada (viola o DIP).
+\begin{itemize}
+\item E se a \texttt{Lâmpada} muda?
+\item E se queremos usar o botão para controlar um microondas?
+\end{itemize}
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-2]{Botao}{- minhaLampada}{}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=2]{Lampada}{}{}
+     \umluniassoc{Botao}{Lampada}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+Exemplo: Um botão para controlar uma lâmpada.
+
+\begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=-2]{Botao}{- minhaChave}{}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=2]{Chaveavel}{}{\umlvirt{+ liga()} \\ \umlvirt{+ desliga()}}
+     \umlclass[font=\fontsize{6}{6}\selectfont, x=2, y=-2]{Lampada}{}{+ liga() \\ + desliga()}
+     \umluniassoc{Botao}{Chaveavel}
+     \umlimpl{Lampada}{Chaveavel}
+    \end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{\textit{Dependency inversion principle (DIP)}}
+    \begin{block}{Ideia geral do DIP}
+        Dependa de abstrações e não de implementações. 
+    \end{block}
+    \begin{block}{Problemas causados por violar o DIP}
+        \begin{itemize}
+            \item Alto acoplamento 
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Paz, pão e terra."}
+        \end{block}
+\end{frame}
+\end{document}

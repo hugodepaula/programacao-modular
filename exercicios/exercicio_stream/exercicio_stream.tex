@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercícios Stream}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Analise o seguinte trecho de código Java:
+
+\begin{lstlisting}
+public class Livro {
+   private String titulo;
+   private String genero;
+   private int anoPublicacao;
+   private Autor autor;
+}
+
+public class Autor {
+   private String nome;
+   private int anoNascimento;
+}
+\end{lstlisting}
+
+\textbf{Ambas as classes possuem getters e setters}. Implmente os seguintes métodos utilizando Java Stream (esses métodos não estão dentro das classes acima) :
+
+\subproblem Dado uma lista de Livros, retorne se existe pelo menos um livro publicado em um terminado ano, ex: 1998.
+\begin{lstlisting}
+public boolean existeLivrosPublicadosEm(List<Livro> livros, int ano)
+\end{lstlisting}
+\vspace*{2cm}
+
+\subproblem Dado uma lista de Livros, retorne todos os livros publicados de um determinado gênero, ex: Romance.
+\begin{lstlisting}
+public List<Livro> getLivrosPorGenero(List<Livro> livros, String genero)
+\end{lstlisting}
+\vspace*{2cm}
+
+
+\subproblem Dado uma lista de Livros, retorne todos os livros publicados cujo o título inicie com derminada letra, ex: J.
+\begin{lstlisting}
+public List<Livro> getLivrosPublicadosComTitulosIniciadoEm(List<Livro> livros, char letra)
+\end{lstlisting}
+\vspace*{2cm}
+
+\subproblem Dado uma lista de Livros, retorne a quantidade de livros publicados por um determinado autor, ex: Jorge Amado .
+\begin{lstlisting}
+public int getQuantidadeLivrosPorAutor(List<Livro> livros, String nomeAutor)
+\end{lstlisting}
+\vspace*{2cm}
+
+\subproblem Dado uma lista de Livros, retorne todos os livros publicados cujo o autor tenha o publicado com uma determinada idade, ex: Livros que foram publicados quando o autor tinha 32 anos .
+\begin{lstlisting}
+public List<Livro> getLivrosPublicadosQuandoAutorTinhaIdade(List<Livro> livros, int idadeAutorNaPublicacao)
+\end{lstlisting}
+
+\end{document}

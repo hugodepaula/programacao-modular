@@ -1,0 +1,932 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Coleções em Java%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas linhas 1.46
+% cinco linhas 2.26
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.96cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Coleções}
+
+\subsection{Java Collections Framework}
+
+\begin{frame}{\textit{Collections}}
+
+\begin{block}{\textit{Collections}}
+Uma coleção é um objeto que agrupo múltiplos objetos, como um \textit{container}.
+\end{block}
+
+\begin{block}{\textit{Java Collections Framework}}
+É uma arquitetura unificada para representação e manipulação de coleções, independentes de implementação.
+\end{block}
+
+
+\begin{center}
+\includegraphics[width=.6\textwidth]{colls-coreInterfaces.png}\footnote{Oracle. \textit{Collections: The Java Tutorial}. 2016.}
+\end{center}
+\end{frame}
+
+\begin{frame}{\textit{Java Collections Framework}}
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{implementations.png}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Sintaxe}
+
+\begin{itemize}
+\item Exemplo de criação de coleção:
+
+\begin{block}{}
+\lstinline|List<String> list = new ArrayList<String>();|
+\end{block}
+
+\item Processamento:
+   \begin{itemize}
+   \item for-each
+
+\begin{block}{}
+\lstinline|for (String s: list) System.out.println(s);|
+\end{block}
+
+
+
+   \item Iterador
+
+\begin{block}{}
+\begin{lstlisting}
+Iterator<?> it = list.iterator();
+while(it.hasNext())
+    if (!cond(it.next()))
+        it.remove();
+\end{lstlisting}
+\end{block}
+
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Interfaces}
+
+\subsection{Collection}
+
+\begin{frame}[fragile]{Interface Collection<E>}
+
+\begin{itemize}
+   \item Inclusão / remoção:
+      \begin{lstlisting}
+       boolean add(E elemento)
+       boolean remove(E elemento)
+      \end{lstlisting}
+   \item Consultas:
+      \begin{lstlisting}
+      int size()
+      boolean isEmpty()
+      boolean contains(Object elemento)
+      Iterator<E> iterator()
+      Object[] toArray()
+      \end{lstlisting}
+   \item Operações com grupos:
+      \begin{lstlisting}
+      boolean containsAll(Collection<?> coleção)
+      boolean addAll(Collection<? extends E> coleção)
+      void clear()
+      void removeAll(Collection<?> coleção)
+      void retainAll(Collection<?> coleção)
+      \end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\subsection{Set e SortedSet -- conjuntos}
+
+\begin{frame}[fragile]{Interface Set<E> -- conjuntos de elementos}
+
+\begin{itemize}
+\item Conjuntos: não aceitam elementos duplicados.
+\item Principais métodos:
+   \begin{itemize}
+   \item Herdados da interface \lstinline|Collection|.
+   \end{itemize}
+\item Implementações:
+   \begin{itemize}
+   \item Classe \lstinline|HashSet| -- acesso mais rápido.
+   \item Classe \lstinline|TreeSet| -- acesso ordenado.
+   \item Classe \lstinline|LinkedHashSet| -- mais versátil.
+   \end{itemize}
+\item Considerações:
+   \begin{itemize}
+   \item Dois conjuntos são iguais se contiverem os mesmos elementos (determinado através dos métodos \lstinline|equals()| e \lstinline|hashCode()|).
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interface SortedSet<E> -- conjunto ordenado}
+
+\begin{itemize}
+   \item Principais métodos:
+      \begin{lstlisting}
+      E first()
+      E last()
+
+      SortedSet<E> headSet(E aoElemento)
+      SortedSet<E> subSet(E doElemento, E aoElemento)
+      SortedSet<E> tailSet(E doElemento)
+
+      Comparator<? super E> comparator()
+    \end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo de conjuntos}
+\begin{lstlisting}
+public class ExemploSet {
+    public static void main( String[] args ) {
+
+        Set<String> conjunto = new HashSet<>();
+
+        conjunto.add( "Bernardo" );
+        conjunto.add( "Carolina" );
+        conjunto.add( "Felipe" );
+        conjunto.add( "Carolina" );
+        conjunto.add( "Ana" );
+
+        System.out.println( conjunto );
+
+        Set<String> conjuntoOrdenado =
+                            new TreeSet<>( conjunto );
+
+        System.out.println( conjuntoOrdenado );
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Solução parcial: aluno}
+
+\begin{lstlisting}
+public class Aluno {
+	private final String matricula;
+	private String nome;
+	private int idade;
+
+	public Aluno(String matricula, String nome, int idade) {
+		this.matricula = matricula;
+		this.nome = nome;
+		this.idade = idade;
+	}
+
+/** getters e setters **/
+
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Solução parcial: Aluno}
+
+\begin{lstlisting}
+public static void main(String[] args) {
+   var aluno1 = new Aluno("123", "Pedro", 25);
+   var aluno2 = new Aluno("123", "Pedro", 25);
+   System.out.println(aluno1.equals(aluno2));
+
+
+   Set<Aluno> set = new HashSet<>();
+   set.add(aluno1);
+   set.add(aluno2);
+
+   System.out.println(set.size());
+
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{List -- listas e Queue -- filas}
+
+\begin{frame}[fragile]{Interface List<E> -- listas}
+\begin{itemize}
+   \item Coleção indexada com possibilidade de chaves duplicadas
+   \item Principais métodos:
+\end{itemize}
+\begin{lstlisting}
+      void add( int índice, E elemento )
+      boolean add( E elemento )
+      boolean addAll( int índice, Collection<? extends E> coleção )
+
+      E get( int índice )
+      E set( int índice, E element )
+      int indexOf( Object elemento )
+      int lastIndexOf( Object elemento )
+
+      E remove( int índice )
+      List<E> subList( int índiceInicial, int índiceFinal )
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Interface ListIterator<E> -- iterador de listas}
+
+\begin{block}{}
+   \lstinline|ListIterator<E> listIterator()| \\
+   \lstinline|ListIterator<E> listIterator(int índiceInicial)|
+\end{block}
+\begin{itemize}
+\item Principais métodos:
+\end{itemize}
+
+\begin{lstlisting}
+      void add( E elemento )
+      void set( E elemento )
+      void remove()
+
+      boolean hasPrevious()
+      boolean hasNext()
+      E previous()
+      E next()
+
+      int nextIndex()
+      int previousIndex()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Implementações de listas}
+
+\begin{itemize}
+   \item \lstinline|Classe ArrayList<E>| -- semelhante a vetores dinâmicos.
+   \begin{itemize}
+      \item Implementa os métodos da interface.
+   \end{itemize}
+   \item \lstinline|Classe LinkedList<E>| -- manipulação sequencial de elementos (filas, pilhas, deques, etc.).
+   \begin{itemize}
+       \item Implementa métodos adicionais, além dos da interface:
+   \end{itemize}
+\end{itemize}
+
+\begin{lstlisting}
+      void addFirst( E elemento )
+      void addLast( E elemento )
+      E getFirst()
+      E getLast()
+      Object removeFirst()
+      Object removeLast()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo de listas}
+\begin{lstlisting}
+public class ExemploDeListas {
+   public static void main(String[] args) {
+      List<String> lista = new ArrayList<String>();
+      lista.add("Bernardo");      lista.add("Carolina");
+      lista.add("Felipe");        lista.add("Carolina");
+      lista.add("Clara");
+      System.out.println(lista);
+      System.out.println("1: " + lista.get(2));
+      LinkedList<String> fila = new LinkedList<String>();
+      fila.addFirst("Bernardo");  fila.addFirst("Carolina");
+      fila.addFirst("Felipe");    fila.addFirst("Ana");
+      fila.addFirst("Clara");
+      System.out.println(fila);
+      fila.removeLast();
+      fila.removeLast();
+      System.out.println(fila);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Interface Queue<E> -- filas}
+
+\begin{itemize}
+\item Coleção baseada em filas, com possibilidade de prioridades e bloqueios
+\item Principais métodos:
+\begin{lstlisting}
+E element() // retorna 1o elem. da fila, sem removê-lo.
+boolean offer(E elemento) // insere se possível.
+boolean add(E elemento) // insere ou lança exceção.
+E peek() // recupera elem., mas não remove ou retorna null.
+E poll() // recupera e remove ou retorna null.
+E remove() // recupera e remove ou lança exceção.
+\end{lstlisting}
+\item Implementações de filas:
+\begin{itemize}
+   \item \lstinline|Classe PriorityQueue<E>| -- semelhante às listas, só que implementadas em Heap.
+   \begin{itemize}
+   \item Elem. ordenados por ordenação natural ou por \lstinline|Comparator| .
+   \item Objetos devem ser comparáveis (\lstinline|interface Comparable<E>|): \\
+
+   \lstinline|public int compareTo( E e ) throws ClassCastException|
+   \end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Map -- mapeamentos}
+
+\begin{frame}[fragile]{Interface Map<K,V> -- mapeamentos}
+
+\begin{itemize}
+\item Associações de chaves (\textit{K -- Keys}) e valores (\textit{V -- Values}). \vspace{-.5mm}
+\item Principais métodos para alteração: \vspace{-.5mm}
+\begin{lstlisting}
+      V put( K chave, V valor )
+      V remove( K chave )
+      void putAll( Map<? extends K, ? extends V> mapeamento )
+      void clear()
+\end{lstlisting}
+   \item Principais métodos para consulta:\vspace{-.5mm}
+\begin{lstlisting}
+      V get( K chave )
+      boolean containsKey( Object chave )
+      boolean containsValue( Object valor )
+      int size()
+      boolean isEmpty()
+   \end{lstlisting}
+   \item Principais métodos para grupos:\vspace{-.5mm}
+   \begin{lstlisting}
+      Set<K> keySet()
+      Collection<V> values()
+      Set<Map.Entry<K,V>> entrySet()
+   \end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Map.Entry<K,V> -- elementos de mapeamentos}
+
+\begin{itemize}
+\item Representa um par chave-valor.
+\item Principais métodos:
+   \begin{lstlisting}
+      boolean equals( Object objeto )
+      K getKey();
+      V getValue();
+      V setValue( V valor );
+   \end{lstlisting}
+\item Implementações de mapeamentos:
+\begin{itemize}
+   \item \lstinline|class HashMap<K,V>| -- agilidade, permite \texttt{nulls}.
+   \item \lstinline|class TreeMap<K,V>| -- ordenação (árvore balanceada).
+   \item \lstinline|class LinkedHashMap<K,V>| -- ordem de iteração previsível.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{SortedMap<K,V> -- mapeamentos ordenados}
+
+\begin{itemize}
+\item  Implementado pelo \lstinline|TreeMap<K, V>|.
+\item Principais métodos:
+   \begin{lstlisting}
+      Comparator<? super K> comparator();
+      SortedMap<K,V> headMap( K ateChave );
+      SortedMap<K,V> subMap( K daChave, K ateChave );
+      SortedMap<K,V> tailMap( K daChave );
+      K firstKey();
+      K lastKey();
+   \end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo de mapeamentos}
+
+\begin{lstlisting}
+public static void main(String[] args) {
+   Map<String, Integer> mapH = new HashMap<>();
+   for (int i = 0; i < args.length; i++) {
+	 String chave = args[i];
+	 Integer frequencia = mapH.get(chave);
+	 if (frequencia == null) {
+		  frequencia = 1;
+	 } else {
+	    	frequencia++;
+	 }
+
+	 mapH.put(chave, frequencia);
+   }
+   System.out.println(mapH);
+
+   var mapOrd = new TreeMap<>(mapH);
+   System.out.println(mapOrd);
+
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Algoritmos de Coleções}
+\begin{itemize}
+\item Principais algoritmos aplicados a coleções (classe \lstinline|Collections|):
+\end{itemize}
+
+\begin{lstlisting}
+sort() // ordena uma lista
+shuffle() // embaralha uma lista
+reverse() // inverte a ordem dos elementos em uma lista
+fill() // preenche uma coleção com determinado elemento
+copy() // copia os elementos de uma coleção para outra
+swap() // inverte dois elementos em uma lista
+binarySearch() // busca binária em uma lista ordenada
+frequency() // calcula o nº de vezes que elem. aparece numa coleção
+disjoint() // verifica se duas listas não têm elementos em comum
+min() // acha o menor valor em uma coleção
+max() // acha o maior valor em uma coleção
+\end{lstlisting}
+
+\end{frame}
+
+\section{Streams e pipelines}
+
+\subsection{Definição}
+
+\begin{frame}{Java \textit{pipelines} e \textit{streams}}
+\begin{itemize}
+    \item Para aprendermos \textit{streams}, precisamos relembrar a hierarquia de produtos.
+\end{itemize}
+\begin{center}
+    \begin{tikzpicture}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-4.3,y=1.1, type=abstract]{Produto}{-- descricao : String \\ -- quant : int \\ -- preco : float \\ -- dataFabricacao : LocalDateTime}{+ emEstoque() : boolean \\ + toString() : String}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-6.1, y=-2]{BemDuravel}{ -- mesesGarantia : int}{+ toString() : String}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=-2.3, y=-2]{BemDeConsumo}{-- dataValidade : LocalDate}{ + toString() : String}
+        \umlclass[font=\fontsize{7}{7}\selectfont,x=1.5,y=.7]{Estoque}{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- produtos : Produto[] \\ -- numProdutos}{+ adicionar(Produto) \\
+            + consultar(String) : Produto \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float  \\ + toString() : String }
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+        \umluniaggreg[mult1=1, mult2=*]{Estoque}{Produto}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+\begin{itemize}
+    \item \textbf{\textit{Stream}} é uma sequência de elementos. Ao contrário da \textit{Collection}, não é uma estrutura de dados que armazena elementos, mas transporta valores através de um \textit{pipeline}, como um fluxo de dados.
+    \item \textbf{\textit{Pipeline}} é uma sequência de operações sobre \textit{streams}.
+    \item Para utilizar as \textit{streams} é necessário apenas chamar o método \textit{.stream} 
+       sobre uma collection
+\end{itemize}
+\begin{block}{Primeiro exemplo}
+\begin{lstlisting}
+List.of(1, 2, 3, 4)
+   .stream()
+   .map(e -> e * e)
+   .toList();
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+\begin{block}{Principais operações dos \textit{streams}}
+\begin{itemize}
+   \item .map: Mapeia itens para um novo tipo
+   \item .filter: Remove do stream todos os itens que não atendam uma determinada condição
+   \item .count: Conta quantos items estão no \textit{stream}
+   \item .toList: Reune todos os itens de um \textit{stream} para uma Lista
+   \item .allMatch: Operação booleana se todos os itens de um \textit{stream} atendam uma determinada condição. 
+   \item .noneMatch: Operação booleana se nenhum os itens de um \textit{stream} atendam uma determinada condição. 
+   \item .anyMatch: Operação booleana se pelo menos um item de um \textit{stream} atenda uma determinada condição. 
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+\begin{block}{Principais operações dos \textit{streams}}
+\begin{itemize}
+   \item .findAny: Devolve um opcional com qualquer elemento do stream
+   \item .findFirst: Devolve um opcional com o primeiro elemento do stream
+   \item .reduce: Recebe uma sequência de elementos como entrada e combina eles em um apenas um elemento.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+
+\begin{block}{}
+\begin{lstlisting}
+// O exemplo imprime os produtos com $preco > 100.0$.
+List<Produto> produtos = new ArrayList<Produto>();
+produtos.stream()
+        .filter(prod -> prod.getPreco() > 100)
+        .forEach(prod -> System.out.println(prod));
+// ------- Stream x Java Array ------------
+for (Produto prod: produtos) {
+    if (prod.getPreco() > 100) {
+        System.out.println(prod);
+    }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+    \item Perceba que o processamento em \textit{pipeline} executou operações em sequência sobre um fluxo de dados:
+    \begin{enumerate}
+        \item Filtrou a lista mantendo apenas os produtos com preço maior que 100.0.
+        \item Imprimiu cada produto restante após a filtragem.
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Java \textit{pipelines} e \textit{streams}}
+
+\begin{itemize}\small
+    \item O exemplo a seguir calcula a quantidade média por \texttt{BemDeConsumo} no estoque, pelo \textit{pipeline}:
+    \begin{enumerate}\footnotesize
+        \item converte lista de produtos em um \textit{stream}.
+        \item filtra o \textit{stream} mantendo os produtos do tipo \texttt{BemDeConsumo}.
+        \item mapeia o resultado para \texttt{int}, baseado no atributo \texttt{quant} (retorna \texttt{IntStream}).
+        \item calcula a média da lista de inteiros (retorna \texttt{OptionalDouble}).
+        \item retorna a média como \texttt{double}.
+    \end{enumerate}
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+double media = produtos
+     .stream()
+     .filter(p -> p instanceof BemDeConsumo)
+     .mapToInt(Produto::getQuant)
+     .average()
+     .getAsDouble();
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\subsection{Exemplo Estoque}
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}
+public class Estoque {
+   private static final int MAX_PRODUTOS = 100;
+   private Produto[] listaDeProdutos;
+   private int numProdutos;
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}
+public class Estoque {
+   List<Produto> listaDeProdutos;
+
+   public List<Produto> getListaDeProdutos() {
+      return listaDeProdutos;
+   }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}
+public void adicionar(Produto p) {
+  if (numProdutos < MAX_PRODUTOS) {
+     listaDeProdutos[numProdutos++] = p;
+  }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}
+public void adicionar(Produto p) {
+  listaDeProdutos.add(p);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}[basicstyle=\tiny]
+public void remover(String descricao) {
+   for (int pos = 0; pos < numProdutos; pos++) {
+      if (descricao.equals(listaDeProdutos[pos].getDescricao())) {
+         for (int i = pos + 1; i < numProdutos; i++)
+            listaDeProdutos[i - 1] = listaDeProdutos[i];
+         listaDeProdutos[numProdutos - 1] = null;
+         numProdutos--;
+      }
+   }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}[basicstyle=\tiny]
+public void remover(String descricao) {
+   listaDeProdutos.removeIf((prod) -> descricao.equals(prod.getDescricao()));
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}[basicstyle=\tiny]
+public Produto consultar(String descricao) {
+  for (int pos = 0; pos < numProdutos; pos++) {
+     if (descricao.equalsIgnoreCase(listaDeProdutos[pos].getDescricao())) {
+        return listaDeProdutos[pos];
+     }
+  }
+  return null;
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}[basicstyle=\tiny]
+public Produto consultar(String descricao) {
+   return produtos
+            .stream()
+            .filter(p -> descricao.equalsIgnoreCase(p.getDescricao()))
+            .findAny()
+            .orElse(null);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}
+public int totalEmEstoque() {
+  int total = 0;
+  for (int i = 0; i < numProdutos; i++)
+    total += listaDeProdutos[i].getQuant();
+  return total;
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}
+public int totalEmEstoque() {
+  return listaDeProdutos.stream()
+                  .mapToInt(Produto::getQuant)
+                  .sum();
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}
+public float valorEmEstoque() {
+  float valor = 0;
+  for (int i = 0; i < numProdutos; i++)
+    valor += listaDeProdutos[i].getQuant() *
+             listaDeProdutos[i].getPreco();
+  return valor;
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}
+public float valorEmEstoque() {
+  return listaDeProdutos.stream()
+           .map((pd) -> pd.getQuant() * pd.getPreco())
+           .reduce(0.0F, (x, y) -> x + y);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{block}{Java array}
+\begin{lstlisting}
+public String toString() {
+   StringBuilder valor = new StringBuilder();
+   for (int i = 0; i < numProdutos; i++) {
+      valor.append(listaDeProdutos[i] + "\n");
+   }
+   return valor.toString();
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Collections e Streams}
+\begin{lstlisting}
+public String toString() {
+   return listaDeProdutos.stream()
+           .map((prod) -> prod.toString() + "\n")
+           .reduce("", (x, y) -> x + y);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{itemize}
+    \item O método a seguir ordena o estoque em ordem alfabética de descrição.
+    \item Ele não utiliza \textit{streams}.
+    \item Ele implementa a interface \texttt{Comparator} em uma classe anônima passada diretamente como parâmetro.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+public void ordenar() {
+  listaDeProdutos.sort(new Comparator<Produto>() {
+    @Override
+    public int compare(Produto o1, Produto o2) {
+      return (o1.getDescricao().compareTo(o2.getDescricao()));
+    }
+  });
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{itemize}
+    \item O método método ordenar poderia ser implementado na forma de \textit{streams}.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+public void ordenar() {
+ listaDeProdutos =
+   listaDeProdutos.stream()
+     .sorted(
+         (x, y) -> x.getDescricao().compareTo(y.getDescricao()))
+     .toList();
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{itemize}
+    \item É possível se criar um método parametrizável.
+    \item Esse método recebe dois parâmetros: uma condição (\texttt{Predicate}) e um método de comparação (\texttt{Comparator}).
+    \item Retorna a lista de produtos filtrada pela condi;áo e ordenada pelo critério definido.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+public List<Produto> ordenarStream(Predicate<Produto> p,
+                                   Comparator<Produto> c) {
+  return listaDeProdutos.stream()
+              .filter(p)
+              .sorted(c)
+              .collect(toList());
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: Estoque com \textit{collections} e \textit{streams}}
+
+\begin{itemize}
+    \item Para usar os novos métodos criados na classe Estoque.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}[basicstyle=\tiny]
+public static void main(String args[]) {
+   ...
+   estoque.ordenar();
+
+   List<Produto> filtrado = estoque.ordenarStream(
+                ((pf) -> pf.getQuant() > 100),
+                ((p1, p2)  -> Float.compare(p1.getPreco(), p2.getPreco())));
+
+   filtrado.forEach(prod -> System.out.println(prod));
+
+   double media = estoque.getListaDeProdutos()
+      .stream()
+      .filter(p -> p instanceof BemDeConsumo)
+      .mapToInt(Produto::getQuant)
+      .average()
+      .getAsDouble();
+
+   System.out.println("Quantidade média por produto: " + media);
+   System.out.println("Total em estoque: " + estoque.totalEmEstoque());
+   System.out.println("Valor em estoque: " + estoque.valorEmEstoque());
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Uma frase muda o fim do filme."}
+        \end{block}
+\end{frame}
+
+
+\end{document}

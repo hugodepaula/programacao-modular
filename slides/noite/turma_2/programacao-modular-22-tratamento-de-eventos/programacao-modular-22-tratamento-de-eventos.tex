@@ -1,0 +1,592 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Tratamento de eventos%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+% duas  linhas 1.48cm
+% tres  linhas 1.75cm
+% cinco linhas 2.26cm
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.75cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Eventos}
+
+\subsection{Eventos}
+
+\begin{frame}{Eventos}
+
+\begin{block}{Eventos}
+Correspondem à interações com os componentes.
+\end{block}
+
+\begin{itemize}
+\item Cada componente responde a tipos de eventos diversos.
+
+\item Ouvintes de eventos (\textit{Listeners}) são os objetos notificados quando um evento ocorre.
+
+\item Para que um componente ou contêiner possa responder a eventos, é necessário instalar um \textit{Listener}.
+
+\item Eventos são derivados de \lstinline|java.awt.event.AWTEvent|.
+
+\item Eventos e \textit{Listeners} são disponibilizados pelos pacotes \lstinline|java.awt.event.*| e \lstinline|javax.swing.event.*|.
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Eventos}
+
+\begin{itemize}
+\item Eventos de baixo nível compreendem:
+  \begin{itemize}
+  \item eventos de contêiner (inserção ou remoção de componente).
+  \item eventos de foco (componente ganhou ou perdeu foco).
+  \item eventos de entrada: teclado e mouse.
+  \item eventos de janela: resize, open, close, minimize, etc...
+  \end{itemize}
+\item Eventos semânticos compreendem:
+  \begin{itemize}
+  \item eventos de ação: notificam a ação de um componente específico. Ex: botão ``clicado''.
+  \item eventos  de ajuste: a barra de rolagem foi ajustada.
+  \item eventos de item: um elemento de lista, \textit{radio button} ou \textit{checkbox} foi alterado.
+  \item eventos de texto: indica alteração de um texto em um \lstinline|JTextArea| ou \lstinline|JTextField|.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Fontes de eventos}
+
+\begin{frame}[fragile]{Fontes de eventos do AWT}
+\begin{center}
+   \tiny
+   
+   \begin{tabular}{|p{.2\textwidth}|p{.4\textwidth}|p{.3\textwidth}|}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Listener}} & \multicolumn{1}{c|}{\textbf{Métodos}} & \multicolumn{1}{c|}{\textbf{Componentes}} \\
+    \hline
+    ActionListener & actionPerformed() & AbstractButton, Button, ButtonModel, ComboBoxEditor, JComboBox, JFileChooser, JTextField, List, MenuItem, TextField, Timer \\
+    \hline
+    AdjustmentListener & Changed() & JScrollBar, Scrollbar \\
+    \hline
+    ComponentListener & componentHidden(), componentMoved(), componentResized(), componentShown() & Component \\
+    \hline
+    ContainerListener & componentAdded(), componentRemoved() & Container \\
+    \hline
+    FocusListener & focusGained(), focusLost() & Component \\
+    \hline
+    ItemListener & itemStateChanged() & AbstractButton, ButtonModel, Checkbox, CheckboxMenuItem, Choice, ItemSelectable, JComboBox, List \\
+    \hline
+    KeyListener & keyPressed(), keyReleased(), keyTyped() & Component \\
+    \hline
+    MouseListener & mouseClicked(), mouseEntered(), mouseExited(), mousePressed(), mouseReleased() & Component \\
+    \hline
+    MouseMotionListener & mouseDragged(), mouseMoved() & Component \\
+    \hline
+    TextListener & textValueChanged() & TextComponent \\
+    \hline
+    WindowListener & windowActivated(), windowClosed(), windowClosing(), windowDeactivated(), windowDeiconified(), windowIconified(), windowOpened() & Window \\
+    \hline
+    \end{tabular}%
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Fontes de eventos do Swing (1/2)}
+
+\begin{center}
+\tiny
+\begin{tabular}{|p{.2\textwidth}|p{.4\textwidth}|p{.3\textwidth}|}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Listener}} & \multicolumn{1}{c|}{\textbf{Métodos}} & \multicolumn{1}{c|}{\textbf{Componentes}} \\
+    \hline
+AncestorListener & ancestorAdded(), ancestorMoved(), ancestorRemoved() & Action, JComponent \\
+\hline
+CaretListener & caretUpdate() & JTextComponent \\
+\hline
+CellEditorListener & editingCanceled(), editingStopped() & CellEditor, \\
+\hline
+ChangeListener & stateChanged() & AbstractButton, BoundedRangeModel, ButtonModel, JProgressBar, JSlider, JTabbedPane, JViewport, MenuSelectionManager,  SingleSelectionModel \\
+\hline
+HyperlinkListener & hyperlinkUpdate() & JEditorPane \\
+\hline
+InternalFrameListener & internalFrameActivated(), internalFrameClosed(), internalFrameClosing(), internalFrameDeactivated(), internalFrameDeiconified(), internalFrameIconified() internalFrameOpened() &  \\
+\hline
+ListDataListener & contentsChanged(), intervalAdded(), intervalRemoved() & AbstractListModel, ListModel \\
+\hline
+ListSelectionListener & valueChanged() & JList, ListSelectionModel \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Fontes de eventos do Swing (2/2)}
+
+\begin{center}
+\tiny
+\begin{tabular}{|p{.2\textwidth}|p{.4\textwidth}|p{.3\textwidth}|}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Listener}} & \multicolumn{1}{c|}{\textbf{Métodos}} & \multicolumn{1}{c|}{\textbf{Componentes}} \\
+    \hline
+MenuDragMouseListener & menuDragMouseDragged(), menuDragMouseEntered(), menuDragMouseExited(), menuDragMouseReleased() & JMenuItem \\
+\hline
+MenuKeyListener & menuKeyPressed(), menuKeyReleased(), menuKeyTyped() & JMenuItem \\
+\hline
+MenuListener & menuCanceled(), menuDeselected(), menuSelected() & JMenu \\
+\hline
+PopupMenuListener & popupMenuCanceled(), & JPopupMenu \\
+\hline
+      & popupMenuWillBecome- &  \\
+\hline
+      & Invisible(), &  \\
+\hline
+      & popupMenuWillBecome- &  \\
+\hline
+      & Visible() &  \\
+\hline
+TreeExpansionListener & treeCollapsed(), treeExpanded() & JTree \\
+\hline
+TreeSelectionListener & valueChanged() & JTree \\
+\hline
+TreeWillExpandListener & treeWillCollapse(), treeWillExpand() & JTree \\
+\hline
+java.beans.- & propertyChange() & Action, JComponent, \\
+\hline
+PropertyChangeListener &       & UIDefaults, UIManager \\
+\hline
+java.beans.- & vetoableChange() & JComponent \\
+\hline
+VetoableChangeListener &       &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{Eventos: exemplo}
+
+\begin{lstlisting}
+public class JanelaGrafica extends JFrame {
+  private static final long serialVersionUID = 1L;
+  private JButton butOK;
+  private JTextField campo;
+  private JLabel texto;
+
+  public JanelaGrafica() {
+    super("Aplicacao grafica simples");
+
+    Container cPane = this.getContentPane();
+
+    // Define layout do container
+    cPane.setLayout(new FlowLayout());
+
+    // Cria os componentes
+    texto = new JLabel("Nome:");
+    campo = new JTextField(15);
+    butOK = new JButton("OK");
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Eventos: exemplo}
+
+\begin{lstlisting}
+    // Adiciona os componentes a janela ou container
+    cPane.add(texto);
+    cPane.add(campo);
+    cPane.add(butOK);
+
+     this.addWindowListener(new AppListener());
+ 
+    // Adciona um listener para o botão de OK
+    butOK.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        texto.setText(campo.getText());
+        // Copia conteúdo digitado para o label
+      }
+    });
+
+    // Ajusta tamanho/janela conforme os componentes
+    this.pack();
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Eventos: exemplo}
+
+\begin{lstlisting}
+private class AppListener extends WindowAdapter {
+  public void windowClosing(WindowEvent e) {
+    System.exit(0);
+  }
+}
+
+public class AplicacaoGrafica {
+  public static void main(String args[]) {
+    JanelaGrafica apg = new JanelaGrafica();
+    apg.setVisible(true);
+  }
+}
+\end{lstlisting}
+
+\begin{textblock*}{10mm}(.5\textwidth,-1cm)
+    \includegraphics[height=2cm]{eventoSimples.pdf}
+\end{textblock*}
+
+\end{frame}
+
+\subsection{Exercício de evento simples}
+
+\begin{frame}{Exercícios}
+
+\begin{itemize}
+\item Construa um programa em Java que solicita o nome, o sexo, a idade e o estado civil de uma pessoa e, quando o botão de OK é clicado, ele instancia um objeto da classe Pessoa e limpa os campos da tela. 
+
+\item Implemente um método \lstinline|toString()| na classe Pessoa que exibe os dados pessoais da pessoa. 
+
+\item Utilize o \lstinline|JOptionPane| para exibir a pessoa cadastrada.
+
+\item Se o usuário clicar o botão CANCEL os campos são limpos mas a frase não é criada.
+\end{itemize}
+
+\end{frame}
+
+
+\section{Tratamento de eventos}
+
+\subsection{Forma centralizada}
+
+\begin{frame}[fragile]{Tratamento de eventos centralizado}
+
+\begin{itemize}
+\item Utiliza-se o evento semântico ``ação realizada'' (\textit{action performed}).
+\item Um único objeto implementa a interface \lstinline|ActionListener|.
+\item Esse objeto é registrado nos diversos componentes da interface:
+\item O método \lstinline|public void actionPerformed(ActionEvent e)| é implementado uma única vez e deve identificar qual componente disparou o evento.
+\end{itemize}
+
+\begin{lstlisting}
+public interface ActionListener
+{
+   public void actionPerformed(ActionEvent e);    
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: evento centralizado}
+
+\begin{lstlisting}
+public class JanelaGrafica extends JFrame implements ActionListener {
+   private JButton butOk = new JButton("Ok");
+   private JButton butCancel = new JButton("Cancel");
+   private JTextField campo = new JTextField(15);
+   private JLabel texto = new JLabel("Nome:");
+
+   public JanelaGrafica() {
+      super("Aplicacao grafica simples");
+      
+      this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      Container cPane = this.getContentPane();
+      cPane.setLayout(new FlowLayout());
+
+      // Tratamento de eventos centralizado
+      butOk.addActionListener(this);
+      butCancel.addActionListener(this);
+
+      cPane.add(texto);      cPane.add(campo);
+      cPane.add(butOk);      cPane.add(butCancel);
+      this.pack();
+   }
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: evento centralizado}
+
+\begin{lstlisting}
+   @Override
+   public void actionPerformed(ActionEvent e) {
+      System.out.println("Item: " + e.getActionCommand());
+      String componente = e.getActionCommand();
+      if (componente.equals("Ok")) {
+         JOptionPane.showMessageDialog(this, 
+                "Bem vindo, " + campo.getText() + ".",
+                "Boas vindas", JOptionPane.PLAIN_MESSAGE);
+      } else {
+         campo.setText("");
+      }
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Evento centralizado}
+
+\begin{itemize}
+\item Principais problemas:
+\begin{itemize}
+\item não é escalável, pois concentra a complexidade do tratamento de eventos.
+\item o texto como único mecanismo de identificação de um campo pode ser problemático.
+\end{itemize}
+\item É importante conhecer, pois é utilizado.
+\end{itemize}
+\end{frame}
+
+\subsection{Classes aninhadas}
+
+\begin{frame}{Abordagem das classes aninhadas}
+
+\begin{itemize}
+\item Pode-se definir classes internas para tratar eventos.
+\item Classes internas têm seu uso restrito à classe em que foi definida.
+\item Classes internas têm acesso aos membros privados da classe em que foi definida. 
+\item Compilador cria a classe de nome \texttt{ClasseExterna\$ClasseInterna.class}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: classes internas}
+
+\begin{lstlisting}
+public class JanelaGrafica extends JFrame {
+   private JButton butOk = new JButton("Ok");
+   private JButton butCancel = new JButton("Cancel");
+   private JTextField campo = new JTextField(15);
+   private JLabel texto = new JLabel("Nome:");
+
+   public JanelaGrafica() {
+      super("Aplicacao grafica simples");
+      
+      this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      Container cPane = this.getContentPane();
+      cPane.setLayout(new FlowLayout());
+
+      // Tratamento de eventos com classe aninhadas
+      butOk.addActionListener(new ButOkEvent());
+      butCancel.addActionListener(new ButCancelEvent());
+
+      cPane.add(texto);      cPane.add(campo);
+      cPane.add(butOk);      cPane.add(butCancel);
+      this.pack();
+   }
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: classes internas}
+
+\begin{lstlisting}
+   class ButOkEvent implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         JOptionPane.showMessageDialog(null,
+                "Bem vindo, " + campo.getText() + ".",
+                "Boas vindas", JOptionPane.PLAIN_MESSAGE);
+      }
+   }
+   
+   class ButCancelEvent implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         campo.setText("");
+      }
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Classes internas anônimas}
+
+\begin{frame}[fragile]{Classes internas anônimas}
+
+\begin{itemize}
+\item Nomear classes internas pode ser um problema em janelas complexas.
+\item Classes internas anônimas seguem a mesma regra das classes nomeadas.
+\item Por não possuírem nome, não podem ser reaproveitadas.
+\item Por não possuírem nome, sua instância é referenciada pelo seu supertipo (tipo da classe pai).
+\end{itemize}
+
+\begin{lstlisting}
+new ActionListener() {
+   public void actionPerformed(ActionEvent e) {
+      // Faz alguma coisa
+   }
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: classes internas anônimas}
+
+\begin{lstlisting}
+public class JanelaGrafica extends JFrame {
+   private JButton butOk = new JButton("Ok");
+   private JButton butCancel = new JButton("Cancel");
+   private JTextField campo = new JTextField(15);
+   private JLabel texto = new JLabel("Nome:");
+
+   public JanelaGrafica() {
+      super("Aplicacao grafica simples");
+      
+      this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      Container cPane = this.getContentPane();
+      cPane.setLayout(new FlowLayout());
+
+      cPane.add(texto);      cPane.add(campo);
+      cPane.add(butOk);      cPane.add(butCancel);
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exemplo: classes internas anônimas}
+
+\begin{lstlisting}
+      // Classes aninhadas anonimas
+      butOk.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null,
+                   "Bem vindo, " + campo.getText() + ".",
+                   "Boas vindas", JOptionPane.PLAIN_MESSAGE);
+         }
+      });
+   
+      butCancel.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            campo.setText("");
+         }
+      });
+      
+      this.pack();
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Classes Adaptadoras}
+
+\begin{itemize}
+\item Uma classe que implementa um ouvinte de eventos precisa implementar todos os métodos desse \textit{Listener}.
+\item Classes adaptadoras (\textit{Adapters}) fornecem uma implementação vazia dos \textit{Listeners}, que pode ser aproveitada.
+\end{itemize}
+
+\begin{lstlisting}
+class WindowAdapter implements WindowListener {
+    public void windowClosing(WindowEvent e) {}
+    public void windowOpened(WindowEvent e) {}
+    public void windowIconified(WindowEvent e) {}
+    public void windowClosed(WindowEvent e) {}
+    public void windowDeiconified(WindowEvent e) {}
+    public void windowActivated(WindowEvent e) {}
+    public void windowDeactivated(WindowEvent e) {}    
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Exercício}
+
+\begin{itemize}
+\item Faça uma calculadora simples, sem teclado numérico, apenas com os botões das 4 operações: adição, subtração, multiplicação e divisão.
+\item Usuário deve digitar o primeiro operando.
+\item Ao clicar no botão do operador, o 1$^\circ$ operando deve ser armazenado e o campo deve ficar limpo para receber o segundo operando.
+\item Ao clicar igual, a operação deve ser realizada e o resultado deve ser exibido.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Nós só podemos ver um pouco do futuro, mas o suficiente para perceber que há muito a fazer."}
+        \end{block}
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,288 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+    Herança%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\includegraphics[width=4cm]{puc_engesoft_logo.png} \\
+	\textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Curso de Engenharia de Software
+}
+%\institute[DCC / PUC Minas]
+%{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+%	\textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+%	Departamento de Ciência da Computação
+%}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   breaklines=true,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+	\begin{textblock*}{10mm}(.8785\textwidth,-1.75cm)
+		\includegraphics[height=0.97cm]{puc_engesoft_logo.png}%\includegraphics[height=1cm]{puclogo_small_bw.pdf}
+	\end{textblock*}
+}
+%\addtobeamertemplate{frametitle}{}{%
+%   \begin{textblock*}{10mm}(.9945\textwidth,-1.71cm)
+%    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+%   \end{textblock*}
+%}
+
+
+    
+\section{Herança}
+
+\begin{frame}{Herança}
+    \begin{itemize}
+    \item Mecanismo para definição de uma classe  em termos de outra classe existente.
+    \item Relação: \textit{é um tipo de} / \textit{é um}.
+    \item Herança permite o reuso do comportamento de uma classe na definição de outra.
+    \item A classe derivada herda todas as características de sua classe base, podendo adicionar novas características.
+    \item Baseada em dois princípios fundamentais do projeto de software:
+        \begin{itemize}
+            \item especificação \textit{(top-down)}
+            \item generalização / abstração \textit{(bottom-up)}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generalização / Especialização}
+\begin{center}
+\begin{figure}[h] 
+   \includegraphics[width=0.9\textwidth]{herancaUML.pdf}
+\end{figure}
+\end{center}
+\end{frame}
+
+\section{Herança simples}
+
+\begin{frame}{Herança Simples}
+\begin{itemize}
+   \item Novas classes, chamadas de classes derivadas (ou subclasses), são definidas a partir de apenas uma classe base (ou superclasse).
+    \item Exemplos:
+   \begin{itemize}
+   \item Um professor é uma Pessoa.
+   \item Um ônibus é um Veículo.
+   \item Um automóvel é um Veículo.
+   \end{itemize}
+\item Membros da classe base podem ser \underline{redefinidos} na classe derivada.
+   \item Em Java, qualquer classe herda da classe \lstinline|Object|.
+   \item Em Java, usa-se a palavra chave \lstinline|extends|, para indicar herança.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo de herança simples}
+    \begin{center}\tiny
+    \begin{tikzpicture} 
+     \umlclass{Pessoa}{\# cargaHoraria : int \\ \# nome : String}{ + getCargaHoraria() : int \\+ setCargaHoraria(m : int) : void \\ + getNome(): String\\+ setNome(n : String) : void }
+     \umlclass[x=-3, y=-4.25]{Professor}{-- dataAdmissao: Date \\ -- cargaHoraria : int }{+ calcularSalario() : double}
+     \umlclass[x=3, y=-4.25]{Aluno}{-- idCurso : int \\ -- cargaMatriculada : int}{+ calculaMensalidade():  double}
+        \umlVHVinherit{Professor}{Pessoa} 
+        \umlVHVinherit{Aluno}{Pessoa} 
+    \end{tikzpicture}
+\end{center}\end{frame}
+
+\subsection{Construtores em classes estendidas}
+
+
+\begin{frame}[fragile]{Exemplo: Construtores em classes estendidas}
+\begin{lstlisting}
+class Pessoa {
+   protected int cargaHoraria;         
+   protected String nome;
+   public Pessoa(int cargaHoraria, String nome) {
+      this.cargaHoraria = cargaHoraria;
+      this.nome = nome;
+   }
+  /** getters e setters **/
+}
+
+class Professor extends Pessoa {
+   protected Date dataAdmissao;
+   public Professor(int cargaHoraria, String nome, Date dataAdmissao,  int cargaHoraria) {
+      super(cargaHoraria, nome);
+      this.dataAdmissao = dataAdmissao;
+   }
+   public double calculaSalario() {
+    return (double) this.cargaHoraria * 1000000;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Construtores em classes estendidas}
+\begin{lstlisting}
+class Aluno extends Pessoa {
+   protected int idCurso;
+   public Professor(int cargaHoraria, String nome, int idCurso,  int cargaMatriculada) {
+      super(cargaHoraria, nome);
+      this.idCurso = idCurso;
+   }
+   public double calculaMensalidade() {
+    return (double) this.cargahoraria * 0;
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo: Construtores em classes estendidas}
+\begin{lstlisting}
+
+\end{lstlisting}
+\begin{itemize}
+\item Fases de cada construtor:
+   \begin{itemize}
+   \item Chamar construtor da superclasse.
+   \item Inicializar os campos utilizando suas instruções de inicialização.
+   \item Executar corpo do construtor.
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Construtores em classes estendidas}
+\begin{itemize}
+\item Nova classe deve escolher qual construtor da superclasse a chamar.
+\item Em um construtor da subclasse pode-se chamar diretamente o construtor da superclasse: \lstinline|super()|.
+\item A assinatura
+do método \lstinline|super()| deve ser a mesma assinatura do construtor que se deseja chamar.
+\item  Se não especificar construtor executa-se chamada ao construtor padrão da classe base (se houver).
+\end{itemize}
+\end{frame}
+
+
+\section{Exemplo: Herança de Produto}
+
+\begin{frame}{Exemplo: Herança de Produto}
+    \begin{center}
+    \begin{tikzpicture} 
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-4.3,y=.5]{Produto}{-- descricao : String \\ -- quant : int \\ -- preco : float \\ -- dataFabricacao : LocalDateTime}{+ emEstoque : boolean}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-6, y=-3]{BemDuravel}{ -- mesesGarantia : int}{}
+     \umlclass[font=\fontsize{7}{7}\selectfont,x=-2, y=-3]{BemDeConsumo}{-- dataValidade : LocalDate}{}
+     \umlclass[font=\fontsize{6}{6}\selectfont,x=1,y=.5]{Estoque}{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- lstBensDuraveis : BemDuravel[] \\ -- lstBensConsumo : BemDeConsumo[] \\ -- numBensDuraveis : int \\ -- numBensDeConsumo : int}{+ adicionar(BemDuravel) \\ + adicionar(BemDeConsumo) \\ + consultarBemDuravel(String) : BemDuravel \\ + consultarBemConsumo(String) : BemDeConsumo \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float \\ +  exibirEstoque() : String }
+        \umlVHVinherit{BemDuravel}{Produto}
+        \umlVHVinherit{BemDeConsumo}{Produto}
+     \umluniassoc{Estoque}{BemDuravel}
+     \umluniassoc{Estoque}{BemDeConsumo}
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%     \umlclass[x=4]{\umlstatic{-- MAX\_PRODUTOS : const int} \\ -- listaDeBensDuraveis : BemDuravel[] \\ -- listaDeBensDeConsumo : BemDeConsumo[] \\ -- numBensDuraveis : int \\ -- numBensDeConsumo : int}{+ adicionar(BemDuravel) \\ + adicionar(BemDeConsumo) \\ + consultarBemDuravel(String) : BemDuravel \\ + consultarBemDeConsumo(String) : BemDeConsumo \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float \\ +  exibirEstoque() : String }
+
+
+
+%     \umlclass[x=4]{\umlstatic{-- MAX_PRODUTOS : const int} \\ -- listaDeProdutos : Produto[] \\ -- numProdutos}{+ adicionar(Produto) \\
+%     + consultar(String) : Produto \\ + remover(String) \\ + totalEmEstoque() : int \\ + valorEmEstoque() : float \\ + exibirEstoque() : String }
+
+
+\begin{frame}[fragile]{Exemplo: Bem de Consumo}
+\begin{lstlisting}
+public class BemDeConsumo extends Produto {
+   private LocalDate dataValidade;
+
+   public LocalDate getDataValidade() {  return dataValidade;  }
+   public void setDataValidade(LocalDate dataValidade) {
+      // a data de fabricação deve ser anterior à data de validade.
+      if (getDataFabricacao().isBefore(dataValidade.atStartOfDay()))
+         this.dataValidade = dataValidade;
+   }
+   public BemDeConsumo() {
+      super();
+      // o default é uma validade de 6 meses.
+      dataValidade = LocalDate.now().plusMonths(6);
+   }
+   public BemDeConsumo(String d, float p, int q, 
+                       LocalDateTime f, LocalDate v) {
+      super(d, p, q, f);
+      setDataValidade(v);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemplo: Bem Durável}
+\begin{lstlisting}
+public class BemDuravel extends Produto {
+   private int mesesGarantia;
+   
+   public int getMesesGarantia() { return mesesGarantia; }
+   public void setMesesGarantia(int mesesGarantia) {
+      if (mesesGarantia > 0)
+         this.mesesGarantia = mesesGarantia;
+   }
+   public BemDuravel() {
+      super();
+      // o valor default é garantia de 6 meses.
+      mesesGarantia = 6;
+   }
+   public BemDuravel(String d, float p, int q, 
+                     LocalDateTime f, int g) {
+      super(d, p, q, f);
+      setMesesGarantia(g);
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Temos ódio à ditadura. Ódio e nojo."} - Ulysses Guimarães
+        \end{block}
+\end{frame}
+
+
+\end{document}

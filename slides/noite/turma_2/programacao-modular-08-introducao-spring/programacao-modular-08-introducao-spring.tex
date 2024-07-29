@@ -1,0 +1,375 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{ulem}
+\usepackage{tikz-uml}
+\usepackage{multicol}
+
+
+\title[Programação Modular]
+{%
+	Spring Framework: Introdução
+}
+
+\author[Prof. Pedro Pongelupe]
+{
+	Prof.~Pedro Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%	\end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+	%\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+	%\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+	%\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+	   \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+\section{Spring}
+\begin{frame}{Frameworks}
+        \begin{block}{O quê é um framework?}
+               Um \textit{framework} é uma \textbf{abstração} que une códigos entre vários projetos de software provendo uma funcionalidade genérica.
+        \end{block}
+        \begin{block}{Framework x Biblioteca}
+                Ao contrário das bibliotecas, é o \textit{framework} quem dita o fluxo de controle da aplicação, chamado de \textbf{Inversão de Controle}. Ou seja, o framework possui uma forma especifíca de se utilizar. 
+        \end{block}
+\end{frame}
+
+
+\subsection{Prelúdio}
+\begin{frame}{História}
+        \begin{block}{O que é? Onde vive?}
+                A primeira versão do Spring foi lançada em 2003. Spring é um framework de \textbf{inversão de controle} que podem ser utilizados por qualquer aplicação Java. Maaaas, as extensões web são as mais famosas.
+        \end{block}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[scale=0.2]{spring.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\subsection{Spring Boot}
+\begin{frame}{Frameworks}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[width=\textwidth]{Most-Popular-Backend-Frameworks-2022.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{primavera - Spring Boot}
+        \begin{columns}
+                \column{0.76\textwidth}
+                \begin{block}{primavera - Don L}
+                        \textit{Eu que sou de onde a miséria seca as estações\\
+                                Vi a primavera \\
+                                Florescer entre os canhões\\
+                                E não recuar \\
+                                Eu que sou de guerra\\
+                                Dei o sangue na missão\\
+                                De regar a terra\\
+                        Se eu tombar vão ser milhões pra multiplicar}
+                \end{block}
+                \column{0.24\textwidth}
+                \begin{figure}[h]
+                        \centering
+                        \includegraphics[scale=0.25]{spring-boot.png}
+                \end{figure}
+        \end{columns}
+\end{frame}
+
+\begin{frame}{Spring Boot}
+        \begin{block}{O que é?}
+                Spring Boot facilita a criação de aplicações \textit{stand-alone}, \textit{production-grade} Spring based Applications que você pode simplesmente 'só rodar'.
+        \end{block}
+        \begin{block}{Speedrun de \textit{hello world}}
+                \begin{enumerate}
+                        \item Utilize o \href{https://start.spring.io}{start.spring.io} para criar seu projeto
+                        \item Adicione seu código
+                        \item Profit!
+                \end{enumerate}
+        \end{block}
+\end{frame}
+
+\section{spring initializr}
+\begin{frame}{spring initializr}
+        \begin{figure}[h]
+                \centering
+                \includegraphics[scale=0.27]{spring_initializr.png}
+        \end{figure}
+\end{frame}
+
+\begin{frame}{spring initializr - Principais dependências}
+                \begin{multicols}{3}
+                \begin{itemize}
+                        \item Developer Tools 
+                        \item Web* 
+                        \item Template Engines 
+                        \item Security 
+                        \item SQL* 
+                        \item NOSQL 
+                        \item Messaging 
+                        \item I/O 
+                        \item OPS 
+                        \item Observability 
+                        \item Testing 
+                        \item Spring Cloud 
+                        \item Spring Cloud Config 
+                        \item Spring Cloud Discovery 
+                        \item Spring Cloud Routing 
+                        \item Spring Cloud Circuit Breaker 
+                        \item Spring Cloud Messaging 
+                        \item VMware \\Tanzu Application Service
+                        \item Microsoft Azure
+                        \item Google \\Cloud
+                        \item AI 
+                \end{itemize}
+                \end{multicols}
+\end{frame}
+
+\section{Exemplo Aluno}
+\subsection{Speedrun de Conceitos}
+\begin{frame}{Protocolo HTTP}
+        \begin{block}{Principais características}
+                Em linhas gerais, HTTP é um protocolo \textit{web} para a transferência de hipertexto entre um cliente e servidor. Ou seja, é o protocolo que provê a base de funcionamento da internet. Sendo que as principais componentes desse protocolo são:
+                \begin{itemize}
+                        \item Endereço recurso web - URL 
+                        \item Verbos HTTP - GET, POST, PUT, DELETE, etc 
+                        \item Body da requisição 
+                        \item Cabeçalhos - \textit{Accept}, \textit{Connection}, etc  
+                        \item Response Status Code - 2xx, 4xx, 5xx
+                \end{itemize}
+        \end{block}
+\end{frame}
+\begin{frame}{Padrão MVC}
+        \begin{block}{Principais características}
+                Em linhas gerais, o Padrão MVC é uma arquitetura de software formulada na década de 1980, focado no
+                \textbf{reuso de código} e \textbf{separação de conceitos} em três camadas interconectadas.
+        \end{block}
+        \begin{figure}[h]
+                \centering
+                \includegraphics[scale=0.35]{mvc.jpg}
+        \end{figure}
+\end{frame}
+\begin{frame}{ORM - Mapeamento Objeto-Relacional}
+        \begin{block}{Principais características}
+                Em linhas gerais, os ORM traduzem as classes de um sistema Orientado por Objetos em tabelas de banco de dados.
+                Ou seja, Com esta técnica, o programador não precisa se preocupar com os comandos em linguagem SQL; ele irá usar uma interface de programação simples que faz todo o trabalho de persistência. 
+        \end{block}
+        \begin{block}{Exemplos}
+                \begin{itemize}
+                        \item Hibernate e EclipseLink - Java
+                        \item Django - Python 
+                        \item Entity Framework - C\#/.net 
+                        \item Sequelize - Node js 
+                \end{itemize}
+        \end{block}
+\end{frame}
+
+
+\subsection{Nosso primeiro CRUD}
+\begin{frame}{Enunciado e classe Aluno}
+                \begin{block}{Enunciado}
+                        Você e outros alunos estão planejando fazer um sistema de gestão acadêmica para desbancar o SGA. O sistema de vocês chama-se SGA 2, vocês fizeram o planejamento das entidades do sistema, pensaram as interfaces e dividiram todas as tarefas em sprints. A solução projetada terá uma arquitetura cliente-servidor utilizando o Spring Boot para o back-end e o postgres para o banco de dados. Sua tarefa da primeira sprint é implementar um CRUD de aluno no back-end, ou seja, expor os seguintes 4 endpoints:
+                \end{block}
+\end{frame}
+\begin{frame}{Endpoints e classe Aluno}
+        \begin{columns}
+                \column{0.76\textwidth}
+                \begin{block}{Enunciado}
+                        \begin{itemize}
+                                \item \colorbox{pink}{POST /alunos} - Insere no banco de dados os dados do Aluno
+                                \item \colorbox{pink}{GET /alunos/\{matricula\}} - Busca no banco de dados os dados do Aluno pela matrícula
+                                \item \colorbox{pink}{PUT /alunos/\{matricula\}} - Atualiza no banco de dados os dados do Aluno pela matrícula
+                                \item \colorbox{pink}{DELETE /alunos/\{matricula\}} - Apaga no banco de dados os dados do Aluno pela matrícula
+                        \end{itemize}
+                \end{block}
+                \column{0.24\textwidth}
+                \begin{tikzpicture}
+                        \umlclass{Aluno}{-- matricula \\ -- nome \\ -- idade}{}
+                \end{tikzpicture} \\
+        \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Classe Aluno}
+\begin{lstlisting}[basicstyle=\tiny]
+@Entity
+@Table
+public class Aluno {
+
+	@Id
+	@Column
+	private String matricula;
+
+	@Column
+	private String nome;
+
+	@Column
+	private int idade;
+
+
+	public Aluno(String nome, String matricula, int idade) {
+		this.nome = nome;
+		this.matricula = matricula;
+		this.idade = idade;
+	}
+
+
+	public Aluno() {
+	}
+
+  ... getters/setters...
+
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{AlunosController}
+\begin{lstlisting}[basicstyle=\tiny]
+@Controller
+public class AlunosController {
+
+  @PersistenceUnit
+  private EntityManagerFactory entityManagerFactory;
+
+  ...
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{C - Create}
+\begin{lstlisting}[basicstyle=\tiny]
+...
+  @PostMapping("/alunos")
+  public @ResponseBody Aluno postAluno(@RequestBody Aluno a) {
+    var entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+    entityManager.persist(a);
+    entityManager.getTransaction().commit();
+    entityManager.close();
+
+    return a;
+  }
+...
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{R - Read}
+\begin{lstlisting}[basicstyle=\tiny]
+...
+  @GetMapping("/alunos/{matricula}")
+  public @ResponseBody Aluno getAlunoByMatricula(@PathVariable String matricula) {
+    var entityManager = entityManagerFactory.createEntityManager();
+
+    entityManager.getTransaction().begin();
+    var a = entityManager.find(Aluno.class, matricula);
+    entityManager.getTransaction().commit();
+    entityManager.close();
+
+    return a;
+  }
+...
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{U - Update}
+\begin{lstlisting}[basicstyle=\tiny]
+...
+  @PutMapping("/alunos/{matricula}")
+	public @ResponseBody Aluno updateAlunoByMatricula(@PathVariable String matricula, 
+      @RequestBody Aluno a) {
+		var entityManager = entityManagerFactory.createEntityManager();
+
+		entityManager.getTransaction().begin();
+		var alunoDB = entityManager.find(Aluno.class, matricula);
+		alunoDB.setMatricula(a.getMatricula());
+		alunoDB.setIdade(a.getIdade());
+		alunoDB.setNome(a.getNome());
+		entityManager.persist(alunoDB);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+		return a;
+	}
+...
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{D - Delete}
+\begin{lstlisting}[basicstyle=\tiny]
+...
+  @DeleteMapping("/alunos/{matricula}")
+	public @ResponseBody Aluno deleteAlunoByMatricula(@PathVariable String matricula) {
+		var entityManager = entityManagerFactory.createEntityManager();
+		
+		entityManager.getTransaction().begin();
+		var a = entityManager.find(Aluno.class, matricula);
+		entityManager.remove(a);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+		return a;
+	}
+...
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Hay que endurecer sem nunca perder a ternura}"
+        \end{block}
+\end{frame}
+\end{document}

@@ -1,0 +1,180 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+\usepackage{listings}[language=Java]
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício de Revisão Prova 1}
+
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem  Uma conta bancária é identificada pelo seu número de 5 dígitos e pelo CPF de seu proprietário. As contas bancárias permitem operações de saque e depósito. A operação de saque tem uma regra especial, permitindo que o cliente faça um saque acima do seu saldo – o que é chamado de limite. Por exemplo, se uma conta tem saldo de R\$200 e limite de R\$100, seu cliente pode sacar até R\$300. O saldo fica negativo e, no próximo depósito, a conta cobrará uma taxa de 3\% sobre este valor negativo, descontando do próprio valor de depósito.
+
+Para a situação apresentada, modele uma classe utilizando UML e implemente seu código em Java. É aconselhado testar os métodos implementados para ter certeza do seu funcionamento.
+
+\answer 
+\\
+\begin{tikzpicture}
+        \umlclass{Conta}{+ \underline{TAXA\_CHEQUE\_ESPECIAL}: double = 0.03 \\ -- identificador: String \\ -- cpf: String \\ -- saldo: double \\ -- limite: double}{+ sacar(valor: double): double \\ + depositar(valor: double): double \\ + getSaldo(): double}
+\end{tikzpicture}
+\begin{lstlisting}
+public class Conta {
+
+        private static final double TAXA_CHEQUE_ESPECIAL = 0.03;
+
+        private String identificador;
+        private String cpf;
+        private double saldo;
+        private double limite;
+
+        public Conta(String identificador, String cpf, double saldo, double limite) {
+          this.identificador = identificador;
+          this.cpf = cpf;
+          this.saldo = saldo;
+          this.limite = limite;
+        }
+
+        public double sacar(double valor) {
+          if (valor <= saldo + limite) {
+            this.saldo -= valor;
+          } else {
+            valor = -1;
+          }
+          return valor;
+        }
+
+        public double depositar(double valor) {
+          if (saldo < 0) {
+            this.saldo += valor + (saldo * TAXA_CHEQUE_ESPECIAL);
+          } else {
+            this.saldo += valor;
+          }
+          return saldo;
+        }
+
+        public double getSaldo() {
+          return this.saldo;
+        }
+}
+
+class ContaTest {
+
+  private Conta conta;
+
+  @BeforeEach
+  public void setUp() {
+    this.conta = new Conta("12345", "algum cpf", 200, 100);
+  }
+
+  @Test
+  public void testSacarSemChequeEspecial() {
+    conta.sacar(50d);
+    assertEquals(150d, conta.getSaldo());
+  }
+
+  @Test
+  public void testSacarComChequeEspecial() {
+    conta.sacar(250d);
+    assertEquals(-50d, conta.getSaldo());
+  }
+
+  @Test
+  public void testSacarValorInvalido() {
+    conta.sacar(2500d);
+    assertEquals(200d, conta.getSaldo());
+  }
+
+  @Test
+  public void testDepositarSemChequeEspecial() {
+    conta.depositar(50d);
+    assertEquals(250d, conta.getSaldo());
+  }
+
+  @Test
+  public void testDepositarComChequeEspecial() {
+    conta.sacar(250d);
+    conta.depositar(100d);
+    assertEquals(48.50, conta.getSaldo());
+  }
+
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\problem Considere o seguinte diagrama UML. 
+
+\vspace{0.5cm}
+\begin{tikzpicture}
+        \umlemptyclass{Autor}
+        \umlemptyclass[x=4]{Livro}
+        \umlemptyclass[x=8]{Leitor}
+        \umlassoc[mult1=1..2, mult2=1..3]{Autor}{Livro}
+        \umlassoc[mult1=1..5, mult2=0..4]{Livro}{Leitor}
+\end{tikzpicture}
+
+\vspace{0.5cm}
+\subproblem Se existem 6 instâncias de autores, qual é o mínimo e o máximo de livros? E qual o mínimo e máximo de leitores?
+\answer 6 e 18; 0 e 72
+\subproblem Se existem 6 instâncias de leitores, qual é o mínimo e o máximo de livros? E qual o mínimo e máximo de autores?
+\answer 6 e 30; 6 e 12
+
+\vspace{0.5cm}
+
+\problem Considere o seguinte diagrama UML 
+
+\vspace{0.5cm}
+\begin{tikzpicture}
+        \umlclass{Firma}{-- nome \\ -- endereco}{}
+        \umlclass[x=4]{Funcionário}{-- nome \\ -- salário}{}
+        \umlaggreg[mult1=*, mult2=*]{Firma}{Funcionário}
+\end{tikzpicture}
+
+\vspace{0.5cm}
+O atributo nome da classe \textit{Firma} não pode repetir. Escreva quais são as alternativas \textbf{verdadeiras}.
+
+\subproblem Cada funcionário trabalha para pelo menos uma firma
+\subproblem Cada firma tem que ter pelo menos um funcionário  
+\subproblem Nenhum funcionário pode trabalhar para mais de uma firma
+\subproblem Dois funcionários com o mesmo nome não podem trabalhar na mesma firma 
+
+\vspace{0.5cm}
+\answer a, c
+
+\problem Qual a diferença de interpretação entre os relacionamentos livro-sobrecapa e lirvo-páginas? 
+
+\vspace{0.5cm}
+\begin{tikzpicture}
+        \umlemptyclass{Livro}
+        \umlclass[y=-3]{SobreCapa}{}{}
+        \umlemptyclass[x=4]{Página}
+        \umlemptyclass[x=8]{Parágrafo}
+        \umlcompo[mult1=1, mult2=1..*]{Livro}{Página}
+        \umlcompo[mult1=1, mult2=1..*]{Página}{Parágrafo}
+        \umlaggreg[mult1=1, mult2=0..1]{Livro}{SobreCapa}
+\end{tikzpicture}
+
+\vspace{0.5cm}
+\answer Livro-página é uma agregação por composição, logo se destruirmos o livro, somem as
+páginas e os parágrafos. Representamos um livro como algo fisicamente constituído de
+páginas.
+Na agregação livro-sobrecapa representamos que um livro pode ser constituído por uma
+sobrecapa mas que a sobrecapa é um objeto que existe independentemente do livro. Os
+tempos de vida dos objetos não são semelhantes.
+
+\end{document}

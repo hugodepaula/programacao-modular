@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{hyperref}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\dueTo{24/06/2024}
+\def\points{5}
+\def\graduate{Engenharia de Software}
+\def\theme{Prática Investigativa - Java 21, 22 e 23}
+
+\begin{document}
+    %% Table with the header
+    \makeheader
+    
+    %% Space for the instructions
+    \fbox{
+        \parbox{\textwidth}{
+            \begin{minipage}{\textwidth}
+                \makeinstructions
+                {
+                    \begin{instlist}
+                        \item O grupo deve ser de até 6 alunos. 
+                        \item A JEP escolhida e a ordem de apresentação será sorteada pelo professor em sala de aula e disponibilizada na parte de Avisos no Canvas. 
+                        \item Todos grupos devem postar a apresentação no dia 24/06/2024, independentemente da data a apresentação do grupo.
+                        \item O trabalho em grupo, avaliação \underline{individual}.
+                    \end{instlist}
+                }
+            \end{minipage}
+        }
+    }
+    \vspace*{1cm}
+
+    O Java lança novas funcionalidades a cada nova versão da linguagem. Essas funcionalidades são representadas por Propostas de Aprimoramento da JDK, \textit{JEP (JDK Enhancement Proposals)}. O JEP serve como um roteiro de longo prazo para projetos a serem incorporado na linguagem Java, logo são propostas feitas pela comunidade para melhorar a experência de programar Java. Então, neste trabalho vamos explorar JEP das versões 21, 22 e 23 do Java.  
+
+    Dado os seguintes JEPs:
+    \begin{enumerate}
+        \item JDK 23 - \href{https://openjdk.org/jeps/467}{JEP 467: Markdown Documentation Comments}
+        \item JDK 23 - \href{https://openjdk.org/jeps/455}{JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview)}
+        \item JDK 23 - \href{https://openjdk.org/jeps/473}{JEP 473: Stream Gatherers (Second Preview)}
+        \item JDK 23 - \href{https://openjdk.org/jeps/466}{JEP 466: Class-File API (Second Preview)}
+        \item JDK 23 - \href{https://openjdk.org/jeps/477}{JEP 477: Implicitly Declared Classes and Instance Main Methods (Third Preview)}
+        \item JDK 22 - \href{https://openjdk.org/jeps/459}{JEP 459: String Templates (Second Preview)}
+        \item JDK 22 - \href{https://openjdk.org/jeps/456}{JEP 456: Unnamed Variables \& Patterns}
+        \item JDK 22 - \href{https://openjdk.org/jeps/447}{JEP 447: Statements before super(...) (Preview)}
+        \item JDK 21 - \href{https://openjdk.org/jeps/447}{JEP 431: Sequenced Collections}
+        \item JDK 21 - \href{https://openjdk.org/jeps/440}{JEP 440: Record Patterns}
+    \end{enumerate}
+
+    Você e seu grupo devem elaborar uma \textbf{apresentação de até 20 minutos} sobre a JEP sorteada. Sua apresentação deve explicar a JEP, apresentando: 
+
+    \begin{itemize}
+        \item Resumo da proposta
+        \item Objetivo
+        \item Motivação
+        \item Descrição
+        \item Exemplos (rodando código, se possível)
+    \end{itemize}
+
+    
+\end{document}

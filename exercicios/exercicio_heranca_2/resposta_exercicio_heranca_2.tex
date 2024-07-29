@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+\usepackage{listings}[language=Java]
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício}
+
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Uma empresa de TI envolvida com políticas públicas prestará serviço a organizações diversas. O software desta empresa possibilitará que uma organização interessada crie ações cívicas para impulsionar políticas de interesses de um grupo de cidadãos. Uma ação cívica pode ser uma petição ou uma campanha.
+
+No caso de uma petição, as pessoas interessadas assinarão a ação. Este conjunto de signatários servirá, posteriormente, para gerar um texto impresso com o texto da petição e os dados de cada pessoa que a apoiou. 
+
+Já as campanhas são divulgadas em redes diversas: Lifegram, Peoplebook e Twinger. Nestas redes, cada interação com a campanha é registrada. As campanhas simples apenas são publicadas e, quando encerradas, geram um relatório contendo o número de interações em cada rede. Já as campanhas ativas são publicadas em uma rede e, além disso, possibilitam que o mesmo texto seja enviado por email para um ou mais destinatários. O relatório desta campanha contabiliza as interações e a quantidade de emails enviados. Dependendo do sucesso da campanha, a organização promotora pode resolver transformar uma campanha simples em uma campanha ativa. 
+
+Qualquer tipo de ação cívica precisa ter datas de início e fim, podendo ser prorrogada por alguns dias se assim for o interesse organização promotora. Portanto, estes dados devem estar em qualquer relatório gerado para a organização. Uma organização precisa ter uma pessoa responsável pela criação das campanhas e para ser o contato que receberá os relatórios das ações promovidas pela organização.
+
+Como líder da equipe, que ainda é pequena e está em formação, suas tarefas são:
+ 
+
+\subproblem Utilizando todos os conceitos vistos até hoje na disciplina, \textbf{modele um diagrama de classes UML} para o problema proposto. O modelo deve incluir \textbf{classes, relacionamentos, atributos e métodos} necessários para resolver completamente o problema.
+\textbf{Não é necessário incluir} construtores ou métodos get/set, mas indique as visibilidades de métodos e atributos. 
+
+\answer  
+\\
+\begin{tikzpicture}
+  \umlclass{Organização}{-- pessoaResponsavel: String \\ -- acoes: List$<$Ação$>$}{+ gerarRelatorio(inicio: LocalDate, fim: LocaDate): String \\ + fazerNovaAcao(acao: Acao): void}
+  \umlclass[x=9, type=abstract]{Ação}{-- texto: String \\ -- dtInicio: LocalDate \\ -- dtFim: LocalDate}{+ getRelatorio(): String \\ \umlvirt{\# getDetalhamentoRelatorio(): String} \\ + prorrogar(dias: int): void}
+  \umlclass[x=2, y=-5]{CampanhaSimples}{ -- interacoesPorRede: Map$<$String, Integer$>$ }{+ gerarCampanhaAtiva(): CampanhaAtiva  \\ + adicionarInteracao(rede: String): void \\ \# getDetalhamentoRelatorio(): String }
+  \umlclass[x=9, y=-5]{Petição}{ -- assinaturas: List$<$String$>$}{+ assinar(assinatura: String): void \\ \# getDetalhamentoRelatorio(): String} 
+  \umlclass[x=2, y=-8.75]{CampanhaAtiva}{ -- emailsEnviados: int}{+ enviarEmails(destinatarios: String[]): void  \\ \# getDetalhamentoRelatorio(): String}
+  \umlcompo[mult1=1, mult2=*]{Organização}{Ação} 
+  \umlVHVinherit{CampanhaSimples}{Ação}
+  \umlVHVinherit{Petição}{Ação}
+  \umlVHVinherit{CampanhaAtiva}{CampanhaSimples}
+\end{tikzpicture}
+
+
+\subproblem Considerando seu modelo em (a), escreva o código dos métodos para:
+\begin{itemize}
+  \item Transformar uma campanha simples em ativa.
+\end{itemize}
+\answer 
+\begin{lstlisting}
+public CampanhaAtiva gerarCampanhaAtiva() {
+  return new CampanhaAtiva(this);
+}
+\end{lstlisting}
+  
+\begin{itemize}
+  \item Gerar relatórios de todas as ações promovidas por uma organização entre duas datas.
+\end{itemize}
+\answer 
+\begin{lstlisting}
+public String gerarRelatorio(LocalDate inicio, LocalDate fim) {
+  return acoes
+    .stream()
+    .filter(a -> (a.getDtInicio().equals(inicio) || a.getDtInicio().after(inicio))
+                 && (a.getDtFim().equals(fim) || a.getDtFim().before(fim)))
+    .map(Acao::getRelatorio)
+    .reduce("Pessoa responsavel: ", (acc, el) -> acc.concat(el));
+} 
+
+// Acao
+public String getRelatorio() {
+  return """
+        ACAO
+      ---------------------
+      Data Inicio: %s
+      Data Fim: %s
+      Texto: %s
+      Detalhes: %s
+    """.formatted(dtInicio, dtFim, texto, getDetalhamentoRelatorio());
+}
+
+// Peticao 
+@Override
+public String getDetalhamentoRelatorio() {
+  return assinaturas
+         .stream()
+         .reduce("", (acc, el) -> acc.concat("\n" + el));
+}
+
+// CampanhaSimples 
+@Override
+public String getDetalhamentoRelatorio() {
+  return interacoes
+         .entrySet()
+         .stream()
+         .reduce("", (acc, el) -> 
+                    acc.concat("rede social %s \n interacoes: %d \n"
+                                .formatted(el.getKey(), el.getValue()));
+}
+
+// CampanhaAtiva 
+@Override
+public String getDetalhamentoRelatorio() {
+  return super.getRelatorio()
+              .concat("emails enviados: " + emailsEnviados);
+}
+\end{lstlisting}
+
+\end{document}

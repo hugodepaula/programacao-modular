@@ -1,0 +1,266 @@
+\documentclass[handout]{beamer}
+
+\input{aulas-beamer-preamble}
+
+
+\title[Programação Modular]
+{%
+   Classes Abstratas%
+}
+\author[Prof. Pedro Pongelupe]
+{
+    Prof.~Pedro~Pongelupe
+}
+\institute[DCC / PUC Minas]
+{\epsfig{file=puclogo_small_bw,width=1.5cm} \\
+  \textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+    Departamento de Ciência da Computação
+}
+\date[]{}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+
+\begin{document}
+
+
+\selectlanguage{brazil}
+
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%\addtobeamertemplate{frametitle}{}{%
+%    \begin{tikzpicture}[remember picture,overlay]
+%    \node[anchor=north east,yshift=2pt] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1.2cm}};
+%    \end{tikzpicture}}
+
+
+%\addtobeamertemplate{frametitle}{}{%
+    %\begin{tikzpicture}[node distance=0cm, remember picture, overlay, every node/.style={inner sep=0,outer sep=0, node distance=0cm, baseline=0cm}]
+    %\node[anchor=north east] at (current page.north east) {\epsfig{file=puclogo_small_bw,width=1cm}};
+    %\end{tikzpicture}}
+
+
+%\logo{\includegraphics[height=0.8cm]{puclogo_small_bw.pdf}\vspace{220pt}}
+
+
+\begin{frame}
+   \frametitle{Sumário}
+   \tableofcontents[pausesections]
+\end{frame}
+
+%\AtBeginSection[] % Do nothing for \section*
+%{
+%\begin{frame}<beamer>
+%\frametitle{Outline}
+%\tableofcontents[currentsection]
+%\end{frame}}
+
+
+\addtobeamertemplate{frametitle}{}{%
+   \begin{textblock*}{10mm}(.9945\textwidth,-1.72cm)
+    \includegraphics[height=1cm]{puclogo_small_bw.pdf}
+   \end{textblock*}
+}
+
+
+    
+\section{Polimorfismo}
+
+\begin{frame}{Exemplo: Reserva Sala de Estudos polimórfica}
+   \begin{center}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-4,y=.75]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-6, y=-3.35]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ + getMatricula() : string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-2, y=-3.35]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ + getMatricula() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=1.35, y=.8]{SalaDeEstudos}{+ \umlstatic{CAPACIDADE : int}= 4 \\ + \umlstatic{HORA\_ABERTURA: Hora}= 9:00 \\ + \umlstatic{HORA\_FECHAMENTO: Hora} = 22:00}{}
+         \umlassoc[name=emp]{SalaDeEstudos}{PessoaUniversitaria}
+         \umlassocclass[font=\fontsize{6}{6}\selectfont,x=1.7, y=-1.45, , anchor1=-130]{Reserva}{emp-1}{-- pessoas : PessoaUniversitaria[] \\ -- sala : SalaEstudos \\ -- hora: Hora}{+ getMatriculas(): string[]}
+      \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}{Novas regras para geração da matrícula}
+   Para todas as especialização, as existentes e novas, deverão \textbf{obrigatoriamente} adicionar um \underline{prefixo} ao código pessoa para gerar a matrícula.  
+\begin{itemize}
+   \item Aluno: AL\{código pessoa\}
+   \item Professor: PF\{código pessoa\}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Utilizando Polimorfismo para resolver o novo requisito}
+   \begin{center}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-4,y=.75]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \# getPrefixo(): string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-6, y=-3.35]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-2, y=-3.35]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+      \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Implementação}
+\begin{multicols}{2}
+\begin{lstlisting}[basicstyle=\tiny]
+public class PessoaUniversitaria {
+  ...
+  public String getMatricula() {
+      return getPrefixo()
+         .concat(codigoPessoa);
+  }
+
+  public String getPrefixo() {
+      return "";
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[basicstyle=\tiny]
+
+
+
+
+  public class Aluno extends PessoaUniversitaria {
+      ...
+      @Override
+      protected String getPrefixo() {
+         return "AL";
+      }
+      ...
+   }
+  public class Professor extends PessoaUniversitaria {
+      ...
+      @Override
+      protected String getPrefixo() {
+         return "PR";
+      }
+      ...
+   }
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Conclusões relativas ao uso da herança}
+   \begin{itemize}
+      \item Polimorfismo
+         \begin{itemize}
+            \item É a característica que permite que diferente objetos respondam a \underline{mesma} mensagem cada um a sua maneira. 
+            \item Uma referência para a superclasse só pode acessar os métodos previstos na interface da superclasse, porém,
+               o Java automaticamente ativa a implementação correspondente no objeto apontado.
+         \end{itemize}
+      \item O comando \textbf{instanceof} verifica se um determinado objeto é de uma instância de uma certa classe
+         \begin{lstlisting}
+    if (pessoa instanceof Aluno)
+        System.out.println("Aluno");
+    \end{lstlisting}
+   \end{itemize}
+\end{frame}
+
+
+\section{Classe Abstrata}
+\subsection{Pensando a classe FuncionarioAdministrativo}
+\begin{frame}{Pensando a classe FuncionarioAdministrativo}
+   \begin{center}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-2,y=.75]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \# getPrefixo(): string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-6, y=-3.35]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=-2, y=-3.35]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{6}{6}\selectfont,x=2, y=-3.35]{FuncionarioAdministrativo}{-- setor : string}{ + getSetor() : string \\ \# getPrefixo() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+         \umlVHVinherit{FuncionarioAdministrativo}{PessoaUniversitaria}
+      \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}
+   Exemplo no Eclipse
+\end{frame}
+
+\begin{frame}{Problemas com a Implementação}
+   \begin{itemize}
+      \item Ainda faz sentido existir instâncias de PessoaUniversitaria?
+      \item As novas especializações de PessoaUniversitaria não são obrigadas a implementar o método
+         \textit{getPrefixo() : string}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Classes abstratas}
+   \begin{itemize}
+      \item Classes abstratas permitem que se definam métodos sem implementação que devem ser redefinidos em classes derivadas. 
+      \item Classes abstratas podem ou não ter métodos abstratos.
+      \item Classes abstratas não podem ser instanciadas.
+      \item As classes derivadas de classes abstratas herdam todos os métodos, incluindo os abstratos.
+      \item As classes derivadas de classes abstratas são abstratas até que implementem os métodos abstratos.
+      \item Em Java: palavra-chave \lstinline|abstract|.
+   \end{itemize}
+\end{frame}
+
+
+
+\subsection{Classe PessoaUniversitaria abstrata}
+
+\begin{frame}{Exemplo: Reserva Sala de Estudos polimórfica}
+   \begin{center}
+      \begin{tikzpicture} 
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-6,y=.75, type=abstract]{PessoaUniversitaria}{--  codigoPessoa : String \\ -- nome : String \\ -- idade : int}{+ getCodigoPessoa() : string \\ + setCodigoPessoa(c: string): void \\ + getNome() : string \\ + setNome(nome: string): void \\+ getIdade() : int \\ + setIdade(idade: int): void \\ + getMatricula() : string \\ \umlvirt{\# getPrefixo(): string}}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-6, y=-2.67]{Aluno}{ -- materiaMatriculadas : string[]}{ + matricular(m: string) : boolean \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=-2, y=-2.67]{Professor}{-- cargaHoraria : int}{ + getCargaHoraria() : int \\ \# getPrefixo() : string}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=2, y=-2.67]{FuncionarioAdministrativo}{-- setor : string}{ + getSetor() : string \\ \# getPrefixo() : string}
+         \umlVHVinherit{Aluno}{PessoaUniversitaria}
+         \umlVHVinherit{Professor}{PessoaUniversitaria}
+         \umlVHVinherit{FuncionarioAdministrativo}{PessoaUniversitaria}
+         \umlclass[font=\fontsize{5}{5}\selectfont,x=1.35, y=.8]{SalaDeEstudos}{+ \umlstatic{CAPACIDADE : int}= 4 \\ + \umlstatic{HORA\_ABERTURA: Hora}= 9:00 \\ + \umlstatic{HORA\_FECHAMENTO: Hora} = 22:00}{}
+         \umlassoc[name=emp]{SalaDeEstudos}{PessoaUniversitaria}
+         \umlassocclass[font=\fontsize{5}{5}\selectfont,x=-2, y=2.5, , anchor1=-130]{Reserva}{emp-1}{-- pessoas : PessoaUniversitaria[] \\ -- sala : SalaEstudos \\ -- hora: Hora}{+ getMatriculas(): string[]}
+      \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Classe PessoaUniversitaria abstrata}
+\begin{lstlisting}
+public abstract class PessoaUniversitaria {
+   private String codigoPessoa;
+   private String nome;
+   private int idade;
+
+	public PessoaUniversitaria(String codigoPessoa, String nome, 
+  int idade) {
+		this.codigoPessoa = codigoPessoa;
+		this.nome = nome;
+		this.idade = idade;
+	}
+  ...
+
+  public String getMatricula() {
+		return getPrefixo().concat(codigoPessoa);
+	}
+
+  protected abstract String getPrefixo();
+
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Obrigado!!}
+        Muito obrigado pela atenção! Alguma dúvida? Bora praticar!!!
+        \begin{block}{  }
+                "\textit{Quem não se movimenta, não sente as correntes que o prendem."}
+        \end{block}
+\end{frame}
+
+
+
+\end{document}

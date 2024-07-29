@@ -1,0 +1,213 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author: Pedro Pongelupe - Professor at PUC-MG                                         %%
+%% contacts:                                                                             %%
+%%    e-mail: pedro.pongelupe@sga.pucminas.br                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{lib/eng_softdoc}
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{tikz-uml}
+
+%% Informations that will be insert in the table header 
+\def\prof{Pedro Pongelupe Lopes}
+\def\class{Programação Modular}
+\def\semester{2024.1}
+\def\registration{}
+\def\student{}
+
+\def\theme{Exercício de Revisão Prova 3}
+
+\lstset{language=Java,
+   basicstyle=\scriptsize,
+   commentstyle=\color{red},
+   showstringspaces=false,
+   numbers=none,
+   numberstyle=\tiny}
+\begin{document}
+%% Table with the header
+\makeheader
+
+\problem Analise os seguintes fragmentos de código e responda: 
+\begin{itemize}
+        \item Esse código compila? Se não, porquê?
+        \item Esse código tem alguma exceção não tratada? Se sim, qual?
+        \item Se complia e não tem nenhuma exceção não tratada, qual a saída esperada no console?
+\end{itemize}
+
+\subproblem
+\begin{lstlisting}
+public class Driver {
+	public static void main(String[] args) {
+		int i = 0;
+		int y = 6;
+
+		try {
+			y /= i;
+			i = 5;
+			y += 2;
+		} catch (RuntimeException e) {
+			i++;
+			y = 4;
+		}
+		System.out.println(i + y);
+	}
+}
+\end{lstlisting}
+
+
+\vspace{0.25cm}
+\subproblem
+\begin{lstlisting}
+public class Driver {
+	public static void main(String[] args) {
+		var str = "cr";
+		try {
+			str += "e";
+		} catch (Exception e) {
+			str += "i";
+		} finally {
+			str += "me";
+		}
+
+		System.out.println(str);
+	}
+}
+\end{lstlisting}
+
+
+\vspace{0.5cm}
+
+\subproblem
+\begin{lstlisting}
+public class Driver {
+	public static void main(String[] args){
+		var anoAtual = LocalDate.now().get(ChronoField.YEAR);
+
+		if (anoAtual == 1998) {
+			throw new Exception("Nao estamos mais em 1998");
+		} else {
+			System.out.println("Estamos no ano de: " + anoAtual);
+		}
+	}
+}
+\end{lstlisting}
+\vspace{0.5cm}
+
+\subproblem
+\begin{lstlisting}
+public class Driver {
+	public static void main(String[] args) {
+		var arr = new int[] { 1, 9, 5, 0 };
+		for (var i : arr) {
+			if (i % 2 == 0)
+				throw new NumeroParException();
+		}
+		System.out.println("somente numeros impares!");
+	}
+	public static class NumeroParException extends RuntimeException {}
+}
+\end{lstlisting}
+
+\problem Considere o seguinte código Java: 
+
+\vspace{0.5cm}
+\begin{lstlisting}
+public enum MesAno {
+	JAN(31), FEV(29), MAR(31), ABR(30), MAI(31), JUN(30), JUL(31), AGO(31), SET(30), OUT(31), NOV(30), DEZ(31);
+
+	private final int quantidadeDias;
+
+	private MesAno(int quantidadeDias) {
+		this.quantidadeDias = quantidadeDias;
+	}
+	public boolean tem31Dias() {
+		return quantidadeDias == 31;
+	}
+	public static MesAno buscaPorNumero(int numero) {
+		return MesAno.values()[numero - 1];
+	}
+}
+public class Data {
+
+	private int dia;
+
+	private MesAno mes;
+
+	private int ano;
+
+	public Data(int dia, int mes, int ano) {
+		this.dia = dia;
+		this.mes = MesAno.buscaPorNumero(mes);
+		this.ano = ano;
+	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public MesAno getMes() {
+		return mes;
+	}
+
+	public void setMes(MesAno mes) {
+		this.mes = mes;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public boolean mesTem31Dias() {
+		return mes.tem31Dias();
+	}
+}
+\end{lstlisting}
+\subproblem Desenhe o diagrama UML do código.  
+\vspace{0.5cm}
+\subproblem Altere o método \textit{buscaPorNumero(int numero)} para ele lançar uma exceção quando o paramêtro \textit{numero} não 
+for válido. Ex: \textit{numero = 19}
+\vspace{0.5cm}
+\subproblem 
+Implemente um método \textit{main} que instâncie as seguintes 3 datas:
+\begin{itemize}
+	\item 22/04/1870
+	\item 30/06/2002
+	\item 15/-15/2038 
+\end{itemize}
+\textbf{Utilizando try-catch}, caso alguma data seja inválida, instâncie \textbf{qualquer} data válida como valor padrão. 
+
+\vspace{0.5cm}
+\newpage
+
+\problem Analise a seguinte situação proposta e o diagrama UML proposto como solução do problema :
+		
+		Em um cinema, há 5 salas que possuem o número da sala e 30 assentos disponíveis cada. 
+    Em um dia de funcionamento desse cinema, as salas funcionam exibindo sessões, cada sessão possui um horário e o filme em cartaz.
+    A bilheteria do cinema vende os ingressos das sessões ao público.
+    Cada ingresso custa R\$ 20,00 a inteira e R\$ 10,00 a meia entrada que é dada para pessoas menores de 21 anos e
+    estudantes. Além disso, para acompanhamento da saúde financeira do cinema, é necssário falar qual o valor arrecadado com os ingressos vendidos
+    de cada sessão.
+
+\vspace{0.5cm}
+    \begin{tikzpicture}
+            \umlclass{Sala}{+ \underline{QNT\_ASSENTOS}: int = 30 \\ -- numeroSala: int}{+ getNumeroSala(): int}
+            \umlclass[x=8]{Sessão}{-- filme: String \\ -- horario: Date \\ -- sala: Sala \\ -- ingressosVendidos: List$<$Ingresso$>$ \\ -- quantidadeVendida: int = 0}{+ getValorArrecadado(): double \\ + venderIngresso(i : Ingresso): boolean}
+            \umlassoc[mult1=1..5, mult2=1]{Sala}{Sessão}
+            \umlclass[x=8, y=-4.5, type=enumeration]{Ingresso}{INTEIRA(20), MEIA(10)\\ -- preco: double}{+ getPreco(): double \\ \underline{+ ingressoPorIdadeEhEstudante(idade: int, isEstudante: boolean):Ingresso}}
+            \umlcompo[mult1=1, mult2=0..30]{Sessão}{Ingresso}
+    \end{tikzpicture}
+
+\vspace{0.5cm}
+		\textbf{Escreva o código} Java correspondente ao diagrama anterior.
+
+\end{document}

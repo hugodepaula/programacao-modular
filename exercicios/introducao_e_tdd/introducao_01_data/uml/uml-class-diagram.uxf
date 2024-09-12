@@ -1,0 +1,13 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>100</x><y>50</y><w>210</w><h>190</h></coordinates><panel_attributes>Data
+--
+-dia: inte
+-mes: int
+-ano: int
+--
++Data()
++Data(dia: int, mes: int, ano: int)
++anoBisexto(): boolean
++diasNoMes()
++diaDaSemana()
++porExtenso()
++adicionaDias(n: int)</panel_attributes><additional_attributes></additional_attributes></element></diagram>

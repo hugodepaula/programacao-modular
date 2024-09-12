@@ -6,25 +6,22 @@ public class Data {
 	private int mes;
 	private int ano;
 	private static final int[] NUM_DIAS_MES = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	private static final String[] DIAS_DA_SEMANA = { "Segunda-feira", "Ter�a-feira", "Quarta-feira", "Quinta-feira",
-			"Sexta-feira", "S�bado", "Domingo" };
+	private static final String[] DIAS_DA_SEMANA = { "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira",
+			"Sexta-feira", "Sábado", "Domingo" };
 	private static final int[] NUM_MES_SEMANA = { 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5 };
-	private static final String[] NOME_MESES = { "janeiro", "fevereiro", "mar�o", "abril", "maio", "junho", "julho",
+	private static final String[] NOME_MESES = { "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
 			"agosto", "setembro", "outubro", "novembro", "dezembro" };
-	public static int cont = 0;
 
 	public Data() {
 		dia = LocalDate.now().getDayOfMonth();
 		mes = LocalDate.now().getMonthValue();
 		ano = LocalDate.now().getYear();
-		cont++;
 	}
 
 	public Data(int dia, int mes, int ano) {
 		this.setAno(ano);
 		this.setMes(mes);
 		this.setDia(dia);
-		cont++;
 	}
 
 	public int getDia() {
@@ -88,7 +85,4 @@ public class Data {
 		}
 	}
 
-	public void finalize() throws Throwable {
-		cont--;
-	}
 }

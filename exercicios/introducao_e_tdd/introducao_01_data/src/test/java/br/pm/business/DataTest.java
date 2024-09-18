@@ -11,28 +11,34 @@ class DataTest {
 	public static Data data;
 
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		data = new Data(1, 1, 2020);
 	}
+
+    private void testAdicionaDiasHelper(int numDias, int newDia, int newMes, int newAno) {
+		data.adicionaDias(numDias);
+		assertEquals(newDia, data.getDia(), "Testa o ajuste do dia." );
+		assertEquals(newMes, data.getMes(), "Testa o ajuste do mês." );
+		assertEquals(newAno, data.getAno(), "Testa o ajuste do ano." );
+    }
 	
 	@Test
-	void testAdicionaDiasNoMes() {
-		data.adicionaDias(15);
-		assertEquals(16, data.getDia(), "Testa o ajuste do dia." );
-		assertEquals(1, data.getMes(), "Testa o ajuste do mês." );
-		assertEquals(2020, data.getAno(), "Testa o ajuste do ano." );
+	public void testAdicionaDiasNoMes() {
+        testAdicionaDiasHelper(15,16,1,2020);
 	}
 
 	@Test
-	void testAdicionaDiasVirandoMes() {
-		data.adicionaDias(35);
-		assertEquals(5, data.getDia(), "Testa o ajuste do dia." );
-		assertEquals(2, data.getMes(), "Testa o ajuste do mês." );
-		assertEquals(2020, data.getAno(), "Testa o ajuste do ano." );
+	public void testAdicionaDiasVirandoMes() {
+        testAdicionaDiasHelper(35,5,2,2020);
 	}
 
     @Test
-    void testAnoBisexto() {
+	public void testAdicionaDiasVirandoAno() {
+        testAdicionaDiasHelper(366,1,1,2021);
+	}
+
+   @Test
+   public void testAnoBisexto() {
         data.setAno(2001);
         assertFalse(data.anoBisexto(), "Testa 2001 não é ano bisexto.");
         data.setAno(2004);
@@ -44,25 +50,25 @@ class DataTest {
     }
 
     @Test
-    void testDiaDaSemana() {
+    public void testDiaDaSemana() {
         assertEquals("Quarta-feira", data.diaDaSemana());
     }
 
     @Test
-    void testPorExtenso() {
+    public void testPorExtenso() {
         assertEquals("1 de janeiro de 2020", data.porExtenso());
     }
 
     @Test
-    void testSetAno() {
+    public void testSetAno() {
         data.setAno(2050);
         assertEquals(2050, data.getAno(), "Alterando para ano 2050.");
-        data.setMes(13);
-        assertEquals(2050, data.getAno(), "Alterando para mês 1500.");
+        data.setAno(1500);
+        assertEquals(2050, data.getAno(), "Alterando para ano 1500.");
     }
 
     @Test
-    void testSetDia() {
+    public void testSetDia() {
         data.setDia(3);
         assertEquals(3, data.getDia(), "Alterando para dia 3.");
         data.setDia(33);
@@ -72,7 +78,7 @@ class DataTest {
     }
 
     @Test
-    void testSetMes() {
+    public void testSetMes() {
         data.setMes(3);
         assertEquals(3, data.getMes(), "Alterando para mês 3.");
         data.setMes(13);

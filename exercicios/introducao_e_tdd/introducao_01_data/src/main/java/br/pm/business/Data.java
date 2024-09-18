@@ -13,9 +13,10 @@ public class Data {
 			"agosto", "setembro", "outubro", "novembro", "dezembro" };
 
 	public Data() {
-		dia = LocalDate.now().getDayOfMonth();
-		mes = LocalDate.now().getMonthValue();
-		ano = LocalDate.now().getYear();
+		var hoje = LocalDate.now();
+		dia = hoje.getDayOfMonth();
+		mes = hoje.getMonthValue();
+		ano = hoje.getYear();
 	}
 
 	public Data(int dia, int mes, int ano) {
@@ -29,8 +30,9 @@ public class Data {
 	}
 
 	public void setDia(int dia) {
-		if ((dia > 0) && (dia <= NUM_DIAS_MES[mes - 1] || (this.anoBisexto() && dia == 29)))
+		if ((dia > 0) && (dia <= NUM_DIAS_MES[mes - 1] || (this.anoBisexto() && dia == 29))) {
 			this.dia = dia;
+		}
 	}
 
 	public int getMes() {
@@ -38,8 +40,9 @@ public class Data {
 	}
 
 	public void setMes(int mes) {
-		if ((mes > 0) && (mes <= 12))
+		if ((mes > 0) && (mes <= 12)) {
 			this.mes = mes;
+		}
 	}
 
 	public int getAno() {
@@ -47,8 +50,9 @@ public class Data {
 	}
 
 	public void setAno(int ano) {
-		if (ano > 1900)
+		if (ano >= 1900) {
 			this.ano = ano;
+		}
 	}
 
 	public boolean anoBisexto() {

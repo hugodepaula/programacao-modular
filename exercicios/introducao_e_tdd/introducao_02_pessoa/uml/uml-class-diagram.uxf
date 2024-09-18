@@ -1,13 +1,15 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>100</x><y>50</y><w>210</w><h>190</h></coordinates><panel_attributes>Pessoa
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>100</x><y>50</y><w>340</w><h>140</h></coordinates><panel_attributes>Pessoa
 --
--dia: inte
--mes: int
--ano: int
+-nome: String
+-cpf: String 
+-idade: int
+-sexo: Sexo
 --
-+Data()
-+Data(dia: int, mes: int, ano: int)
-+anoBisexto(): boolean
-+diasNoMes()
-+diaDaSemana()
-+porExtenso()
-+adicionaDias(n: int)</panel_attributes><additional_attributes></additional_attributes></element></diagram>
++Pessoa(nome: String, cpf: String, idade: int, sexo: Sexo)
++validarCPF(cpf: String): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>130</x><y>270</y><w>210</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Sexo
+--
++FEMININO
++MASCULINO</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>180</y><w>40</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element></diagram>

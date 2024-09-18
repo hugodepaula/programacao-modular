@@ -1,0 +1,44 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>110</x><y>40</y><w>210</w><h>140</h></coordinates><panel_attributes>Pessoa
+--
+-nome: String
+-endereco: String
+-telefone: String
+-cidade: String
+-uf: Uf
+-cep: String
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>230</y><w>170</w><h>70</h></coordinates><panel_attributes>PJ
+--
+-cnpj: Long
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>230</y><w>150</w><h>70</h></coordinates><panel_attributes>PF
+--
+-cpf: int
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>120</x><y>170</y><w>90</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>170</y><w>80</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>470</x><y>390</y><w>210</w><h>70</h></coordinates><panel_attributes>Empresa
+--
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>110</y><w>210</w><h>80</h></coordinates><panel_attributes>Cliente
+--
+-credito: float
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>390</y><w>210</w><h>130</h></coordinates><panel_attributes>Funcionario
+--
+-cargo: String
+-salario: float
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>290</y><w>220</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+m1=1
+m2=0..*
+r2=funcionarios
+m2pos=-30,0</panel_attributes><additional_attributes>200;120;30;120;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>360</y><w>70</w><h>80</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>50;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>110</y><w>270</w><h>300</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+r2=clientes
+m2=0..*
+m1=1..*</panel_attributes><additional_attributes>230;280;230;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>150</y><w>70</w><h>110</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;90;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>450</y><w>340</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+m1=1
+m2=0..1
+&lt; é presidida pelo 
+r2=presidente</panel_attributes><additional_attributes>310;10;310;50;10;50</additional_attributes></element></diagram>

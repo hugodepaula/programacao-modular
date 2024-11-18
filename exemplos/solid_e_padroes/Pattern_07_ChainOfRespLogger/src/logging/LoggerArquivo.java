@@ -1,3 +1,4 @@
+package logging;
 
 public class LoggerArquivo extends Logger {
 	public LoggerArquivo(int nivel) {
@@ -5,7 +6,7 @@ public class LoggerArquivo extends Logger {
 	}
 
 	@Override
-	protected void escrever(String mensagem) {
+	protected void processMessage(String mensagem) {
 		System.out.println("Arquivo::Logger: " + mensagem);
 	}
 }

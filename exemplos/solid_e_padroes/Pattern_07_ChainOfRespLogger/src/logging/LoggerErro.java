@@ -1,3 +1,4 @@
+package logging;
 
 public class LoggerErro extends Logger {
 	public LoggerErro(int nivel) {
@@ -5,7 +6,7 @@ public class LoggerErro extends Logger {
 	}
 
 	@Override
-	protected void escrever(String mensagem) {
+	protected void processMessage(String mensagem) {
 		System.out.println( "ERROR::Logger: " + mensagem);
 	}
 }

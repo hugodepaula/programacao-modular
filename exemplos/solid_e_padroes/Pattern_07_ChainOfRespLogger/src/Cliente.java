@@ -1,3 +1,7 @@
+import logging.Logger;
+import logging.LoggerArquivo;
+import logging.LoggerConsole;
+import logging.LoggerErro;
 
 public class Cliente {
 
@@ -7,9 +11,9 @@ public class Cliente {
 		Logger fileLogger = new LoggerArquivo(Logger.DEBUG);
 		Logger consoleLogger = new LoggerConsole(Logger.INFO);
 		
-		errorLogger.setProximo(fileLogger);
+		errorLogger.setNext(fileLogger);
 		
-		fileLogger.setProximo(consoleLogger);
+		fileLogger.setNext(consoleLogger);
 		
 		return errorLogger;
 	}
@@ -18,8 +22,8 @@ public class Cliente {
 		
 		Logger loggerChain = getCadeiaDeLoggers();
 		
-		loggerChain.log(Logger.INFO, "Esta é uma informação de evento.");
-		loggerChain.log(Logger.DEBUG, "Esta é uma informação de Debug.");
-		loggerChain.log(Logger.ERRO, "Esta é uma mensagem de erro.");
+		loggerChain.log(Logger.INFO, "Esta Ã© uma informaÃ§Ã£o de evento.");
+		loggerChain.log(Logger.DEBUG, "Esta Ã© uma informaÃ§Ã£o de Debug.");
+		loggerChain.log(Logger.ERRO, "Esta Ã© uma mensagem de erro.");
 	}
 }

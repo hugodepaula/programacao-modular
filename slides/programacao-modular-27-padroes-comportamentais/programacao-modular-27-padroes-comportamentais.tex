@@ -1,3 +1,4 @@
+
 \documentclass[handout]{beamer}
 
 \input{aulas-beamer-preamble}
@@ -115,7 +116,7 @@ Descreve uma forma de organizar os objetos em cadeia (como na forma de uma corre
 \begin{frame}{Chain of Responsibility: exemplo Logger}
 
 \begin{center}
-\includegraphics[width=.9\textwidth]{chainLogger.pdf}
+\includegraphics[width=.75\textwidth,angle=270]{chainLogger.pdf}
 \end{center}
 
 \end{frame}
@@ -130,21 +131,21 @@ public abstract class Logger {
   public static int ERRO = 3;
   protected int nivel;
   // proximo elemento na cadeia de responsabilidades
-  protected Logger proximoLogger;
+  protected Logger next;
 
-  public void setProximo(Logger proximoLogger) {
-    this.proximoLogger = proximoLogger;
+  public void setNext(Logger next) {
+    this.next = next;
   }
 
-  public void log(int nivel, String mensagem) {
+  public void log(int nivel, String msg) {
     if (this.nivel <= nivel) {
       escrever(mensagem);
     }
     if (proximoLogger != null) {
-      proximoLogger.log(nivel, mensagem);
+      proximoLogger.log(nivel, msg);
     }
   }
-  abstract protected void escrever(String mensagem);
+  abstract protected void write(String msg);
 }
 \end{lstlisting}
 \end{frame}
@@ -158,8 +159,8 @@ public class LoggerConsole extends Logger {
     this.nivel = nivel;
   }
   @Override
-  protected void escrever(String mensagem) {
-    System.out.println("Console Padrao::Logger: " + mensagem);
+  protected void write(String msg) {
+    System.out.println("Console Padrao::Logger: " + msg);
   }
 }
 
@@ -168,8 +169,8 @@ public class LoggerErro extends Logger {
     this.nivel = nivel;
   }
   @Override
-  protected void escrever(String mensagem) {
-    System.out.println("Console de Error::Logger: " + mensagem);
+  protected void write(String msg) {
+    System.out.println("Console de Error::Logger: " + msg);
   }
 }
 
@@ -178,8 +179,8 @@ public class LoggerArquivo extends Logger {
     this.nivel = nivel;
   }
   @Override
-  protected void escrever(String mensagem) {
-    System.out.println("Arquivo::Logger: " + mensagem);
+  protected void write(String msg) {
+    System.out.println("Arquivo::Logger: " + msg);
   }
 }
 \end{lstlisting}
@@ -197,8 +198,8 @@ public class Cliente {
     Logger errorLogger = new LoggerErro(Logger.ERRO);
     Logger fileLogger = new LoggerArquivo(Logger.DEBUG);
     Logger consoleLogger = new LoggerConsole(Logger.INFO);
-    errorLogger.setProximo(fileLogger);
-    fileLogger.setProximo(consoleLogger);
+    errorLogger.setNext(fileLogger);
+    fileLogger.setNext(consoleLogger);
     return errorLogger;
   }
 
@@ -215,7 +216,7 @@ public class Cliente {
 \section{Observer}
 
 \begin{frame}{Observer}
-    
+
     \begin{block}{Observer}
         Relação de um-para-muitos entre objetos de tal forma que quando um objeto é modificado os objetos dependentes são notificados automaticamente.
     \end{block}
@@ -226,21 +227,21 @@ public class Cliente {
 
 \begin{frame}{Observer: solução geral}
     \begin{center}\tiny
-        \begin{tikzpicture} 
-        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont]{Observer}{-- subject : Subject}{+ notify()}
+        \begin{tikzpicture}
+        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont]{Observer}{-- subject : Subject}{+ \textit{notify()}}
         \umlclass[font=\fontsize{8}{8}\selectfont,y=-2]{ConcreteObserver}{}{+ notify()}
         \umlclass[font=\fontsize{8}{8}\selectfont,x=5,y=-0.7]{Subject}{-- observers : List<Observer> \\ -- state : State }{ + getState() : State \\ + setState(: State) : void \\ + attach(: Observer) : void \\ + notifyAllObservers() : void}
-        \umlVHVinherit{ConcreteObserver}{Observer} 
-        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify,pos2=0.5]{Subject}{Observer} 
+        \umlVHVinherit{ConcreteObserver}{Observer}
+        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify,pos2=0.5]{Subject}{Observer}
         \end{tikzpicture} \\[5mm]
     \end{center}
-    
+
     \begin{itemize}
         \item \textbf{Subject}: permite a conexão de observadores e possui o estado que será observado.
         \item \textbf{Observer}: se conecta a um Subject e declara o método que é executado no momento da notificação.
         \item \textbf{ConcreteObserver}: implementa o método de notificação.
     \end{itemize}
-    
+
 \end{frame}
 
 
@@ -249,16 +250,16 @@ public class Cliente {
 
 \begin{frame}{Exemplo: Observer}
     \begin{center}\tiny
-        \begin{tikzpicture} 
-        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont,y=1.5]{Observer}{-- subject : Subject}{+ update()}
+        \begin{tikzpicture}
+        \umlclass[type=abstract, font=\fontsize{8}{8}\selectfont,y=1.5]{Observer}{-- subject : Subject}{+ \textit{update()}}
         \umlclass[font=\fontsize{8}{8}\selectfont,x=-3, y=-2]{BinaryObserver}{}{+ update()}
         \umlclass[font=\fontsize{8}{8}\selectfont,x=0, y=-2]{OctalObserver}{}{+ update()}
         \umlclass[font=\fontsize{8}{8}\selectfont,x=3, y=-2]{HexaObserver}{}{+ update()}
-        \umlVHVinherit{BinaryObserver}{Observer} 
-        \umlVHVinherit{OctalObserver}{Observer} 
+        \umlVHVinherit{BinaryObserver}{Observer}
+        \umlVHVinherit{OctalObserver}{Observer}
         \umlVHVinherit{HexaObserver}{Observer}
         \umlclass[font=\fontsize{8}{8}\selectfont,x=5, y=1.5]{Subject}{-- observers : List<Observer> \\ -- state : int }{ + getState() : int \\ + setState(: State) : void \\ + attach(: Observer) : void \\ + notifyAllObservers() : void}
-        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify, pos2=0.5]{Subject}{Observer} 
+        \umluniassoc[font=\fontsize{8}{8}\selectfont,arg2=notify, pos2=0.5]{Subject}{Observer}
         \end{tikzpicture} \\[5mm]
     \end{center}
 \end{frame}

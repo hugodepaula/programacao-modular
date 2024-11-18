@@ -8,8 +8,8 @@ public class Cliente {
     Logger errorLogger = new LoggerErro(Logger.ERRO);
     Logger fileLogger = new LoggerArquivo(Logger.DEBUG);
     Logger consoleLogger = new LoggerConsole(Logger.INFO);
-    errorLogger.setProximo(fileLogger);
-    fileLogger.setProximo(consoleLogger);
+    errorLogger.setNext(fileLogger);
+    fileLogger.setNext(consoleLogger);
     return errorLogger;
   }
 
